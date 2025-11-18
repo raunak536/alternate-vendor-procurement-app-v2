@@ -1,0 +1,288 @@
+.results {
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fafafa;
+}
+
+.results-header {
+  margin-bottom: 2rem;
+}
+
+.biocon-logo-header {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  transition: opacity 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.results-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.results-query {
+  color: #6e6e73;
+  font-size: 0.95rem;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  background: #f5f5f7;
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #6e6e73;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #1d1d1f;
+}
+
+.toggle-btn.active {
+  background: #fff;
+  color: #667eea;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-btn svg {
+  stroke: currentColor;
+}
+
+.vendors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vendor-tile {
+  background: #fff;
+  border: 1px solid #d2d2d7;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.vendor-tile:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.vendor-tile.expanded {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.vendor-tile.purchased-recent {
+  border-left: 3px solid #667eea;
+  background: #fafbff;
+}
+
+.tile-header {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.tile-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vendor-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.vendor-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+
+.purchased-badge {
+  padding: 0.25rem 0.6rem;
+  background: #e8ebff;
+  color: #667eea;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.vendor-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #6e6e73;
+}
+
+.vendor-location::after {
+  content: "•";
+  margin-left: 1rem;
+  color: #d2d2d7;
+}
+
+.tile-priority {
+  display: flex;
+  align-items: center;
+}
+
+.priority-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.priority-high {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.priority-medium {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.priority-low {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.expand-icon {
+  color: #86868b;
+  transition: transform 0.2s ease;
+}
+
+.vendor-tile.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+.tile-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  border-top: 1px solid #f5f5f7;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+}
+
+.vendor-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #6e6e73;
+  min-width: 120px;
+  font-size: 0.9rem;
+}
+
+.detail-value {
+  color: #1d1d1f;
+  font-size: 0.9rem;
+}
+
+.score-high {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.score-medium {
+  color: #e65100;
+  font-weight: 500;
+}
+
+.certifications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cert-badge {
+  padding: 0.25rem 0.6rem;
+  background: #f5f5f7;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #6e6e73;
+}
+
+.vendor-description {
+  margin-top: 0.5rem;
+  color: #6e6e73;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.loading, .no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #6e6e73;
+  font-size: 1rem;
+}
+
+.vendor-spend {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.95rem;
+}
+
+.spend-highlight {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 1.1rem;
+}

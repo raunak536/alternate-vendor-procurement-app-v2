@@ -1,0 +1,196 @@
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+}
+
+.landing-content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.agent-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.biocon-logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  object-fit: contain;
+}
+
+.search-form {
+  width: 100%;
+  position: relative;
+}
+
+.trolley-container {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.trolley-icon {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  animation: moveCart 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3));
+}
+
+@keyframes moveCart {
+  0% {
+    left: 0;
+    transform: scaleX(1) translateY(0);
+  }
+  2%, 8% {
+    transform: scaleX(1) translateY(-2px);
+  }
+  4%, 6% {
+    transform: scaleX(1) translateY(0);
+  }
+  46% {
+    left: calc(100% - 60px);
+    transform: scaleX(1) translateY(0);
+  }
+  48% {
+    left: calc(100% - 60px);
+    transform: scaleX(1) translateY(-4px);
+  }
+  50% {
+    left: calc(100% - 60px);
+    transform: scaleX(-1) translateY(0);
+  }
+  52%, 58% {
+    transform: scaleX(-1) translateY(-2px);
+  }
+  54%, 56% {
+    transform: scaleX(-1) translateY(0);
+  }
+  96% {
+    left: 0;
+    transform: scaleX(-1) translateY(0);
+  }
+  98% {
+    left: 0;
+    transform: scaleX(-1) translateY(-4px);
+  }
+  100% {
+    left: 0;
+    transform: scaleX(1) translateY(0);
+  }
+}
+
+.lumos-header {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.lumos-subheader {
+  font-size: 1.1rem;
+  color: #6e6e73;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #d2d2d7;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.search-container:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #1d1d1f;
+  background: transparent;
+  padding: 0.25rem 0;
+}
+
+.search-input::placeholder {
+  color: #86868b;
+}
+
+.search-button {
+  background: #667eea;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.search-button:hover {
+  background: #5568d3;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #d2d2d7;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: #f5f5f7;
+}
