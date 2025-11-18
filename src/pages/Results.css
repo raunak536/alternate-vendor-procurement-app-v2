@@ -15,6 +15,7 @@
   height: auto;
   margin-bottom: 1rem;
   object-fit: contain;
+  display: block;
 }
 
 .back-button {
@@ -24,8 +25,10 @@
   font-size: 0.95rem;
   cursor: pointer;
   padding: 0.5rem 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem 0;
   transition: opacity 0.2s ease;
+  display: block;
+  text-align: left;
 }
 
 .back-button:hover {
@@ -279,6 +282,27 @@
   font-weight: 600;
   color: #667eea;
   font-size: 0.95rem;
+}
+
+.vendor-meta-separator {
+  color: #d2d2d7;
+  margin: 0 0.5rem;
+}
+
+.vendor-last-purchase {
+  color: #6e6e73;
+  font-size: 0.9rem;
+}
+
+.time-ago {
+  color: #86868b;
+  font-size: 0.85rem;
+}
+
+.time-ago-detail {
+  color: #86868b;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
 }
 
 .spend-highlight {

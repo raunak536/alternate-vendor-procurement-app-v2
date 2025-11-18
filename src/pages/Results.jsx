@@ -34,6 +34,30 @@ function Results() {
     return `₹${crores.toFixed(2)} Cr`
   }
 
+  const formatDate = (dateStr) => {
+    if (!dateStr) return 'N/A'
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+  }
+
+  const formatTimeAgo = (timeAgo) => {
+    if (!timeAgo) return null
+    
+    const parts = []
+    if (timeAgo.years > 0) {
+      parts.push(`${timeAgo.years} ${timeAgo.years === 1 ? 'year' : 'years'}`)
+    }
+    if (timeAgo.months > 0) {
+      parts.push(`${timeAgo.months} ${timeAgo.months === 1 ? 'month' : 'months'}`)
+    }
+    
+    if (parts.length === 0) {
+      return 'This month'
+    }
+    
+    return parts.join(', ') + ' ago'
+  }
+
   return (
     <div className="results">
       <div className="results-header">
@@ -84,13 +108,15 @@ function Results() {
             <div className="no-results">No vendors found for this SKU</div>
           ) : (
             vendors.map((vendor, idx) => (
-              <VendorTile
+            <VendorTile
                 key={idx}
-                vendor={vendor}
+              vendor={vendor}
                 isExpanded={expandedId === idx}
                 onToggle={() => toggleExpand(idx)}
                 formatSpend={formatSpend}
-              />
+                formatDate={formatDate}
+                formatTimeAgo={formatTimeAgo}
+            />
             ))
           )}
         </div>
@@ -101,18 +127,27 @@ function Results() {
   )
 }
 
-function VendorTile({ vendor, isExpanded, onToggle, formatSpend }) {
-  const vendorName = vendor.vendor.split('    ').slice(1).join(' ').trim() || vendor.vendor
+function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, formatTimeAgo }) {
+  const timeAgoStr = vendor.last_purchase_time_ago ? formatTimeAgo(vendor.last_purchase_time_ago) : null
   
   return (
     <div className={`vendor-tile ${isExpanded ? 'expanded' : ''}`}>
       <div className="tile-header" onClick={onToggle}>
         <div className="tile-main">
           <div className="vendor-name-row">
-            <div className="vendor-name">{vendorName}</div>
+            <div className="vendor-name">{vendor.vendor_name}</div>
           </div>
           <div className="vendor-meta">
             <span className="vendor-spend">Total Spend: {formatSpend(vendor.total_spend)}</span>
+            {vendor.last_purchase_date && (
+              <>
+                <span className="vendor-meta-separator">•</span>
+                <span className="vendor-last-purchase">
+                  Last Purchase: {formatDate(vendor.last_purchase_date)}
+                  {timeAgoStr && <span className="time-ago"> ({timeAgoStr})</span>}
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div className="expand-icon">
@@ -127,12 +162,29 @@ function VendorTile({ vendor, isExpanded, onToggle, formatSpend }) {
           <div className="vendor-details">
             <div className="detail-row">
               <span className="detail-label">Vendor Code:</span>
-              <span className="detail-value">{vendor.vendor.split('    ')[0]}</span>
+              <span className="detail-value">{vendor.vendor_code}</span>
             </div>
             <div className="detail-row">
               <span className="detail-label">Total Spent (FY23-FY25):</span>
               <span className="detail-value spend-highlight">{formatSpend(vendor.total_spend)}</span>
             </div>
+            {vendor.last_purchase_date && (
+              <>
+                <div className="detail-row">
+                  <span className="detail-label">Last Purchase Date:</span>
+                  <span className="detail-value">
+                    {formatDate(vendor.last_purchase_date)}
+                    {timeAgoStr && <span className="time-ago-detail"> ({timeAgoStr})</span>}
+                  </span>
+                </div>
+                {vendor.last_purchase_amount && (
+                  <div className="detail-row">
+                    <span className="detail-label">Last Purchase Amount:</span>
+                    <span className="detail-value spend-highlight">{formatSpend(vendor.last_purchase_amount)}</span>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
       )}
