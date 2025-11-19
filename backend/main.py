@@ -350,6 +350,112 @@ def parse_vendor_string(vendor_str: str) -> dict:
         'vendor_name': vendor_name
     }
 
+def generate_risk_score(vendor_name, total_spend, last_purchase_date, country):
+    """
+    Generate mock risk score based on vendor characteristics.
+    Risk score is a combination of relationship history, financials, and regulations.
+    
+    Returns:
+        dict with 'overall_score' (0-100), 'category' (Low/Medium/High), and 'breakdown'
+    """
+    import random
+    
+    # Seed random based on vendor name for consistency
+    random.seed(hash(vendor_name) % 1000)
+    
+    # Relationship History Score (0-100)
+    # Based on purchase recency and frequency
+    relationship_score = 70
+    if last_purchase_date:
+        try:
+            if isinstance(last_purchase_date, str):
+                last_date = datetime.strptime(last_purchase_date, '%Y-%m-%d').date()
+            elif isinstance(last_purchase_date, pd.Timestamp):
+                last_date = last_purchase_date.date()
+            else:
+                last_date = last_purchase_date
+            
+            days_ago = (date.today() - last_date).days
+            if days_ago < 90:
+                relationship_score = 85 + random.randint(0, 10)
+            elif days_ago < 180:
+                relationship_score = 70 + random.randint(0, 10)
+            elif days_ago < 365:
+                relationship_score = 55 + random.randint(0, 10)
+            else:
+                relationship_score = 40 + random.randint(0, 15)
+        except:
+            relationship_score = 60 + random.randint(0, 20)
+    else:
+        relationship_score = 45 + random.randint(0, 15)
+    
+    # Financials Score (0-100)
+    # Based on spend amount (higher spend = more stable)
+    financial_score = 60
+    if total_spend > 50000000:  # > 5 Cr
+        financial_score = 80 + random.randint(0, 15)
+    elif total_spend > 20000000:  # > 2 Cr
+        financial_score = 70 + random.randint(0, 15)
+    elif total_spend > 10000000:  # > 1 Cr
+        financial_score = 60 + random.randint(0, 15)
+    else:
+        financial_score = 50 + random.randint(0, 15)
+    
+    # Regulations Score (0-100)
+    # Based on country and vendor characteristics
+    regulatory_score = 70
+    high_risk_countries = ['china', 'russia', 'brazil']
+    medium_risk_countries = ['india', 'poland', 'mexico']
+    
+    if country:
+        country_lower = country.lower()
+        if country_lower in high_risk_countries:
+            regulatory_score = 50 + random.randint(0, 15)
+        elif country_lower in medium_risk_countries:
+            regulatory_score = 65 + random.randint(0, 15)
+        else:
+            regulatory_score = 75 + random.randint(0, 15)
+    else:
+        regulatory_score = 60 + random.randint(0, 20)
+    
+    # Calculate weighted overall score
+    # Relationship: 40%, Financials: 35%, Regulations: 25%
+    overall_score = int(
+        relationship_score * 0.40 +
+        financial_score * 0.35 +
+        regulatory_score * 0.25
+    )
+    
+    # Determine category
+    if overall_score >= 75:
+        category = 'Low'
+    elif overall_score >= 55:
+        category = 'Medium'
+    else:
+        category = 'High'
+    
+    return {
+        'overall_score': overall_score,
+        'category': category,
+        'breakdown': {
+            'relationship_history': {
+                'score': relationship_score,
+                'weight': 40,
+                'label': 'Relationship History'
+            },
+            'financials': {
+                'score': financial_score,
+                'weight': 35,
+                'label': 'Financials'
+            },
+            'regulations': {
+                'score': regulatory_score,
+                'weight': 25,
+                'label': 'Regulations & Compliance'
+            }
+        }
+    }
+
 def calculate_time_ago(purchase_date_str):
     """
     Calculate years, months, and days between purchase date and today.
@@ -517,6 +623,20 @@ def get_vendors(sku: str = ""):
     vendor_spend['last_purchase_date'] = purchase_info.apply(lambda x: x['date'])
     vendor_spend['last_purchase_amount'] = purchase_info.apply(lambda x: x['amount'])
     vendor_spend['last_purchase_time_ago'] = purchase_info.apply(lambda x: x['time_ago'])
+    
+    # Generate risk scores for each vendor
+    def get_risk_score(row):
+        return generate_risk_score(
+            row['vendor_name'],
+            row['total_spend'],
+            row['last_purchase_date'],
+            row['country']
+        )
+    
+    risk_scores = vendor_spend.apply(get_risk_score, axis=1)
+    vendor_spend['risk_score'] = risk_scores.apply(lambda x: x['overall_score'])
+    vendor_spend['risk_category'] = risk_scores.apply(lambda x: x['category'])
+    vendor_spend['risk_breakdown'] = risk_scores.apply(lambda x: x['breakdown'])
     
     # Return with parsed fields (keeping original vendor for backwards compatibility if needed)
     return vendor_spend.head(50).to_dict('records')

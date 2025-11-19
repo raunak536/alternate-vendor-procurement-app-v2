@@ -115,6 +115,7 @@ function Results() {
                 formatSpend={formatSpend}
                 formatDate={formatDate}
                 formatTimeAgo={formatTimeAgo}
+                isRecommended={idx === 0}
             />
             ))
           )}
@@ -126,7 +127,7 @@ function Results() {
   )
 }
 
-function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, formatTimeAgo }) {
+function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, formatTimeAgo, isRecommended }) {
   const timeAgoStr = vendor.last_purchase_time_ago ? formatTimeAgo(vendor.last_purchase_time_ago) : null
   
   // Capitalize company name for display
@@ -143,7 +144,7 @@ function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, for
   const displayCountry = vendor.country ? vendor.country.toUpperCase() : null
   
   return (
-    <div className={`vendor-tile ${isExpanded ? 'expanded' : ''}`}>
+    <div className={`vendor-tile ${isExpanded ? 'expanded' : ''} ${isRecommended ? 'recommended' : ''}`}>
       <div className="tile-header" onClick={onToggle}>
         <div className="tile-main">
           <div className="vendor-name-row">
@@ -153,6 +154,9 @@ function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, for
                 <span className="vendor-country"> • {displayCountry}</span>
               )}
             </div>
+            {isRecommended && (
+              <span className="recommended-badge">Recommended</span>
+            )}
           </div>
           <div className="vendor-meta">
             <span className="vendor-spend">Total Spend: {formatSpend(vendor.total_spend)}</span>
@@ -162,6 +166,14 @@ function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, for
                 <span className="vendor-last-purchase">
                   Last Purchase: {formatDate(vendor.last_purchase_date)}
                   {timeAgoStr && <span className="time-ago"> ({timeAgoStr})</span>}
+                </span>
+              </>
+            )}
+            {vendor.risk_score !== undefined && (
+              <>
+                <span className="vendor-meta-separator">•</span>
+                <span className={`risk-score-badge risk-${vendor.risk_category?.toLowerCase()}`}>
+                  Risk: {vendor.risk_score}/100 ({vendor.risk_category})
                 </span>
               </>
             )}
@@ -218,6 +230,57 @@ function VendorTile({ vendor, isExpanded, onToggle, formatSpend, formatDate, for
                 )}
               </>
             )}
+            {vendor.risk_score !== undefined && vendor.risk_breakdown && (
+              <div className="risk-section">
+                <div className="risk-header">
+                  <span className="detail-label">Risk Score:</span>
+                  <span className={`risk-score-value risk-${vendor.risk_category?.toLowerCase()}`}>
+                    {vendor.risk_score}/100
+                  </span>
+                  <span className={`risk-category-badge risk-${vendor.risk_category?.toLowerCase()}`}>
+                    {vendor.risk_category}
+                  </span>
+                </div>
+                <div className="risk-breakdown">
+                  <div className="risk-breakdown-title">Score Breakdown:</div>
+                  {Object.entries(vendor.risk_breakdown).map(([key, component]) => (
+                    <div key={key} className="risk-component">
+                      <div className="risk-component-header">
+                        <span className="risk-component-label">{component.label}</span>
+                        <span className="risk-component-score">{Math.round(component.score)}/100</span>
+                      </div>
+                      <div className="risk-bar-container">
+                        <div 
+                          className={`risk-bar risk-bar-${component.score >= 75 ? 'low' : component.score >= 55 ? 'medium' : 'high'}`}
+                          style={{ width: `${component.score}%` }}
+                        />
+                      </div>
+                      <div className="risk-component-weight">Weight: {component.weight}%</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="vendor-actions">
+              <a href="#" className="action-link" onClick={(e) => e.preventDefault()}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+                View Detailed Supplier Info
+              </a>
+              <a href="#" className="action-link" onClick={(e) => e.preventDefault()}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <line x1="8" y1="10" x2="16" y2="10" />
+                  <line x1="8" y1="14" x2="14" y2="14" />
+                </svg>
+                Go to Negotiation Assist Tool
+              </a>
+            </div>
           </div>
         </div>
       )}
