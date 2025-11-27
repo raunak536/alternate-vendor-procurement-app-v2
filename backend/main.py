@@ -640,4 +640,3 @@ def get_vendors(sku: str = ""):
     
     # Return with parsed fields (keeping original vendor for backwards compatibility if needed)
     return vendor_spend.head(50).to_dict('records')
-
