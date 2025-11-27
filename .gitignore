@@ -1,6 +1,9 @@
 **pyc
 *ipynb
 *par
+*.env
+*.md
+jupyter_notebooks/*
 # Logs
 logs
 *.log
