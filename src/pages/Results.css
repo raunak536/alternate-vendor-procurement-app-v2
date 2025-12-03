@@ -546,7 +546,7 @@
 /* Vendor Metrics */
 .vendor-metrics {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem 0;
   border-top: 1px solid #f5f5f5;
@@ -592,10 +592,10 @@
   color: #666;
 }
 
-/* Vendor Details Row */
+/* Vendor Details Row - Dynamic attributes */
 .vendor-details-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
   padding: 0.75rem 0;
   border-bottom: 1px solid #f5f5f5;
@@ -830,7 +830,11 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .vendor-metrics {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .vendor-details-row {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .compare-footer {
@@ -852,6 +856,10 @@
   }
   
   .vendor-metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .vendor-details-row {
     grid-template-columns: 1fr;
   }
 }

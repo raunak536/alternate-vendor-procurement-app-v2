@@ -10,7 +10,6 @@ function Compare() {
   const vendorIds = (searchParams.get('vendors') || '').split(',').map(Number).filter(Boolean)
   const productName = searchParams.get('q') || 'TSA Plates'
   
-  const [quantity, setQuantity] = useState(500)
   const [searchQuery, setSearchQuery] = useState(productName)
   const [allVendors, setAllVendors] = useState([])
   const [loading, setLoading] = useState(true)
@@ -37,6 +36,36 @@ function Compare() {
   
   // Get selected vendors from fetched data
   const selectedVendors = allVendors.filter(v => vendorIds.includes(v.id))
+
+  // Get all dynamic attributes across all selected vendors
+  const fixedFields = [
+    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
+    'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
+    'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
+    'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
+    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'shelfLife',
+    'packaging', 'storage', 'locking'
+  ]
+  
+  // Collect all unique dynamic attribute keys from all selected vendors
+  const dynamicAttributeKeys = [...new Set(
+    selectedVendors.flatMap(vendor => 
+      Object.keys(vendor).filter(key => 
+        !fixedFields.includes(key) && 
+        vendor[key] !== null && 
+        vendor[key] !== undefined && 
+        vendor[key] !== 'NA' &&
+        vendor[key] !== ''
+      )
+    )
+  )]
+
+  // Convert snake_case to Title Case for display
+  const formatLabel = (key) => {
+    return key
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase())
+  }
 
   const formatCurrency = (amount) => {
     if (amount === null || amount === undefined) return 'NA'
@@ -291,15 +320,6 @@ function Compare() {
 
           <div className="compare-title-row">
             <h1>{productName} / Vendor Comparison</h1>
-            <div className="quantity-input">
-              <span>Calculation based on Qty:</span>
-              <input 
-                type="number" 
-                value={quantity}
-                onChange={(e) => setQuantity(+e.target.value)}
-              />
-              <span className="unit">kg</span>
-            </div>
           </div>
 
           <div className="comparison-table">
@@ -333,31 +353,6 @@ function Compare() {
               ))}
             </div>
 
-            {/* Total Est. Cost Row */}
-            <div className="table-row highlight-row">
-              <div className="attribute-column">
-                <div className="attribute-content">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                    <path d="M2 9h20" />
-                  </svg>
-                  <div>
-                    <span className="attribute-name">Total Est. Cost</span>
-                    <span className="attribute-sub">(Based on {quantity} units)</span>
-                  </div>
-                </div>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <div className="cost-display">
-                    <span className="cost-primary">
-                      {vendor.unitPrice != null ? formatCurrency(vendor.unitPrice * quantity) : 'NA'}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* Price (Per Unit) Row */}
             <div className="table-row">
               <div className="attribute-column">
@@ -367,20 +362,6 @@ function Compare() {
                 <div key={vendor.id} className="vendor-column">
                   <span className="data-value">
                     {vendor.unitPrice != null ? `${formatCurrency(vendor.unitPrice)} / plate` : 'NA'}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Available Qty Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Available Qty</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">
-                    {vendor.availableQty != null ? `${vendor.availableQty.toLocaleString()} plates` : 'NA'}
                   </span>
                 </div>
               ))}
@@ -425,18 +406,6 @@ function Compare() {
               ))}
             </div>
 
-            {/* Lead Time Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Lead Time</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">{vendor.leadTime}</span>
-                </div>
-              ))}
-            </div>
-
             {/* Region Row */}
             <div className="table-row">
               <div className="attribute-column">
@@ -449,55 +418,7 @@ function Compare() {
               ))}
             </div>
 
-            {/* Shelf Life Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Shelf Life</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">{vendor.shelfLife}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Packaging Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Packaging</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">{vendor.packaging}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Locking Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Locking</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">{vendor.locking}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Storage Condition Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <span className="attribute-name">Storage Condition</span>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  <span className="data-value">{vendor.storage}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Certifications Row */}
+            {/* Certifications Row - Always shown */}
             <div className="table-row">
               <div className="attribute-column">
                 <span className="attribute-name">Certifications</span>
@@ -516,6 +437,65 @@ function Compare() {
                 </div>
               ))}
             </div>
+
+            {/* Dynamic Attribute Rows - Based on SKU-specific comparison attributes */}
+            {dynamicAttributeKeys.map(attrKey => (
+              <div className="table-row" key={attrKey}>
+                <div className="attribute-column">
+                  <span className="attribute-name">{formatLabel(attrKey)}</span>
+                </div>
+                {selectedVendors.map(vendor => (
+                  <div key={vendor.id} className="vendor-column">
+                    <span className="data-value">
+                      {vendor[attrKey] !== null && vendor[attrKey] !== undefined && vendor[attrKey] !== ''
+                        ? (Array.isArray(vendor[attrKey]) 
+                            ? vendor[attrKey].join(', ') 
+                            : vendor[attrKey])
+                        : <span className="no-data">NA</span>
+                      }
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ))}
+
+            {/* Fallback rows for mock data (when no dynamic attributes) */}
+            {dynamicAttributeKeys.length === 0 && (
+              <>
+                <div className="table-row">
+                  <div className="attribute-column">
+                    <span className="attribute-name">Shelf Life</span>
+                  </div>
+                  {selectedVendors.map(vendor => (
+                    <div key={vendor.id} className="vendor-column">
+                      <span className="data-value">{vendor.shelfLife || 'NA'}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="table-row">
+                  <div className="attribute-column">
+                    <span className="attribute-name">Packaging</span>
+                  </div>
+                  {selectedVendors.map(vendor => (
+                    <div key={vendor.id} className="vendor-column">
+                      <span className="data-value">{vendor.packaging || 'NA'}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="table-row">
+                  <div className="attribute-column">
+                    <span className="attribute-name">Storage Condition</span>
+                  </div>
+                  {selectedVendors.map(vendor => (
+                    <div key={vendor.id} className="vendor-column">
+                      <span className="data-value">{vendor.storage || 'NA'}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
 
             {/* AI Risk Assessment Row */}
             <div className="table-row">

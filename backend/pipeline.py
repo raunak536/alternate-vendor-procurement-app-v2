@@ -149,19 +149,32 @@ CRITICAL - PRODUCT AVAILABILITY VERIFICATION:
 - Only include products that appear to be actively available for purchase.
 - Add a field "availability_status" with value "available", "limited", or "unverified" for each vendor.
 
+CRITICAL - INLINE SOURCE CITATIONS:
+Every piece of information MUST have a single source URL in square brackets at the end of the value.
+Format: "value [https://exact-source-url.com/page]"
+
+Rules for citations:
+1. Use the MOST SPECIFIC URL where that exact info was found (e.g., the exact product page section, specs tab, or datasheet URL)
+2. If exact URL unavailable, use the product page URL where the info appears
+3. Only ONE URL per field - pick the best/most specific source
+4. NO markdown links - just plain text with URL in square brackets
+5. Example formats:
+   - "price": "$125.00 / 100 pack [https://www.vendor.com/product/123]"
+   - "storage_condition": "2-8°C, protect from light [https://www.vendor.com/product/123/specs]"
+   - "certifications": "USP, EP, GMP [https://www.vendor.com/product/123/compliance]"
+
 - For each vendor object, include the following keys:
-    - "vendor_name": Name of the vendor.
-    - "region": Region/country (if available).
-    - "product_description": Product basics (catalogue code, description).
-    - "product_url": A direct URL to the product page (CRITICAL: this allows us to scrape for more info later). MUST be a working URL that shows the product.
-    - "availability_status": "available", "limited", or "unverified" - indicates if the product is actually purchasable.
-    - "certifications": List of relevant certifications/compliances (e.g., FDA, ISO 9001, GMP, USP, EP). This is CRITICAL for biopharma procurement. SEARCH DEEPLY for these in technical data sheets or product specification sections on the page. If explicitly mentioned, include them. If unknown, set to "NA".
-    - "price": The raw price string found on the source (e.g., "$125.00 / 100 pack", "€50.00 per unit"). Do NOT attempt to normalize or calculate per-unit prices yourself to avoid errors. Just report exactly what you find, including currency and package size.
-        - Attempt to find 2-3 sources to triangulate the price.
-        - If price is unavailable after checking multiple sources, set this value to "NA". Do NOT guess.
-    - "source_urls": A list of URLs used to verify availability, price, and certifications. Every piece of info must be backed by a source here.
-    - [Key Comparison Attributes]: Dynamic keys for the attributes identified in the input (e.g., "storage_condition", "purity"). Use snake_case for keys.
-        - SPECIALLY for "storage_condition" and "certifications", look for terms like "store at", "storage", "temperature", "protect from light", "compliance", "monograph" in the product details.
+    - "vendor_name": Name of the vendor (no URL needed).
+    - "region": Region/country if available (no URL needed).
+    - "product_description": Product basics with catalog code [source_url].
+    - "product_url": A direct URL to the product page (CRITICAL: this allows us to scrape for more info later). MUST be a working URL. No brackets needed - this IS the URL.
+    - "availability_status": "available", "limited", or "unverified" (no URL needed - derived from product_url).
+    - "certifications": Comma-separated list of certifications [source_url]. If unknown, set to "NA".
+    - "price": Raw price string with currency and package size [source_url]. If unavailable, set to "NA".
+    - [Key Comparison Attributes]: Dynamic keys for attributes from the input (e.g., "storage_condition", "purity", "shelf_life"). Use snake_case. Each value MUST include [source_url].
+        - For "storage_condition", look for: "store at", "storage", "temperature", "protect from light"
+        - For "certifications", look for: "compliance", "monograph", "USP", "EP", "GMP"
+        - For "shelf_life", look for: "expiry", "shelf life", "stability"
 
 - Limit your results to just the 3–5 most relevant or credible vendors.
 - ACCURACY IS PARAMOUNT. If any info provided is wrong, the user will lose trust. Prefer "NA" over guessing.
@@ -234,7 +247,17 @@ def run_deep_research(query: str) -> Dict[str, Any]:
     Returns:
         Dictionary with query data and vendor results
     """
+    import time
+    
     client = get_openai_client()
+    
+    # Track total time and tokens
+    start_time = time.time()
+    total_tokens = {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+    }
     
     # Step 1: Enrich the query
     print(f"\n{'='*60}")
@@ -251,6 +274,13 @@ def run_deep_research(query: str) -> Dict[str, Any]:
     
     enrichment_response = retry_with_backoff(make_enrichment_call, max_retries=2, initial_delay=5)
     enriched_query = enrichment_response.output[0].content[0].text
+    
+    # Track enrichment tokens
+    if hasattr(enrichment_response, 'usage') and enrichment_response.usage:
+        total_tokens["input_tokens"] += getattr(enrichment_response.usage, 'input_tokens', 0)
+        total_tokens["output_tokens"] += getattr(enrichment_response.usage, 'output_tokens', 0)
+        total_tokens["total_tokens"] += getattr(enrichment_response.usage, 'total_tokens', 0)
+    
     print(f"\n--- Enriched Query ---\n{enriched_query}\n")
     
     # Step 2: Run deep research (always synchronous for reliability)
@@ -271,6 +301,16 @@ def run_deep_research(query: str) -> Dict[str, Any]:
     
     response = retry_with_backoff(make_deep_research_call, max_retries=3, initial_delay=10)
     
+    # Track deep research tokens
+    if hasattr(response, 'usage') and response.usage:
+        total_tokens["input_tokens"] += getattr(response.usage, 'input_tokens', 0)
+        total_tokens["output_tokens"] += getattr(response.usage, 'output_tokens', 0)
+        total_tokens["total_tokens"] += getattr(response.usage, 'total_tokens', 0)
+    
+    # Calculate total time taken
+    end_time = time.time()
+    time_taken_seconds = round(end_time - start_time, 2)
+    
     # Parse the response
     vendors = parse_deep_research_response(response.output_text)
     
@@ -282,6 +322,8 @@ def run_deep_research(query: str) -> Dict[str, Any]:
         "enriched_query": enriched_query,
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "research_model": "o4-mini-deep-research",
+        "time_taken_seconds": time_taken_seconds,
+        "tokens_used": total_tokens,
         "vendors": []
     }
     
@@ -296,7 +338,6 @@ def run_deep_research(query: str) -> Dict[str, Any]:
             "availability_status": vendor.get("availability_status", "unverified"),
             "certifications": vendor.get("certifications"),
             "price": vendor.get("price"),
-            "source_urls": vendor.get("source_urls", []),
             # Crawled data placeholder
             "crawled_data": None,
             "crawled_at": None,
@@ -305,8 +346,10 @@ def run_deep_research(query: str) -> Dict[str, Any]:
         }
         
         # Add dynamic fields (comparison attributes)
+        # Skip source_urls since each field now has inline citations
+        skip_keys = {"source_urls"}
         for key, value in vendor.items():
-            if key not in structured_vendor:
+            if key not in structured_vendor and key not in skip_keys:
                 structured_vendor[key] = value
         
         query_entry["vendors"].append(structured_vendor)
@@ -336,6 +379,14 @@ def cmd_research(args):
         print(f"{'='*60}")
         print(f"Query ID: {query_entry['query_id']}")
         print(f"Vendors found: {len(query_entry['vendors'])}")
+        
+        # Show time and token usage
+        time_taken = query_entry.get('time_taken_seconds', 0)
+        tokens = query_entry.get('tokens_used', {})
+        print(f"\n⏱️  Time taken: {time_taken} seconds ({time_taken/60:.1f} minutes)")
+        print(f"🪙 Tokens used: {tokens.get('total_tokens', 'N/A')} total")
+        print(f"   └─ Input: {tokens.get('input_tokens', 'N/A')}, Output: {tokens.get('output_tokens', 'N/A')}")
+        
         print("\nVendors:")
         for v in query_entry["vendors"]:
             price_str = v.get("price") or "N/A"
@@ -636,6 +687,14 @@ def cmd_show(args):
     print(f"Original Query: {query_entry['query_text']}")
     print(f"Last Updated: {query_entry.get('last_updated', 'N/A')}")
     print(f"Model: {query_entry.get('research_model', 'N/A')}")
+    
+    # Show time and token usage if available
+    time_taken = query_entry.get('time_taken_seconds')
+    tokens = query_entry.get('tokens_used', {})
+    if time_taken:
+        print(f"Time Taken: {time_taken} seconds ({time_taken/60:.1f} minutes)")
+    if tokens:
+        print(f"Tokens Used: {tokens.get('total_tokens', 'N/A')} total (Input: {tokens.get('input_tokens', 'N/A')}, Output: {tokens.get('output_tokens', 'N/A')})")
     
     if query_entry.get("enriched_query"):
         print(f"\n--- Enriched Query ---")

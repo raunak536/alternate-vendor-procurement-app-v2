@@ -387,7 +387,7 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
   
   // Helper to display value or NA
   const displayValue = (value, suffix = '') => {
-    if (value === null || value === undefined || value === 'NA') {
+    if (value === null || value === undefined || value === 'NA' || value === '') {
       return 'NA'
     }
     return suffix ? `${value} ${suffix}` : value
@@ -411,6 +411,26 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
     if (!url) return null
     return url.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0]
   }
+
+  // Convert snake_case to Title Case for display
+  const formatLabel = (key) => {
+    return key
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase())
+  }
+
+  // Get dynamic attributes from vendor (exclude known fixed fields)
+  const fixedFields = [
+    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
+    'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
+    'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
+    'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
+    'product_description', 'crawled_data', 'crawled_at', 'extracted_info'
+  ]
+  
+  const dynamicAttributes = Object.entries(vendor)
+    .filter(([key, value]) => !fixedFields.includes(key) && value !== null && value !== undefined && value !== 'NA' && value !== '')
+    .slice(0, 4) // Show max 4 dynamic attributes
 
   return (
     <div className={`vendor-card ${vendor.isCurrentPartner ? 'current-partner' : ''}`}>
@@ -478,34 +498,10 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
               <span className="metric-value na-text">NA</span>
             )}
           </div>
-        </div>
 
-        <div className="vendor-details-row">
-          <div className="detail-item">
-            <span className="detail-label">Shelf Life</span>
-            <span className="detail-value">{displayValue(vendor.shelfLife)}</span>
-          </div>
-          <div className="detail-item">
-            <span className="detail-label">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              </svg>
-              Packaging
-            </span>
-            <span className="detail-value">{displayValue(vendor.packaging)}</span>
-          </div>
-          <div className="detail-item">
-            <span className="detail-label">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-              </svg>
-              Storage
-            </span>
-            <span className="detail-value">{displayValue(vendor.storage)}</span>
-          </div>
-          <div className="detail-item">
-            <span className="detail-label">
+          {/* Certifications alongside product URL */}
+          <div className="metric">
+            <span className="metric-label">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M9 12l2 2 4-4" />
@@ -523,6 +519,20 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
             </div>
           </div>
         </div>
+
+        {/* Dynamic attributes row - shows SKU-specific comparison attributes */}
+        {dynamicAttributes.length > 0 && (
+          <div className="vendor-details-row" style={{ gridTemplateColumns: `repeat(${Math.min(dynamicAttributes.length, 4)}, 1fr)` }}>
+            {dynamicAttributes.map(([key, value]) => (
+              <div className="detail-item" key={key}>
+                <span className="detail-label">{formatLabel(key)}</span>
+                <span className="detail-value">
+                  {Array.isArray(value) ? value.join(', ') : displayValue(value)}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {vendor.internalHistory && (
           <div className="internal-history">

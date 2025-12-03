@@ -381,33 +381,33 @@ function transformApiVendor(vendor, index) {
   // Parse certifications - show NA if not present
   let certifications = []
   if (vendor.certifications && Array.isArray(vendor.certifications)) {
-    certifications = vendor.certifications
+    // Handle certifications that might have inline URLs like "USP, EP [url]"
+    certifications = vendor.certifications.map(cert => {
+      if (typeof cert === 'string') {
+        return cert.replace(/\s*\[.*?\]\s*$/, '').trim()
+      }
+      return cert
+    })
+  } else if (typeof vendor.certifications === 'string' && vendor.certifications !== 'NA') {
+    // Handle string certifications with possible inline URL
+    const certStr = vendor.certifications.replace(/\s*\[.*?\]\s*$/, '')
+    certifications = certStr.split(',').map(c => c.trim()).filter(Boolean)
   } else if (vendor.quality_certifications && vendor.quality_certifications !== 'NA') {
     certifications = vendor.quality_certifications.split(',').map(c => c.trim())
-  }
-
-  // Parse shelf life from storage conditions
-  let shelfLife = 'NA'
-  if (vendor.shelf_life_storage_conditions) {
-    const shelfMatch = vendor.shelf_life_storage_conditions.match(/(\d+\s*months?)/i)
-    if (shelfMatch) {
-      shelfLife = shelfMatch[1]
-    }
-  }
-
-  // Parse storage conditions
-  let storage = 'NA'
-  if (vendor.shelf_life_storage_conditions) {
-    const storageMatch = vendor.shelf_life_storage_conditions.match(/store\s+at\s+([^;]+)/i)
-    if (storageMatch) {
-      storage = storageMatch[1].trim()
-    }
   }
 
   // Use suitability_score from backend if available, otherwise fallback
   const suitabilityScore = vendor.suitability_score ?? (95 - (index * 3))
 
-  return {
+  // Fixed fields that we handle specifically
+  const fixedFields = [
+    'id', 'vendor_name', 'region', 'product_description', 'product_url',
+    'availability_status', 'certifications', 'price', 'source_urls',
+    'crawled_data', 'crawled_at', 'extracted_info', 'suitability_score'
+  ]
+
+  // Build base vendor object
+  const transformedVendor = {
     id: vendor.id || index + 1,
     name: vendor.vendor_name,
     source: 'EXT', // External vendors from deep research
@@ -422,10 +422,6 @@ function transformApiVendor(vendor, index) {
     leadTime: 'NA', // Not available from deep research
     suitabilityScore: suitabilityScore, // Score from backend scoring module
     certifications: certifications,
-    shelfLife: shelfLife,
-    packaging: vendor.packaging_format_volume_size || 'NA',
-    storage: storage,
-    locking: 'NA',
     internalHistory: null,
     riskAssessment: null, // NA - no internal risk data for external vendors
     website: vendor.product_url || '',
@@ -434,6 +430,25 @@ function transformApiVendor(vendor, index) {
     // Original API data preserved for details view
     _apiData: vendor
   }
+
+  // Copy all dynamic attributes from the API response (these are SKU-specific comparison attributes)
+  // They will be displayed dynamically in the vendor card
+  Object.entries(vendor).forEach(([key, value]) => {
+    if (!fixedFields.includes(key) && value !== null && value !== undefined) {
+      // Clean up values that have inline URL citations like "value [url]"
+      if (typeof value === 'string') {
+        // Extract just the value, removing the [url] citation
+        const cleanValue = value.replace(/\s*\[https?:\/\/[^\]]+\]\s*$/i, '').trim()
+        // Also remove markdown-style links like ([text](url))
+        const finalValue = cleanValue.replace(/\s*\(\[.*?\]\(https?:\/\/[^)]+\)\)\s*$/i, '').trim()
+        transformedVendor[key] = finalValue || value
+      } else {
+        transformedVendor[key] = value
+      }
+    }
+  })
+
+  return transformedVendor
 }
 
 // Mock API service to simulate backend calls
