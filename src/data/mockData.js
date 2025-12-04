@@ -367,15 +367,11 @@ export const dashboardStats = {
 
 // Helper to convert API vendor data to frontend format with mock data for missing fields
 function transformApiVendor(vendor, index) {
-  // Parse price if available - show NA if not present
-  let unitPrice = null
+  // Use raw price string from JSON - clean URL citations if present
   let priceDisplay = 'NA'
   if (vendor.price && vendor.price !== 'NA') {
-    const priceMatch = vendor.price.match(/[\d.]+/)
-    if (priceMatch) {
-      unitPrice = parseFloat(priceMatch[0])
-      priceDisplay = unitPrice
-    }
+    // Remove inline URL citations like "value [https://url.com]"
+    priceDisplay = vendor.price.replace(/\s*\[https?:\/\/[^\]]+\]\s*$/i, '').trim()
   }
   
   // Parse certifications - show NA if not present
@@ -413,10 +409,10 @@ function transformApiVendor(vendor, index) {
     source: 'EXT', // External vendors from deep research
     isCurrentPartner: false,
     isPreferred: index === 0, // First vendor as preferred (after sorting by score)
-    isBestValue: unitPrice !== null && unitPrice < 8,
-    unitPrice: unitPrice, // null if not available
-    unitPriceDisplay: priceDisplay, // For display purposes
-    totalEstCost: unitPrice !== null ? unitPrice * 500 : null,
+    isBestValue: false, // Cannot determine without parsing price
+    unitPrice: null, // Not parsed for API vendors - use raw price string instead
+    unitPriceDisplay: priceDisplay, // Raw price string from JSON
+    totalEstCost: null, // Cannot calculate without parsed unit price
     availableQty: null, // NA - not in API data
     region: vendor.region || 'NA',
     leadTime: 'NA', // Not available from deep research
@@ -494,7 +490,9 @@ export const api = {
           }
           if (filters.priceRange) {
             vendors = vendors.filter(v => 
-              v.unitPrice >= filters.priceRange[0] && v.unitPrice <= filters.priceRange[1]
+              v.unitPrice !== null && 
+              v.unitPrice >= filters.priceRange[0] && 
+              v.unitPrice <= filters.priceRange[1]
             )
           }
           if (filters.currentPartnerOnly) {
@@ -532,7 +530,9 @@ export const api = {
     }
     if (filters.priceRange) {
       vendors = vendors.filter(v => 
-        v.unitPrice >= filters.priceRange[0] && v.unitPrice <= filters.priceRange[1]
+        v.unitPrice !== null && 
+        v.unitPrice >= filters.priceRange[0] && 
+        v.unitPrice <= filters.priceRange[1]
       )
     }
     if (filters.currentPartnerOnly) {
@@ -556,11 +556,13 @@ export const api = {
     const allVendors = [...mockVendors]
     
     // Find the true best value vendor (lowest cost) from ALL vendors
-    const bestValue = allVendors.find(v => v.isBestValue) || 
-      allVendors.reduce((best, v) => v.unitPrice < best.unitPrice ? v : best, allVendors[0])
+    // Only consider vendors with numeric unitPrice (mock vendors)
+    const vendorsWithPrice = allVendors.filter(v => v.unitPrice !== null)
+    const bestValue = vendorsWithPrice.find(v => v.isBestValue) || 
+      (vendorsWithPrice.length > 0 ? vendorsWithPrice.reduce((best, v) => v.unitPrice < best.unitPrice ? v : best, vendorsWithPrice[0]) : null)
     
     // Find the current partner with highest spend
-    const currentPartners = allVendors.filter(v => v.isCurrentPartner)
+    const currentPartners = allVendors.filter(v => v.isCurrentPartner && v.unitPrice !== null)
     const current = currentPartners.length > 0 
       ? currentPartners.reduce((best, v) => 
           (v.internalHistory?.lifetimeSpend || 0) > (best.internalHistory?.lifetimeSpend || 0) ? v : best, 

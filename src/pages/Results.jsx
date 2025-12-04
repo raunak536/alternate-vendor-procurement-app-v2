@@ -89,7 +89,12 @@ function Results() {
 
   const sortedVendors = [...vendors].sort((a, b) => {
     switch(sortBy) {
-      case 'price': return a.unitPrice - b.unitPrice
+      case 'price': 
+        // Handle null unitPrice (API vendors) - put them at the end
+        if (a.unitPrice === null && b.unitPrice === null) return 0
+        if (a.unitPrice === null) return 1
+        if (b.unitPrice === null) return -1
+        return a.unitPrice - b.unitPrice
       case 'leadTime': return parseInt(a.leadTime) - parseInt(b.leadTime)
       default: return b.suitabilityScore - a.suitabilityScore
     }
@@ -98,6 +103,26 @@ function Results() {
   // Split vendors into top recommendations and others
   const topVendors = sortedVendors.slice(0, 4)
   const otherVendors = sortedVendors.slice(4)
+
+  // Compute consistent comparison attributes from ALL vendors dynamically
+  // This ensures all tiles show the same attributes regardless of which SKU is searched
+  const fixedFields = [
+    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
+    'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
+    'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
+    'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
+    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls'
+  ]
+
+  // Get union of all dynamic attribute keys from all vendors
+  const allDynamicKeys = [...new Set(
+    sortedVendors.flatMap(vendor => 
+      Object.keys(vendor).filter(key => !fixedFields.includes(key))
+    )
+  )]
+
+  // Take first 4 as consistent comparison attributes for all tiles
+  const comparisonAttributes = allDynamicKeys.slice(0, 4)
 
   return (
     <div className="results-page">
@@ -339,6 +364,7 @@ function Results() {
                     formatCurrency={formatCurrency}
                     quantity={filters.estQuantity}
                     searchQuery={query}
+                    comparisonAttributes={comparisonAttributes}
                   />
                 ))}
               </div>
@@ -361,6 +387,7 @@ function Results() {
                     onToggleSelect={() => toggleVendorSelection(vendor.id)}
                     formatCurrency={formatCurrency}
                     searchQuery={query}
+                    comparisonAttributes={comparisonAttributes}
                   />
                 ))}
               </div>
@@ -382,7 +409,7 @@ function Results() {
   )
 }
 
-function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, searchQuery }) {
+function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, searchQuery, comparisonAttributes = [] }) {
   const navigate = useNavigate()
   
   // Helper to display value or NA
@@ -391,14 +418,6 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
       return 'NA'
     }
     return suffix ? `${value} ${suffix}` : value
-  }
-
-  // Helper to format price or show NA
-  const displayPrice = (price, suffix = '') => {
-    if (price === null || price === undefined || price === 'NA') {
-      return 'NA'
-    }
-    return suffix ? `${formatCurrency(price)} ${suffix}` : formatCurrency(price)
   }
 
   // Navigate to vendor detail page
@@ -420,18 +439,9 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
       .replace(/\b\w/g, c => c.toUpperCase())
   }
 
-  // Get dynamic attributes from vendor (exclude known fixed fields)
-  const fixedFields = [
-    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
-    'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
-    'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
-    'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
-    'product_description', 'crawled_data', 'crawled_at', 'extracted_info'
-  ]
-  
-  const dynamicAttributes = Object.entries(vendor)
-    .filter(([key, value]) => !fixedFields.includes(key) && value !== null && value !== undefined && value !== 'NA' && value !== '')
-    .slice(0, 4) // Show max 4 dynamic attributes
+  // Use passed comparisonAttributes to ensure all vendor tiles show the same fields
+  // This is dynamically computed from ALL vendors at the parent level
+  const dynamicAttributes = comparisonAttributes.map(key => [key, vendor[key]])
 
   return (
     <div className={`vendor-card ${vendor.isCurrentPartner ? 'current-partner' : ''}`}>
@@ -462,8 +472,8 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
 
         <div className="vendor-metrics">
           <div className="metric">
-            <span className="metric-label">Unit Price</span>
-            <span className="metric-value">{displayPrice(vendor.unitPrice, '/ plate')}</span>
+            <span className="metric-label">Price</span>
+            <span className="metric-value">{vendor.unitPriceDisplay || 'NA'}</span>
           </div>
           
           <div className="metric">

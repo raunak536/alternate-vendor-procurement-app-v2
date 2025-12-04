@@ -353,15 +353,15 @@ function Compare() {
               ))}
             </div>
 
-            {/* Price (Per Unit) Row */}
+            {/* Price Row */}
             <div className="table-row">
               <div className="attribute-column">
-                <span className="attribute-name">Price (Per Unit)</span>
+                <span className="attribute-name">Price</span>
               </div>
               {selectedVendors.map(vendor => (
                 <div key={vendor.id} className="vendor-column">
                   <span className="data-value">
-                    {vendor.unitPrice != null ? `${formatCurrency(vendor.unitPrice)} / plate` : 'NA'}
+                    {vendor.unitPriceDisplay || 'NA'}
                   </span>
                 </div>
               ))}
