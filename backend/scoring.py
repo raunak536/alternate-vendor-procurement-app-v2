@@ -8,6 +8,11 @@ TODO: Enhance with more sophisticated logic later.
 from typing import Dict, Any, List
 
 
+def _has_valid_value(value: Any) -> bool:
+    """Check if a value is present and not 'NA'."""
+    return value and value != "NA"
+
+
 def calculate_suitability_score(vendor: Dict[str, Any]) -> int:
     """
     Calculate a simple suitability score (0-100) based on data completeness.
@@ -15,16 +20,16 @@ def calculate_suitability_score(vendor: Dict[str, Any]) -> int:
     """
     score = 50  # Base score
     
-    # +10 for each key field that has data
-    if vendor.get("price"):
+    # +10 for each key field that has valid data (not NA)
+    if _has_valid_value(vendor.get("price")):
         score += 10
-    if vendor.get("certifications") or vendor.get("quality_certifications"):
+    if _has_valid_value(vendor.get("certifications")) or _has_valid_value(vendor.get("quality_certifications")):
         score += 10
-    if vendor.get("shelf_life_storage_conditions"):
+    if _has_valid_value(vendor.get("shelf_life_storage_conditions")):
         score += 10
-    if vendor.get("sterilization_method"):
+    if _has_valid_value(vendor.get("sterilization_method")):
         score += 10
-    if vendor.get("packaging_format_volume_size"):
+    if _has_valid_value(vendor.get("packaging_format_volume_size")):
         score += 10
     
     return min(score, 100)

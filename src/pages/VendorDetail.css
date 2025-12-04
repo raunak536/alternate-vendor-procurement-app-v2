@@ -261,6 +261,51 @@
   font-style: italic;
 }
 
+/* Financial Stability Card */
+.financial-card {
+  margin-top: 1.5rem;
+}
+
+.financial-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.financial-card .card-title svg {
+  color: #0a5a8a;
+}
+
+.info-value.rating-good {
+  color: #0d7a3e;
+  font-weight: 600;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.risk-badge.low {
+  background: #e6f4ea;
+  color: #0d7a3e;
+}
+
+.risk-badge.medium {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.risk-badge.high {
+  background: #ffebee;
+  color: #c62828;
+}
+
 /* Relationship Section */
 .relationship-section {
   margin-top: 0.5rem;

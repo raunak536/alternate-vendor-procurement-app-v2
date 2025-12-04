@@ -299,6 +299,45 @@ function CompanyInfoTab({ vendor, apiData, displayValue }) {
           </div>
         </div>
       )}
+
+      {/* Financial Stability Card */}
+      <div className="info-card financial-card">
+        <h3 className="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="12" y1="1" x2="12" y2="23" />
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+          FINANCIAL STABILITY
+        </h3>
+        <div className="info-grid">
+          <div className="info-item">
+            <span className="info-label">CREDIT RATING</span>
+            <span className="info-value rating-good">AA+</span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">ANNUAL REVENUE</span>
+            <span className="info-value">$2.4B</span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">YEAR FOUNDED</span>
+            <span className="info-value">1994</span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">D&B RISK SCORE</span>
+            <span className="info-value">
+              <span className="risk-badge low">Low Risk</span>
+            </span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">PAYMENT HISTORY</span>
+            <span className="info-value rating-good">Excellent</span>
+          </div>
+          <div className="info-item">
+            <span className="info-label">EMPLOYEES</span>
+            <span className="info-value">12,500+</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

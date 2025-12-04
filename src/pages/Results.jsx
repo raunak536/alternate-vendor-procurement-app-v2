@@ -409,7 +409,8 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
   // Format website URL for display
   const formatUrl = (url) => {
     if (!url) return null
-    return url.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0]
+    const cleaned = url.replace(/^(https?:\/\/)?(www\.)?/, '')
+    return cleaned.length > 35 ? cleaned.slice(0, 35) + '...' : cleaned
   }
 
   // Convert snake_case to Title Case for display
