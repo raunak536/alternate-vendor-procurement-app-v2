@@ -137,9 +137,9 @@ function VendorDetail() {
           <div className="vendor-header-right">
             <div className="price-display">
               <span className="price-value">
-                {vendor.unitPrice !== null ? formatCurrency(vendor.unitPrice) : 'NA'} / plate
+                {vendor.unitPriceDisplay || 'NA'}
               </span>
-              <span className="price-label">Per Unit (Estimated)</span>
+              <span className="price-label">Price</span>
             </div>
             <button className="request-quote-btn">REQUEST QUOTE</button>
           </div>
@@ -355,9 +355,9 @@ function ProductSpecsTab({ vendor, apiData, displayValue, formatCurrency }) {
         <div className="specs-card">
           <div className="specs-grid">
             <div className="spec-item">
-              <span className="spec-label">UNIT PRICE</span>
+              <span className="spec-label">PRICE</span>
               <span className="spec-value">
-                {vendor.unitPrice !== null ? `${formatCurrency(vendor.unitPrice)} / plate` : 'NA'}
+                {vendor.unitPriceDisplay || 'NA'}
               </span>
             </div>
             <div className="spec-item">
