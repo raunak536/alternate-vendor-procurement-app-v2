@@ -107,11 +107,12 @@ function Results() {
   // Compute consistent comparison attributes from ALL vendors dynamically
   // This ensures all tiles show the same attributes regardless of which SKU is searched
   const fixedFields = [
-    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
+    'id', 'name', 'productName', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
     'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
     'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
     'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
-    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls'
+    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls',
+    'shelfLife', 'packaging', 'storage', 'locking'
   ]
 
   // Get union of all dynamic attribute keys from all vendors
@@ -477,7 +478,7 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
           </div>
           
           <div className="metric">
-            <span className="metric-label">Region</span>
+            <span className="metric-label">Manufacturer Country</span>
             <span className="metric-value">{displayValue(vendor.region)}</span>
           </div>
 

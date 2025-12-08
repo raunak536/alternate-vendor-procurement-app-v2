@@ -239,7 +239,7 @@ function CompanyInfoTab({ vendor, apiData, displayValue }) {
             </span>
           </div>
           <div className="info-item">
-            <span className="info-label">HEADQUARTERS</span>
+            <span className="info-label">MANUFACTURER COUNTRY</span>
             <span className="info-value">{displayValue(vendor.region)}</span>
           </div>
           <div className="info-item">

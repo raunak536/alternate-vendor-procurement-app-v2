@@ -1,0 +1,373 @@
+{
+  "queries": {
+    "tsa 3p irr neutralizers": {
+      "query_id": "tsa-3p-irr-neutralizers",
+      "query_text": "TSA 3P IRR Neutralizers",
+      "enriched_query": "1. **Enriched Procurement Query**:\n- Seeking suppliers for \"Tryptic Soy Agar (TSA) with 3-Part Irradiated (IRR) Neutralizers\".\n- Intended use: **Not specified** (please specify if for environmental monitoring, sterility testing, validation, etc.).\n- Format/packaging: **Not specified** (please specify plate size, volume, or other format preferences if known).\n- Quantity requirement: **Not specified**.\n- Product should contain triple neutralizers (commonly lecithin, polysorbate 80, and sodium thiosulfate) and must be irradiated to achieve sterility assurance.\n- Must be compliant with relevant pharmacopeial standards (e.g., USP, EP, JP) – **open, unless specified**.\n- Certificate of Analysis (CoA) and sterility documentation preferred.\n- Alternate names/synonyms: \"Tryptic Soy Agar with Neutralizers\", \"Irradiated TSA 3N\", \"TSA 3-Component Neutralizing Agar\", \"TSA with Lecithin/Polysorbate/Sodium Thiosulfate\", \"TSA neutralizing media irradiated\".\n- Please provide catalog numbers and technical data sheets if available.\n\n2. **Key Comparison Attributes**:\n- **Sterilization Method** (gamma irradiation confirmation and certificate)\n- **Type and concentration of neutralizers** (lecithin, polysorbate 80, sodium thiosulfate; exact formulation)\n- **Regulatory compliance/certifications** (pharmacopeial conformity, GMP, CoA availability)\n- **Packaging/format** (plates, bottles, tubes; size and quantity per pack)\n- **Shelf life and storage conditions**",
+      "last_updated": "2025-12-03 15:57:21",
+      "research_model": "o4-mini-deep-research",
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "MilliporeSigma (Merck)",
+          "region": "Global",
+          "product_description": "Ready-to-use contact plates (55 mm) of Tryptic Soy Agar with neutralizers (lecithin, polysorbate 80 (Tween®), sodium thiosulfate, L-histidine); gamma-irradiated and triple-wrapped; pack of 10 plates (10 plates/triple pack)",
+          "product_url": "https://www.merckmillipore.com/GE/en/product/mm/146231",
+          "availability_status": "available",
+          "certifications": [
+            "USP",
+            "EP"
+          ],
+          "price": "USD $106.00 / 20 pack",
+          "source_urls": [
+            "https://www.merckmillipore.com/GE/en/product/mm/146231",
+            "https://www.merckmillipore.com/GE/en/product/mm/146231",
+            "https://www.merckmillipore.com/GE/en/product/mm/146231",
+            "https://www.sigmaaldrich.com/US/en/product/mm/146231"
+          ],
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "sterilization_method": "Gamma irradiation (post-packaging sterilization) ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=sterility))",
+          "neutralizers": [
+            "Lecithin",
+            "Polysorbate 80",
+            "Sodium thiosulfate"
+          ],
+          "packaging_format": "55 mm contact plates, triple-wrapped; 10 plates per pack ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=packaging))",
+          "shelf_life": "NA",
+          "storage_condition": "Protect from light; keep loosely closed and dry ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=protect%20from%20light%20,closed%20and%20dry))"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Thermo Fisher Scientific",
+          "region": "Global",
+          "product_description": "Triple-wrapped sterile pack of Tryptic Soy Agar (55 mm plates) with neutralizers (lecithin, polysorbate 80, sodium thiosulfate, L-histidine) and a VHP indicator; 100 plates per pack (with 2D barcode)",
+          "product_url": "https://www.thermofisher.com/order/catalog/product/R111TW1",
+          "availability_status": "available",
+          "certifications": [
+            "NA"
+          ],
+          "price": "NA",
+          "source_urls": [
+            "https://www.thermofisher.com/order/catalog/product/R111TW1",
+            "https://www.thermofisher.com/order/catalog/product/R111TW1"
+          ],
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "sterilization_method": "Gamma irradiation (triple-wrapped sterilization)",
+          "neutralizers": [
+            "Lecithin",
+            "Polysorbate 80",
+            "Sodium thiosulfate",
+            "L-Histidine"
+          ],
+          "packaging_format": "55 mm contact plates, triple-wrapped; 100 plates per pack ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Quantity100%2Fpk))",
+          "shelf_life": "43 weeks ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Quantity100%2Fpk))",
+          "storage_condition": "Room temperature (no refrigeration required) ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Using%20plates%20with%20an%20improved,Please%20inquire))"
+        },
+        {
+          "id": 3,
+          "vendor_name": "BD (Becton Dickinson)",
+          "region": "Global",
+          "product_description": "BD BBL Trypticase Soy Agar with Lecithin and Polysorbate 80 (sterile pack of Rodac contact plates); 100 plates per pack (gamma-irradiated, multiwrapped)",
+          "product_url": "https://www.bd.com/en-us/products-and-solutions/products/product-page.215342",
+          "availability_status": "unavailable",
+          "certifications": [
+            "NA"
+          ],
+          "price": "NA",
+          "source_urls": [
+            "https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203",
+            "https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203"
+          ],
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "sterilization_method": "Gamma irradiation (sterile pack, multiwrap) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=Plated%20media%20in%20gamma,from%20vaporized%20hydrogen%20peroxide%20exposure))",
+          "neutralizers": [
+            "Lecithin",
+            "Polysorbate 80"
+          ],
+          "packaging_format": "65 mm Rodac contact plates; 100 plates per pack (sterile multiwrap) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=222207%20%20,product%20page%20for%20possible%20alternatives))",
+          "shelf_life": "112 days ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=222207%20%20,product%20page%20for%20possible%20alternatives))",
+          "storage_condition": "2–8 °C (refrigerated) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=Specifications))"
+        }
+      ]
+    },
+    "hyaluronids activty elisa-k-6000-5x96 wl": {
+      "query_id": "hyaluronids-activty-elisa-k-6000-5x96-wl",
+      "query_text": "Hyaluronids Activty ELISA-K-6000-5x96 wl",
+      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Seeking suppliers for \"Hyaluronidase Activity ELISA Kit,\" specifically referencing the catalog number ELISA-K-6000 (also search for synonyms such as \"Hyaluronidase Activity Assay Kit\" or \"Hyaluronidase ELISA Kit\").\n- Kit size/package: 5 x 96-well plates per kit (total 480 wells).\n- Intended application: Detection and quantification of hyaluronidase enzyme activity using ELISA methodology (quantitative enzyme activity measurement).\n- Require details on sensitivity, detection range, and sample compatibility (e.g., serum, plasma, tissue, cell lysates—mark as \"not specified\" if not in original query).\n- Certification/validation: Research use only (RUO) or clinical use—please specify (not specified in the query).\n- Please provide lead time, shipping/storage conditions (cold chain required?), and expiration/shelf life.\n- Alternate product names: \"Hyaluronidase Activity ELISA Kit\", \"Hyaluronidase Activity Quantification Kit\", \"Hyaluronidase Assay 5 x 96-well\".\n\n2. **Key Comparison Attributes**:\n\n- Format and size of the kit (e.g., number of 96-well plates per kit)\n- Sensitivity and detection range of the assay\n- Sample compatibility (types of samples validated)\n- Certification/Validation status (e.g., RUO, CE-IVD, FDA cleared)\n- Storage conditions and shelf life\n\nThis structured request will facilitate detailed, apples-to-apples comparison across different kit vendors and ensure critical product characteristics are evaluated.",
+      "last_updated": "2025-12-04 21:48:20",
+      "research_model": "o4-mini-deep-research",
+      "time_taken_seconds": 264.79,
+      "tokens_used": {
+        "input_tokens": 49721,
+        "output_tokens": 16595,
+        "total_tokens": 66316
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Fisher Scientific",
+          "region": "US",
+          "product_description": "Human HAase (Hyaluronidase) ELISA Kit, 96 tests ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=Biomatik%20Corporation%C2%A0Human%20HAase%20,Kit%2C%2096%20tests))",
+          "product_url": "https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485",
+          "availability_status": "available",
+          "certifications": "RUO ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=Restriction%3A%20For%20Research%20Use%20Only))",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "format_and_size": "96-well plate, 96 tests ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Restriction%3A%20For%20Research%20Use%20Only))",
+          "sensitivity": "1.88 ng/mL ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
+          "detection_range": "3.13-200 ng/mL ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
+          "sample_compatibility": "Serum, Plasma, Biological Fluids ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
+          "storage_condition": "NA",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Novus Biologicals (Bio-Techne)",
+          "region": "US",
+          "product_description": "Human Hyaluronidase 1 (HYAL1) ELISA Kit (Colorimetric, 96T) ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Human%20Hyaluronidase%201%2FHYAL1%20ELISA%20Kit,Colorimetric))",
+          "product_url": "https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795",
+          "availability_status": "available",
+          "certifications": "RUO ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=This%20product%20is%20for%20research,months%20from%20date%20of%20receipt))",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "format_and_size": "96-well plate, 96 tests ([www.biomatik.com](https://www.biomatik.com/elisa-kits/human-hyal1-hyaluronidase-1-elisa-kit-cat-ekf59026/#:~:text=Format))",
+          "sensitivity": "1.88 ng/mL ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Suitable%20Sample%20Type%20%20,1.88%20ng%2FmL))",
+          "detection_range": "3.13-200 ng/mL ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Suitable%20Sample%20Type%20%20,1.88%20ng%2FmL))",
+          "sample_compatibility": "Serum, plasma, other biological fluids ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Reactivity%20%20,1.88%20ng%2FmL))",
+          "storage_condition": "NA",
+          "shelf_life": "6 months from date of receipt ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=This%20product%20is%20for%20research,months%20from%20date%20of%20receipt))"
+        },
+        {
+          "id": 3,
+          "vendor_name": "Sigma-Aldrich (MilliporeSigma)",
+          "region": "US",
+          "product_description": "Hyaluronidase Inhibitor Screening Assay Kit, MAK458 (100 tests) ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
+          "product_url": "https://www.sigmaaldrich.com/US/en/product/sigma/mak458",
+          "availability_status": "limited",
+          "certifications": "NA",
+          "price": "$614.00 / kit ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=%24614))",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "format_and_size": "100 tests (turbidimetric assay) ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
+          "sensitivity": "NA",
+          "detection_range": "NA",
+          "sample_compatibility": "Not specified ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
+          "storage_condition": "−20°C ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=storage%20temp))",
+          "shelf_life": "NA"
+        }
+      ]
+    },
+    "e.coli hcdna kits; cat #: 4458435": {
+      "query_id": "ecoli-hcdna-kits-cat-4458435",
+      "query_text": "E.coli HcDNA kits; Cat #: 4458435",
+      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Seeking suppliers for \"E. coli HcDNA Kit\" (Catalog Number: 4458435).\n- Intended use: [not specified; please indicate if for research, diagnostic, or clinical use].\n- Request product information, technical data sheet (TDS), and Certificate of Analysis (CoA), if available.\n- Specify contents of the kit, including included reagents and quantities.\n- Packaging/size: [not specified; please indicate volume or number of preps if necessary].\n- Require information on storage conditions and recommended shelf life.\n- Alternate names/synonyms: Please cross-reference as \"Escherichia coli HcDNA Extraction Kit,\" \"E. coli High Copy DNA Kit,\" or similar extraction/purification kits.\n- Request information on availability, lead time, and shipping restrictions (temperature, hazard, etc.).\n- Regulatory certification or compliance (if required): [open].\n\n2. **Key Comparison Attributes**:\n\n- Kit contents (reagents included and their volumes/number of preps)\n- Intended application (research use only, clinical/diagnostic, etc.)\n- Storage conditions (temperature, light sensitivity, etc.)\n- Shelf life/expiry date\n- Certifying documentation (Certificate of Analysis, compliance certifications)\n\n*Note: Always confirm catalog number (4458435) matches across suppliers, as catalog numbers may differ between brands.",
+      "last_updated": "2025-12-04 21:51:54",
+      "research_model": "o4-mini-deep-research",
+      "time_taken_seconds": 450.35,
+      "tokens_used": {
+        "input_tokens": 74229,
+        "output_tokens": 24143,
+        "total_tokens": 98372
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Thermo Fisher Scientific",
+          "region": "Global",
+          "product_description": "Applied Biosystems resDNASEQ Quantitative E. coli DNA Kit (Assay Kit only, Cat. No. 4458435) – qPCR-based kit for sensitive quantitation of E. coli host cell DNA ([www.thermofisher.cn](https://www.thermofisher.cn/order/catalog/product/jp/en/4458435#:~:text=This%20quantitative%20PCR%20%28qPCR%29,in%20less%20than%204%20hours))",
+          "product_url": "https://www.thermofisher.cn/order/catalog/product/4458435",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "kit_contents": "E. coli DNA Control (30 ng/μL, 40 μL); DNA Dilution Buffer (7 mL); Environmental Master Mix (2X, 2 × 0.75 mL); E. coli DNA Assay Mix (10X, 300 μL); Negative Control (water, 1.0 mL) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
+          "intended_application": "For research use only (not for diagnostic use) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Show%20More%20%20))",
+          "storage_condition": "Store at –15 °C to –25 °C before first use; after thaw, DNA Dilution Buffer, Master Mix, and Negative Control can be stored at 2–8 °C; protect from light ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Fisher Scientific",
+          "region": "UK",
+          "product_description": "Applied Biosystems resDNASEQ Quantitative E. coli DNA Kit (Assay Kit only, Fisher Prod. Code 30067392, Cat. No. 4458435) for quantitation of E. coli host cell DNA ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=This%20quantitative%20PCR%20%28qPCR%29,in%20less%20than%204%20hours))",
+          "product_url": "https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "kit_contents": "E. coli DNA Control (30 ng/μL, 40 μL); DNA Dilution Buffer (7 mL); Environmental Master Mix (2X, 2 × 0.75 mL); E. coli DNA Assay Mix (10X, 300 μL); Negative Control (water, 1.0 mL) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
+          "intended_application": "For research use only (not for diagnostic use) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Show%20More%20%20))",
+          "storage_condition": "Store at –15 °C to –25 °C before first use; after thaw, DNA Dilution Buffer, Master Mix, and Negative Control can be stored at 2–8 °C; protect from light ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 3,
+          "vendor_name": "MilliporeSigma (Sigma-Aldrich)",
+          "region": "Global",
+          "product_description": "GenElute HP Select Plasmid DNA Gigaprep Kit (Cat. No. NA0800) – high-copy plasmid DNA purification kit for E. coli ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/na0800#:~:text=The%20GenElute%20HP%20Select%20Plasmid,2.5%20L%20Luria%20Broth%20%28LB))",
+          "product_url": "https://www.sigmaaldrich.com/US/en/product/sigma/NA0800",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "kit_contents": "NA",
+          "intended_application": "Purification of high-copy plasmid DNA from recombinant E. coli ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/na0800#:~:text=The%20GenElute%20HP%20Select%20Plasmid,2.5%20L%20Luria%20Broth%20%28LB))",
+          "storage_condition": "NA",
+          "shelf_life": "NA"
+        }
+      ]
+    },
+    "proteina mix-n-go elisakit f600": {
+      "query_id": "proteina-mix-n-go-elisakit-f600",
+      "query_text": "PROTEINA MIX-N-GO ELISAKIT F600",
+      "enriched_query": "1. **Enriched Procurement Query**:\n- Seeking vendors or suppliers for the \"Protein Mix-N-Go! ELISA Kit,\" catalog number F600.\n- Manufacturer: [Open/not specified] (potentially Biomatrica, Novus Biologicals, or similar – please confirm manufacturer if known)\n- Intended use: Enzyme-Linked Immunosorbent Assay (ELISA) for protein detection/quantification. Specific target protein or application: [Open/not specified].\n- Kit components: Please provide detailed information on kit contents (plates, reagents, buffers, controls, etc.).\n- Kit size or number of tests/wells: [Open/not specified]\n- Certifications or compliance: [Open/not specified – e.g., CE, RUO (Research Use Only), or IVD]\n- Storage conditions required: [Open/not specified]\n- Alternate product names or synonyms: \"Mix-N-Go Protein ELISA Kit\", \"ELISA Kit F600\", \"Mix-N-Go! Protein Assay Kit\"\n- Please include lead times, minimum order quantities, and availability.\n\n2. **Key Comparison Attributes**:\n- Kit format/number of tests per kit (e.g., 96-well, 48-well, etc.)\n- Detection method and sensitivity (e.g., colorimetric, fluorometric, sensitivity limit)\n- Required storage conditions (ambient, refrigerated, -20°C, etc.)\n- Certifications/status (e.g., Research Use Only, IVD, CE-marked, etc.)\n- Kit components and completeness (e.g., inclusion of standards, controls, substrate)\n\n*Note: Please further specify the protein target, manufacturer, or application for even more precise supplier matching if possible.*",
+      "last_updated": "2025-12-04 21:55:02",
+      "research_model": "o4-mini-deep-research",
+      "time_taken_seconds": 619.29,
+      "tokens_used": {
+        "input_tokens": 55334,
+        "output_tokens": 21129,
+        "total_tokens": 76463
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Fisher Scientific",
+          "region": "Global (US)",
+          "product_description": "Cygnus Technologies Protein A Mix-N-Go ELISA Kit, natural (Cat. F600) ([www.fishersci.com](https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426#:~:text=Cygnus%20Technologies%C2%A0Protein%20A%20Mix,Kit))",
+          "product_url": "https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "$977.85 / 1 kit ([www.fishersci.com](https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426#:~:text=,1))",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "storage_condition": "2 °C to 8 °C ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Storage%3A%20All%20kit%20reagents%202%C2%B0C,Assay%20format%3A%2096%20Well%20Plate))",
+          "number_of_tests": "96 ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Assay%20format%3A%2096%20Well%20Plate))",
+          "kit_format": "96-well plate ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Assay%20format%3A%2096%20Well%20Plate))",
+          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Avantor (VWR)",
+          "region": "Global (Europe)",
+          "product_description": "Avantor Protein A Mix-N-Go ELISA Kit (Cat. F965) ([bionordika.no](https://bionordika.no/all-products/bioprocessing/avantor-protein-a-mix-n-go-elisa-kit~cyg-f965#:~:text=Avantor%20Protein%20A%20Mix,Kit))",
+          "product_url": "https://bionordika.no/all-products/bioprocessing/avantor-protein-a-mix-n-go-elisa-kit~cyg-f965",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "NA",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "storage_condition": "2 °C to 8 °C ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=Storage%3A%202%C2%B0C%20to%208%C2%B0C%20Assay,format))",
+          "number_of_tests": "96 ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=2%C2%B0C%20to%208%C2%B0C%20Assay%20format%3A,96%20Well%20Plate))",
+          "kit_format": "96-well plate ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=2%C2%B0C%20to%208%C2%B0C%20Assay%20format%3A,96%20Well%20Plate))",
+          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 3,
+          "vendor_name": "R&D Systems (Bio-Techne)",
+          "region": "Global (US)",
+          "product_description": "R&D Systems Protein A ELISA Kit (Cat. BPPA00) ([www.fishersci.pt](https://www.fishersci.pt/shop/products/protein-a-elisa-kit/30000815#:~:text=R%26D%20Systems%E2%84%A2%C2%A0Protein%20A%20ELISA%20Kit))",
+          "product_url": "https://www.rndsystems.com/products/protein-a-elisa-kit_bppa00",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "€825.00 / 1 kit ([www.fishersci.pt](https://www.fishersci.pt/shop/products/protein-a-elisa-kit/30000815#:~:text=Product%20Code))",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "storage_condition": "2 °C to 8 °C ([www.rndsystems.com](https://www.rndsystems.com/products/protein-a-elisa-kit_bppa00#:~:text=Storage))",
+          "number_of_tests": "NA",
+          "kit_format": "NA",
+          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
+          "shelf_life": "NA"
+        }
+      ]
+    },
+    "pathhunterbioassaykit#93-0933": {
+      "query_id": "pathhunterbioassaykit93-0933",
+      "query_text": "PathHunterBioassayKit#93-0933",
+      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Sourcing request for: PathHunter Bioassay Kit (Catalog #93-0933)\n- Manufacturer: DiscoverX (Eurofins DiscoverX is a common manufacturer for PathHunter assay kits)\n- Alternative product names/identifiers: Also known as PathHunter β-Arrestin Assay Kit or PathHunter Bioassay System, depending on application. Please provide cross-references if available.\n- Intended use/application: Not specified (open – intended application should be confirmed with the supplier)\n- Target/Assay type: Not specified (open – supplier’s product datasheet should confirm the specific assay or detection target of #93-0933)\n- Kit size/packaging: Not specified (open – supplier to clarify available pack sizes for #93-0933)\n- Certificate of Analysis (COA): Required; ensure batch-specific documentation is available\n- Storage conditions: Not specified (open – request supplier to confirm recommended storage, typically refrigerated or frozen for assay kits)\n- Grade/purity/format: Research grade assumed unless otherwise specified; confirm with supplier\n- Regulatory status: For research use only (RUO), unless otherwise stated\n- Delivery timeline and availability: Open\n- Synonyms/search expansion: PathHunter Assay Kit, Catalog #93-0933, β-Arrestin Assay Kits, DiscoverX 93-0933, Eurofins DiscoverX PathHunter Kit\n\n2. **Key Comparison Attributes**:\n- Assay type/target specificity (verify the exact target and cell type for Kit #93-0933)\n- Kit size/number of assays (number of wells or reactions per kit)\n- Storage and stability requirements (temperature, shelf life)\n- Regulatory grade or certification (Research Use Only, GMP, etc.)\n- Price and availability (lead time, stock status)\n\n**Note**: If any specification is not listed in the query, it should be requested as \"open\" when contacting vendors, with the aim of gathering full product datasheets for comparison.",
+      "last_updated": "2025-12-05 11:00:27",
+      "research_model": "o4-mini-deep-research",
+      "time_taken_seconds": 463.26,
+      "tokens_used": {
+        "input_tokens": 55810,
+        "output_tokens": 28010,
+        "total_tokens": 83820
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Fisher Scientific",
+          "region": "United States",
+          "product_description": "Eurofins Discoverx PathHunter Bioassay Detection Kit, 75 (1,000 dp, 96-well) (Catalog #93-0933) is a detection kit containing lysis buffer and EFC substrate to detect EFC levels in PathHunter bioassay cells; includes components for 10 plates (96-well) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
+          "product_url": "https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "$5,825.43 / Each of 1 [https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661]",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
+          "kit_size": "10 plates (96-well) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
+          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Fisher Scientific",
+          "region": "Germany",
+          "product_description": "Discoverx PathHunter Bioassay Detection Kit (Catalog #93-0933E) is a detection kit containing lysis buffer and EFC substrate for cell-based EFC detection ([www.discoverx.com](https://www.discoverx.com/catalog/PathHunter%C2%AE-Bioassay-Detection-Kit/93-0933E#:~:text=The%20PathHunter%C2%AE%20Bioassay%20Detection%20Kit,levels%20in%20the%20assayed%20cells))",
+          "product_url": "https://www.fishersci.com/shop/products/pathhunter-bioassay-detection-kit/16337616",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "€2233.50 / Each [https://www.fishersci.com/shop/products/pathhunter-bioassay-detection-kit/16337616]",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.discoverx.com](https://www.discoverx.com/catalog/PathHunter%C2%AE-Bioassay-Detection-Kit/93-0933E#:~:text=The%20PathHunter%C2%AE%20Bioassay%20Detection%20Kit,levels%20in%20the%20assayed%20cells))",
+          "kit_size": "NA",
+          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
+          "shelf_life": "NA"
+        },
+        {
+          "id": 3,
+          "vendor_name": "Fisher Scientific",
+          "region": "Finland",
+          "product_description": "Discoverx 500 mL PathHunter Bioassay Detection Kit (Catalog #93-0933L) for 10,000 data points (96-well) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
+          "product_url": "https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548",
+          "availability_status": "available",
+          "certifications": "NA",
+          "price": "€58483.50 / 500mL [https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548]",
+          "crawled_data": null,
+          "crawled_at": null,
+          "extracted_info": {},
+          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
+          "kit_size": "10,000 data points (96-well) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
+          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
+          "shelf_life": "NA"
+        }
+      ]
+    }
+  }
+}

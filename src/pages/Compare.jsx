@@ -39,12 +39,12 @@ function Compare() {
 
   // Get all dynamic attributes across all selected vendors
   const fixedFields = [
-    'id', 'name', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
+    'id', 'name', 'productName', 'source', 'isCurrentPartner', 'isPreferred', 'isBestValue', 'isFastest',
     'unitPrice', 'unitPriceDisplay', 'totalEstCost', 'availableQty', 'region', 'leadTime',
     'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
     'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
-    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'shelfLife',
-    'packaging', 'storage', 'locking'
+    'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls',
+    'shelfLife', 'packaging', 'storage', 'locking'
   ]
   
   // Collect all unique dynamic attribute keys from all selected vendors
@@ -406,10 +406,10 @@ function Compare() {
               ))}
             </div>
 
-            {/* Region Row */}
+            {/* Manufacturer Country Row */}
             <div className="table-row">
               <div className="attribute-column">
-                <span className="attribute-name">Region</span>
+                <span className="attribute-name">Manufacturer Country</span>
               </div>
               {selectedVendors.map(vendor => (
                 <div key={vendor.id} className="vendor-column">

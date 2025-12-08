@@ -1,373 +1,2045 @@
 {
   "queries": {
-    "tsa 3p irr neutralizers": {
-      "query_id": "tsa-3p-irr-neutralizers",
-      "query_text": "TSA 3P IRR Neutralizers",
-      "enriched_query": "1. **Enriched Procurement Query**:\n- Seeking suppliers for \"Tryptic Soy Agar (TSA) with 3-Part Irradiated (IRR) Neutralizers\".\n- Intended use: **Not specified** (please specify if for environmental monitoring, sterility testing, validation, etc.).\n- Format/packaging: **Not specified** (please specify plate size, volume, or other format preferences if known).\n- Quantity requirement: **Not specified**.\n- Product should contain triple neutralizers (commonly lecithin, polysorbate 80, and sodium thiosulfate) and must be irradiated to achieve sterility assurance.\n- Must be compliant with relevant pharmacopeial standards (e.g., USP, EP, JP) – **open, unless specified**.\n- Certificate of Analysis (CoA) and sterility documentation preferred.\n- Alternate names/synonyms: \"Tryptic Soy Agar with Neutralizers\", \"Irradiated TSA 3N\", \"TSA 3-Component Neutralizing Agar\", \"TSA with Lecithin/Polysorbate/Sodium Thiosulfate\", \"TSA neutralizing media irradiated\".\n- Please provide catalog numbers and technical data sheets if available.\n\n2. **Key Comparison Attributes**:\n- **Sterilization Method** (gamma irradiation confirmation and certificate)\n- **Type and concentration of neutralizers** (lecithin, polysorbate 80, sodium thiosulfate; exact formulation)\n- **Regulatory compliance/certifications** (pharmacopeial conformity, GMP, CoA availability)\n- **Packaging/format** (plates, bottles, tubes; size and quantity per pack)\n- **Shelf life and storage conditions**",
-      "last_updated": "2025-12-03 15:57:21",
-      "research_model": "o4-mini-deep-research",
-      "vendors": [
+    "tsa 3p irr neutralizers plate": {
+      "query_id": "tsa-3p-irr-neutralizers-plate",
+      "query_text": "TSA 3P IRR Neutralizers plate",
+      "enriched_query": "We are seeking suppliers of a Tryptic Soy Agar (TSA) 3-Phase Irradiated (IRR) Neutralizers Plate. This is a ready-to-use microbial culture medium plate used for environmental monitoring and surface sampling, formulated with neutralizers to inactivate residual disinfectants. TSA plates with neutralizers are typically employed in pharmaceutical and biopharmaceutical cleanroom, production, and quality control settings to validate cleaning processes. Please provide detailed product specifications, including format (triple-bagged or triple-wrapped), type of neutralizers included, irradiation status and method for sterility assurance, packaging options, quality certifications, and documentation supporting regulatory compliance. Include information on price, storage conditions, shelf life, regulatory certifications, pack size, catalog number, manufacturer, and shipping/lead times. Product must meet cGMP/ISO requirements as applicable for environmental monitoring in regulated biopharma environments.",
+      "comparison_attributes": [
         {
-          "id": 1,
-          "vendor_name": "MilliporeSigma (Merck)",
-          "region": "Global",
-          "product_description": "Ready-to-use contact plates (55 mm) of Tryptic Soy Agar with neutralizers (lecithin, polysorbate 80 (Tween®), sodium thiosulfate, L-histidine); gamma-irradiated and triple-wrapped; pack of 10 plates (10 plates/triple pack)",
-          "product_url": "https://www.merckmillipore.com/GE/en/product/mm/146231",
-          "availability_status": "available",
-          "certifications": [
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price of the product, including currency and quantity per order.",
+          "look_for": [
+            "price",
+            "unit price",
+            "cost",
+            "list price",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Condition",
+          "description": "Recommended storage temperature and handling requirements for the product.",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Length of time the product remains stable and usable under recommended storage conditions.",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications",
+          "description": "Regulatory and quality certifications relevant for pharmaceutical and biopharmaceutical applications.",
+          "look_for": [
+            "certification",
+            "compliance",
             "USP",
-            "EP"
-          ],
-          "price": "USD $106.00 / 20 pack",
-          "source_urls": [
-            "https://www.merckmillipore.com/GE/en/product/mm/146231",
-            "https://www.merckmillipore.com/GE/en/product/mm/146231",
-            "https://www.merckmillipore.com/GE/en/product/mm/146231",
-            "https://www.sigmaaldrich.com/US/en/product/mm/146231"
-          ],
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "sterilization_method": "Gamma irradiation (post-packaging sterilization) ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=sterility))",
-          "neutralizers": [
-            "Lecithin",
-            "Polysorbate 80",
-            "Sodium thiosulfate"
-          ],
-          "packaging_format": "55 mm contact plates, triple-wrapped; 10 plates per pack ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=packaging))",
-          "shelf_life": "NA",
-          "storage_condition": "Protect from light; keep loosely closed and dry ([www.merckmillipore.com](https://www.merckmillipore.com/GE/en/product/mm/146231#:~:text=protect%20from%20light%20,closed%20and%20dry))"
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD",
+            "cGMP",
+            "pharmacopeia"
+          ]
         },
         {
-          "id": 2,
-          "vendor_name": "Thermo Fisher Scientific",
-          "region": "Global",
-          "product_description": "Triple-wrapped sterile pack of Tryptic Soy Agar (55 mm plates) with neutralizers (lecithin, polysorbate 80, sodium thiosulfate, L-histidine) and a VHP indicator; 100 plates per pack (with 2D barcode)",
-          "product_url": "https://www.thermofisher.com/order/catalog/product/R111TW1",
-          "availability_status": "available",
-          "certifications": [
-            "NA"
-          ],
-          "price": "NA",
-          "source_urls": [
-            "https://www.thermofisher.com/order/catalog/product/R111TW1",
-            "https://www.thermofisher.com/order/catalog/product/R111TW1"
-          ],
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "sterilization_method": "Gamma irradiation (triple-wrapped sterilization)",
-          "neutralizers": [
-            "Lecithin",
-            "Polysorbate 80",
-            "Sodium thiosulfate",
-            "L-Histidine"
-          ],
-          "packaging_format": "55 mm contact plates, triple-wrapped; 100 plates per pack ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Quantity100%2Fpk))",
-          "shelf_life": "43 weeks ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Quantity100%2Fpk))",
-          "storage_condition": "Room temperature (no refrigeration required) ([www.thermofisher.com](https://www.thermofisher.com/order/catalog/product/R111TW1#:~:text=Using%20plates%20with%20an%20improved,Please%20inquire))"
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Number of plates or units per package or kit.",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests"
+          ]
         },
         {
-          "id": 3,
-          "vendor_name": "BD (Becton Dickinson)",
-          "region": "Global",
-          "product_description": "BD BBL Trypticase Soy Agar with Lecithin and Polysorbate 80 (sterile pack of Rodac contact plates); 100 plates per pack (gamma-irradiated, multiwrapped)",
-          "product_url": "https://www.bd.com/en-us/products-and-solutions/products/product-page.215342",
-          "availability_status": "unavailable",
-          "certifications": [
-            "NA"
-          ],
-          "price": "NA",
-          "source_urls": [
-            "https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203",
-            "https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203"
-          ],
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "sterilization_method": "Gamma irradiation (sterile pack, multiwrap) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=Plated%20media%20in%20gamma,from%20vaporized%20hydrogen%20peroxide%20exposure))",
-          "neutralizers": [
-            "Lecithin",
-            "Polysorbate 80"
-          ],
-          "packaging_format": "65 mm Rodac contact plates; 100 plates per pack (sterile multiwrap) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=222207%20%20,product%20page%20for%20possible%20alternatives))",
-          "shelf_life": "112 days ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=222207%20%20,product%20page%20for%20possible%20alternatives))",
-          "storage_condition": "2–8 °C (refrigerated) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/bbl-trypticase-soy-agar-lecithin-polysorbate-80-sterile-pack-media-rodac-plates/p-4770203#:~:text=Specifications))"
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Vendor product code, reference number, or SKU used for ordering.",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Brand or company that produces, supplies, or distributes the product.",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Expected delivery time, availability, and shipping details.",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "irradiation_status",
+          "display_name": "Irradiation/Sterility Assurance",
+          "description": "Whether the plates are gamma-irradiated for sterility, including compliance with sterility standards.",
+          "look_for": [
+            "irradiated",
+            "sterile",
+            "gamma",
+            "sterility assurance",
+            "SAL",
+            "irradiation certificate"
+          ]
+        },
+        {
+          "key": "neutralizers_composition",
+          "display_name": "Neutralizers Composition",
+          "description": "Details on types and concentrations of chemical neutralizers present to inactivate a range of disinfectants.",
+          "look_for": [
+            "neutralizers",
+            "composition",
+            "lecithin",
+            "polysorbate",
+            "neutralizing agents",
+            "Tween",
+            "SCDLP",
+            "residues"
+          ]
+        },
+        {
+          "key": "plate_format",
+          "display_name": "Plate Format/Packaging",
+          "description": "Physical configuration such as triple-bagged, triple-wrapped, contact or settle plate type suitable for cleanroom transfer.",
+          "look_for": [
+            "plate format",
+            "contact plate",
+            "settle plate",
+            "triple bagged",
+            "triple wrapped",
+            "single bag",
+            "packaging"
+          ]
+        },
+        {
+          "key": "documentation",
+          "display_name": "Documentation/COA",
+          "description": "Supporting documents such as Certificates of Analysis, Certificates of Irradiation, Lot Release, and Validation documentation.",
+          "look_for": [
+            "COA",
+            "certificate of analysis",
+            "irradiation certificate",
+            "lot release",
+            "quality certificate",
+            "validation report",
+            "TDS"
+          ]
         }
-      ]
-    },
-    "hyaluronids activty elisa-k-6000-5x96 wl": {
-      "query_id": "hyaluronids-activty-elisa-k-6000-5x96-wl",
-      "query_text": "Hyaluronids Activty ELISA-K-6000-5x96 wl",
-      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Seeking suppliers for \"Hyaluronidase Activity ELISA Kit,\" specifically referencing the catalog number ELISA-K-6000 (also search for synonyms such as \"Hyaluronidase Activity Assay Kit\" or \"Hyaluronidase ELISA Kit\").\n- Kit size/package: 5 x 96-well plates per kit (total 480 wells).\n- Intended application: Detection and quantification of hyaluronidase enzyme activity using ELISA methodology (quantitative enzyme activity measurement).\n- Require details on sensitivity, detection range, and sample compatibility (e.g., serum, plasma, tissue, cell lysates—mark as \"not specified\" if not in original query).\n- Certification/validation: Research use only (RUO) or clinical use—please specify (not specified in the query).\n- Please provide lead time, shipping/storage conditions (cold chain required?), and expiration/shelf life.\n- Alternate product names: \"Hyaluronidase Activity ELISA Kit\", \"Hyaluronidase Activity Quantification Kit\", \"Hyaluronidase Assay 5 x 96-well\".\n\n2. **Key Comparison Attributes**:\n\n- Format and size of the kit (e.g., number of 96-well plates per kit)\n- Sensitivity and detection range of the assay\n- Sample compatibility (types of samples validated)\n- Certification/Validation status (e.g., RUO, CE-IVD, FDA cleared)\n- Storage conditions and shelf life\n\nThis structured request will facilitate detailed, apples-to-apples comparison across different kit vendors and ensure critical product characteristics are evaluated.",
-      "last_updated": "2025-12-04 21:48:20",
-      "research_model": "o4-mini-deep-research",
-      "time_taken_seconds": 264.79,
-      "tokens_used": {
-        "input_tokens": 49721,
-        "output_tokens": 16595,
-        "total_tokens": 66316
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2025-12-09 01:21:49",
+        "time_taken_seconds": 147.08,
+        "tokens_used": {
+          "input": 37765,
+          "output": 13025,
+          "total": 50790
+        },
+        "raw_response": "**Vendor: SGL (Southern Group Laboratory)** – *Product:* “TSA Surfacecheck® N (Tryptone Soya Agar + Neutralisers), Contact Plate, Irradiated”.  This is a 55 mm contact plate of pre-poured TSA medium with built-in neutralizers, supplied gamma-irradiated and triple-wrapped (VHP double pouch + outer bag).  It is designed for environmental surface sampling and comes in packs of 10.  Shelf life is ~26 weeks (at 2–25 °C).  **Confidence:** High – exact TSA+neutralizer plate match (triple‐wrapped, irradiated) ([www.sglab.com](https://www.sglab.com/product/tsa-surfacecheck-tryptone-soya-agar-neutralisers-contact-plate-irradiated/#:~:text=Container%20%20,0.2)) ([www.merckmillipore.com](https://www.merckmillipore.com/AE/en/product/mm/146697#:~:text=Neutralizer%20A%20ICR%2B%20is%20designed,In%20addition%2C%20the%20ICRplus)).  **Recommendation:** 0.90 – reputable specialized supplier.  **Concerns:** None obvious; product is in stock per site.  \n\n**Vendor: Merck Millipore (Sigma-Aldrich)** – *Product:* “Tryptic Soy Agar – Ready-to-use Contact Plates – Neutralizer A (ICR plus) with lockable lid, 55 mm, γ-irradiated, triple packed (pkg of 10)”.  This is a pre-poured 55 mm TSA contact plate containing Neutralizer A (a mix of lecithin, Tween, histidine, thiosulfate, etc.) to inactivate disinfectants.  Plates are gamma-irradiated for sterility and triple-wrapped.  Pack size is 10 plates; high quality (USP/EP compendial).  **Confidence:** High – exact match (TSA+neutralizer, 55 mm, irradiated, triple-packed) ([www.merckmillipore.com](https://www.merckmillipore.com/AE/en/product/mm/146697#:~:text=Neutralizer%20A%2C%20ICR%20plus%20with,packed%2C%20suitable%20for%20surface%20monitoring)) ([www.merckmillipore.com](https://www.merckmillipore.com/AE/en/product/mm/146697#:~:text=Neutralizer%20A%20ICR%2B%20is%20designed,In%20addition%2C%20the%20ICRplus)).  **Recommendation:** 0.95 – leading manufacturer with cGMP-grade media.  **Concerns:** None; item listed (catalog 1.46697) is actively offered.  \n\n**Vendor: Thermo Fisher (Thermo Scientific / Oxoid)** – *Product:* “Triple Wrap Sterile Pack Tryptone Soya Agar with Neutralizers, VHP indicator, and 2D Barcode (55 mm plates)”.  This is a 55 mm TSA contact plate with built-in neutralizers (polysorbate 80, lecithin, etc.), supplied sterile in a triple-wrapped container including a VHP (peroxide) indicator film and barcode.  It is gamma-irradiated and comes 100 plates/pack.  **Confidence:** High – exact match on format (TSA + neutralizers, 55 mm, triple-irradiated) ([www.fishersci.com](https://www.fishersci.com/shop/products/triple-wrap-sterile-pack-w-vhp-indicator-tryptone-soya-agar-9/p-9571001#:~:text=Description%20%20,irradiated%2C%20with%20VHP%20barrier%20wrap)).  **Recommendation:** 0.90 – top-tier supplier (Fisher Scientific/Thermo Scientific) with specialized EM plates.  **Concerns:** Large pack size (100 plates); includes VHP indicator which may be optional.  \n\n**Vendor: CPC Biotech** – *Product:* “MCTA (TSA+Lec+Tw80) + L-Hystidine + S. Thiosulphate, 55 mm TWSI”.  This is a ready-made 55 mm plate of Tryptic Soy Agar supplemented with lecithin, Tween 80, L-Histidine, and sodium thiosulfate (four neutralizers for quats, phenolics, aldehydes, halogens).  The plates are irradiated, sterile, and triple-wrapped; sold in bulk (pack of 240 plates; order code 449INHY/21.240).  **Confidence:** High – exact TSA + multi-neutralizer plate (triple packaging, irradiated) ([www.cpcbiotech.it](https://www.cpcbiotech.it/en/microbial-content-test-agar-tsalectw80-l-hystidine-s-thiosulphate-2/#:~:text=MCTA%20%28TSA%2BLec%2BTw80%29%20%2B%20L,Thiosulphate%2055mm%20TWSI)) ([www.cpcbiotech.it](https://www.cpcbiotech.it/en/media-portfolio/irradiated-plates/#:~:text=MCTA%20%28TSA%2BLec%2BTw80%29%20%2B%20L,240%20240)).  **Recommendation:** 0.85 – exact spec match from a specialized manufacturer.  **Concerns:** Smaller European supplier – check availability/shipment to India.  \n\n**Vendor: EWC Diagnostics** – *Product:* “Tryptic Soy Agar + Neutralizing (Contact Plate)”.  This is a 55 mm TSA contact plate containing a neutralizer blend (histidine, lecithin, polysorbate 80 (Tween 80), sodium thiosulfate) to inactivate disinfectant residues.  Plates are gamma-irradiated and triple-bagged; sold 20 plates/pack (Ref. 15339S).  **Confidence:** High – exact match (TSA + disinfectant neutralizers, triple-irradiated plates) ([www.ewcdiagnostics.com](https://www.ewcdiagnostics.com/tryptic-soy-agar-neutralizing/#:~:text=The%20composition%20of%20TSA%20complies,treatment%20of%20surfaces%20and%20materials)).  **Recommendation:** 0.80 – fulfills requirements, though vendor is smaller.  **Concerns:** Limited shelf life (9 months per datasheet) and smaller pack size; confirm availability.  \n\n"
       },
       "vendors": [
         {
           "id": 1,
-          "vendor_name": "Fisher Scientific",
-          "region": "US",
-          "product_description": "Human HAase (Hyaluronidase) ELISA Kit, 96 tests ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=Biomatik%20Corporation%C2%A0Human%20HAase%20,Kit%2C%2096%20tests))",
-          "product_url": "https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485",
-          "availability_status": "available",
-          "certifications": "RUO ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=Restriction%3A%20For%20Research%20Use%20Only))",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "format_and_size": "96-well plate, 96 tests ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Restriction%3A%20For%20Research%20Use%20Only))",
-          "sensitivity": "1.88 ng/mL ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
-          "detection_range": "3.13-200 ng/mL ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
-          "sample_compatibility": "Serum, Plasma, Biological Fluids ([www.fishersci.com](https://www.fishersci.com/shop/products/elisa-kit-96t-per-kt-3815/501500485#:~:text=The%20Human%20HAase%20,Cross))",
-          "storage_condition": "NA",
-          "shelf_life": "NA"
+          "vendor_name": "SGL (Southern Group Laboratory)",
+          "product_name": "TSA Surfacecheck® N (Tryptone Soya Agar + Neutralisers), Contact Plate, Irradiated",
+          "product_url": "https://www.sglab.com/product/tsa-surfacecheck-tryptone-soya-agar-neutralisers-contact-plate-irradiated/#:~:text=Container%20%20,0.2",
+          "product_description": "55 mm contact plate of pre-poured TSA medium with built-in neutralizers, gamma-irradiated and triple-wrapped.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2025-12-09 01:22:24",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "irradiation_status",
+              "neutralizers_composition",
+              "plate_format",
+              "documentation"
+            ],
+            "unavailable": [
+              "price",
+              "certifications"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "2‑25 °C",
+              "original_label": "Storage Temp",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "26 weeks",
+              "original_label": "Shelf Life",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "10 (per pack)",
+              "original_label": "Pack Size",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "5303",
+              "original_label": "Product Code / SKU",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Southern Group Laboratory (SGL)",
+              "original_label": "Vendor (SGL brand)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Available from stock (lead time not specified)",
+              "original_label": "Availability note",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "irradiation_status": {
+              "value": "Irradiated; VHP triple-wrapped",
+              "original_label": "Product title and description",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "neutralizers_composition": {
+              "value": "Full or partial neutralisation of Chlorine 2%, Quaternary Ammonium 1:400, Iodine 2%, Phenol 2%",
+              "original_label": "Quality Control – neutralisation note",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "plate_format": {
+              "value": "55 mm contact plates; VHP triple-wrapped",
+              "original_label": "Container and description",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            },
+            "documentation": {
+              "value": "MSDS and Technical Data Sheet (TDS) available for download",
+              "original_label": "Supporting Documents section",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:24",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United Kingdom"
         },
         {
           "id": 2,
-          "vendor_name": "Novus Biologicals (Bio-Techne)",
-          "region": "US",
-          "product_description": "Human Hyaluronidase 1 (HYAL1) ELISA Kit (Colorimetric, 96T) ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Human%20Hyaluronidase%201%2FHYAL1%20ELISA%20Kit,Colorimetric))",
-          "product_url": "https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795",
-          "availability_status": "available",
-          "certifications": "RUO ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=This%20product%20is%20for%20research,months%20from%20date%20of%20receipt))",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "format_and_size": "96-well plate, 96 tests ([www.biomatik.com](https://www.biomatik.com/elisa-kits/human-hyal1-hyaluronidase-1-elisa-kit-cat-ekf59026/#:~:text=Format))",
-          "sensitivity": "1.88 ng/mL ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Suitable%20Sample%20Type%20%20,1.88%20ng%2FmL))",
-          "detection_range": "3.13-200 ng/mL ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Suitable%20Sample%20Type%20%20,1.88%20ng%2FmL))",
-          "sample_compatibility": "Serum, plasma, other biological fluids ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=Reactivity%20%20,1.88%20ng%2FmL))",
-          "storage_condition": "NA",
-          "shelf_life": "6 months from date of receipt ([www.novusbio.com](https://www.novusbio.com/products/hyaluronidase-1-hyal1-elisa-kit_nbp3-11795?srsltid=AfmBOoqaKhm92iKMToQrm6CrKxcj0cQ9LxbzwRhqV48Rj_cPggI3S8Kd#:~:text=This%20product%20is%20for%20research,months%20from%20date%20of%20receipt))"
+          "vendor_name": "Merck Millipore (Sigma-Aldrich)",
+          "product_name": "Tryptic Soy Agar – Ready-to-use Contact Plates – Neutralizer A (ICR plus) with lockable lid, 55 mm, γ-irradiated, triple packed (pkg of 10)",
+          "product_url": "https://www.merckmillipore.com/AE/en/product/mm/146697#:~:text=Neutralizer%20A%2C%20ICR%20plus%20with,packed%2C%20suitable%20for%20surface%20monitoring",
+          "product_description": "Pre-poured 55 mm TSA contact plate containing Neutralizer A to inactivate disinfectants, gamma-irradiated and triple-wrapped.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2025-12-09 01:22:32",
+            "available": [
+              "storage_condition",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "irradiation_status",
+              "neutralizers_composition",
+              "plate_format",
+              "documentation"
+            ],
+            "unavailable": [
+              "price",
+              "shelf_life"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "Protect from light, tightly closed, dry; store at 15‑25 °C",
+              "original_label": "storage condition / storage temp.",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "Compliant with EP and USP",
+              "original_label": "Agency",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "pkg of 10 plates (triple packed); box of 20 ea; box of 200 ea",
+              "original_label": "packaging",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "146697 (variants: 1466970020 for 20‑pack, 1466970200 for 200‑pack)",
+              "original_label": "Catalogue Number",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Merck Millipore / Sigma‑Aldrich (part of Merck KGaA)",
+              "original_label": "Brand – implicit from site",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Not found (availability shown as 'Limited Availability' or 'In Stock', but no lead time details)",
+              "original_label": "Availability / Pricing & Availability section",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "irradiation_status": {
+              "value": "γ‑irradiated, sterile",
+              "original_label": "sterility / sterility (sterile; γ‑irradiated)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "neutralizers_composition": {
+              "value": "Mixture of neutralizers that inactivates alcohols, aldehyde, glucoprotamine, hydrogen peroxide, peracetic acid, phenols, quaternary ammonium compounds, polyhexamethylene biguanides; proprietary formulation not disclosed",
+              "original_label": "composition / General description",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "plate_format": {
+              "value": "55 mm contact plate with lockable lid; ready‑to‑use; triple packed",
+              "original_label": "form / packaging",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            },
+            "documentation": {
+              "value": "Certificate of Analysis (COA), Certificate of Quality (COQ), Data Sheet, additional documents available in Document Library",
+              "original_label": "Documentation",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:32",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Germany"
         },
         {
           "id": 3,
-          "vendor_name": "Sigma-Aldrich (MilliporeSigma)",
-          "region": "US",
-          "product_description": "Hyaluronidase Inhibitor Screening Assay Kit, MAK458 (100 tests) ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
-          "product_url": "https://www.sigmaaldrich.com/US/en/product/sigma/mak458",
-          "availability_status": "limited",
-          "certifications": "NA",
-          "price": "$614.00 / kit ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=%24614))",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "format_and_size": "100 tests (turbidimetric assay) ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
-          "sensitivity": "NA",
-          "detection_range": "NA",
-          "sample_compatibility": "Not specified ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=Hyaluronidase%20Inhibitor%20Screening%20Assay%20Kit))",
-          "storage_condition": "−20°C ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/mak458#:~:text=storage%20temp))",
-          "shelf_life": "NA"
+          "vendor_name": "Thermo Fisher (Thermo Scientific / Oxoid)",
+          "product_name": "Triple Wrap Sterile Pack Tryptone Soya Agar with Neutralizers, VHP indicator, and 2D Barcode (55 mm plates)",
+          "product_url": "https://www.fishersci.com/shop/products/triple-wrap-sterile-pack-w-vhp-indicator-tryptone-soya-agar-9/p-9571001#:~:text=Description%20%20,irradiated%2C%20with%20VHP%20barrier%20wrap",
+          "product_description": "55 mm TSA contact plate with built-in neutralizers, sterile, gamma-irradiated, and triple-wrapped.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "discovery_concerns": "Large pack size (100 plates); includes VHP indicator which may be optional.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 01:22:40",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "irradiation_status",
+              "neutralizers_composition",
+              "plate_format"
+            ],
+            "unavailable": [
+              "price",
+              "certifications",
+              "lead_time",
+              "documentation"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "room temperature (unspecified exact range)",
+              "original_label": "room temperature storage",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "improved shelf life (no duration specified)",
+              "original_label": "improved shelf life",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 per pack",
+              "original_label": "Quantity 100/pk",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "p‑9571001",
+              "original_label": "Catalog No.",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Thermo Scientific (part of Thermo Fisher Scientific)",
+              "original_label": "Supplier: Thermo Scientific",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "irradiation_status": {
+              "value": "Triple wrapped – irradiated, with VHP barrier wrap",
+              "original_label": "Packaging Type No cardboard inner packaging, triple wrapped‑irradiated, with VHP barrier wrap",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "neutralizers_composition": {
+              "value": "Lecithin, Polysorbate 80, Sodium Thiosulphate, L‑Histidin",
+              "original_label": "complete with ... Lecithin, Polysorbate 80, Sodium Thiosulphate and L‑Histidin",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            },
+            "plate_format": {
+              "value": "55 mm plates, triple wrapped (contact plate)",
+              "original_label": "Format 55 mm plates; Description … contact with neutralizers and VHP indicator; Packaging Type … triple wrapped",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:40",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 4,
+          "vendor_name": "CPC Biotech",
+          "product_name": "MCTA (TSA+Lec+Tw80) + L-Hystidine + S. Thiosulphate, 55 mm TWSI",
+          "product_url": "https://www.cpcbiotech.it/en/microbial-content-test-agar-tsalectw80-l-hystidine-s-thiosulphate-2/#:~:text=MCTA%20%28TSA%2BLec%2BTw80%29%20%2B%20L,Thiosulphate%2055mm%20TWSI",
+          "product_description": "Ready-made 55 mm plate of Tryptic Soy Agar supplemented with multiple neutralizers, irradiated and sterile.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.85,
+          "discovery_concerns": "Smaller European supplier – check availability/shipment to India.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 01:22:50",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "irradiation_status",
+              "neutralizers_composition",
+              "plate_format",
+              "documentation"
+            ],
+            "unavailable": [
+              "price"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "Stability at room temperature",
+              "original_label": "stability at room temperature",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "Long shelf life",
+              "original_label": "Long shelf life",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "ISO 9001:2015",
+              "original_label": "UNI EN ISO 9001:2015 CERTIFIED",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "240 units per order (55 mm plates)",
+              "original_label": "Pack Size (Units) 240",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "449INHY/21",
+              "original_label": "Codice Art",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "CPC Biotech",
+              "original_label": "—",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Ships worldwide within 48 hours from order receipt",
+              "original_label": "we ship worldwide within 48 hours from order receipt",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "irradiation_status": {
+              "value": "Sterile, gamma‑irradiated, triple‑wrapped",
+              "original_label": "Triple Wrapped Sterile Irradiated",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "neutralizers_composition": {
+              "value": "Contains lecithin, Tween 80, L‑histidine, sodium thiosulfate",
+              "original_label": "Lecithin, Tween 80, Histidine and Sodium thiosulfate",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "plate_format": {
+              "value": "55 mm plates, triple‑wrapped, sterile, irradiated",
+              "original_label": "55mm, Triple Wrapped Sterile Irradiated",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            },
+            "documentation": {
+              "value": "MSDS and Technical Data Sheet (Schede tecniche)",
+              "original_label": "MSDS; Schede tecniche",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:50",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Italy"
+        },
+        {
+          "id": 5,
+          "vendor_name": "EWC Diagnostics",
+          "product_name": "Tryptic Soy Agar + Neutralizing (Contact Plate)",
+          "product_url": "https://www.ewcdiagnostics.com/tryptic-soy-agar-neutralizing/#:~:text=The%20composition%20of%20TSA%20complies,treatment%20of%20surfaces%20and%20materials",
+          "product_description": "55 mm TSA contact plate containing a neutralizer blend to inactivate disinfectant residues, gamma-irradiated and triple-bagged.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.8,
+          "discovery_concerns": "Limited shelf life (9 months per datasheet) and smaller pack size; confirm availability.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 01:22:58",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "irradiation_status",
+              "neutralizers_composition",
+              "plate_format",
+              "documentation"
+            ],
+            "unavailable": [
+              "price",
+              "lead_time"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "10–25 °C",
+              "original_label": "10‑25°C storage temperature",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "9 months",
+              "original_label": "9 months shelf life",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "Complies with USP, EP and JP",
+              "original_label": "complies with USP, EP and JP",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "20 contact plates per pack",
+              "original_label": "20 contact plates/pack",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "15339S",
+              "original_label": "Ref. 15339S",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "EWC Diagnostics",
+              "original_label": "EWC Diagnostics B.V.",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "irradiation_status": {
+              "value": "Gamma irradiated, triple-bagged, individually packed",
+              "original_label": "Gamma irradiated, triple enveloped, contact plates",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "neutralizers_composition": {
+              "value": "Histidine, lecithin, polysorbate 80 and sodium thiosulfate",
+              "original_label": "addition of neutralizing agents (Histidine, lecithin, polysorbate 80 and sodium thiosulfate)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "plate_format": {
+              "value": "Contact plates: gamma-irradiated, triple-bagged, individually packed contact plates",
+              "original_label": "Gamma irradiated, triple enveloped, contact plates",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            },
+            "documentation": {
+              "value": "Downloadable product IFU (Instruction for Use)",
+              "original_label": "Download the product IFU",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 01:22:58",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Netherlands"
         }
-      ]
+      ],
+      "last_updated": "2025-12-09 01:22:15",
+      "pipeline_stats": {
+        "total_time_seconds": 238.31,
+        "total_tokens": {
+          "input": 152582,
+          "output": 18534,
+          "total": 171116
+        }
+      }
     },
     "e.coli hcdna kits; cat #: 4458435": {
       "query_id": "ecoli-hcdna-kits-cat-4458435",
       "query_text": "E.coli HcDNA kits; Cat #: 4458435",
-      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Seeking suppliers for \"E. coli HcDNA Kit\" (Catalog Number: 4458435).\n- Intended use: [not specified; please indicate if for research, diagnostic, or clinical use].\n- Request product information, technical data sheet (TDS), and Certificate of Analysis (CoA), if available.\n- Specify contents of the kit, including included reagents and quantities.\n- Packaging/size: [not specified; please indicate volume or number of preps if necessary].\n- Require information on storage conditions and recommended shelf life.\n- Alternate names/synonyms: Please cross-reference as \"Escherichia coli HcDNA Extraction Kit,\" \"E. coli High Copy DNA Kit,\" or similar extraction/purification kits.\n- Request information on availability, lead time, and shipping restrictions (temperature, hazard, etc.).\n- Regulatory certification or compliance (if required): [open].\n\n2. **Key Comparison Attributes**:\n\n- Kit contents (reagents included and their volumes/number of preps)\n- Intended application (research use only, clinical/diagnostic, etc.)\n- Storage conditions (temperature, light sensitivity, etc.)\n- Shelf life/expiry date\n- Certifying documentation (Certificate of Analysis, compliance certifications)\n\n*Note: Always confirm catalog number (4458435) matches across suppliers, as catalog numbers may differ between brands.",
-      "last_updated": "2025-12-04 21:51:54",
-      "research_model": "o4-mini-deep-research",
-      "time_taken_seconds": 450.35,
-      "tokens_used": {
-        "input_tokens": 74229,
-        "output_tokens": 24143,
-        "total_tokens": 98372
+      "enriched_query": "Seeking vendor information and quotations for Escherichia coli Host Cell DNA (HcDNA) quantification kits, specifically Catalog Number 4458435. These kits are used for detecting and quantifying residual host cell DNA in biopharmaceutical samples, essential for product safety and regulatory compliance. Please provide detailed specifications including unit price, storage conditions, shelf life, relevant quality or regulatory certifications, pack size, manufacturer details, catalog number, and delivery lead time. Additionally, include technical details relating to sensitivity, detection method, compatibility with instrumentation (e.g., qPCR), assay time, and sample throughput.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price, currency, and quantity per purchase unit",
+          "look_for": [
+            "price",
+            "list price",
+            "unit price",
+            "cost",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Condition",
+          "description": "Temperature and storage requirements for the product",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Duration the kit remains stable and usable under recommended storage conditions",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications",
+          "description": "Regulatory and quality compliance such as GMP, ISO, USP, IVD, RUO, etc.",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Quantity or number of reactions provided per kit",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Unique product identifier such as catalog or SKU number",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Name of the company producing or supplying the kit",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Delivery timeline and product availability status",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "detection_method",
+          "display_name": "Detection Method",
+          "description": "Analytical technique used for DNA quantitation, e.g. qPCR, hybridization assay",
+          "look_for": [
+            "detection method",
+            "assay type",
+            "qPCR",
+            "PCR",
+            "quantification method",
+            "hybridization",
+            "real-time PCR"
+          ]
+        },
+        {
+          "key": "sensitivity",
+          "display_name": "Sensitivity (Limit of Detection)",
+          "description": "Lowest quantity of E. coli DNA that can be reliably detected",
+          "look_for": [
+            "sensitivity",
+            "limit of detection",
+            "LOD",
+            "lower detection limit",
+            "detection range"
+          ]
+        },
+        {
+          "key": "assay_time",
+          "display_name": "Assay Time",
+          "description": "Total duration required to complete the analysis",
+          "look_for": [
+            "assay time",
+            "run time",
+            "analysis time",
+            "protocol time",
+            "incubation time"
+          ]
+        },
+        {
+          "key": "instrument_compatibility",
+          "display_name": "Instrument Compatibility",
+          "description": "Compatible laboratory instruments and platforms (e.g., qPCR thermocyclers, specific brands/models)",
+          "look_for": [
+            "instrument compatibility",
+            "compatible with",
+            "platform",
+            "thermocycler",
+            "applied biosystems",
+            "quantstudio"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2025-12-09 02:14:13",
+        "time_taken_seconds": 289.96,
+        "tokens_used": {
+          "input": 45598,
+          "output": 14798,
+          "total": 60396
+        },
+        "raw_response": "- **Thermo Fisher Scientific (Applied Biosystems)** – [resDNASEQ™ Quantitative E. coli DNA Kit (Assay Kit only, Cat# 4458435)](https://www.thermofisher.com/order/catalog/product/hk/zt/4458435): A qPCR-based TaqMan assay kit for highly sensitive quantitation of E. coli host cell DNA in biopharmaceutical samples.  Includes master mix, primers/probes, genomic DNA standard and controls (100-reaction kit).  Provides a complete sample-to-signal solution (LOQ ~15 pg DNA/mL) for residual DNA testing in ≤4 h.  *Confidence:* High (exact product by manufacturer); *Recommendation:* 1.0 – “Exact product match from a tier-1 supplier.”; *Concerns:* None (widely available, IVD-use not stated but optimized for research QC).\n- **Revvity (Avantor/VWR)** – [HostDetect E.coli PCR DNA Quant Kit (DXMDX-RGT-1005)](https://www.revvity.com/product/hostdetect-e-coli-pcr-dna-quant-kit-dxmdx-rgt-1005): A real-time qPCR assay (RUO) for quantitative detection of residual E. coli genomic DNA in bioprocess samples.  Uses a TaqMan® probe and primer mix with Environmental Master Mix (2×) to detect E. coli host DNA at fg–pg levels (sensitivity ~0.03 pg/rxn).  Compatible with standard qPCR instruments (ABI 7500, CFX96, etc.).  *Confidence:* High (well-defined equivalent kit); *Recommendation:* 0.8 – “Sensitive qPCR-based HCD kit from a global supplier.”; *Concerns:* Research-use status (not IVD); requires quote (no direct online purchase indicated).\n- **Bio-Rad Laboratories** – [VeriCheck ddPCR E.coli Residual DNA Quantification Kit (#17000032)](https://www.bio-rad.com/en-es/sku/17000032-vericheck-ddpcr-e-coli-residual-dna-quantification-kit): A droplet digital PCR kit for ultrahigh-sensitivity quantification of E. coli residual DNA.  Designed for Bio-Rad QX100/200 ddPCR systems, it contains 200 reactions of assay mix and ddPCR supermix to detect femtogram amounts of E. coli host DNA.  LOD ~15 fg, LOQ ≤30 fg per 20 µL.  *Confidence:* High (established ddPCR solution); *Recommendation:* 0.9 – “Highly sensitive, reputable ddPCR kit for E. coli HCD quantitation.”; *Concerns:* Requires specialized ddPCR instrument; RUO product.\n- **Yeasen Biotechnology** – [E. coli Host Cell DNA Residue Detection Kit (2G, Cat# 41308ES60)](https://www.yeasenbio.com/id/products/41308): A research-use qPCR kit (TaqMan probe-based) for quantitative detection of residual E. coli host DNA in intermediate or final bioproduct samples.  Kit includes Amplicon-specific master mix, primer/probe mix, DNA control (30 ng/µL) and diluents (for 100 reactions).  Claimed detection limit at femtogram level.  *Confidence:* Medium (close functional match); *Recommendation:* 0.7 – “Validated E. coli HCD kit from an alternative supplier.”; *Concerns:* RUO only; additional sample-prep kit required; overseas vendor (may affect lead time).\n- **KACTUS Bio** – [E. coli Residual DNA (qPCR) Detection Kit (Cat# DK-E003)](https://kactusbio.com/products/e-coli-residual-dna-qpcr-detection-kit-dk-e003): A 100-reaction TaqMan qPCR kit for quantifying residual E. coli host DNA in biopharmaceutical products.  Includes qPCR reagents and probes targeting common E. coli strains (e.g. DH5α, BL21).  Linear range 30 fg–300 pg/µL per reaction.  *Confidence:* Medium (meets intended purpose); *Recommendation:* 0.6 – “Suitable research-use kit with claimed fg sensitivity.”; *Concerns:* RUO; less-known supplier.\n- **Eagle Biosciences** – [E. coli Residual DNA Detection Kit (qPCR, SKU HG-ED001)](https://eaglebio.com/product/e-coli-residual-dna-detection-kit-qpcr/): A 100-reaction real-time PCR (TaqMan) kit for detecting residual E. coli DNA in bioproduct samples.  For research use.  Lists sensitivity ~30 fg/µL and dynamic range 30–3×10^5 fg/µL.  Compatible with ABI 7500, Bio-Rad CFX96 etc.  *Confidence:* Medium; *Recommendation:* 0.7 – “Relevant profile and sensitivity for HCD detection.”; *Concerns:* High unit cost ($), RUO kit."
       },
       "vendors": [
         {
           "id": 1,
-          "vendor_name": "Thermo Fisher Scientific",
-          "region": "Global",
-          "product_description": "Applied Biosystems resDNASEQ Quantitative E. coli DNA Kit (Assay Kit only, Cat. No. 4458435) – qPCR-based kit for sensitive quantitation of E. coli host cell DNA ([www.thermofisher.cn](https://www.thermofisher.cn/order/catalog/product/jp/en/4458435#:~:text=This%20quantitative%20PCR%20%28qPCR%29,in%20less%20than%204%20hours))",
-          "product_url": "https://www.thermofisher.cn/order/catalog/product/4458435",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "kit_contents": "E. coli DNA Control (30 ng/μL, 40 μL); DNA Dilution Buffer (7 mL); Environmental Master Mix (2X, 2 × 0.75 mL); E. coli DNA Assay Mix (10X, 300 μL); Negative Control (water, 1.0 mL) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
-          "intended_application": "For research use only (not for diagnostic use) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Show%20More%20%20))",
-          "storage_condition": "Store at –15 °C to –25 °C before first use; after thaw, DNA Dilution Buffer, Master Mix, and Negative Control can be stored at 2–8 °C; protect from light ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
-          "shelf_life": "NA"
+          "vendor_name": "Thermo Fisher Scientific (Applied Biosystems)",
+          "product_name": "resDNASEQ™ Quantitative E. coli DNA Kit (Assay Kit only, Cat# 4458435)",
+          "product_url": "https://www.thermofisher.com/order/catalog/product/hk/zt/4458435",
+          "product_description": "A qPCR-based TaqMan assay kit for highly sensitive quantitation of E. coli host cell DNA in biopharmaceutical samples.",
+          "discovery_confidence": "high",
+          "recommendation_score": 1.0,
+          "recommendation_reason": "Exact product match from a tier-1 supplier.",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:14:43",
+            "available": [
+              "price",
+              "storage_condition",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "detection_method",
+              "sensitivity",
+              "assay_time"
+            ],
+            "unavailable": [
+              "shelf_life",
+              "instrument_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "Request A Quote (no price listed – INR currency placeholder)",
+              "original_label": "Price (INR)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "Store components at –15 to –25 °C (initial), and some components at 2–8 °C after first use; shipping condition: dry ice",
+              "original_label": "Contents & Storage; Shipping Condition",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "For Research Use Only (RUO)",
+              "original_label": "For Research Use Only. Not for use in diagnostic procedures.",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 reactions",
+              "original_label": "No. of Reactions / Quantity",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "4458435",
+              "original_label": "Catalog Number",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Applied Biosystems (Thermo Fisher Scientific)",
+              "original_label": "Applied Biosystems™ (brand on page)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Request A Quote (no availability or shipping lead time provided)",
+              "original_label": "Request A Quote",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "Primer‑probe, qPCR",
+              "original_label": "Detection Method; PCR Method",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "LOQ = 15 pg DNA/mL test sample",
+              "original_label": "LOQ = 15 pg DNA/mL test sample",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            },
+            "assay_time": {
+              "value": "Typically in less than 4 hours",
+              "original_label": "typically in less than 4 hours",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:43",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
         },
         {
           "id": 2,
-          "vendor_name": "Fisher Scientific",
-          "region": "UK",
-          "product_description": "Applied Biosystems resDNASEQ Quantitative E. coli DNA Kit (Assay Kit only, Fisher Prod. Code 30067392, Cat. No. 4458435) for quantitation of E. coli host cell DNA ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=This%20quantitative%20PCR%20%28qPCR%29,in%20less%20than%204%20hours))",
-          "product_url": "https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "kit_contents": "E. coli DNA Control (30 ng/μL, 40 μL); DNA Dilution Buffer (7 mL); Environmental Master Mix (2X, 2 × 0.75 mL); E. coli DNA Assay Mix (10X, 300 μL); Negative Control (water, 1.0 mL) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
-          "intended_application": "For research use only (not for diagnostic use) ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Show%20More%20%20))",
-          "storage_condition": "Store at –15 °C to –25 °C before first use; after thaw, DNA Dilution Buffer, Master Mix, and Negative Control can be stored at 2–8 °C; protect from light ([www.fishersci.co.uk](https://www.fishersci.co.uk/shop/products/resdnaseq-quantitative-i-e-coli-i-dna-kits/30067392#:~:text=Content%20And%20Storage%20%20,and%202%E2%88%928%C2%B0C%20after%20first%20use))",
-          "shelf_life": "NA"
+          "vendor_name": "Revvity (Avantor/VWR)",
+          "product_name": "HostDetect E.coli PCR DNA Quant Kit (DXMDX-RGT-1005)",
+          "product_url": "https://www.revvity.com/product/hostdetect-e-coli-pcr-dna-quant-kit-dxmdx-rgt-1005",
+          "product_description": "A real-time qPCR assay for quantitative detection of residual E. coli genomic DNA in bioprocess samples.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.8,
+          "recommendation_reason": "Sensitive qPCR-based HCD kit from a global supplier.",
+          "discovery_concerns": "Research-use status (not IVD); requires quote (no direct online purchase indicated).",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:14:51",
+            "available": [
+              "price",
+              "storage_condition",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "detection_method",
+              "sensitivity",
+              "assay_time",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "shelf_life",
+              "lead_time"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "USD 2,304.00 for 192 rxns (list price)",
+              "original_label": "List price",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "-25 to −15 °C",
+              "original_label": "Storage Conditions",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "RUO (Research Use Only)",
+              "original_label": "real‑time PCR assay (RUO)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "192 reactions per kit",
+              "original_label": "Unit Size",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "DXMDX‑RGT‑1005",
+              "original_label": "Part #",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Revvity",
+              "original_label": "vendor/brand name on page",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "real‑time PCR (TaqMan® probe-based qPCR)",
+              "original_label": "real‑time PCR assay; sequence‑specific primers and TaqMan® probe",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "≥ 0.03 pg per reaction",
+              "original_label": "Analytical Sensitivity / Sensitivity",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "assay_time": {
+              "value": "< 2 hours PCR",
+              "original_label": "Key Highlights",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Any real‑time qPCR instrument with FAM™ and VIC®/HEX™ channels",
+              "original_label": "Any Real‑time qPCR Instruments with FAM™ and VIC®/HEX™ channels",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:51",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
         },
         {
           "id": 3,
-          "vendor_name": "MilliporeSigma (Sigma-Aldrich)",
-          "region": "Global",
-          "product_description": "GenElute HP Select Plasmid DNA Gigaprep Kit (Cat. No. NA0800) – high-copy plasmid DNA purification kit for E. coli ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/na0800#:~:text=The%20GenElute%20HP%20Select%20Plasmid,2.5%20L%20Luria%20Broth%20%28LB))",
-          "product_url": "https://www.sigmaaldrich.com/US/en/product/sigma/NA0800",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "kit_contents": "NA",
-          "intended_application": "Purification of high-copy plasmid DNA from recombinant E. coli ([www.sigmaaldrich.com](https://www.sigmaaldrich.com/US/en/product/sigma/na0800#:~:text=The%20GenElute%20HP%20Select%20Plasmid,2.5%20L%20Luria%20Broth%20%28LB))",
-          "storage_condition": "NA",
-          "shelf_life": "NA"
+          "vendor_name": "Bio-Rad Laboratories",
+          "product_name": "VeriCheck ddPCR E.coli Residual DNA Quantification Kit (#17000032)",
+          "product_url": "https://www.bio-rad.com/en-es/sku/17000032-vericheck-ddpcr-e-coli-residual-dna-quantification-kit",
+          "product_description": "A droplet digital PCR kit for ultrahigh-sensitivity quantification of E. coli residual DNA.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Highly sensitive, reputable ddPCR kit for E. coli HCD quantitation.",
+          "discovery_concerns": "Requires specialized ddPCR instrument; RUO product.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:14:59",
+            "available": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "detection_method",
+              "sensitivity",
+              "assay_time",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "certifications"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$3,010.00 for 1 kit",
+              "original_label": "Price",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "–20°C (constant temperature freezer)",
+              "original_label": "Storage at –20°C",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "Up to 18 months",
+              "original_label": "Guaranteed up to 18 months",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "200 × 20 µl reactions per kit",
+              "original_label": "200 × 20 µl reactions",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "17000032",
+              "original_label": "catalog #s: 17000032",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Bio‑Rad Laboratories, Inc.",
+              "original_label": "Company: Bio‑Rad",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Login to see your price – availability unspecified; appears discontinued",
+              "original_label": "List Price: … Login to see your price / (Discontinued)",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "Droplet Digital PCR (ddPCR)",
+              "original_label": "ddPCR E. coli Residual DNA Quantification Kit",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "LOD = 15 fg per 20 µl reaction; LOQ ≤ 30 fg per 20 µl reaction",
+              "original_label": "LOD = 15 fg or better; LOQ ≤30 fg per 20 µl reaction",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "assay_time": {
+              "value": "Completed within hours",
+              "original_label": "Fast, simple workflow — completed within hours rather than days",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "QX100™, QX200™, AutoDG™ Droplet Digital PCR Systems; PX1 PCR Plate Sealer; C1000 Touch Thermal Cycler with 96 Deep–Well Reaction Module",
+              "original_label": "For use with the QX100™, QX200™, or AutoDG™ Droplet Digital™ PCR Systems; Additional Equipment: QX200…, PX1™, C1000 Touch™",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:14:59",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 4,
+          "vendor_name": "Yeasen Biotechnology",
+          "product_name": "E. coli Host Cell DNA Residue Detection Kit (2G, Cat# 41308ES60)",
+          "product_url": "https://www.yeasenbio.com/id/products/41308",
+          "product_description": "A research-use qPCR kit for quantitative detection of residual E. coli host DNA in intermediate or final bioproduct samples.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.7,
+          "recommendation_reason": "Validated E. coli HCD kit from an alternative supplier.",
+          "discovery_concerns": "RUO only; additional sample-prep kit required; overseas vendor (may affect lead time).",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:15:05",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "detection_method",
+              "sensitivity",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "certifications",
+              "assay_time"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "-25 °C to –15 °C, for 2 years (both components A & B protected from light)",
+              "original_label": "Storage",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "2 years (under –25 °C to –15 °C)",
+              "original_label": "Storage (implies shelf life)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "50 T‑EN or 100 T‑EN (reactions)",
+              "original_label": "Size",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "41308ES50‑EN / 41308ES60‑EN",
+              "original_label": "Cat.No.",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Yeasen Biotechnology",
+              "original_label": "Vendor / Yeasen",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Orders processed within 24 hours if in stock; no shipping on Fridays (ships Monday for Friday orders)",
+              "original_label": "Shipping",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "TaqMan fluorescent‑probe quantitative PCR (qPCR)",
+              "original_label": "Description (method)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "Limit of Quantification (LOQ): 30 fg/μL",
+              "original_label": "Limit of Quantification (LOQ)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Bio‑Rad CFX96 Optic Module; Thermo Scientific ABI 7500; ABI QuantStudio 5",
+              "original_label": "Applicable instrument models",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:05",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "China"
+        },
+        {
+          "id": 5,
+          "vendor_name": "KACTUS Bio",
+          "product_name": "E. coli Residual DNA (qPCR) Detection Kit (Cat# DK-E003)",
+          "product_url": "https://kactusbio.com/products/e-coli-residual-dna-qpcr-detection-kit-dk-e003",
+          "product_description": "A 100-reaction TaqMan qPCR kit for quantifying residual E. coli host DNA in biopharmaceutical products.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.6,
+          "recommendation_reason": "Suitable research-use kit with claimed fg sensitivity.",
+          "discovery_concerns": "RUO; less-known supplier.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:15:15",
+            "available": [
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "detection_method",
+              "sensitivity",
+              "assay_time",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "certifications"
+            ]
+          },
+          "specs": {
+            "storage_condition": {
+              "value": "Store at –20°C, protected from light",
+              "original_label": "Stability And Storage",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "Valid 12 months from the date of manufacture",
+              "original_label": "Stability And Storage",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 Reactions",
+              "original_label": "Size / Tests",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "DK‑E003",
+              "original_label": "Catalog #DK‑E003",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "KACTUS",
+              "original_label": "brand/company header",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Order by 4 pm ET for delivery on: (implied same‑day ordering)",
+              "original_label": "Order by 4 pm ET for delivery on:",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "TaqMan® based qPCR",
+              "original_label": "Method",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "LOQ: 30 fg/µL, CV≤20%; Linear range: 30 fg/µL to 300 pg/µL",
+              "original_label": "Quality Standards",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "assay_time": {
+              "value": "Results generated within 1 hour",
+              "original_label": "Product Features → Rapid Detection",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "ABI QuantStudio 3, ABI 7500",
+              "original_label": "Instrument Compatibility",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:15",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 6,
+          "vendor_name": "Eagle Biosciences",
+          "product_name": "E. coli Residual DNA Detection Kit (qPCR, SKU HG-ED001)",
+          "product_url": "https://eaglebio.com/product/e-coli-residual-dna-detection-kit-qpcr/",
+          "product_description": "A 100-reaction real-time PCR kit for detecting residual E. coli DNA in bioproduct samples.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.7,
+          "recommendation_reason": "Relevant profile and sensitivity for HCD detection.",
+          "discovery_concerns": "High unit cost ($), RUO kit.",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:15:23",
+            "available": [
+              "price",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "detection_method",
+              "sensitivity",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "lead_time",
+              "assay_time"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$1,755.00 for the kit (100 Reactions)",
+              "original_label": "$1,755.00",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "RUO (Research Use Only)",
+              "original_label": "For Research Use Only",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 Reactions",
+              "original_label": "Size: 100 Reactions",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "HG-ED001 (SKU)",
+              "original_label": "SKU: HG-ED001",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Eagle Biosciences",
+              "original_label": "Eagle Biosciences",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "TaqMan probe–based quantitative PCR (qPCR)",
+              "original_label": "Assay Principle: ... Taqman probe to quantitatively detect",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "30 fg/μL (3.00×10^1 fg/μL)",
+              "original_label": "Sensitivity: 3.00×10^{1} fg/uL",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Compatible with ABI PRISM 7500, Bio‑Rad CFX96, Bioer Linegene 9600plus",
+              "original_label": "Applicable models: ABI PRISM 7500; CFX96 (Bio‑Rad); Bioer Linegene 9600plus",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:15:23",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
         }
-      ]
+      ],
+      "last_updated": "2025-12-09 02:14:33",
+      "pipeline_stats": {
+        "total_time_seconds": 377.16,
+        "total_tokens": {
+          "input": 157144,
+          "output": 21719,
+          "total": 178863
+        }
+      }
     },
     "proteina mix-n-go elisakit f600": {
       "query_id": "proteina-mix-n-go-elisakit-f600",
       "query_text": "PROTEINA MIX-N-GO ELISAKIT F600",
-      "enriched_query": "1. **Enriched Procurement Query**:\n- Seeking vendors or suppliers for the \"Protein Mix-N-Go! ELISA Kit,\" catalog number F600.\n- Manufacturer: [Open/not specified] (potentially Biomatrica, Novus Biologicals, or similar – please confirm manufacturer if known)\n- Intended use: Enzyme-Linked Immunosorbent Assay (ELISA) for protein detection/quantification. Specific target protein or application: [Open/not specified].\n- Kit components: Please provide detailed information on kit contents (plates, reagents, buffers, controls, etc.).\n- Kit size or number of tests/wells: [Open/not specified]\n- Certifications or compliance: [Open/not specified – e.g., CE, RUO (Research Use Only), or IVD]\n- Storage conditions required: [Open/not specified]\n- Alternate product names or synonyms: \"Mix-N-Go Protein ELISA Kit\", \"ELISA Kit F600\", \"Mix-N-Go! Protein Assay Kit\"\n- Please include lead times, minimum order quantities, and availability.\n\n2. **Key Comparison Attributes**:\n- Kit format/number of tests per kit (e.g., 96-well, 48-well, etc.)\n- Detection method and sensitivity (e.g., colorimetric, fluorometric, sensitivity limit)\n- Required storage conditions (ambient, refrigerated, -20°C, etc.)\n- Certifications/status (e.g., Research Use Only, IVD, CE-marked, etc.)\n- Kit components and completeness (e.g., inclusion of standards, controls, substrate)\n\n*Note: Please further specify the protein target, manufacturer, or application for even more precise supplier matching if possible.*",
-      "last_updated": "2025-12-04 21:55:02",
-      "research_model": "o4-mini-deep-research",
-      "time_taken_seconds": 619.29,
-      "tokens_used": {
-        "input_tokens": 55334,
-        "output_tokens": 21129,
-        "total_tokens": 76463
+      "enriched_query": "We are seeking detailed vendor information and quotations for the 'Proteina Mix-N-Go ELISA Kit (Catalog Number: F600)'. This kit is presumed to be an enzyme-linked immunosorbent assay (ELISA) product intended for the quantitative or qualitative detection of target analytes in biological samples. Please provide comprehensive product details relevant to procurement, including unit price, storage requirements, shelf life, quality and regulatory certifications (such as RUO, IVD, ISO, GMP), pack size (number of tests or wells per kit), catalog number/SKU, manufacturer information, and expected lead time for delivery. For optimal vendor comparison, also include key specifications such as assay format (e.g., sandwich, direct, indirect), sensitivity (lowest detectable concentration), sample type compatibility (e.g., serum, plasma, cell lysate), and detection method (e.g., colorimetric, chemiluminescent). Indicate intended use (e.g., research use only/RUO or diagnostic/IVD) and provide datasheets or documentation if available.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price, including currency and quantity provided",
+          "look_for": [
+            "price",
+            "unit price",
+            "list price",
+            "cost",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Conditions",
+          "description": "Temperature and conditions required for storage and stability",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Stability period or expiration dating of the kit from receipt or manufacture",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications and Compliance",
+          "description": "Applicable regulatory or quality certifications for the product",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Quantity of tests, wells, or volume included per kit/package",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests",
+            "wells"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Unique product code or SKU for ordering and reference",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Company or brand producing or distributing the ELISA kit",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Estimated delivery timeline and product availability",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "assay_format",
+          "display_name": "Assay Format",
+          "description": "Type of ELISA method (e.g., sandwich, competitive, direct, indirect)",
+          "look_for": [
+            "assay format",
+            "ELISA type",
+            "method",
+            "configuration",
+            "sandwich",
+            "competitive",
+            "direct",
+            "indirect"
+          ]
+        },
+        {
+          "key": "detection_method",
+          "display_name": "Detection Method",
+          "description": "The technology or label used for quantifying results (e.g., colorimetric, chemiluminescent, fluorescent)",
+          "look_for": [
+            "detection",
+            "detection method",
+            "colorimetric",
+            "chemiluminescent",
+            "fluorescence",
+            "absorbance",
+            "substrate"
+          ]
+        },
+        {
+          "key": "sensitivity",
+          "display_name": "Sensitivity",
+          "description": "Lowest detectable concentration of the analyte, typically expressed as a limit of detection",
+          "look_for": [
+            "sensitivity",
+            "LOD",
+            "limit of detection",
+            "minimal detection",
+            "analytical sensitivity"
+          ]
+        },
+        {
+          "key": "sample_type_compatibility",
+          "display_name": "Sample Type Compatibility",
+          "description": "Compatible biological sample types for the kit (e.g., serum, plasma, cell lysate, urine, tissue culture supernatant)",
+          "look_for": [
+            "sample compatibility",
+            "sample type",
+            "sample matrix",
+            "tested with",
+            "validated for",
+            "serum",
+            "plasma",
+            "cell lysate",
+            "supernatant"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2025-12-09 02:22:38",
+        "time_taken_seconds": 750.52,
+        "tokens_used": {
+          "input": 39296,
+          "output": 15939,
+          "total": 55235
+        },
+        "raw_response": "- **Vendor:** Fisher Scientific – **Product:** *Cygnus Technologies Protein A Mix-N-Go ELISA Kit (F600)* – **URL:**  [Link](https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426) – **Description:** A research-use ELISA kit for quantifying Protein A (natural/recombinant).  New protocol skips boiling/centrifugation, cutting assay time (~1h45m) with high sensitivity (~<100 pg/mL). Pack is 96-well, all reagents refrigerated. – **Confidence:** High – **Recommendation:** 0.95 (Exact Cygnus F600 kit from a major global supplier with clear availability) – **Reason:** Exact product match, reputable supplier, competitive price. – **Concerns:** None apparent (online price given, add-to-cart available).  \n\n- **Vendor:** Bio-Connect (Connect Life Science) – **Product:** *F600 Protein A Mix-N-Go ELISA Kit, natural* – **URL:**  [Link](https://shop.bio-connect.nl/protein-a-mix-n-go-elisa-kit-natural-f600-1kit-c92) – **Description:** RUO ELISA kit for quantifying Protein A in biotherapeutics. Includes pre-coated 96-well plate and reagents; sensitive to ~50 pg/mL (LOD ~50 pg/mL, LLOQ 100 pg/mL) ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=LOD%3A%20,pg%2FmL%20Recommended%20Diluent%3A%20I600)) ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/#:~:text=Protein%20A%20Mix,These%20kits%20are%20for%20Research)). All reagents stored 2–8 °C. – **Confidence:** High – **Recommendation:** 0.90 (Exact Cygnus F600 kit, sizable European distributor) – **Reason:** Exact match (F600 “natural” kit) with product details and 10-day delivery noted. – **Concerns:** None obvious (RUO; based in Europe – shipping to India should be verified).  \n\n- **Vendor:** GENTAUR Online (Maxim Anim) – **Product:** *Protein A Mix-N-Go ELISA Kit, natural | F600* – **URL:**  [Link](https://maxanim.com/cygnus-technologies-elisa-kits/) – **Description:** Research-use ELISA for natural recombinant Protein A (F600) quantitation ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/#:~:text=Protein%20A%20Mix,These%20kits%20are%20for%20Research)). Includes complete reagents (96-well strip plate, standards, detection antibodies). New protocol omits sample boiling, reducing time (~1h45m); sensitivity ≈50 pg/mL ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/#:~:text=Protein%20A%20Mix,These%20kits%20are%20for%20Research)). – **Confidence:** High – **Recommendation:** 0.85 (Exact product listing on specialized life-science retailer) – **Reason:** Matches exactly (Cygnus F600 kit), price listed. Gentaur/MaxAnim is a known lab supplier network. – **Concerns:** Smaller/region-specific distributor; verify shipping and currency.  \n\n- **Vendor:** Gen9Bio Solutions – **Product:** *Protein A Mix-N-Go ELISA Kit, natural | F600* – **URL:**  [Link](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/) – **Description:** RUO ELISA kit (1 × 96-well plate) for Protein A quantitation ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=214,Assay%20format%3A%2096%20Well%20Plate)). All reagents stored at 2–8 °C; new assay drops boiling step. Seller lists price ~$1073 (unit of 1 kit) ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=%241%2C073)). – **Confidence:** High – **Recommendation:** 0.90 (Exact match on specialized scientific vendor site) – **Reason:** Product and catalog number match perfectly. Price confirmable; major assay specs (96-well, ~50 pg/mL LOD) provided. – **Concerns:** None noted (site shows availability; US-based).  \n\n- **Vendor:** AGTC Bioproducts Ltd. – **Product:** *Protein A Mix-N-Go ELISA Kit, natural | F600* – **URL:**  [Link](https://agtcbioproducts.com/categories/cygnus-technologies-elisa-kits.html) – **Description:** RUO ELISA kit for measuring Protein A (F600) ([agtcbioproducts.com](https://agtcbioproducts.com/categories/cygnus-technologies-elisa-kits.html#:~:text=Protein%20A%20Mix,These%20kits%20are%20for%20Research)). Contains necessary components for a 1 × 96-well assay; 2–8 °C storage. The description notes quantitation of natural and recombinant Protein A (F600) ([agtcbioproducts.com](https://agtcbioproducts.com/categories/cygnus-technologies-elisa-kits.html#:~:text=Protein%20A%20Mix,These%20kits%20are%20for%20Research)). Listed price €1,073.00. – **Confidence:** High – **Recommendation:** 0.85 (Exact Cygnus F600 kit by a lab supplier) – **Reason:** Matches product exactly with full description and pricing. Vendor appears to carry the Cygnus portfolio. – **Concerns:** Pricing in EUR; confirm shipping to India. Some smaller supplier.  \n\n"
       },
       "vendors": [
         {
           "id": 1,
           "vendor_name": "Fisher Scientific",
-          "region": "Global (US)",
-          "product_description": "Cygnus Technologies Protein A Mix-N-Go ELISA Kit, natural (Cat. F600) ([www.fishersci.com](https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426#:~:text=Cygnus%20Technologies%C2%A0Protein%20A%20Mix,Kit))",
+          "product_name": "Cygnus Technologies Protein A Mix-N-Go ELISA Kit (F600)",
           "product_url": "https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "$977.85 / 1 kit ([www.fishersci.com](https://www.fishersci.com/shop/products/mix-n-go-protein-a-elisa-kit/NC0720426#:~:text=,1))",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "storage_condition": "2 °C to 8 °C ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Storage%3A%20All%20kit%20reagents%202%C2%B0C,Assay%20format%3A%2096%20Well%20Plate))",
-          "number_of_tests": "96 ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Assay%20format%3A%2096%20Well%20Plate))",
-          "kit_format": "96-well plate ([gen9bio.com](https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/#:~:text=Assay%20format%3A%2096%20Well%20Plate))",
-          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
-          "shelf_life": "NA"
+          "product_description": "A research-use ELISA kit for quantifying Protein A (natural/recombinant). New protocol skips boiling/centrifugation, cutting assay time (~1h45m) with high sensitivity (~<100 pg/mL). Pack is 96-well, all reagents refrigerated.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "recommendation_reason": "Exact Cygnus F600 kit from a major global supplier with clear availability",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:23:03",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "sensitivity"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "assay_format",
+              "detection_method",
+              "sample_type_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$977.85 / Each of 1",
+              "original_label": "• $977.85 / Each of 1",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:03",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "Not explicitly stated; likely 1 kit (96 wells)",
+              "original_label": "Quantity: Each of 1",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:23:03",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "NC0720426",
+              "original_label": "Catalog No. NC0720426",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:03",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Cygnus Technologies",
+              "original_label": "Supplier: Cygnus Technologies",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:03",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "<100 pg/ml",
+              "original_label": "detects Protein A levels <100 pg/ml",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:03",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
         },
         {
           "id": 2,
-          "vendor_name": "Avantor (VWR)",
-          "region": "Global (Europe)",
-          "product_description": "Avantor Protein A Mix-N-Go ELISA Kit (Cat. F965) ([bionordika.no](https://bionordika.no/all-products/bioprocessing/avantor-protein-a-mix-n-go-elisa-kit~cyg-f965#:~:text=Avantor%20Protein%20A%20Mix,Kit))",
-          "product_url": "https://bionordika.no/all-products/bioprocessing/avantor-protein-a-mix-n-go-elisa-kit~cyg-f965",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "NA",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "storage_condition": "2 °C to 8 °C ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=Storage%3A%202%C2%B0C%20to%208%C2%B0C%20Assay,format))",
-          "number_of_tests": "96 ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=2%C2%B0C%20to%208%C2%B0C%20Assay%20format%3A,96%20Well%20Plate))",
-          "kit_format": "96-well plate ([maxanim.com](https://maxanim.com/cygnus-technologies-elisa-kits/avantor-protein-a-mix-n-go-elisa-kit-f965/#:~:text=2%C2%B0C%20to%208%C2%B0C%20Assay%20format%3A,96%20Well%20Plate))",
-          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
-          "shelf_life": "NA"
+          "vendor_name": "Bio-Connect (Connect Life Science)",
+          "product_name": "F600 Protein A Mix-N-Go ELISA Kit, natural",
+          "product_url": "https://shop.bio-connect.nl/protein-a-mix-n-go-elisa-kit-natural-f600-1kit-c92",
+          "product_description": "RUO ELISA kit for quantifying Protein A in biotherapeutics. Includes pre-coated 96-well plate and reagents; sensitive to ~50 pg/mL.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Exact match (F600 “natural” kit) with product details and 10-day delivery noted.",
+          "discovery_concerns": "Shipping to India should be verified",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:23:10",
+            "available": [
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "assay_format",
+              "detection_method",
+              "sensitivity",
+              "sample_type_compatibility"
+            ]
+          },
+          "specs": {
+            "certifications": {
+              "value": "Research Use Only",
+              "original_label": "Certification",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:10",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "1 kit",
+              "original_label": "1 kit (label ‘1 kit’ under product name)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:10",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "F600",
+              "original_label": "F600 (displayed under product title)",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:10",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Cygnus Technologies",
+              "original_label": "Supplier",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:10",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "10 delivery days",
+              "original_label": "Delivery Days Customer",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:10",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United States"
         },
         {
           "id": 3,
-          "vendor_name": "R&D Systems (Bio-Techne)",
-          "region": "Global (US)",
-          "product_description": "R&D Systems Protein A ELISA Kit (Cat. BPPA00) ([www.fishersci.pt](https://www.fishersci.pt/shop/products/protein-a-elisa-kit/30000815#:~:text=R%26D%20Systems%E2%84%A2%C2%A0Protein%20A%20ELISA%20Kit))",
-          "product_url": "https://www.rndsystems.com/products/protein-a-elisa-kit_bppa00",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "€825.00 / 1 kit ([www.fishersci.pt](https://www.fishersci.pt/shop/products/protein-a-elisa-kit/30000815#:~:text=Product%20Code))",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "storage_condition": "2 °C to 8 °C ([www.rndsystems.com](https://www.rndsystems.com/products/protein-a-elisa-kit_bppa00#:~:text=Storage))",
-          "number_of_tests": "NA",
-          "kit_format": "NA",
-          "kit_components": "96-well microplate; all reagents including pre-made Protein A standards, enzyme conjugate, substrate, stop solution, and wash buffers ([www.bioprocessonline.com](https://www.bioprocessonline.com/doc/protein-a-mix-n-go-elisa-kits-0001#:~:text=,are%20provided%20in%20the%20kits))",
-          "shelf_life": "NA"
-        }
-      ]
-    },
-    "pathhunterbioassaykit#93-0933": {
-      "query_id": "pathhunterbioassaykit93-0933",
-      "query_text": "PathHunterBioassayKit#93-0933",
-      "enriched_query": "1. **Enriched Procurement Query**:\n\n- Sourcing request for: PathHunter Bioassay Kit (Catalog #93-0933)\n- Manufacturer: DiscoverX (Eurofins DiscoverX is a common manufacturer for PathHunter assay kits)\n- Alternative product names/identifiers: Also known as PathHunter β-Arrestin Assay Kit or PathHunter Bioassay System, depending on application. Please provide cross-references if available.\n- Intended use/application: Not specified (open – intended application should be confirmed with the supplier)\n- Target/Assay type: Not specified (open – supplier’s product datasheet should confirm the specific assay or detection target of #93-0933)\n- Kit size/packaging: Not specified (open – supplier to clarify available pack sizes for #93-0933)\n- Certificate of Analysis (COA): Required; ensure batch-specific documentation is available\n- Storage conditions: Not specified (open – request supplier to confirm recommended storage, typically refrigerated or frozen for assay kits)\n- Grade/purity/format: Research grade assumed unless otherwise specified; confirm with supplier\n- Regulatory status: For research use only (RUO), unless otherwise stated\n- Delivery timeline and availability: Open\n- Synonyms/search expansion: PathHunter Assay Kit, Catalog #93-0933, β-Arrestin Assay Kits, DiscoverX 93-0933, Eurofins DiscoverX PathHunter Kit\n\n2. **Key Comparison Attributes**:\n- Assay type/target specificity (verify the exact target and cell type for Kit #93-0933)\n- Kit size/number of assays (number of wells or reactions per kit)\n- Storage and stability requirements (temperature, shelf life)\n- Regulatory grade or certification (Research Use Only, GMP, etc.)\n- Price and availability (lead time, stock status)\n\n**Note**: If any specification is not listed in the query, it should be requested as \"open\" when contacting vendors, with the aim of gathering full product datasheets for comparison.",
-      "last_updated": "2025-12-05 11:00:27",
-      "research_model": "o4-mini-deep-research",
-      "time_taken_seconds": 463.26,
-      "tokens_used": {
-        "input_tokens": 55810,
-        "output_tokens": 28010,
-        "total_tokens": 83820
-      },
-      "vendors": [
-        {
-          "id": 1,
-          "vendor_name": "Fisher Scientific",
-          "region": "United States",
-          "product_description": "Eurofins Discoverx PathHunter Bioassay Detection Kit, 75 (1,000 dp, 96-well) (Catalog #93-0933) is a detection kit containing lysis buffer and EFC substrate to detect EFC levels in PathHunter bioassay cells; includes components for 10 plates (96-well) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
-          "product_url": "https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "$5,825.43 / Each of 1 [https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661]",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
-          "kit_size": "10 plates (96-well) ([www.fishersci.com](https://www.fishersci.com/shop/products/pathhunter-bioassay-detect-kit/NC1079661#:~:text=Eurofins%20DiscoverX%27s%20PathHunter%20Bioassay%20cells,User%20manual%20and%20COA%2C%20visit))",
-          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
-          "shelf_life": "NA"
+          "vendor_name": "GENTAUR Online (Maxim Anim)",
+          "product_name": "Protein A Mix-N-Go ELISA Kit, natural | F600",
+          "product_url": "https://maxanim.com/cygnus-technologies-elisa-kits/",
+          "product_description": "Research-use ELISA for natural recombinant Protein A (F600) quantitation. Includes complete reagents (96-well strip plate, standards, detection antibodies).",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.85,
+          "recommendation_reason": "Matches exactly (Cygnus F600 kit), price listed.",
+          "discovery_concerns": "Verify shipping and currency",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:23:16",
+            "available": [
+              "price",
+              "storage_condition",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "assay_format",
+              "sensitivity"
+            ],
+            "unavailable": [
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "detection_method",
+              "sample_type_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "995.00 (currency selectable, e.g., USD) per 1 Kit",
+              "original_label": "Select Currency //995.00",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "All kit reagents 2°C to 8°C",
+              "original_label": "Storage",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "1 Kit",
+              "original_label": "Size",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "SKU: 214-F050",
+              "original_label": "SKU",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Cygnus Technologies",
+              "original_label": "Brand implicit",
+              "confidence": "medium",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "assay_format": {
+              "value": "96 Well Plate",
+              "original_label": "Assay format",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "LOD: 120 pg/mL",
+              "original_label": "LOD",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:16",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United States"
         },
         {
-          "id": 2,
-          "vendor_name": "Fisher Scientific",
-          "region": "Germany",
-          "product_description": "Discoverx PathHunter Bioassay Detection Kit (Catalog #93-0933E) is a detection kit containing lysis buffer and EFC substrate for cell-based EFC detection ([www.discoverx.com](https://www.discoverx.com/catalog/PathHunter%C2%AE-Bioassay-Detection-Kit/93-0933E#:~:text=The%20PathHunter%C2%AE%20Bioassay%20Detection%20Kit,levels%20in%20the%20assayed%20cells))",
-          "product_url": "https://www.fishersci.com/shop/products/pathhunter-bioassay-detection-kit/16337616",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "€2233.50 / Each [https://www.fishersci.com/shop/products/pathhunter-bioassay-detection-kit/16337616]",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.discoverx.com](https://www.discoverx.com/catalog/PathHunter%C2%AE-Bioassay-Detection-Kit/93-0933E#:~:text=The%20PathHunter%C2%AE%20Bioassay%20Detection%20Kit,levels%20in%20the%20assayed%20cells))",
-          "kit_size": "NA",
-          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
-          "shelf_life": "NA"
+          "id": 4,
+          "vendor_name": "Gen9Bio Solutions",
+          "product_name": "Protein A Mix-N-Go ELISA Kit, natural | F600",
+          "product_url": "https://gen9bio.com/protein-a-mix-n-go-elisa-kit-natural-f600/",
+          "product_description": "RUO ELISA kit (1 × 96-well plate) for Protein A quantitation. All reagents stored at 2–8 °C; new assay drops boiling step.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Product and catalog number match perfectly. Price confirmable.",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:23:24",
+            "available": [
+              "price",
+              "storage_condition",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "assay_format",
+              "detection_method",
+              "sensitivity"
+            ],
+            "unavailable": [
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "sample_type_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$1,073 for 1 Kit",
+              "original_label": " $1,073",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "2°C to 8°C",
+              "original_label": "Storage: All kit reagents 2°C to 8°C",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "1 Kit (96‑well plate)",
+              "original_label": "Size: 1 Kit; Assay format: 96 Well Plate",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "214‑F600",
+              "original_label": "SKU: 214‑F600",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Cygnus Technologies",
+              "original_label": "Cygnus Technologies",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "assay_format": {
+              "value": "96 Well Plate",
+              "original_label": "Assay format: 96 Well Plate",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "detection_method": {
+              "value": "Colorimetric (TMB substrate with HRP enzyme)",
+              "original_label": " …HRP labeled antibody… strips are then reacted with tetramethylbenzidine (TMB) substrate… amount of hydrolyzed substrate is read on a microtiter plate reader…",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            },
+            "sensitivity": {
+              "value": "LOD ~50 pg/mL; LLOQ 100 pg/mL",
+              "original_label": "LOD: ~50 pg/mL; LLOQ: 100 pg/mL",
+              "confidence": "high",
+              "extracted_at": "2025-12-09 02:23:24",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United States"
         },
         {
-          "id": 3,
-          "vendor_name": "Fisher Scientific",
-          "region": "Finland",
-          "product_description": "Discoverx 500 mL PathHunter Bioassay Detection Kit (Catalog #93-0933L) for 10,000 data points (96-well) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
-          "product_url": "https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548",
-          "availability_status": "available",
-          "certifications": "NA",
-          "price": "€58483.50 / 500mL [https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548]",
-          "crawled_data": null,
-          "crawled_at": null,
-          "extracted_info": {},
-          "assay_type": "Cell-based chemiluminescent EFC detection (β-arrestin assay) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
-          "kit_size": "10,000 data points (96-well) ([www.fishersci.fi](https://www.fishersci.fi/shop/products/500ml-pathhunter-bioassay-detection-kit-10-000-dp-96-well/16325548#:~:text=Discoverx%C2%A0500ML%20PathHunter%20Bioassay%20Detection%20Kit%2C,well))",
-          "storage_condition": "–20°C ([www.discoverx.com](https://www.discoverx.com/catalog/pathhunter-detection-kit/93-0001m#:~:text=Upon%20arrival%2C%20store%20reagents%20at,see%20user%20manual%20for%20details))",
-          "shelf_life": "NA"
+          "id": 5,
+          "vendor_name": "AGTC Bioproducts Ltd.",
+          "product_name": "Protein A Mix-N-Go ELISA Kit, natural | F600",
+          "product_url": "https://agtcbioproducts.com/categories/cygnus-technologies-elisa-kits.html",
+          "product_description": "RUO ELISA kit for measuring Protein A (F600). Contains necessary components for a 1 × 96-well assay; 2–8 °C storage.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.85,
+          "recommendation_reason": "Matches product exactly with full description and pricing.",
+          "discovery_concerns": "Pricing in EUR; confirm shipping to India",
+          "specs_availability": {
+            "checked_at": "2025-12-09 02:23:31",
+            "error": "Could not parse JSON from response:\nHere is the extraction for one exemplary product—the **A549 HCP ELISA Kit | F230**—from the provided vendor page. If you'd like similar extraction for other kits, just let me know.\n\n{\n    \"results\": {\n        \"price\": {\n            \"value\": \"€1,213.00 per 1 Kit\",\n            \"original_label\": \"€1,213.00\",\n            \"confidence\": \"high\"\n        },\n        \"storage_condition\": {\n            \"value\": \"2 °C to 8 °C (all kit reagents)\",\n            \"original_label\": \"Storage: All kit reagents 2°C t..."
+          },
+          "specs": {}
         }
-      ]
+      ],
+      "last_updated": "2025-12-09 02:22:55",
+      "pipeline_stats": {
+        "total_time_seconds": 822.12,
+        "total_tokens": {
+          "input": 143475,
+          "output": 19729,
+          "total": 163204
+        }
+      }
     }
   }
 }

@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
 """
-Vendor Research Pipeline CLI
+Vendor Research Pipeline CLI - V2
 
-A comprehensive CLI for running deep research on vendor products,
-crawling product URLs, and querying crawled data using LLMs.
+A 4-phase pipeline for vendor research in biopharma procurement:
+  Phase 1: ENRICHMENT - Expand query + identify comparison attributes
+  Phase 2: DISCOVERY  - Deep research to find at least 5 vendors (natural language)
+  Phase 3: PARSE      - Convert discovery to structured JSON
+  Phase 4: EXTRACTION - Extract specs from each vendor's product page
 
 Usage:
-    python pipeline.py research "TSA 3P IRR Neutralizers"
-    python pipeline.py research "FBS"
-    python pipeline.py crawl "tsa-3p-irr-neutralizers"
-    python pipeline.py crawl "tsa-3p-irr-neutralizers" --vendor-id 1
-    python pipeline.py query "tsa-3p-irr-neutralizers" --vendor-id 1 "What is the price?"
+    python pipeline.py research "<your product query>"     # Full pipeline
+    python pipeline.py discover "<your product query>"     # Discovery only
+    python pipeline.py extract "<query-id>"                # Extract specs
+    python pipeline.py extract "<query-id>" --vendor-id 1
+    python pipeline.py fetch-spec "<query-id>" --vendor-id 1 --spec "price"
     python pipeline.py list
-    python pipeline.py show "tsa-3p-irr-neutralizers"
+    python pipeline.py show "<query-id>"
 """
 
 import argparse
 import json
 import os
 import sys
-import asyncio
 import re
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any, List
@@ -31,6 +34,9 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / '.env')
 
 from openai import OpenAI
+
+# Local imports
+from spec_library import BIOPHARMA_SPECS, format_specs_for_prompt, get_default_specs
 
 # Data paths
 DATA_DIR = Path(__file__).parent / "data"
@@ -50,29 +56,17 @@ def get_openai_client():
     return OpenAI(
         api_key=openai_api_key,
         timeout=httpx.Timeout(
-            connect=120.0,  # Increased connection timeout
+            connect=120.0,
             read=7200.0,    # 2 hours for deep research
-            write=120.0,    # Increased write timeout
-            pool=120.0      # Increased pool timeout
+            write=120.0,
+            pool=120.0
         ),
-        max_retries=3  # Auto-retry on transient errors
+        max_retries=3
     )
 
 
 def retry_with_backoff(func, max_retries=3, initial_delay=5):
-    """
-    Retry a function with exponential backoff.
-    
-    Args:
-        func: The function to call (should be a lambda or callable)
-        max_retries: Maximum number of retry attempts
-        initial_delay: Initial delay in seconds between retries
-    
-    Returns:
-        The result of the function call
-    """
-    import time
-    
+    """Retry a function with exponential backoff."""
     last_exception = None
     for attempt in range(max_retries + 1):
         try:
@@ -81,106 +75,16 @@ def retry_with_backoff(func, max_retries=3, initial_delay=5):
             last_exception = e
             error_msg = str(e).lower()
             
-            # Don't retry on certain errors
             if "invalid_api_key" in error_msg or "authentication" in error_msg:
                 raise e
             
             if attempt < max_retries:
-                delay = initial_delay * (2 ** attempt)  # Exponential backoff
+                delay = initial_delay * (2 ** attempt)
                 print(f"\n   ⚠️  Attempt {attempt + 1} failed: {e}")
                 print(f"   ⏳ Retrying in {delay} seconds...")
                 time.sleep(delay)
             else:
                 raise last_exception
-
-
-# === Prompts ===
-
-QUERY_ENRICHMENT_PROMPT = """
-You are an expert in biopharma procurement.
-
-Your job is to rewrite the user query to make it clear, detailed, and suitable for finding vendors or suppliers.
-
-Additionally, you must identify 3-5 key attributes that are critical for comparing this specific SKU/product across different vendors (e.g., storage conditions, purity, grade, thickness, material, etc., depending on the product).
-
-Instructions:
-- Expand any abbreviations or jargon (e.g., change "FBS" to "Fetal Bovine Serum")
-- Add important details needed for procurement, such as specifications, grades, certification, intended use, and size/packaging, if mentioned; if missing, clearly mark as "open" or "not specified"
-- Suggest alternate product names, synonyms, or catalog numbers, if relevant, to help widen the search scope
-- Remove overly broad generalities (like "good price") or note them as open criteria
-- Focus it for vendor/supplier research
-- Explicitly list the "Key Comparison Attributes" that should be fetched for comparison.
-
-Output Structure:
-1. **Enriched Procurement Query**: The detailed query with bullet points for each key requirement.
-2. **Key Comparison Attributes**: A list of the 3-5 critical parameters for this SKU.
-
-If the user query isn't in English, reply in the same language.
-
-Do NOT make up any details that aren't in the original query regarding the user's specific requirements, but DO use your domain knowledge to identify standard comparison attributes.
-
-Your goal is to maximize the chances of finding the right suppliers and enable a detailed comparison.
-"""
-
-DEEP_RESEARCH_PROMPT = """
-You are a domain expert in biopharma procurement working for a large, global biopharma company.
-
-Task:
-Given the enriched user query (which includes "Key Comparison Attributes"), identify 3–5 *established, global* alternate vendors that supply the product.
-
-PRIORITY VENDOR WEBSITES TO SEARCH:
-- Fisher Scientific: https://www.fishersci.com/us/en/home.html
-- Sigma-Aldrich (MilliporeSigma): https://www.sigmaaldrich.com/IN/en
-- Thermo Fisher Scientific: https://www.thermofisher.com
-- VWR/Avantor: https://www.vwr.com
-- BD (Becton Dickinson): https://www.bd.com
-- Sartorius: https://www.sartorius.com
-- Corning: https://www.corning.com
-
-Instructions:
-- Output MUST be a valid JSON array of objects. No markdown formatting, no code blocks, just raw JSON.
-- CRITICAL: Only include **well-established, global vendors** (e.g., Thermo Fisher, Merck/MilliporeSigma, Sartorius, VWR/Avantor, Corning, BD, etc.). Do NOT include small, local, or unknown distributors unless they are the primary manufacturer for a niche critical product. Large biopharma companies minimize risk by avoiding small/unknown vendors.
-- Only include vendors you are confident actually supply the specific product requested. No hallucination.
-
-CRITICAL - PRODUCT AVAILABILITY VERIFICATION:
-- Before including a vendor, VERIFY that the product is actually available and in stock on the vendor's website.
-- Check for "out of stock", "discontinued", "unavailable", "not available in your region" indicators.
-- If a product page exists but shows the product is unavailable, DO NOT include it. This creates trust issues with end users.
-- Only include products that appear to be actively available for purchase.
-- Add a field "availability_status" with value "available", "limited", or "unverified" for each vendor.
-
-CRITICAL - INLINE SOURCE CITATIONS:
-Every piece of information MUST have a single source URL in square brackets at the end of the value.
-Format: "value [https://exact-source-url.com/page]"
-
-Rules for citations:
-1. Use the MOST SPECIFIC URL where that exact info was found (e.g., the exact product page section, specs tab, or datasheet URL)
-2. If exact URL unavailable, use the product page URL where the info appears
-3. Only ONE URL per field - pick the best/most specific source
-4. NO markdown links - just plain text with URL in square brackets
-5. Example formats:
-   - "price": "$125.00 / 100 pack [https://www.vendor.com/product/123]"
-   - "storage_condition": "2-8°C, protect from light [https://www.vendor.com/product/123/specs]"
-   - "certifications": "USP, EP, GMP [https://www.vendor.com/product/123/compliance]"
-
-- For each vendor object, include the following keys:
-    - "vendor_name": Name of the vendor (no URL needed).
-    - "region": Region/country if available (no URL needed).
-    - "product_description": Product basics with catalog code [source_url].
-    - "product_url": A direct URL to the product page (CRITICAL: this allows us to scrape for more info later). MUST be a working URL. No brackets needed - this IS the URL.
-    - "availability_status": "available", "limited", or "unverified" (no URL needed - derived from product_url).
-    - "certifications": Comma-separated list of certifications [source_url]. If unknown, set to "NA".
-    - "price": Raw price string with currency and package size [source_url]. If unavailable, set to "NA".
-    - [Key Comparison Attributes]: Dynamic keys for attributes from the input (e.g., "storage_condition", "purity", "shelf_life"). Use snake_case. Each value MUST include [source_url].
-        - For "storage_condition", look for: "store at", "storage", "temperature", "protect from light"
-        - For "certifications", look for: "compliance", "monograph", "USP", "EP", "GMP"
-        - For "shelf_life", look for: "expiry", "shelf life", "stability"
-
-- Limit your results to just the 3–5 most relevant or credible vendors.
-- ACCURACY IS PARAMOUNT. If any info provided is wrong, the user will lose trust. Prefer "NA" over guessing.
-- SPEND MORE EFFORT ON SEARCHING: Dig into technical specifications, tabs like "Specifications", "Documents", or "SDS/COA" on vendor pages to find key attributes, prices, certifications, storage conditions, etc.
-- Ensure the JSON is valid and parseable.
-"""
 
 
 def slugify(text: str) -> str:
@@ -206,171 +110,687 @@ def save_vendors_data(data: Dict[str, Any]) -> None:
     print(f"✓ Data saved to {VENDORS_JSON_PATH}")
 
 
-def parse_deep_research_response(response_text: str) -> List[Dict[str, Any]]:
-    """Parse the JSON array from deep research response."""
-    # Try to find JSON array in the response
+def parse_json_response(response_text: str) -> dict:
+    """Parse JSON from LLM response, handling markdown code blocks."""
     text = response_text.strip()
     
-    # If it starts with [, try direct parse
-    if text.startswith('['):
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            pass
+    # Try direct parse first
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
     
-    # Try to extract JSON array from markdown code blocks
-    json_match = re.search(r'```(?:json)?\s*(\[[\s\S]*?\])\s*```', text)
-    if json_match:
-        try:
-            return json.loads(json_match.group(1))
-        except json.JSONDecodeError:
-            pass
+    # Try extracting from markdown code block
+    if "```" in text:
+        match = re.search(r'```(?:json)?\s*([\s\S]*?)\s*```', text)
+        if match:
+            try:
+                return json.loads(match.group(1))
+            except json.JSONDecodeError:
+                pass
     
-    # Try to find array anywhere in text
-    array_match = re.search(r'\[[\s\S]*\]', text)
-    if array_match:
-        try:
-            return json.loads(array_match.group(0))
-        except json.JSONDecodeError:
-            pass
+    # Try finding JSON object/array anywhere
+    for pattern in [r'\{[\s\S]*\}', r'\[[\s\S]*\]']:
+        match = re.search(pattern, text)
+        if match:
+            try:
+                return json.loads(match.group(0))
+            except json.JSONDecodeError:
+                pass
     
     raise ValueError(f"Could not parse JSON from response:\n{text[:500]}...")
 
 
-def run_deep_research(query: str) -> Dict[str, Any]:
+# =============================================================================
+# PROMPTS
+# =============================================================================
+
+ENRICHMENT_PROMPT = """You are an expert in biopharma procurement.
+
+Rewrite the user query to be clear and detailed for vendor research. Also identify the key specs that matter for comparing this specific product type.
+
+USER QUERY: {query}
+
+BASE ATTRIBUTES (always include these):
+{base_specs}
+
+OUTPUT FORMAT (valid JSON only):
+{{
+    "enriched_query": "Detailed procurement query with expanded abbreviations, product type, intended use, and key requirements...",
+    "comparison_attributes": [
+        // MUST include ALL base attributes listed above, plus 2-4 additional product-specific attributes
+        {{
+            "key": "<attribute_key_in_snake_case>",
+            "display_name": "<Human Readable Name>",
+            "description": "<What this attribute measures or represents>",
+            "look_for": ["<term1>", "<term2>", "<term3>", "<term4>"]
+        }}
+    ]
+}}
+
+INSTRUCTIONS:
+1. Expand any abbreviations or acronyms in the query to their full form
+2. Add relevant context about product category and typical use cases
+3. ALWAYS include ALL the base attributes listed above in your comparison_attributes
+4. Add 2-4 ADDITIONAL attributes specific to this product type beyond the base attributes
+5. Use snake_case for attribute keys
+6. Include relevant search aliases in look_for (terms vendors might use for the same thing)
+7. Total comparison_attributes should be 8-12 (base attributes + product-specific ones)
+
+The base attributes are critical for all biopharma procurement comparisons. Add product-specific attributes on top of them."""
+
+
+DISCOVERY_PROMPT = """You are a domain expert in biopharma procurement researching alternate vendors.
+
+CONTEXT:
+We are procuring for a large Indian biopharma company. We need to find alternate vendors for the product below.
+
+PRODUCT QUERY:
+{enriched_query}
+
+ATTRIBUTES THAT WILL BE EXTRACTED LATER:
+{attributes_list}
+
+YOUR TASK:
+Find at least 5 alternate vendors that supply this EXACT product or very close equivalents.
+
+CRITICAL: Finding an exact product match is essential. Do not include vendors that only have vaguely similar products. The product name, specifications, and intended use must closely match the query.
+
+SEARCH STRATEGY:
+1. Search well-established GLOBAL vendors first:
+   - Thermo Fisher Scientific / Fisher Scientific
+   - MilliporeSigma (Merck/Sigma-Aldrich)
+   - VWR/Avantor
+   - BD (Becton Dickinson)
+   - Sartorius
+   - Corning
+   - Bio-Techne (R&D Systems, Novus)
+2. Also search for specialized manufacturers if relevant
+3. Verify each product actually exists and appears available for purchase
+
+URL REGION PREFERENCE:
+When the same product exists on multiple regional sites, prefer in this order:
+1. Global sites (.com without regional path)
+2. US sites (/US/en, /us/en, .com/us)
+3. India sites (/IN/en, /in/en, sigmaaldrich.com/IN)
+4. Other regional sites only if the above are unavailable
+Example: Prefer sigmaaldrich.com/US/en over sigmaaldrich.com/DE/de for the same product.
+
+FOR EACH VENDOR, REPORT:
+- Vendor name
+- Product name (exact name as shown on vendor's site)
+- Direct product page URL (the specific product page, NOT the homepage or search results)
+- Brief product description
+- Confidence level (high/medium/low) that this is an EXACT match
+- Recommendation score (0.0 to 1.0) - how strongly you recommend this vendor for this product
+  - 0.9-1.0: Excellent match, highly recommended (exact product, reputable vendor, good availability)
+  - 0.7-0.8: Good match, recommended (close match or minor concerns)
+  - 0.5-0.6: Acceptable match, consider as alternative
+  - Below 0.5: Weak match, only if no better options
+- Recommendation reason (1-2 sentences explaining why you gave this score - e.g., "Exact product match from tier-1 vendor with confirmed availability" or "Close equivalent but different pack size")
+- Any concerns (out of stock, discontinued, regional restrictions, etc.)
+
+IMPORTANT:
+- Find at least 5 vendors. More is better if quality exact matches exist.
+- EXACT MATCH is critical - do not pad results with loosely related products.
+- Take your time to research thoroughly. Quality matters more than speed.
+- Write naturally as a research report - do NOT use rigid JSON format.
+- Do NOT extract detailed specs - just find vendors and their product URLs.
+- Do NOT include inline citations with brackets - just list URLs clearly.
+- Only include vendors where you found actual product pages with the exact product."""
+
+
+PARSE_DISCOVERY_PROMPT = """Convert this vendor research report into structured JSON.
+
+RESEARCH REPORT:
+{raw_discovery}
+
+OUTPUT FORMAT (valid JSON only):
+{{
+    "vendors": [
+        {{
+            "vendor_name": "Full vendor name",
+            "product_name": "Exact product name as shown on vendor site",
+            "product_url": "https://exact-product-page-url",
+            "product_description": "Brief description of the product",
+            "confidence": "high/medium/low",
+            "recommendation_score": 0.85,
+            "recommendation_reason": "Brief explanation for the score",
+            "concerns": "Any noted issues, or null if none"
+        }}
+    ]
+}}
+
+INSTRUCTIONS:
+1. Extract ALL vendors mentioned that have valid product URLs (direct product pages, not homepages or search results)
+2. Include the exact product_name as mentioned in the report for each vendor
+3. Exclude any vendors marked as unavailable, discontinued, or unreliable
+4. Normalize vendor names consistently (e.g., "Sigma-Aldrich" and "MilliporeSigma" should both be "MilliporeSigma (Sigma-Aldrich)")
+5. Keep descriptions concise but informative
+6. Preserve the confidence level and any concerns mentioned
+7. Extract recommendation_score as a decimal between 0.0 and 1.0 (if not explicitly mentioned, infer from confidence: high=0.85, medium=0.65, low=0.45)
+8. Extract recommendation_reason - the explanation for why this score was given. If not explicitly stated, generate a brief reason based on confidence level and any noted strengths/concerns
+9. Set concerns to null if no issues were noted"""
+
+
+SPEC_AVAILABILITY_PROMPT = """Check which product specs are available on this page.
+
+PRODUCT URL: {product_url}
+
+SPECS TO CHECK:
+{specs_list}
+
+Visit the product page and identify which specs have actual values displayed.
+
+OUTPUT FORMAT (valid JSON only):
+{{
+    "available_specs": ["<spec_keys_that_are_visible>"],
+    "unavailable_specs": ["<spec_keys_not_found>"],
+    "page_title": "Product page title if found",
+    "notes": "Any relevant observations about the page"
+}}
+
+INSTRUCTIONS:
+1. Use web search to access the product page
+2. For each spec, check if the information is actually visible on the page
+3. Be conservative - only mark as "available" if you can clearly see the data
+4. Note if the page requires login, shows "request quote", or has regional restrictions"""
+
+
+EXTRACTION_PROMPT = """Extract product specs from this vendor page.
+
+PRODUCT URL: {product_url}
+
+SPECS TO EXTRACT:
+{specs_with_aliases}
+
+INSTRUCTIONS:
+1. Use web search to access the product page at the given URL
+2. For each spec, find the matching information on the page
+3. Vendor pages use different labels - match by MEANING not exact text
+4. Use the "look_for" hints to find the right data
+5. Extract the actual VALUE, not the label
+6. Note what label the vendor used (for traceability)
+7. If information is not found, set value to "Not found"
+8. IMPORTANT: If you find the manufacturer name, also determine the manufacturer's country of origin (where the company is headquartered)
+
+OUTPUT FORMAT (valid JSON only):
+{{
+    "results": {{
+        "<spec_key>": {{
+            "value": "<extracted value>",
+            "original_label": "<label the vendor used>",
+            "confidence": "high/medium/low"
+        }}
+    }},
+    "manufacturer_country": "<country of origin of the manufacturer, e.g., USA, Germany, Japan, etc.>",
+    "page_title": "Product page title",
+    "extraction_notes": "Any relevant observations"
+}}
+
+IMPORTANT:
+- For prices, include currency AND quantity/unit
+- For temperatures, include units (e.g., "2-8°C" not just "2-8")
+- Set confidence to "low" if the information seems ambiguous or unclear
+- Do NOT guess or make up values - use "Not found" if uncertain
+- For manufacturer_country, use your knowledge of major biopharma manufacturers to determine country of origin"""
+
+
+# =============================================================================
+# PHASE 1: ENRICHMENT
+# =============================================================================
+
+def run_enrichment(query: str) -> Dict[str, Any]:
     """
-    Run deep research on a product query.
+    Phase 1: Enrich the user query and identify comparison attributes.
     
     Args:
-        query: The product search query
+        query: Raw user query
         
     Returns:
-        Dictionary with query data and vendor results
+        dict with enriched_query and comparison_attributes
     """
-    import time
+    print("\n📝 Phase 1: Enriching query...")
     
     client = get_openai_client()
     
-    # Track total time and tokens
-    start_time = time.time()
-    total_tokens = {
-        "input_tokens": 0,
-        "output_tokens": 0,
-        "total_tokens": 0
-    }
+    # Format base specs from library for inclusion in prompt
+    base_specs_formatted = format_specs_for_prompt(get_default_specs())
     
-    # Step 1: Enrich the query
-    print(f"\n{'='*60}")
-    print(f"🔍 Running deep research for: {query}")
-    print(f"{'='*60}")
-    print("\n📝 Step 1/2: Enriching query...")
+    prompt = ENRICHMENT_PROMPT.format(query=query, base_specs=base_specs_formatted)
     
-    def make_enrichment_call():
+    def make_call():
         return client.responses.create(
-            instructions=QUERY_ENRICHMENT_PROMPT,
             model="gpt-4.1-2025-04-14",
-            input=query
+            input=prompt
         )
     
-    enrichment_response = retry_with_backoff(make_enrichment_call, max_retries=2, initial_delay=5)
-    enriched_query = enrichment_response.output[0].content[0].text
+    response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
     
-    # Track enrichment tokens
-    if hasattr(enrichment_response, 'usage') and enrichment_response.usage:
-        total_tokens["input_tokens"] += getattr(enrichment_response.usage, 'input_tokens', 0)
-        total_tokens["output_tokens"] += getattr(enrichment_response.usage, 'output_tokens', 0)
-        total_tokens["total_tokens"] += getattr(enrichment_response.usage, 'total_tokens', 0)
+    result = parse_json_response(response.output_text)
     
-    print(f"\n--- Enriched Query ---\n{enriched_query}\n")
+    # Track token usage
+    tokens = {}
+    if hasattr(response, 'usage') and response.usage:
+        tokens = {
+            "input": getattr(response.usage, 'input_tokens', 0),
+            "output": getattr(response.usage, 'output_tokens', 0),
+            "total": getattr(response.usage, 'total_tokens', 0)
+        }
     
-    # Step 2: Run deep research (always synchronous for reliability)
-    print(f"🌐 Step 2/2: Running deep research...")
+    result["tokens_used"] = tokens
+    result["model"] = "gpt-4.1-2025-04-14"
+    
+    print(f"   ✓ Enriched query generated")
+    print(f"   ✓ {len(result.get('comparison_attributes', []))} comparison attributes identified")
+    
+    return result
+
+
+# =============================================================================
+# PHASE 2: DISCOVERY
+# =============================================================================
+
+def run_discovery(enriched_query: str, comparison_attributes: List[Dict]) -> Dict[str, Any]:
+    """
+    Phase 2: Run deep research to discover vendors.
+    
+    Args:
+        enriched_query: The enriched query from Phase 1
+        comparison_attributes: List of attributes to consider
+        
+    Returns:
+        dict with raw_response, market_summary, time_taken, tokens
+    """
+    print("\n🌐 Phase 2: Running deep research...")
     print("   This may take 3-10 minutes. Will auto-retry on connection errors...")
     
-    # Use retry with backoff for resilience against connection errors
-    def make_deep_research_call():
+    client = get_openai_client()
+    start_time = time.time()
+    
+    # Format attributes for the prompt
+    attrs_list = "\n".join([
+        f"- {attr['display_name']}: {attr['description']}"
+        for attr in comparison_attributes
+    ])
+    
+    prompt = DISCOVERY_PROMPT.format(
+        enriched_query=enriched_query,
+        attributes_list=attrs_list
+    )
+    
+    def make_call():
         return client.responses.create(
             model="o4-mini-deep-research",
-            instructions=DEEP_RESEARCH_PROMPT,
-            reasoning={"summary": "auto"},
-            input=enriched_query,
+            input=prompt,
             tools=[{"type": "web_search"}],
-            background=False,  # Always run synchronously for reliability
+            reasoning={"summary": "auto"},
+            background=False,
             timeout=7200
         )
     
-    response = retry_with_backoff(make_deep_research_call, max_retries=3, initial_delay=10)
+    response = retry_with_backoff(make_call, max_retries=3, initial_delay=10)
     
-    # Track deep research tokens
-    if hasattr(response, 'usage') and response.usage:
-        total_tokens["input_tokens"] += getattr(response.usage, 'input_tokens', 0)
-        total_tokens["output_tokens"] += getattr(response.usage, 'output_tokens', 0)
-        total_tokens["total_tokens"] += getattr(response.usage, 'total_tokens', 0)
-    
-    # Calculate total time taken
     end_time = time.time()
-    time_taken_seconds = round(end_time - start_time, 2)
+    time_taken = round(end_time - start_time, 2)
     
-    # Parse the response
-    vendors = parse_deep_research_response(response.output_text)
+    tokens = {}
+    if hasattr(response, 'usage') and response.usage:
+        tokens = {
+            "input": getattr(response.usage, 'input_tokens', 0),
+            "output": getattr(response.usage, 'output_tokens', 0),
+            "total": getattr(response.usage, 'total_tokens', 0)
+        }
     
-    # Create query entry with structured data
+    print(f"   ✓ Discovery complete ({time_taken}s)")
+    
+    return {
+        "raw_response": response.output_text,
+        "model": "o4-mini-deep-research",
+        "time_taken_seconds": time_taken,
+        "tokens_used": tokens,
+        "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+
+# =============================================================================
+# PHASE 3: PARSE DISCOVERY
+# =============================================================================
+
+def parse_discovery(raw_discovery: str) -> Dict[str, Any]:
+    """
+    Phase 3: Parse natural language discovery into structured JSON.
+    
+    Args:
+        raw_discovery: Raw text from deep research
+        
+    Returns:
+        dict with vendors list
+    """
+    print("\n🔧 Phase 3: Parsing discovery results...")
+    
+    client = get_openai_client()
+    
+    prompt = PARSE_DISCOVERY_PROMPT.format(raw_discovery=raw_discovery)
+    
+    def make_call():
+        return client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=2000
+        )
+    
+    response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
+    
+    result = parse_json_response(response.choices[0].message.content)
+    
+    print(f"   ✓ Parsed {len(result.get('vendors', []))} vendors")
+    
+    return result
+
+
+# =============================================================================
+# PHASE 4: SPEC EXTRACTION
+# =============================================================================
+
+def discover_available_specs(product_url: str, comparison_attributes: List[Dict]) -> Dict[str, Any]:
+    """
+    Check which specs are available on a product page.
+    
+    Args:
+        product_url: URL of the product page
+        comparison_attributes: List of specs to check
+        
+    Returns:
+        dict with available_specs and unavailable_specs lists
+    """
+    client = get_openai_client()
+    
+    specs_list = "\n".join([
+        f"- {attr['key']} ({attr['display_name']}): {attr['description']}"
+        for attr in comparison_attributes
+    ])
+    
+    prompt = SPEC_AVAILABILITY_PROMPT.format(
+        product_url=product_url,
+        specs_list=specs_list
+    )
+    
+    def make_call():
+        return client.responses.create(
+            model="gpt-4o",
+            input=prompt,
+            tools=[{"type": "web_search"}]
+        )
+    
+    response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
+    
+    return parse_json_response(response.output_text)
+
+
+def extract_specs(product_url: str, specs_to_extract: List[Dict], model: str = "gpt-4o") -> Dict[str, Any]:
+    """
+    Extract specific specs from a product page.
+    
+    Args:
+        product_url: URL of the product page
+        specs_to_extract: List of spec definitions with look_for aliases
+        model: Model to use (default gpt-4o for accuracy)
+        
+    Returns:
+        dict with results for each spec
+    """
+    client = get_openai_client()
+    
+    # Format specs with aliases for the prompt
+    specs_formatted = []
+    for spec in specs_to_extract:
+        aliases = ", ".join(spec.get("look_for", [])[:6])
+        specs_formatted.append(
+            f"- {spec['key']} ({spec['display_name']}): {spec['description']}\n"
+            f"  Look for: {aliases}"
+        )
+    
+    prompt = EXTRACTION_PROMPT.format(
+        product_url=product_url,
+        specs_with_aliases="\n".join(specs_formatted)
+    )
+    
+    def make_call():
+        return client.responses.create(
+            model=model,
+            input=prompt,
+            tools=[{"type": "web_search"}]
+        )
+    
+    response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
+    
+    result = parse_json_response(response.output_text)
+    
+    # Add metadata
+    tokens = {}
+    if hasattr(response, 'usage') and response.usage:
+        tokens = {
+            "input": getattr(response.usage, 'input_tokens', 0),
+            "output": getattr(response.usage, 'output_tokens', 0),
+            "total": getattr(response.usage, 'total_tokens', 0)
+        }
+    
+    result["model"] = model
+    result["tokens_used"] = tokens
+    result["extracted_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    return result
+
+
+def extract_single_spec(product_url: str, spec_key: str, spec_definition: Dict = None) -> Dict[str, Any]:
+    """
+    Extract a single spec from a product page (on-demand).
+    
+    Args:
+        product_url: URL of the product page
+        spec_key: Key of the spec to extract
+        spec_definition: Optional spec definition; if not provided, uses library
+        
+    Returns:
+        dict with extracted spec value
+    """
+    if spec_definition is None:
+        spec_definition = BIOPHARMA_SPECS.get(spec_key)
+        if not spec_definition:
+            return {
+                "value": None,
+                "error": f"Unknown spec key: {spec_key}",
+                "confidence": "low"
+            }
+    
+    result = extract_specs(product_url, [spec_definition])
+    
+    if "results" in result and spec_key in result["results"]:
+        return result["results"][spec_key]
+    
+    return {
+        "value": "Not found",
+        "confidence": "low",
+        "model": result.get("model"),
+        "extracted_at": result.get("extracted_at")
+    }
+
+
+# =============================================================================
+# ORCHESTRATION
+# =============================================================================
+
+def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, Any]:
+    """
+    Run the full 4-phase pipeline.
+    
+    Args:
+        query: User's product query
+        extract_specs_flag: Whether to run Phase 4 extraction
+        
+    Returns:
+        Complete query entry with all data
+    """
+    total_start = time.time()
+    total_tokens = {"input": 0, "output": 0, "total": 0}
+    
+    print(f"\n{'='*60}")
+    print(f"🔍 Running full pipeline for: {query}")
+    print(f"{'='*60}")
+    
+    # Phase 1: Enrichment
+    enrichment = run_enrichment(query)
+    enriched_query = enrichment["enriched_query"]
+    comparison_attributes = enrichment["comparison_attributes"]
+    
+    if enrichment.get("tokens_used"):
+        for k in total_tokens:
+            total_tokens[k] += enrichment["tokens_used"].get(k, 0)
+    
+    print(f"\n--- Enriched Query ---\n{enriched_query[:500]}...")
+    
+    # Phase 2: Discovery
+    discovery = run_discovery(enriched_query, comparison_attributes)
+    
+    if discovery.get("tokens_used"):
+        for k in total_tokens:
+            total_tokens[k] += discovery["tokens_used"].get(k, 0)
+    
+    # Phase 3: Parse
+    parsed = parse_discovery(discovery["raw_response"])
+    
+    # Build query entry structure
     query_id = slugify(query)
     query_entry = {
         "query_id": query_id,
         "query_text": query,
         "enriched_query": enriched_query,
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "research_model": "o4-mini-deep-research",
-        "time_taken_seconds": time_taken_seconds,
-        "tokens_used": total_tokens,
-        "vendors": []
+        "comparison_attributes": comparison_attributes,
+        "discovery": {
+            "model": discovery["model"],
+            "completed_at": discovery["completed_at"],
+            "time_taken_seconds": discovery["time_taken_seconds"],
+            "tokens_used": discovery["tokens_used"],
+            "raw_response": discovery["raw_response"]
+        },
+        "vendors": [],
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
     
-    # Structure each vendor with consistent fields
-    for i, vendor in enumerate(vendors, 1):
+    # Structure vendors
+    for i, vendor in enumerate(parsed.get("vendors", []), 1):
         structured_vendor = {
             "id": i,
             "vendor_name": vendor.get("vendor_name", "Unknown"),
-            "region": vendor.get("region"),
-            "product_description": vendor.get("product_description"),
+            "product_name": vendor.get("product_name"),
             "product_url": vendor.get("product_url"),
-            "availability_status": vendor.get("availability_status", "unverified"),
-            "certifications": vendor.get("certifications"),
-            "price": vendor.get("price"),
-            # Crawled data placeholder
-            "crawled_data": None,
-            "crawled_at": None,
-            # Query results placeholder
-            "extracted_info": {},
+            "product_description": vendor.get("product_description"),
+            "discovery_confidence": vendor.get("confidence", "medium"),
+            "recommendation_score": vendor.get("recommendation_score", 0.5),
+            "recommendation_reason": vendor.get("recommendation_reason"),
+            "discovery_concerns": vendor.get("concerns"),
+            "specs_availability": None,
+            "specs": {}
         }
-        
-        # Add dynamic fields (comparison attributes)
-        # Skip source_urls since each field now has inline citations
-        skip_keys = {"source_urls"}
-        for key, value in vendor.items():
-            if key not in structured_vendor and key not in skip_keys:
-                structured_vendor[key] = value
-        
         query_entry["vendors"].append(structured_vendor)
     
-    print(f"\n✓ Found {len(vendors)} vendors")
+    print(f"\n✓ Found {len(query_entry['vendors'])} vendors")
+    
+    # Phase 4: Extraction (optional)
+    if extract_specs_flag and query_entry["vendors"]:
+        print("\n📊 Phase 4: Extracting specs from vendor pages...")
+        
+        for vendor in query_entry["vendors"]:
+            product_url = vendor.get("product_url")
+            if not product_url:
+                print(f"   [{vendor['id']}] {vendor['vendor_name']}: No product URL")
+                continue
+            
+            print(f"   [{vendor['id']}] {vendor['vendor_name']}...")
+            
+            try:
+                # Extract all comparison attributes
+                extraction = extract_specs(product_url, comparison_attributes)
+                
+                if extraction.get("tokens_used"):
+                    for k in total_tokens:
+                        total_tokens[k] += extraction["tokens_used"].get(k, 0)
+                
+                # Store results
+                results = extraction.get("results", {})
+                available = []
+                unavailable = []
+                
+                for attr in comparison_attributes:
+                    key = attr["key"]
+                    if key in results:
+                        spec_result = results[key]
+                        value = spec_result.get("value")
+                        
+                        if value and value != "Not found":
+                            available.append(key)
+                            vendor["specs"][key] = {
+                                "value": value,
+                                "original_label": spec_result.get("original_label"),
+                                "confidence": spec_result.get("confidence", "medium"),
+                                "extracted_at": extraction.get("extracted_at"),
+                                "model": extraction.get("model")
+                            }
+                        else:
+                            unavailable.append(key)
+                
+                vendor["specs_availability"] = {
+                    "checked_at": extraction.get("extracted_at"),
+                    "available": available,
+                    "unavailable": unavailable
+                }
+                
+                # Store manufacturer country if found
+                if extraction.get("manufacturer_country"):
+                    vendor["manufacturer_country"] = extraction["manufacturer_country"]
+                
+                print(f"       ✓ Extracted {len(available)} specs")
+                
+            except Exception as e:
+                print(f"       ⚠️ Error: {e}")
+                vendor["specs_availability"] = {
+                    "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "error": str(e)
+                }
+    
+    # Final stats
+    total_time = round(time.time() - total_start, 2)
+    query_entry["pipeline_stats"] = {
+        "total_time_seconds": total_time,
+        "total_tokens": total_tokens
+    }
+    
     return query_entry
 
 
+def run_discovery_only(query: str) -> Dict[str, Any]:
+    """Run only Phases 1-3 (discovery without extraction)."""
+    return run_full_pipeline(query, extract_specs_flag=False)
+
+
+# =============================================================================
+# CLI COMMANDS
+# =============================================================================
+
 def cmd_research(args):
-    """Handle the 'research' command."""
+    """Handle the 'research' command - full pipeline."""
     query = args.query
     
     try:
-        query_entry = run_deep_research(query)
+        query_entry = run_full_pipeline(query, extract_specs_flag=True)
         
         # Load existing data and add new query
         data = load_vendors_data()
         query_key = query.lower().strip()
         data["queries"][query_key] = query_entry
         
-        # Save to file
         save_vendors_data(data)
         
         # Print summary
@@ -380,74 +800,64 @@ def cmd_research(args):
         print(f"Query ID: {query_entry['query_id']}")
         print(f"Vendors found: {len(query_entry['vendors'])}")
         
-        # Show time and token usage
-        time_taken = query_entry.get('time_taken_seconds', 0)
-        tokens = query_entry.get('tokens_used', {})
-        print(f"\n⏱️  Time taken: {time_taken} seconds ({time_taken/60:.1f} minutes)")
-        print(f"🪙 Tokens used: {tokens.get('total_tokens', 'N/A')} total")
-        print(f"   └─ Input: {tokens.get('input_tokens', 'N/A')}, Output: {tokens.get('output_tokens', 'N/A')}")
+        stats = query_entry.get('pipeline_stats', {})
+        print(f"\n⏱️  Total time: {stats.get('total_time_seconds', 0)}s")
+        tokens = stats.get('total_tokens', {})
+        print(f"🪙 Total tokens: {tokens.get('total', 'N/A')}")
         
         print("\nVendors:")
         for v in query_entry["vendors"]:
-            price_str = v.get("price") or "N/A"
-            print(f"  [{v['id']}] {v['vendor_name']} - {price_str}")
+            specs_count = len(v.get("specs", {}))
+            print(f"  [{v['id']}] {v['vendor_name']} ({specs_count} specs extracted)")
         
-        print(f"\n💡 Next steps:")
-        print(f"   • Crawl product URLs: python pipeline.py crawl \"{query_entry['query_id']}\"")
-        print(f"   • View details: python pipeline.py show \"{query_entry['query_id']}\"")
+        print(f"\n💡 View details: python pipeline.py show \"{query_entry['query_id']}\"")
         
     except Exception as e:
         print(f"\n❌ Error during research: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 
-async def crawl_url(url: str) -> Optional[Dict[str, Any]]:
-    """
-    Crawl a URL using Crawl4AI and return the markdown content.
+def cmd_discover(args):
+    """Handle the 'discover' command - discovery only, no extraction."""
+    query = args.query
     
-    Args:
-        url: The URL to crawl
-        
-    Returns:
-        Dictionary with markdown content and metadata, or None if failed
-    """
     try:
-        from crawl4ai import AsyncWebCrawler, CrawlerRunConfig
+        query_entry = run_discovery_only(query)
         
-        config = CrawlerRunConfig(
-            word_count_threshold=10,
-            remove_overlay_elements=True,
-        )
+        data = load_vendors_data()
+        query_key = query.lower().strip()
+        data["queries"][query_key] = query_entry
         
-        async with AsyncWebCrawler() as crawler:
-            result = await crawler.arun(url=url, config=config)
-            
-            if result.success:
-                return {
-                    "url": url,
-                    "markdown": result.markdown,
-                    "title": result.metadata.get("title", ""),
-                    "crawled_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "word_count": len(result.markdown.split()) if result.markdown else 0
-                }
-            else:
-                print(f"   ⚠️  Failed to crawl {url}: {result.error_message}")
-                return None
-                
-    except ImportError:
-        print("❌ Error: crawl4ai not installed. Install with: pip install crawl4ai")
-        return None
+        save_vendors_data(data)
+        
+        print(f"\n{'='*60}")
+        print("📊 Discovery Results Summary")
+        print(f"{'='*60}")
+        print(f"Query ID: {query_entry['query_id']}")
+        print(f"Vendors found: {len(query_entry['vendors'])}")
+        
+        print("\nVendors:")
+        for v in query_entry["vendors"]:
+            print(f"  [{v['id']}] {v['vendor_name']} - {v.get('discovery_confidence', 'N/A')} confidence")
+            if v.get("product_url"):
+                print(f"       URL: {v['product_url'][:60]}...")
+        
+        print(f"\n💡 Extract specs: python pipeline.py extract \"{query_entry['query_id']}\"")
+        
     except Exception as e:
-        print(f"   ⚠️  Error crawling {url}: {e}")
-        return None
+        print(f"\n❌ Error during discovery: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 
-def cmd_crawl(args):
-    """Handle the 'crawl' command."""
+def cmd_extract(args):
+    """Handle the 'extract' command - extract specs for existing query."""
     query_id = args.query_id
     vendor_id = args.vendor_id
     
-    # Load data
     data = load_vendors_data()
     
     # Find the query
@@ -466,114 +876,80 @@ def cmd_crawl(args):
             print(f"  • {entry['query_id']}")
         sys.exit(1)
     
-    print(f"\n{'='*60}")
-    print(f"🕷️  Crawling product URLs for: {query_entry['query_id']}")
-    print(f"{'='*60}")
+    comparison_attributes = query_entry.get("comparison_attributes", get_default_specs())
     
     # Filter vendors if specific ID provided
-    vendors_to_crawl = query_entry["vendors"]
+    vendors_to_process = query_entry["vendors"]
     if vendor_id:
-        vendors_to_crawl = [v for v in vendors_to_crawl if v["id"] == vendor_id]
-        if not vendors_to_crawl:
+        vendors_to_process = [v for v in vendors_to_process if v["id"] == vendor_id]
+        if not vendors_to_process:
             print(f"❌ Vendor ID {vendor_id} not found")
             sys.exit(1)
     
-    # Crawl each vendor's product URL
-    async def crawl_all():
-        for vendor in vendors_to_crawl:
-            url = vendor.get("product_url")
-            if not url or url == "NA":
-                print(f"\n[{vendor['id']}] {vendor['vendor_name']}: No product URL")
-                continue
+    print(f"\n{'='*60}")
+    print(f"📊 Extracting specs for: {query_entry['query_id']}")
+    print(f"{'='*60}")
+    
+    for vendor in vendors_to_process:
+        product_url = vendor.get("product_url")
+        if not product_url:
+            print(f"\n[{vendor['id']}] {vendor['vendor_name']}: No product URL")
+            continue
+        
+        print(f"\n[{vendor['id']}] {vendor['vendor_name']}")
+        print(f"   URL: {product_url[:60]}...")
+        
+        try:
+            extraction = extract_specs(product_url, comparison_attributes)
             
-            print(f"\n[{vendor['id']}] {vendor['vendor_name']}")
-            print(f"   URL: {url}")
+            results = extraction.get("results", {})
+            available = []
+            unavailable = []
             
-            result = await crawl_url(url)
-            if result:
-                vendor["crawled_data"] = {
-                    "markdown": result["markdown"],
-                    "title": result["title"],
-                    "word_count": result["word_count"]
-                }
-                vendor["crawled_at"] = result["crawled_at"]
-                print(f"   ✓ Crawled successfully ({result['word_count']} words)")
+            for attr in comparison_attributes:
+                key = attr["key"]
+                if key in results:
+                    spec_result = results[key]
+                    value = spec_result.get("value")
+                    
+                    if value and value != "Not found":
+                        available.append(key)
+                        vendor["specs"][key] = {
+                            "value": value,
+                            "original_label": spec_result.get("original_label"),
+                            "confidence": spec_result.get("confidence", "medium"),
+                            "extracted_at": extraction.get("extracted_at"),
+                            "model": extraction.get("model")
+                        }
+                        print(f"   ✓ {key}: {value[:50]}...")
             else:
-                vendor["crawled_data"] = None
-                vendor["crawled_at"] = None
+                        unavailable.append(key)
+                        print(f"   ✗ {key}: Not found")
+            
+            vendor["specs_availability"] = {
+                "checked_at": extraction.get("extracted_at"),
+                "available": available,
+                "unavailable": unavailable
+            }
+            
+        except Exception as e:
+            print(f"   ⚠️ Error: {e}")
     
-    # Run async crawl
-    asyncio.run(crawl_all())
-    
-    # Update the query entry's last_updated
+    # Update and save
     query_entry["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    # Save updated data
     data["queries"][query_key] = query_entry
     save_vendors_data(data)
     
-    # Summary
-    crawled_count = sum(1 for v in vendors_to_crawl if v.get("crawled_data"))
-    print(f"\n✓ Successfully crawled {crawled_count}/{len(vendors_to_crawl)} vendors")
-    print(f"\n💡 Next: Query the crawled data:")
-    print(f"   python pipeline.py query \"{query_entry['query_id']}\" --vendor-id 1 \"What is the price?\"")
 
-
-def query_crawled_data(markdown: str, question: str, vendor_name: str) -> str:
-    """
-    Query crawled markdown data using OpenAI.
-    
-    Args:
-        markdown: The crawled markdown content
-        question: The user's question
-        vendor_name: The vendor name for context
-        
-    Returns:
-        The answer from the LLM
-    """
-    client = get_openai_client()
-    
-    prompt = f"""You are analyzing product information from a vendor's product page.
-
-Vendor: {vendor_name}
-
-Product Page Content (Markdown):
----
-{markdown[:15000]}  # Truncate to avoid token limits
----
-
-Question: {question}
-
-Instructions:
-- Answer the question based ONLY on the information in the product page content above
-- Be concise and specific
-- If the information is not available in the content, say "Not found in crawled data"
-- For prices, include currency and any associated quantities/units
-- For certifications, list all that are mentioned
-
-Answer:"""
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.1,
-        max_tokens=500
-    )
-    
-    return response.choices[0].message.content.strip()
-
-
-def cmd_query(args):
-    """Handle the 'query' command."""
+def cmd_fetch_spec(args):
+    """Handle the 'fetch-spec' command - fetch single spec on-demand."""
     query_id = args.query_id
     vendor_id = args.vendor_id
-    question = args.question
-    save_result = args.save
+    spec_key = args.spec
     
-    # Load data
     data = load_vendors_data()
     
-    # Find the query
+    # Find query and vendor
     query_entry = None
     query_key = None
     for key, entry in data["queries"].items():
@@ -586,7 +962,6 @@ def cmd_query(args):
         print(f"❌ Query not found: {query_id}")
         sys.exit(1)
     
-    # Find the vendor
     vendor = None
     for v in query_entry["vendors"]:
         if v["id"] == vendor_id:
@@ -595,48 +970,34 @@ def cmd_query(args):
     
     if not vendor:
         print(f"❌ Vendor ID {vendor_id} not found")
-        print("Available vendors:")
-        for v in query_entry["vendors"]:
-            print(f"  [{v['id']}] {v['vendor_name']}")
         sys.exit(1)
     
-    # Check if crawled data exists
-    if not vendor.get("crawled_data") or not vendor["crawled_data"].get("markdown"):
-        print(f"❌ No crawled data for vendor [{vendor_id}] {vendor['vendor_name']}")
-        print(f"   Run: python pipeline.py crawl \"{query_id}\" --vendor-id {vendor_id}")
+    product_url = vendor.get("product_url")
+    if not product_url:
+        print(f"❌ No product URL for vendor [{vendor_id}]")
         sys.exit(1)
     
     print(f"\n{'='*60}")
-    print(f"🔎 Querying vendor: {vendor['vendor_name']}")
-    print(f"   Question: {question}")
+    print(f"🔍 Fetching: {spec_key}")
+    print(f"   Vendor: {vendor['vendor_name']}")
+    print(f"   URL: {product_url}")
     print(f"{'='*60}\n")
     
-    # Query the LLM
-    answer = query_crawled_data(
-        vendor["crawled_data"]["markdown"],
-        question,
-        vendor["vendor_name"]
-    )
+    result = extract_single_spec(product_url, spec_key)
     
-    print(f"📝 Answer:\n{answer}\n")
+    print(f"Value: {result.get('value')}")
+    print(f"Confidence: {result.get('confidence')}")
     
-    # Optionally save the result
-    if save_result:
-        # Store in extracted_info with question as key
-        question_key = slugify(question)[:50]
-        if "extracted_info" not in vendor:
-            vendor["extracted_info"] = {}
-        vendor["extracted_info"][question_key] = {
-            "question": question,
-            "answer": answer,
-            "extracted_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }
+    if result.get("value") and result["value"] != "Not found":
+        # Save to vendor specs
+        if "specs" not in vendor:
+            vendor["specs"] = {}
+        vendor["specs"][spec_key] = result
         
-        # Update and save
         query_entry["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         data["queries"][query_key] = query_entry
         save_vendors_data(data)
-        print(f"✓ Answer saved to vendor's extracted_info")
+        print(f"\n✓ Saved to vendor specs")
 
 
 def cmd_list(args):
@@ -654,11 +1015,14 @@ def cmd_list(args):
     
     for key, entry in data["queries"].items():
         vendor_count = len(entry.get("vendors", []))
-        crawled = sum(1 for v in entry.get("vendors", []) if v.get("crawled_data"))
+        specs_extracted = sum(
+            len(v.get("specs", {})) 
+            for v in entry.get("vendors", [])
+        )
         
         print(f"• {entry['query_id']}")
         print(f"  Query: {entry['query_text']}")
-        print(f"  Vendors: {vendor_count} ({crawled} crawled)")
+        print(f"  Vendors: {vendor_count} ({specs_extracted} total specs extracted)")
         print(f"  Updated: {entry.get('last_updated', 'N/A')}")
         print()
 
@@ -669,7 +1033,6 @@ def cmd_show(args):
     
     data = load_vendors_data()
     
-    # Find the query
     query_entry = None
     for key, entry in data["queries"].items():
         if entry["query_id"] == query_id or query_id.lower() in key:
@@ -686,55 +1049,63 @@ def cmd_show(args):
     
     print(f"Original Query: {query_entry['query_text']}")
     print(f"Last Updated: {query_entry.get('last_updated', 'N/A')}")
-    print(f"Model: {query_entry.get('research_model', 'N/A')}")
     
-    # Show time and token usage if available
-    time_taken = query_entry.get('time_taken_seconds')
-    tokens = query_entry.get('tokens_used', {})
-    if time_taken:
-        print(f"Time Taken: {time_taken} seconds ({time_taken/60:.1f} minutes)")
+    # Discovery info
+    discovery = query_entry.get("discovery", {})
+    if discovery:
+        print(f"\nDiscovery:")
+        print(f"  Model: {discovery.get('model', 'N/A')}")
+        print(f"  Time: {discovery.get('time_taken_seconds', 'N/A')}s")
+        tokens = discovery.get("tokens_used", {})
     if tokens:
-        print(f"Tokens Used: {tokens.get('total_tokens', 'N/A')} total (Input: {tokens.get('input_tokens', 'N/A')}, Output: {tokens.get('output_tokens', 'N/A')})")
+            print(f"  Tokens: {tokens.get('total', 'N/A')} total")
     
-    if query_entry.get("enriched_query"):
-        print(f"\n--- Enriched Query ---")
-        print(query_entry["enriched_query"][:500])
-        if len(query_entry.get("enriched_query", "")) > 500:
-            print("...")
+    # Comparison attributes
+    attrs = query_entry.get("comparison_attributes", [])
+    if attrs:
+        print(f"\nComparison Attributes ({len(attrs)}):")
+        for attr in attrs:
+            print(f"  • {attr['display_name']} ({attr['key']})")
     
+    # Vendors
     print(f"\n{'='*60}")
     print("Vendors")
     print(f"{'='*60}\n")
     
     for vendor in query_entry.get("vendors", []):
         print(f"[{vendor['id']}] {vendor['vendor_name']}")
-        print(f"    Region: {vendor.get('region', 'N/A')}")
-        print(f"    Price: {vendor.get('price', 'N/A')}")
-        print(f"    Product URL: {vendor.get('product_url', 'N/A')}")
-        print(f"    Certifications: {vendor.get('certifications', 'N/A')}")
+        if vendor.get("product_name"):
+            print(f"    Product: {vendor['product_name']}")
+        print(f"    Confidence: {vendor.get('discovery_confidence', 'N/A')}")
+        print(f"    Recommendation: {vendor.get('recommendation_score', 'N/A')} - {vendor.get('recommendation_reason', 'N/A')}")
+        print(f"    URL: {vendor.get('product_url', 'N/A')}")
         
-        if vendor.get("crawled_data"):
-            word_count = vendor["crawled_data"].get("word_count", 0)
-            print(f"    Crawled: ✓ ({word_count} words)")
+        if vendor.get("manufacturer_country"):
+            print(f"    Manufacturer Country: {vendor['manufacturer_country']}")
+        
+        if vendor.get("discovery_concerns"):
+            print(f"    Concerns: {vendor['discovery_concerns']}")
+        
+        specs = vendor.get("specs", {})
+        if specs:
+            print(f"    Specs ({len(specs)}):")
+            for key, spec in specs.items():
+                value = spec.get("value", "N/A")
+                conf = spec.get("confidence", "")
+                print(f"      • {key}: {value[:60]}{'...' if len(str(value)) > 60 else ''} [{conf}]")
         else:
-            print(f"    Crawled: ✗")
+            print(f"    Specs: None extracted")
         
-        if vendor.get("extracted_info"):
-            print(f"    Extracted Info: {len(vendor['extracted_info'])} queries")
-            for key, info in vendor["extracted_info"].items():
-                print(f"      • {info['question']}: {info['answer'][:100]}...")
         print()
 
 
 def cmd_export(args):
-    """Handle the 'export' command - export query data to a clean JSON."""
+    """Handle the 'export' command."""
     query_id = args.query_id
     output_file = args.output
-    include_markdown = args.include_markdown
     
     data = load_vendors_data()
     
-    # Find the query
     query_entry = None
     for key, entry in data["queries"].items():
         if entry["query_id"] == query_id or query_id.lower() in key:
@@ -745,13 +1116,11 @@ def cmd_export(args):
         print(f"❌ Query not found: {query_id}")
         sys.exit(1)
     
-    # Optionally strip markdown to reduce file size
-    if not include_markdown:
-        for vendor in query_entry.get("vendors", []):
-            if vendor.get("crawled_data"):
-                vendor["crawled_data"]["markdown"] = "[STRIPPED - use --include-markdown to include]"
+    # Optionally strip raw discovery response to reduce size
+    if not args.include_raw:
+        if "discovery" in query_entry and "raw_response" in query_entry["discovery"]:
+            query_entry["discovery"]["raw_response"] = "[STRIPPED - use --include-raw to include]"
     
-    # Write to file
     output_path = Path(output_file)
     with open(output_path, 'w') as f:
         json.dump(query_entry, f, indent=2, ensure_ascii=False)
@@ -759,51 +1128,67 @@ def cmd_export(args):
     print(f"✓ Exported to {output_path}")
 
 
+# =============================================================================
+# MAIN
+# =============================================================================
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Vendor Research Pipeline CLI",
+        description="Vendor Research Pipeline CLI - V2",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python pipeline.py research "TSA 3P IRR Neutralizers"
-  python pipeline.py research "FBS"
-  python pipeline.py crawl "tsa-3p-irr-neutralizers"
-  python pipeline.py crawl "tsa-3p-irr-neutralizers" --vendor-id 1
-  python pipeline.py query "tsa-3p-irr-neutralizers" --vendor-id 1 "What is the price?"
-  python pipeline.py list
-  python pipeline.py show "tsa-3p-irr-neutralizers"
-  python pipeline.py export "tsa-3p-irr-neutralizers" -o output.json
+  python pipeline.py research "Your Product Query Here"    # Full pipeline
+  python pipeline.py discover "Another Product"            # Discovery only (no extraction)
+  python pipeline.py extract "your-product-query-here"     # Extract specs for all vendors
+  python pipeline.py extract "your-product-query-here" --vendor-id 1  # Extract for one vendor
+  python pipeline.py fetch-spec "query-id" --vendor-id 1 --spec "price"  # Fetch single spec
+  python pipeline.py list                                  # List all saved queries
+  python pipeline.py show "query-id"                       # Show details for a query
+  python pipeline.py export "query-id" -o output.json      # Export to JSON
         """
     )
     
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
     
-    # Research command
-    research_parser = subparsers.add_parser("research", help="Run deep research on a product query")
+    # Research command (full pipeline)
+    research_parser = subparsers.add_parser(
+        "research", 
+        help="Run full pipeline: discover vendors + extract specs"
+    )
     research_parser.add_argument("query", help="The product search query")
     research_parser.set_defaults(func=cmd_research)
     
-    # Crawl command
-    crawl_parser = subparsers.add_parser("crawl", help="Crawl product URLs for a query")
-    crawl_parser.add_argument("query_id", help="The query ID to crawl vendors for")
-    crawl_parser.add_argument(
+    # Discover command (phases 1-3 only)
+    discover_parser = subparsers.add_parser(
+        "discover",
+        help="Discover vendors only (skip spec extraction)"
+    )
+    discover_parser.add_argument("query", help="The product search query")
+    discover_parser.set_defaults(func=cmd_discover)
+    
+    # Extract command
+    extract_parser = subparsers.add_parser(
+        "extract",
+        help="Extract specs for an existing query"
+    )
+    extract_parser.add_argument("query_id", help="The query ID to extract specs for")
+    extract_parser.add_argument(
         "--vendor-id", 
         type=int,
-        help="Specific vendor ID to crawl (optional, crawls all if not specified)"
+        help="Specific vendor ID (optional, extracts all if not specified)"
     )
-    crawl_parser.set_defaults(func=cmd_crawl)
+    extract_parser.set_defaults(func=cmd_extract)
     
-    # Query command
-    query_parser = subparsers.add_parser("query", help="Query crawled data using LLM")
-    query_parser.add_argument("query_id", help="The query ID")
-    query_parser.add_argument("--vendor-id", type=int, required=True, help="Vendor ID to query")
-    query_parser.add_argument("question", help="The question to ask about the crawled data")
-    query_parser.add_argument(
-        "--save", 
-        action="store_true",
-        help="Save the answer to the vendor's extracted_info"
+    # Fetch-spec command (single spec on-demand)
+    fetch_parser = subparsers.add_parser(
+        "fetch-spec",
+        help="Fetch a single spec on-demand"
     )
-    query_parser.set_defaults(func=cmd_query)
+    fetch_parser.add_argument("query_id", help="The query ID")
+    fetch_parser.add_argument("--vendor-id", type=int, required=True, help="Vendor ID")
+    fetch_parser.add_argument("--spec", required=True, help="Spec key to fetch")
+    fetch_parser.set_defaults(func=cmd_fetch_spec)
     
     # List command
     list_parser = subparsers.add_parser("list", help="List all saved queries")
@@ -815,13 +1200,13 @@ Examples:
     show_parser.set_defaults(func=cmd_show)
     
     # Export command
-    export_parser = subparsers.add_parser("export", help="Export query data to JSON file")
+    export_parser = subparsers.add_parser("export", help="Export query data to JSON")
     export_parser.add_argument("query_id", help="The query ID to export")
-    export_parser.add_argument("-o", "--output", default="export.json", help="Output file path")
+    export_parser.add_argument("-o", "--output", default="export.json", help="Output file")
     export_parser.add_argument(
-        "--include-markdown",
+        "--include-raw",
         action="store_true",
-        help="Include full crawled markdown (can be large)"
+        help="Include raw discovery response (can be large)"
     )
     export_parser.set_defaults(func=cmd_export)
     
@@ -836,4 +1221,3 @@ Examples:
 
 if __name__ == "__main__":
     main()
-

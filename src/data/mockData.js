@@ -365,39 +365,63 @@ export const dashboardStats = {
   ]
 }
 
+// Helper to clean URL citations from values
+function cleanUrlCitations(value) {
+  if (typeof value !== 'string') return value
+  // Remove inline URL citations like "value [https://url.com]"
+  let cleaned = value.replace(/\s*\[https?:\/\/[^\]]+\]\s*$/i, '').trim()
+  // Also remove markdown-style links like ([text](url))
+  cleaned = cleaned.replace(/\s*\(\[.*?\]\(https?:\/\/[^)]+\)\)\s*$/i, '').trim()
+  return cleaned || value
+}
+
+// Helper to extract spec value from nested specs object
+function getSpecValue(vendor, specKey) {
+  const specs = vendor.specs || {}
+  if (specs[specKey] && typeof specs[specKey] === 'object') {
+    return cleanUrlCitations(specs[specKey].value)
+  }
+  // Fallback to direct property (old format)
+  return cleanUrlCitations(vendor[specKey])
+}
+
 // Helper to convert API vendor data to frontend format with mock data for missing fields
 function transformApiVendor(vendor, index) {
-  // Use raw price string from JSON - clean URL citations if present
+  // Extract price from nested specs or direct field
   let priceDisplay = 'NA'
-  if (vendor.price && vendor.price !== 'NA') {
-    // Remove inline URL citations like "value [https://url.com]"
-    priceDisplay = vendor.price.replace(/\s*\[https?:\/\/[^\]]+\]\s*$/i, '').trim()
+  const priceValue = getSpecValue(vendor, 'price')
+  if (priceValue && priceValue !== 'NA') {
+    priceDisplay = priceValue
   }
   
-  // Parse certifications - show NA if not present
+  // Parse certifications from nested specs or direct field
   let certifications = []
-  if (vendor.certifications && Array.isArray(vendor.certifications)) {
-    // Handle certifications that might have inline URLs like "USP, EP [url]"
-    certifications = vendor.certifications.map(cert => {
-      if (typeof cert === 'string') {
-        return cert.replace(/\s*\[.*?\]\s*$/, '').trim()
-      }
-      return cert
-    })
-  } else if (typeof vendor.certifications === 'string' && vendor.certifications !== 'NA') {
-    // Handle string certifications with possible inline URL
-    const certStr = vendor.certifications.replace(/\s*\[.*?\]\s*$/, '')
-    certifications = certStr.split(',').map(c => c.trim()).filter(Boolean)
-  } else if (vendor.quality_certifications && vendor.quality_certifications !== 'NA') {
-    certifications = vendor.quality_certifications.split(',').map(c => c.trim())
+  const certValue = getSpecValue(vendor, 'certifications')
+  if (certValue && certValue !== 'NA') {
+    if (Array.isArray(certValue)) {
+      certifications = certValue.map(c => cleanUrlCitations(c))
+    } else if (typeof certValue === 'string') {
+      // Split by comma and clean
+      certifications = certValue.split(',').map(c => cleanUrlCitations(c.trim())).filter(Boolean)
+    }
   }
 
-  // Use suitability_score from backend if available, otherwise fallback
-  const suitabilityScore = vendor.suitability_score ?? (95 - (index * 3))
+  // Use suitability_score from backend, recommendation_score (0-1) converted, or fallback
+  let suitabilityScore = 95 - (index * 3)
+  if (vendor.suitability_score !== undefined) {
+    suitabilityScore = vendor.suitability_score
+  } else if (vendor.recommendation_score !== undefined) {
+    suitabilityScore = Math.round(vendor.recommendation_score * 100)
+  }
 
-  // Fixed fields that we handle specifically
+  // Use manufacturer_country or region
+  const region = vendor.manufacturer_country || vendor.region || 'NA'
+
+  // Fixed fields that we handle specifically (don't copy as dynamic attributes)
   const fixedFields = [
-    'id', 'vendor_name', 'region', 'product_description', 'product_url',
+    'id', 'vendor_name', 'product_name', 'product_description', 'product_url',
+    'discovery_confidence', 'recommendation_score', 'discovery_concerns',
+    'specs_availability', 'specs', 'manufacturer_country', 'region',
     'availability_status', 'certifications', 'price', 'source_urls',
     'crawled_data', 'crawled_at', 'extracted_info', 'suitability_score'
   ]
@@ -406,6 +430,7 @@ function transformApiVendor(vendor, index) {
   const transformedVendor = {
     id: vendor.id || index + 1,
     name: vendor.vendor_name,
+    productName: vendor.product_name || '', // New field
     source: 'EXT', // External vendors from deep research
     isCurrentPartner: false,
     isPreferred: index === 0, // First vendor as preferred (after sorting by score)
@@ -414,10 +439,14 @@ function transformApiVendor(vendor, index) {
     unitPriceDisplay: priceDisplay, // Raw price string from JSON
     totalEstCost: null, // Cannot calculate without parsed unit price
     availableQty: null, // NA - not in API data
-    region: vendor.region || 'NA',
-    leadTime: 'NA', // Not available from deep research
+    region: region,
+    leadTime: getSpecValue(vendor, 'lead_time') || 'NA',
     suitabilityScore: suitabilityScore, // Score from backend scoring module
     certifications: certifications,
+    // Extract common spec values for detail views
+    shelfLife: getSpecValue(vendor, 'shelf_life') || 'NA',
+    packaging: getSpecValue(vendor, 'plate_format') || getSpecValue(vendor, 'pack_size') || 'NA',
+    storage: getSpecValue(vendor, 'storage_condition') || 'NA',
     internalHistory: null,
     riskAssessment: null, // NA - no internal risk data for external vendors
     website: vendor.product_url || '',
@@ -427,18 +456,27 @@ function transformApiVendor(vendor, index) {
     _apiData: vendor
   }
 
-  // Copy all dynamic attributes from the API response (these are SKU-specific comparison attributes)
-  // They will be displayed dynamically in the vendor card
+  // Extract all spec values as flat attributes for dynamic display
+  if (vendor.specs && typeof vendor.specs === 'object') {
+    Object.entries(vendor.specs).forEach(([key, specObj]) => {
+      // Skip if already handled in fixed fields
+      if (['price', 'certifications'].includes(key)) return
+      
+      if (specObj && typeof specObj === 'object' && specObj.value !== undefined) {
+        const cleanedValue = cleanUrlCitations(specObj.value)
+        if (cleanedValue && cleanedValue !== 'NA') {
+          transformedVendor[key] = cleanedValue
+        }
+      }
+    })
+  }
+
+  // Copy any other dynamic attributes from the API response (old format compatibility)
   Object.entries(vendor).forEach(([key, value]) => {
-    if (!fixedFields.includes(key) && value !== null && value !== undefined) {
-      // Clean up values that have inline URL citations like "value [url]"
+    if (!fixedFields.includes(key) && !transformedVendor.hasOwnProperty(key) && value !== null && value !== undefined) {
       if (typeof value === 'string') {
-        // Extract just the value, removing the [url] citation
-        const cleanValue = value.replace(/\s*\[https?:\/\/[^\]]+\]\s*$/i, '').trim()
-        // Also remove markdown-style links like ([text](url))
-        const finalValue = cleanValue.replace(/\s*\(\[.*?\]\(https?:\/\/[^)]+\)\)\s*$/i, '').trim()
-        transformedVendor[key] = finalValue || value
-      } else {
+        transformedVendor[key] = cleanUrlCitations(value)
+      } else if (typeof value !== 'object') {
         transformedVendor[key] = value
       }
     }
