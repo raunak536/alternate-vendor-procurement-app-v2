@@ -396,6 +396,46 @@
   gap: 1.5rem;
 }
 
+/* Product Info Header */
+.product-info-header {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-info-header .product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.product-info-header .product-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.product-info-header .product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0a5a8a;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.product-info-header .product-link:hover {
+  color: #074b73;
+  text-decoration: underline;
+}
+
 .specs-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -404,8 +444,8 @@
 }
 
 .specs-layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
 }
 
@@ -416,27 +456,51 @@
   padding: 1.5rem;
 }
 
+.specs-card.api-specs {
+  border-color: #d1e7dd;
+  background: linear-gradient(to bottom, #fff 0%, #f8fdf9 100%);
+}
+
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
+.specs-grid.dynamic-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .specs-grid.dynamic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .spec-item {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #f5f5f5;
+  padding: 1rem;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
 }
 
-.spec-item:nth-last-child(-n+2) {
-  border-bottom: none;
-  padding-bottom: 0;
+.spec-item:hover {
+  border-color: #e0e0e0;
+  background: #f5f5f5;
 }
 
 .spec-item.full-width {
   grid-column: 1 / -1;
+}
+
+.spec-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .spec-label {
@@ -447,10 +511,88 @@
   text-transform: uppercase;
 }
 
+.confidence-badge {
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 .spec-value {
   font-size: 0.95rem;
   font-weight: 500;
   color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.spec-source {
+  font-size: 0.7rem;
+  color: #aaa;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+/* Unavailable Specs Card */
+.unavailable-specs-card {
+  background: #fff;
+  border: 1px solid #fce8e8;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.unavailable-specs-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b45309;
+  margin-bottom: 0.5rem;
+}
+
+.unavailable-specs-card h4 svg {
+  color: #d97706;
+}
+
+.unavailable-note {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+}
+
+.unavailable-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.unavailable-item {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #78716c;
+  background: #fef3c7;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* Data Source Info */
+.data-source-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #999;
+  padding: 0.75rem 1rem;
+  background: #fafafa;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+.data-source-info svg {
+  color: #bbb;
 }
 
 /* Availability Card */
@@ -650,6 +792,10 @@
     grid-template-columns: 1fr;
   }
   
+  .specs-grid.dynamic-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .history-cards {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -692,8 +838,22 @@
     grid-template-columns: 1fr;
   }
   
+  .specs-grid.dynamic-grid {
+    grid-template-columns: 1fr;
+  }
+  
   .history-cards {
     grid-template-columns: 1fr;
+  }
+  
+  .product-info-header {
+    padding: 1rem;
+  }
+  
+  .spec-label-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 }
 

@@ -343,80 +343,208 @@ function CompanyInfoTab({ vendor, apiData, displayValue }) {
 }
 
 function ProductSpecsTab({ vendor, apiData, displayValue, formatCurrency }) {
-  // Parse CAS number from API data or use default
-  const casNumber = apiData.cas_number || '61336-70-7'
+  // Get specs from API data
+  const specs = apiData.specs || {}
+  const specsAvailability = apiData.specs_availability || {}
+  
+  // Display name mapping for spec keys
+  const specDisplayNames = {
+    price: 'Price',
+    storage_condition: 'Storage Condition',
+    shelf_life: 'Shelf Life',
+    certifications: 'Certifications',
+    pack_size: 'Pack Size',
+    catalog_number: 'Catalog Number',
+    manufacturer: 'Manufacturer',
+    lead_time: 'Lead Time',
+    irradiation_status: 'Irradiation/Sterility',
+    neutralizers_composition: 'Neutralizers Composition',
+    plate_format: 'Plate Format/Packaging',
+    documentation: 'Documentation/COA',
+    detection_method: 'Detection Method',
+    sensitivity: 'Sensitivity (LOD)',
+    assay_time: 'Assay Time',
+    instrument_compatibility: 'Instrument Compatibility',
+    assay_format: 'Assay Format',
+    sample_type_compatibility: 'Sample Type Compatibility'
+  }
+  
+  // Format spec key to display name
+  const formatSpecKey = (key) => {
+    if (specDisplayNames[key]) return specDisplayNames[key]
+    // Convert snake_case to Title Case
+    return key.split('_').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ')
+  }
+  
+  // Get confidence badge style
+  const getConfidenceBadge = (confidence) => {
+    const styles = {
+      high: { background: '#dcfce7', color: '#166534', label: 'High' },
+      medium: { background: '#fef9c3', color: '#854d0e', label: 'Medium' },
+      low: { background: '#fee2e2', color: '#991b1b', label: 'Low' }
+    }
+    return styles[confidence] || styles.medium
+  }
+  
+  // Check if we have any real specs from API
+  const hasApiSpecs = Object.keys(specs).length > 0
+  
+  // Get unavailable specs
+  const unavailableSpecs = specsAvailability.unavailable || []
   
   return (
     <div className="product-specs-tab">
+      {/* Product Info Header */}
+      {apiData.product_name && (
+        <div className="product-info-header">
+          <h3 className="product-name">{apiData.product_name}</h3>
+          {apiData.product_description && (
+            <p className="product-description">{apiData.product_description}</p>
+          )}
+          {apiData.product_url && (
+            <a href={apiData.product_url} target="_blank" rel="noopener noreferrer" className="product-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              View Product Page
+            </a>
+          )}
+        </div>
+      )}
+      
       <h3 className="specs-title">Technical Specifications</h3>
       
-      <div className="specs-layout">
-        {/* Main Specs Card */}
-        <div className="specs-card">
-          <div className="specs-grid">
-            <div className="spec-item">
-              <span className="spec-label">PRICE</span>
-              <span className="spec-value">
-                {vendor.unitPriceDisplay || 'NA'}
-              </span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">CAS NUMBER</span>
-              <span className="spec-value">{casNumber}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">SHELF LIFE</span>
-              <span className="spec-value">{displayValue(vendor.shelfLife)}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">PACKAGING</span>
-              <span className="spec-value">{displayValue(vendor.packaging)}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">PACK COUNT</span>
-              <span className="spec-value">
-                {vendor.packaging?.match(/\d+\/pack/) ? vendor.packaging.match(/(\d+)\/pack/)[1] + '/pack' : '25/pack'}
-              </span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">STORAGE CONDITION</span>
-              <span className="spec-value">{displayValue(vendor.storage)}</span>
-            </div>
-            <div className="spec-item full-width">
-              <span className="spec-label">LOCKING MECHANISM</span>
-              <span className="spec-value">
-                {vendor.locking && vendor.locking !== 'NA' ? `LockSure single lock system` : 'Standard'}
-              </span>
+      {hasApiSpecs ? (
+        <div className="specs-layout">
+          {/* Main Specs Card - API Data */}
+          <div className="specs-card api-specs">
+            <div className="specs-grid dynamic-grid">
+              {Object.entries(specs).map(([key, specData]) => {
+                if (!specData || typeof specData !== 'object') return null
+                const value = specData.value
+                const confidence = specData.confidence
+                const confidenceStyle = getConfidenceBadge(confidence)
+                
+                return (
+                  <div key={key} className="spec-item">
+                    <div className="spec-label-row">
+                      <span className="spec-label">{formatSpecKey(key).toUpperCase()}</span>
+                      {confidence && (
+                        <span 
+                          className="confidence-badge"
+                          style={{ 
+                            background: confidenceStyle.background, 
+                            color: confidenceStyle.color 
+                          }}
+                        >
+                          {confidenceStyle.label}
+                        </span>
+                      )}
+                    </div>
+                    <span className="spec-value">{value || 'NA'}</span>
+                    {specData.original_label && specData.original_label !== key && (
+                      <span className="spec-source">Source: {specData.original_label}</span>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
-        </div>
 
-        {/* Availability Card */}
-        <div className="availability-card">
-          <h4>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            </svg>
-            AVAILABILITY
-          </h4>
-          <div className="availability-items">
-            <div className="availability-item">
-              <span className="avail-label">In Stock:</span>
-              <span className="avail-value">
-                {vendor.availableQty ? vendor.availableQty.toLocaleString() + ' plates' : '50,000 plates'}
-              </span>
+          {/* Unavailable Specs Card */}
+          {unavailableSpecs.length > 0 && (
+            <div className="unavailable-specs-card">
+              <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                Unavailable Specifications
+              </h4>
+              <p className="unavailable-note">The following specifications were not available from the vendor's product page:</p>
+              <div className="unavailable-list">
+                {unavailableSpecs.map(specKey => (
+                  <span key={specKey} className="unavailable-item">
+                    {formatSpecKey(specKey)}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="availability-item">
-              <span className="avail-label">Min Order:</span>
-              <span className="avail-value">100 units</span>
+          )}
+          
+          {/* Data Source Info */}
+          {specsAvailability.checked_at && (
+            <div className="data-source-info">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              <span>Specifications extracted on {new Date(specsAvailability.checked_at).toLocaleString()}</span>
             </div>
-            <div className="availability-item">
-              <span className="avail-label">Lead Time:</span>
-              <span className="avail-value">{displayValue(vendor.leadTime) || '2 Weeks'}</span>
+          )}
+        </div>
+      ) : (
+        /* Fallback to basic vendor data if no API specs */
+        <div className="specs-layout">
+          <div className="specs-card">
+            <div className="specs-grid">
+              <div className="spec-item">
+                <span className="spec-label">PRICE</span>
+                <span className="spec-value">
+                  {vendor.unitPriceDisplay || 'NA'}
+                </span>
+              </div>
+              <div className="spec-item">
+                <span className="spec-label">SHELF LIFE</span>
+                <span className="spec-value">{displayValue(vendor.shelfLife)}</span>
+              </div>
+              <div className="spec-item">
+                <span className="spec-label">PACKAGING</span>
+                <span className="spec-value">{displayValue(vendor.packaging)}</span>
+              </div>
+              <div className="spec-item">
+                <span className="spec-label">STORAGE CONDITION</span>
+                <span className="spec-value">{displayValue(vendor.storage)}</span>
+              </div>
+              <div className="spec-item">
+                <span className="spec-label">LEAD TIME</span>
+                <span className="spec-value">{displayValue(vendor.leadTime)}</span>
+              </div>
+              <div className="spec-item">
+                <span className="spec-label">REGION</span>
+                <span className="spec-value">{displayValue(vendor.region)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Availability Card for fallback */}
+          <div className="availability-card">
+            <h4>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              </svg>
+              AVAILABILITY
+            </h4>
+            <div className="availability-items">
+              <div className="availability-item">
+                <span className="avail-label">In Stock:</span>
+                <span className="avail-value">
+                  {vendor.availableQty ? vendor.availableQty.toLocaleString() + ' units' : 'NA'}
+                </span>
+              </div>
+              <div className="availability-item">
+                <span className="avail-label">Lead Time:</span>
+                <span className="avail-value">{displayValue(vendor.leadTime) || 'NA'}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
