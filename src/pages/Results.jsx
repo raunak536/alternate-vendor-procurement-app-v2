@@ -464,7 +464,7 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
               {vendor.isFastest && <span className="tag-badge fastest">Fastest</span>}
               {vendor.isManufacturerDirect !== undefined && (
                 <span className={`tag-badge ${vendor.isManufacturerDirect ? 'manufacturer' : 'reseller'}`}>
-                  {vendor.isManufacturerDirect ? 'OEM' : 'Distributor'}
+                  {vendor.isManufacturerDirect ? 'Manufacturer' : 'Distributor'}
                 </span>
               )}
             </div>
