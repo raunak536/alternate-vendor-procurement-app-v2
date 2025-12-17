@@ -899,7 +899,7 @@
       "vendors": [
         {
           "id": 1,
-          "vendor_name": "Thermo Fisher Scientific (Applied Biosystems)",
+          "vendor_name": "Thermo Fisher Scientific",
           "product_name": "resDNASEQ™ Quantitative E. coli DNA Kit (Assay Kit only, Cat# 4458435)",
           "product_url": "https://www.thermofisher.com/order/catalog/product/hk/zt/4458435",
           "product_description": "A qPCR-based TaqMan assay kit for highly sensitive quantitation of E. coli host cell DNA in biopharmaceutical samples.",
@@ -963,7 +963,7 @@
               "model": "gpt-4o"
             },
             "manufacturer": {
-              "value": "Applied Biosystems (Thermo Fisher Scientific)",
+              "value": "Applied Biosystems",
               "original_label": "Applied Biosystems™ (brand on page)",
               "confidence": "high",
               "extracted_at": "2025-12-09 02:14:43",

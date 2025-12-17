@@ -375,6 +375,59 @@ function cleanUrlCitations(value) {
   return cleaned || value
 }
 
+// Simple fuzzy matching function to compare vendor name with manufacturer name
+// Returns a score from 0 to 1 (1 = exact match)
+function fuzzyMatch(str1, str2) {
+  if (!str1 || !str2) return 0
+  
+  // Normalize strings: lowercase, remove special chars, trim
+  const normalize = (s) => s.toLowerCase()
+    .replace(/[^\w\s]/g, ' ')  // Replace special chars with spaces
+    .replace(/\s+/g, ' ')       // Collapse multiple spaces
+    .trim()
+  
+  const norm1 = normalize(str1)
+  const norm2 = normalize(str2)
+  
+  // Exact match after normalization
+  if (norm1 === norm2) return 1
+  
+  // Check if one contains the other (for cases like "Merck" vs "Merck Millipore")
+  if (norm1.includes(norm2) || norm2.includes(norm1)) return 0.9
+  
+  // Extract key words (ignoring common terms)
+  const commonTerms = ['ltd', 'inc', 'corp', 'co', 'company', 'llc', 'gmbh', 'ag', 'sa', 'part', 'of', 'the', 'and']
+  const extractKeyWords = (s) => s.split(' ').filter(w => w.length > 2 && !commonTerms.includes(w))
+  
+  const words1 = extractKeyWords(norm1)
+  const words2 = extractKeyWords(norm2)
+  
+  if (words1.length === 0 || words2.length === 0) return 0
+  
+  // Count matching words
+  let matchCount = 0
+  for (const w1 of words1) {
+    for (const w2 of words2) {
+      // Check word match or partial match (for abbreviations like SGL)
+      if (w1 === w2 || w1.includes(w2) || w2.includes(w1)) {
+        matchCount++
+        break
+      }
+    }
+  }
+  
+  // Calculate score based on proportion of matching words
+  const maxWords = Math.max(words1.length, words2.length)
+  return matchCount / maxWords
+}
+
+// Determine if vendor is the manufacturer or a reseller based on fuzzy name match
+function isManufacturerDirect(vendorName, manufacturerName) {
+  const score = fuzzyMatch(vendorName, manufacturerName)
+  // Score >= 0.5 means likely the same entity (manufacturer selling direct)
+  return score >= 0.5
+}
+
 // Helper to extract spec value from nested specs object
 function getSpecValue(vendor, specKey) {
   const specs = vendor.specs || {}
@@ -417,13 +470,18 @@ function transformApiVendor(vendor, index) {
   // Use manufacturer_country or region
   const region = vendor.manufacturer_country || vendor.region || 'NA'
 
+  // Determine if vendor is the manufacturer or a reseller
+  const manufacturerName = getSpecValue(vendor, 'manufacturer') || ''
+  const isManufacturer = isManufacturerDirect(vendor.vendor_name, manufacturerName)
+
   // Fixed fields that we handle specifically (don't copy as dynamic attributes)
   const fixedFields = [
     'id', 'vendor_name', 'product_name', 'product_description', 'product_url',
     'discovery_confidence', 'recommendation_score', 'discovery_concerns',
     'specs_availability', 'specs', 'manufacturer_country', 'region',
     'availability_status', 'certifications', 'price', 'source_urls',
-    'crawled_data', 'crawled_at', 'extracted_info', 'suitability_score'
+    'crawled_data', 'crawled_at', 'extracted_info', 'suitability_score',
+    'manufacturer', 'isManufacturerDirect', 'manufacturerName'
   ]
 
   // Build base vendor object
@@ -435,6 +493,8 @@ function transformApiVendor(vendor, index) {
     isCurrentPartner: false,
     isPreferred: index === 0, // First vendor as preferred (after sorting by score)
     isBestValue: false, // Cannot determine without parsing price
+    isManufacturerDirect: isManufacturer, // Whether vendor is the manufacturer or a reseller
+    manufacturerName: manufacturerName || null, // Store manufacturer name for reference
     unitPrice: null, // Not parsed for API vendors - use raw price string instead
     unitPriceDisplay: priceDisplay, // Raw price string from JSON
     totalEstCost: null, // Cannot calculate without parsed unit price

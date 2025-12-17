@@ -112,7 +112,7 @@ function Results() {
     'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
     'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
     'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls',
-    'shelfLife', 'packaging', 'storage', 'locking'
+    'shelfLife', 'packaging', 'storage', 'locking', 'isManufacturerDirect', 'manufacturerName'
   ]
 
   // Get union of all dynamic attribute keys from all vendors
@@ -462,6 +462,11 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
               {vendor.isPreferred && <span className="tag-badge preferred">Preferred</span>}
               {vendor.isBestValue && <span className="tag-badge best-value">Best Value</span>}
               {vendor.isFastest && <span className="tag-badge fastest">Fastest</span>}
+              {vendor.isManufacturerDirect !== undefined && (
+                <span className={`tag-badge ${vendor.isManufacturerDirect ? 'manufacturer' : 'reseller'}`}>
+                  {vendor.isManufacturerDirect ? 'OEM' : 'Distributor'}
+                </span>
+              )}
             </div>
           </div>
           <div className="vendor-score">

@@ -521,6 +521,18 @@
   border-color: #fde68a;
 }
 
+.tag-badge.manufacturer {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-color: #c7d2fe;
+}
+
+.tag-badge.reseller {
+  background: #fdf4ff;
+  color: #86198f;
+  border-color: #f5d0fe;
+}
+
 .vendor-score {
   text-align: right;
 }
