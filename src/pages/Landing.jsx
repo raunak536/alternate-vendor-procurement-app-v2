@@ -99,6 +99,12 @@ function Landing() {
                     <div className="suggestion-name">{item.name}</div>
                     <div className="suggestion-meta">
                       <span className="suggestion-category">{item.category}</span>
+                      {item.versionsCount > 1 && (
+                        <span className="suggestion-version">v{item.currentVersion} ({item.versionsCount} versions)</span>
+                      )}
+                      {item.lastUpdated && (
+                        <span className="suggestion-date">{new Date(item.lastUpdated).toLocaleDateString()}</span>
+                      )}
                     </div>
                   </div>
                 ))}

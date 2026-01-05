@@ -61,6 +61,34 @@ def load_vendor_data():
             return json.load(f)
     return {"queries": {}}
 
+
+def get_query_version(query_data, version=None):
+    """
+    Get a specific version of a query, or the current version.
+    Handles both old format (direct data) and new format (versions array).
+    """
+    versions = query_data.get("versions", [])
+    
+    if not versions:
+        # Old format - return as-is
+        return query_data
+    
+    if version:
+        # Get specific version
+        for v in versions:
+            if v.get("version") == version:
+                return v
+        return None
+    
+    # Get current version
+    current_ver = query_data.get("current_version", 1)
+    for v in versions:
+        if v.get("version") == current_ver:
+            return v
+    
+    # Fallback to latest
+    return versions[-1] if versions else None
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -82,10 +110,22 @@ def get_skus(q: str = ""):
     # Build list of all SKUs with their query keys
     all_skus = []
     for query_key, query_data in queries.items():
+        # Get current version data
+        version_data = get_query_version(query_data)
+        if version_data:
+            vendor_count = len(version_data.get("vendors", []))
+            versions_count = len(query_data.get("versions", [])) or 1
+        else:
+            vendor_count = len(query_data.get("vendors", []))
+            versions_count = 1
+        
         all_skus.append({
             "id": query_data.get("query_id", query_key),
             "name": query_data.get("query_text", query_key),
-            "vendorCount": len(query_data.get("vendors", []))
+            "vendorCount": vendor_count,
+            "versionsCount": versions_count,
+            "currentVersion": query_data.get("current_version", 1),
+            "lastUpdated": query_data.get("last_updated", "")
         })
     
     # Filter by query if provided
@@ -94,6 +134,53 @@ def get_skus(q: str = ""):
         all_skus = [sku for sku in all_skus if q_lower in sku["name"].lower()]
     
     return {"skus": all_skus}
+
+
+@app.get("/versions/{query_id}")
+def get_versions(query_id: str):
+    """
+    Get all versions for a specific SKU query.
+    """
+    vendor_data = load_vendor_data()
+    queries = vendor_data.get("queries", {})
+    
+    # Find the query
+    query_data = None
+    for key, data in queries.items():
+        if data.get("query_id") == query_id or query_id.lower() in key:
+            query_data = data
+            break
+    
+    if not query_data:
+        return {"versions": [], "found": False}
+    
+    versions = query_data.get("versions", [])
+    
+    # Build versions list
+    versions_list = []
+    for v in versions:
+        versions_list.append({
+            "version": v.get("version", 1),
+            "date": v.get("version_date", v.get("last_updated", "")),
+            "vendorCount": len(v.get("vendors", [])),
+            "stats": v.get("pipeline_stats", {})
+        })
+    
+    # If no versions array, create single version from old format
+    if not versions_list:
+        versions_list.append({
+            "version": 1,
+            "date": query_data.get("last_updated", ""),
+            "vendorCount": len(query_data.get("vendors", [])),
+            "stats": query_data.get("pipeline_stats", {})
+        })
+    
+    return {
+        "versions": versions_list,
+        "currentVersion": query_data.get("current_version", 1),
+        "queryText": query_data.get("query_text", ""),
+        "found": True
+    }
 
 
 @app.get("/dashboard-stats")
@@ -112,7 +199,12 @@ def get_dashboard_stats():
     category_counts = {}
     
     for query_data in queries.values():
-        vendors = query_data.get("vendors", [])
+        # Get current version data
+        version_data = get_query_version(query_data)
+        if not version_data:
+            continue
+            
+        vendors = version_data.get("vendors", [])
         total_products += len(vendors)
         
         # Get category for this SKU
@@ -191,12 +283,16 @@ def get_dashboard_stats():
 
 
 @app.get("/alternate-vendors")
-def get_alternate_vendors(q: str = ""):
+def get_alternate_vendors(q: str = "", version: int = None):
     """
     Search for alternate vendors based on a product query.
     Returns vendor data from deep research results stored in JSON.
     Each vendor includes a suitability_score (0-100) calculated based on
     data completeness and quality indicators.
+    
+    Args:
+        q: Query string to search for
+        version: Specific version number to retrieve (optional, defaults to current)
     """
     if not q:
         return {"vendors": [], "query": "", "found": False}
@@ -208,31 +304,51 @@ def get_alternate_vendors(q: str = ""):
     vendor_data = load_vendor_data()
     queries = vendor_data.get("queries", {})
     
-    # Try exact match first
+    # Find matching query
+    query_data = None
     if q_normalized in queries:
         query_data = queries[q_normalized]
-        # Add suitability scores and rank vendors
-        scored_vendors = rank_vendors(query_data["vendors"])
-        return {
-            "vendors": scored_vendors,
-            "query": query_data["query_text"],
-            "query_id": query_data["query_id"],
-            "last_updated": query_data["last_updated"],
-            "found": True
+    else:
+        # Try partial match
+        for stored_query, data in queries.items():
+            if q_normalized in stored_query or stored_query in q_normalized:
+                query_data = data
+                break
+    
+    if not query_data:
+        return {"vendors": [], "query": q, "found": False}
+    
+    # Get the specific version or current version
+    version_data = get_query_version(query_data, version)
+    
+    if not version_data:
+        return {"vendors": [], "query": q, "found": False, "error": f"Version {version} not found"}
+    
+    # Add suitability scores and rank vendors
+    scored_vendors = rank_vendors(version_data.get("vendors", []))
+    
+    # Get available versions info
+    versions = query_data.get("versions", [])
+    available_versions = [
+        {
+            "version": v.get("version", 1),
+            "date": v.get("version_date", v.get("last_updated", "")),
+            "vendorCount": len(v.get("vendors", []))
         }
+        for v in versions
+    ] if versions else [{
+        "version": 1,
+        "date": query_data.get("last_updated", ""),
+        "vendorCount": len(query_data.get("vendors", []))
+    }]
     
-    # Try partial match
-    for stored_query, query_data in queries.items():
-        if q_normalized in stored_query or stored_query in q_normalized:
-            # Add suitability scores and rank vendors
-            scored_vendors = rank_vendors(query_data["vendors"])
-            return {
-                "vendors": scored_vendors,
-                "query": query_data["query_text"],
-                "query_id": query_data["query_id"],
-                "last_updated": query_data["last_updated"],
-                "found": True
-            }
-    
-    # No match found
-    return {"vendors": [], "query": q, "found": False}
+    return {
+        "vendors": scored_vendors,
+        "query": query_data.get("query_text", q),
+        "query_id": query_data.get("query_id", ""),
+        "last_updated": version_data.get("version_date", version_data.get("last_updated", "")),
+        "version": version_data.get("version", 1),
+        "currentVersion": query_data.get("current_version", 1),
+        "availableVersions": available_versions,
+        "found": True
+    }

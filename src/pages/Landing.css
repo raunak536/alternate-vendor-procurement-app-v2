@@ -133,6 +133,17 @@
   font-family: 'SF Mono', 'Monaco', monospace;
 }
 
+.suggestion-version {
+  color: #0a5a8a;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.suggestion-date {
+  color: #999;
+  font-size: 0.75rem;
+}
+
 /* Dashboard Section */
 .dashboard-section {
   margin-top: 4rem;

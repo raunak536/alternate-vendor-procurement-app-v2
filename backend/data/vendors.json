@@ -4353,6 +4353,2871 @@
           "total": 175772
         }
       }
+    },
+    "funnel, mce white 0.45m mmhawg124": {
+      "query_id": "funnel-mce-white-045m-mmhawg124",
+      "query_text": "Funnel, MCE white 0.45m MMHAWG124",
+      "enriched_query": "Seeking supplier information and detailed technical specifications for membrane filtration funnels featuring a 0.45 micron pore size mixed cellulose ester (MCE) white filter membrane, catalog number MMHAWG124. These disposable filter funnels are typically used for microbiological analysis, water testing, environmental monitoring, or biopharmaceutical quality control procedures where retention of microorganisms or particles is required. Please provide complete product information, including pricing, pack size, storage conditions, shelf life, certifications, manufacturer, and lead time, as well as technical details such as filter membrane diameter, funnel material composition, filtration volume capacity, and sterility status.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Unit Price",
+          "description": "The current unit price and minimum purchase quantity, provided in relevant currency.",
+          "look_for": [
+            "price",
+            "list price",
+            "unit price",
+            "cost",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Conditions",
+          "description": "Specified storage temperature or environmental requirements for product preservation.",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Manufacturer-guaranteed product stability and expiration period.",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications & Compliance",
+          "description": "Relevant quality, safety, and regulatory certifications for the product.",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Number of funnels or filters supplied per package or kit.",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number (SKU)",
+          "description": "Supplier- or manufacturer-specific product identification code.",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer/Brand",
+          "description": "Company or brand responsible for producing or distributing the product.",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Estimated delivery time or product availability information.",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "pore_size",
+          "display_name": "Membrane Pore Size",
+          "description": "Nominal pore size of the membrane filter, critical for retention of particles/microorganisms.",
+          "look_for": [
+            "pore size",
+            "micron",
+            "μm",
+            "filter cut-off",
+            "nominal retention"
+          ]
+        },
+        {
+          "key": "membrane_material",
+          "display_name": "Membrane Material",
+          "description": "Type of filter membrane material (e.g., mixed cellulose ester, MCE) influencing compatibility and performance.",
+          "look_for": [
+            "membrane material",
+            "filter material",
+            "composition",
+            "MCE",
+            "cellulose",
+            "polyethersulfone",
+            "PES",
+            "nylon",
+            "PTFE"
+          ]
+        },
+        {
+          "key": "funnel_capacity",
+          "display_name": "Funnel Volume Capacity",
+          "description": "Maximum liquid volume the funnel can accommodate per filtration.",
+          "look_for": [
+            "capacity",
+            "funnel volume",
+            "filter volume",
+            "max volume",
+            "mL",
+            "milliliter"
+          ]
+        },
+        {
+          "key": "sterility",
+          "display_name": "Sterility Status",
+          "description": "Indicates whether the funnels are sterile or non-sterile, important for microbiology applications.",
+          "look_for": [
+            "sterile",
+            "sterility",
+            "non-sterile",
+            "pre-sterilized",
+            "autoclaved"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2026-01-05 13:25:44",
+        "time_taken_seconds": 155.33,
+        "tokens_used": {
+          "input": 38949,
+          "output": 8435,
+          "total": 47384
+        },
+        "raw_response": "**MilliporeSigma (Merck) – Milliflex Oasis® Filtration Unit (MMHAWG124)** (Sigma-Aldrich product page): Milliflex Oasis 100 mL sterile filtration funnels with 0.45 µm white MCE membrane (styrene-butadiene funnel). Meets all specs (0.45 µm MCE, 100 mL) with sterile E-beam packaging; sold in packs of 24. [Product Page](https://www.sigmaaldrich.com/IN/en/product/mm/mmhawg124)  \n*Confidence:* High. *Score:* 1.0. *Reason:* Exact product match from manufacturer; full specs and pack size confirmed. *Concerns:* None (active product).  \n\n**Cytiva (GE Life Sciences) – MicroFunnel™ Filter Funnel with GN-6 (MCE) Membrane** (Fisher Sci UK): Disposable sterile filter funnels (100 mL) with GN-6 Metricel mixed cellulose ester membrane, 0.45 µm, white gridded. Click-fit design, sterile, pack of 200 (individually packaged). [Product Page](https://www.fishersci.co.uk/shop/products/microfunnel-st-filters-funnel-gn-6-membrane-2/17164411)  \n*Confidence:* High. *Score:* 0.9. *Reason:* Closely equivalent spec (0.45 µm MCE, 100 mL, sterile) from a major lab supplier. *Concerns:* Supplied in larger 200-pk (vs 24), grid line color difference (black vs white), but functionally identical.  \n\n**Sartorius – Microsart® @filter 100** (Sartorius shop): Ready-to-use sterile 100 mL funnel units with gridded mixed cellulose membrane (white filter, black grid), 0.45 µm pores. (Catalog e.g. SKU 16D01‐10‐06‐TG, 24/pk) [Product Page](https://shop.sartorius.com/ww/p/microsart-filter-100-cn-whiteblack-045-m/16D01--10-06--TG)  \n*Confidence:* Medium. *Score:* 0.8. *Reason:* Matches pore size, volume and use (microbiological QC) from a reputable brand. *Concerns:* Filter material listed as cellulose nitrate (CN) rather than explicitly “MCE”, though CN is a form of mixed cellulose ester.  \n\n**Westlab (Avantor) – Disposable Vacuum Filter Funnel, MCE membrane, 100 ml, 47 mm, 0.45 µm, Sterile**: Pack of 50 sterile funnels with 0.45 µm white mixed cellulose ester membrane and built-in 100 ml funnel (vacuum filtration style). [Product Page](https://www.westlab.com/disposable-vacuum-filter-funnel-mce-membrane-100ml-47mm-0-45um-sterile)  \n*Confidence:* High. *Score:* 0.9. *Reason:* Exact nominal specs (0.45 µm MCE, 100 mL, 47 mm) and sterile status clearly match. *Concerns:* Generic branding (Westlab); verify regulatory/certification as needed.  \n\n**Sterlitech – Disposable Filter Funnel, Sterile, 100 ml, Gridded, 0.45 µm, White (50/pk)**: Sterile disposable filter funnels (100 mL) with white gridded 0.45 µm MCE membrane, sold 50 per pack. [Product Page](https://www.sterlitech.com/microbiological-filter-funnel-af045w50.html) (Sterlitech listing)  \n*Confidence:* High. *Score:* 0.9. *Reason:* Matches all critical attributes (0.45 µm MCE, sterile, 100 ml) in a commercial lab supply context. *Concerns:* Use alternative vendor for Moist Markets; check pack count differences.  \n\nEach listed vendor offers a close or exact equivalent to catalog MMHAWG124. All meet the key specs (0.45 µm MCE membrane, 100 mL funnel), sterility, and are for microbiological use. Packaging and grid colors may vary, but these are functionally equivalent products from reputable suppliers."
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "MilliporeSigma (Sigma-Aldrich)",
+          "product_name": "Milliflex Oasis® Filtration Unit (MMHAWG124)",
+          "product_url": "https://www.sigmaaldrich.com/IN/en/product/mm/mmhawg124",
+          "product_description": "Milliflex Oasis 100 mL sterile filtration funnels with 0.45 µm white MCE membrane.",
+          "discovery_confidence": "high",
+          "recommendation_score": 1.0,
+          "recommendation_reason": "Exact product match from manufacturer; full specs and pack size confirmed.",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:26:10",
+            "available": [
+              "price",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "pore_size",
+              "membrane_material",
+              "funnel_capacity",
+              "sterility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$199.00 for 24 unit pack",
+              "original_label": "24 UNIT $199.00",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "EP, USP, JP",
+              "original_label": "agency",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "pack of 24",
+              "original_label": "packaging",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "MMHAWG124",
+              "original_label": "MMHAWG124",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Milliflex Oasis® (Merck KGaA)",
+              "original_label": "manufacturer/tradename",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Request more information or check cart for availability",
+              "original_label": "Check Cart for Availability / Request more information",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "pore_size": {
+              "value": "0.45 µm",
+              "original_label": "pore size",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "membrane_material": {
+              "value": "mixed cellulose esters (MCE)",
+              "original_label": "mixed cellulose esters (MCE) membrane",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "funnel_capacity": {
+              "value": "100 mL",
+              "original_label": "funnel capacity",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            },
+            "sterility": {
+              "value": "electron beam irradiated (sterile)",
+              "original_label": "sterility",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:10",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Germany"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Cytiva (GE Life Sciences)",
+          "product_name": "MicroFunnel™ Filter Funnel with GN-6 (MCE) Membrane",
+          "product_url": "https://www.fishersci.co.uk/shop/products/microfunnel-st-filters-funnel-gn-6-membrane-2/17164411",
+          "product_description": "Disposable sterile filter funnels (100 mL) with GN-6 Metricel mixed cellulose ester membrane.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Closely equivalent spec from a major lab supplier.",
+          "discovery_concerns": "Supplied in larger 200-pk (vs 24), grid line color difference (black vs white).",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:26:17",
+            "available": [
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "pore_size",
+              "membrane_material",
+              "funnel_capacity",
+              "sterility"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "lead_time"
+            ]
+          },
+          "specs": {
+            "certifications": {
+              "value": "Gamma‑irradiated (double‑bagged packaging)",
+              "original_label": "Description: \"gamma‑irradiated, double‑bagged packaging\"",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "Pack of 20 (also option Pack of 40)",
+              "original_label": "Unit Size: Pack of 20; Pack of 40",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "17164411",
+              "original_label": "Product Code. 17164411",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Cytiva",
+              "original_label": "Page title: \"Cytiva MicroFunnel™ ST Filters Funnel with GN‑6 Membrane\"",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "pore_size": {
+              "value": "0.45 μm",
+              "original_label": "Pore Size 0.45 μm",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "membrane_material": {
+              "value": "GN‑6 Metricel Mixed Cellulose Ester",
+              "original_label": "Material (Membrane) GN‑6 Metricel Mixed Cellulose Ester",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "funnel_capacity": {
+              "value": "100 mL",
+              "original_label": "Capacity (Metric) 100 mL",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            },
+            "sterility": {
+              "value": "Sterile",
+              "original_label": "Sterility Sterile",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:17",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Sweden"
+        },
+        {
+          "id": 3,
+          "vendor_name": "Sartorius",
+          "product_name": "Microsart® @filter 100",
+          "product_url": "https://shop.sartorius.com/ww/p/microsart-filter-100-cn-whiteblack-045-m/16D01--10-06--TG",
+          "product_description": "Ready-to-use sterile 100 mL funnel units with gridded mixed cellulose membrane.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.8,
+          "recommendation_reason": "Matches pore size, volume and use from a reputable brand.",
+          "discovery_concerns": "Filter material listed as cellulose nitrate (CN) rather than explicitly 'MCE'.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:26:25",
+            "available": [
+              "price",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "pore_size",
+              "membrane_material",
+              "funnel_capacity",
+              "sterility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "Not found (price not displayed, requires quote request)",
+              "original_label": "Request a Quote / Pieces info only",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "Lot Certificates: Recovery rate, sterility and performance test",
+              "original_label": "Compliance Information – Lot Certificates",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "24 (3 trays of 8)",
+              "original_label": "Pack Size / Packaging",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "16D01--10-06--TG",
+              "original_label": "Item No.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Sartorius (Microsart® @filter brand)",
+              "original_label": "Brand",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Not found (availability / estimated delivery date not shown — quote required)",
+              "original_label": "Availability / Est. delivery date",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "pore_size": {
+              "value": "0.45 µm",
+              "original_label": "Pore Size",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "membrane_material": {
+              "value": "Cellulose Nitrate (CN) / Mixed Cellulose Ester (MCE)",
+              "original_label": "Membrane Material",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "funnel_capacity": {
+              "value": "100 mL (Volume)",
+              "original_label": "Volume",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            },
+            "sterility": {
+              "value": "Sterile, ready-to-use",
+              "original_label": "(Overview) “Ready-to-use, sterile Microsart® @filter units”",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:25",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Germany"
+        },
+        {
+          "id": 4,
+          "vendor_name": "Westlab (Avantor)",
+          "product_name": "Disposable Vacuum Filter Funnel, MCE membrane, 100 ml, 47 mm, 0.45 µm, Sterile",
+          "product_url": "https://www.westlab.com/disposable-vacuum-filter-funnel-mce-membrane-100ml-47mm-0-45um-sterile",
+          "product_description": "Pack of 50 sterile funnels with 0.45 µm white mixed cellulose ester membrane.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Exact nominal specs and sterile status clearly match.",
+          "discovery_concerns": "Generic branding (Westlab); verify regulatory/certification as needed.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:26:34",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "pore_size",
+              "membrane_material",
+              "funnel_capacity",
+              "sterility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "CA$ 210.50 for pack of 50 (Incl. Tax)",
+              "original_label": "CA$ 210.50 Incl. Tax",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "50 funnels per pack",
+              "original_label": "Pack: 50",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "115-0233",
+              "original_label": "code",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Westlab Group Ltd.",
+              "original_label": "—",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Next day dispatch for orders received before 12 pm PST",
+              "original_label": "Same Day Dispatch / Pre-Sale – NEXT DAY DISPATCH",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "pore_size": {
+              "value": "0.45 µm",
+              "original_label": "Pore Size: 0.45um",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "membrane_material": {
+              "value": "MCE (Mixed Cellulose Ester)",
+              "original_label": "MCE membrane",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "funnel_capacity": {
+              "value": "100 ml",
+              "original_label": "Capacity: 100ml",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            },
+            "sterility": {
+              "value": "Sterile, Individually Sealed",
+              "original_label": "Sterile; Individually Sealed",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:34",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United Kingdom"
+        },
+        {
+          "id": 5,
+          "vendor_name": "Sterlitech",
+          "product_name": "Disposable Filter Funnel, Sterile, 100 ml, Gridded, 0.45 µm, White (50/pk)",
+          "product_url": "https://www.sterlitech.com/microbiological-filter-funnel-af045w50.html",
+          "product_description": "Sterile disposable filter funnels (100 mL) with white gridded 0.45 µm MCE membrane.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Matches all critical attributes in a commercial lab supply context.",
+          "discovery_concerns": "Use alternative vendor for Moist Markets; check pack count differences.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:26:41",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "pore_size",
+              "membrane_material",
+              "funnel_capacity",
+              "sterility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$161.18 (Unit Price), minimum purchase quantity 1 (implied by quantity selector)",
+              "original_label": "Price: $161.18",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "50 per pack",
+              "original_label": "50/pk",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "AF045W50",
+              "original_label": "SKU: AF045W50",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Sterlitech",
+              "original_label": "Brand: Sterlitech",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Estimated shipping in 1‑2 days",
+              "original_label": "Est Ship: 1‑2 days",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "pore_size": {
+              "value": "0.45 µm (clarification); also has 0.2 µm (sterilizing) passed",
+              "original_label": "Pore Sizes Passed: Sterilizing: 0.2 µm, Clarification: 0.45 µm",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "membrane_material": {
+              "value": "Mixed Cellulose Esters (MCE)",
+              "original_label": "Membrane Material: Mixed Cellulose Esters (MCE)",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "funnel_capacity": {
+              "value": "100 mL",
+              "original_label": "Disposable Filter Funnel, 100 ml",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            },
+            "sterility": {
+              "value": "Sterile (gamma irradiated)",
+              "original_label": "Sterile; Sterilized by Gamma Irradiation",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:26:41",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        }
+      ],
+      "last_updated": "2026-01-05 13:26:02",
+      "pipeline_stats": {
+        "total_time_seconds": 222.78,
+        "total_tokens": {
+          "input": 149626,
+          "output": 13230,
+          "total": 162856
+        }
+      }
+    },
+    "clean room moping system configuration": {
+      "query_id": "clean-room-moping-system-configuration",
+      "query_text": "CLEAN ROOM MOPING SYSTEM CONFIGURATION",
+      "enriched_query": "We are seeking detailed vendor information to support the procurement and comparison of Clean Room Mopping System Configurations for use within biopharmaceutical manufacturing environments. These systems are intended for controlled environments (ISO and GMP compliant cleanrooms) and must meet stringent regulatory, sterility, and operational needs. Please provide comprehensive details on system configuration options (i.e., mop head material types, compatibility with disinfectants, autoclavability, ergonomic features), regulatory and quality certifications, sterilization status, and consumables compatibility. Intended use includes daily cleaning and disinfection of classified cleanroom areas (ISO 5–8, Grade A–D) where product contact and cross-contamination risk must be minimized. Relevant comparison criteria include pricing, lead time, regulatory compliance, product durability, and adaptability for different cleanroom classes and layouts.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Unit Price",
+          "description": "The cost per unit, including currency and standard quantity per order.",
+          "look_for": [
+            "price",
+            "list price",
+            "unit price",
+            "cost",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Condition",
+          "description": "Recommended storage temperature and conditions for the mopping system and its components.",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "The period for which the mopping system components remain stable and suitable for use after manufacture.",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications",
+          "description": "Regulatory and quality certifications indicating compliance with relevant standards.",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "The number of items or complete sets per package.",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Manufacturer or supplier’s reference for the product (SKU, catalog number, part number, etc).",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Name and details of the manufacturing company or brand.",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Estimated time for order fulfillment and shipping or availability status.",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "mop_head_material",
+          "display_name": "Mop Head Material",
+          "description": "Material composition of the mop head (e.g., polyester, microfiber), as relevant for cleanroom use and compatibility with sterilization.",
+          "look_for": [
+            "mop head material",
+            "mop type",
+            "fabric",
+            "microfiber",
+            "polyester",
+            "cellulose",
+            "foam"
+          ]
+        },
+        {
+          "key": "autoclavable",
+          "display_name": "Autoclavability",
+          "description": "Whether the mop, handle, and/or bucket system components are suitable for steam sterilization (autoclaving).",
+          "look_for": [
+            "autoclavable",
+            "sterilizable",
+            "can autoclave",
+            "autoclave safe",
+            "steam sterilization"
+          ]
+        },
+        {
+          "key": "cleanroom_class_compatibility",
+          "display_name": "Cleanroom Class Compatibility",
+          "description": "Supported cleanroom classifications (e.g., ISO 5–8, Grade A–D), indicating intended use environments.",
+          "look_for": [
+            "cleanroom class",
+            "ISO class",
+            "grade A",
+            "grade B",
+            "grade C",
+            "grade D",
+            "ISO 5",
+            "ISO 7"
+          ]
+        },
+        {
+          "key": "ergonomic_features",
+          "display_name": "Ergonomic Design Features",
+          "description": "Design elements intended to reduce operator fatigue, improve ease of use, and support safe, repeatable cleaning.",
+          "look_for": [
+            "ergonomic",
+            "user comfort",
+            "adjustable handle",
+            "lightweight",
+            "designed for cleanroom",
+            "ease of use"
+          ]
+        },
+        {
+          "key": "disinfectant_compatibility",
+          "display_name": "Disinfectant Compatibility",
+          "description": "Compatibility of system components with commonly used cleanroom disinfectants and cleaning agents.",
+          "look_for": [
+            "disinfectant compatibility",
+            "chemical compatibility",
+            "cleaning agent safe",
+            "resistance to chemicals"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2026-01-05 13:27:14",
+        "time_taken_seconds": 114.92,
+        "tokens_used": {
+          "input": 46316,
+          "output": 5947,
+          "total": 52263
+        },
+        "raw_response": "**Contec (Fisher Scientific)** – *Product:* **Contec™ QuickTask™ Flat Mops (cleanroom flat mop system)**.  URL: (Fisher Scientific) [www.fishersci.com/shop/products/contec-quicktask-mopping-systems-mop-covers-6/19168800](https://www.fishersci.com/shop/products/contec-quicktask-mopping-systems-mop-covers-6/19168800) – Description: Contec QuickTask is a complete cleanroom mop system with interchangeable flat mop heads (knitted polyester, microfiber, foam, etc.) and fully autoclavable frames/handles. Designed for ceilings, walls and floors in ISO 5–8/GMP A–D areas, QuickTask heads are compatible with bleach, peroxide and quats; frames are autoclavable stainless steel. Validated sterile versions are available. – **Confidence:** High (exact match, major brand). **Score:** 0.95. *Reason:* Proven system from a tier-1 supplier, available in sterilized and non-sterile formats, ISO/GMP compliant. *Concerns:* None significant.\n\n**Foamtec International** – *Product:* **PharmaMOP® Cleanroom Mop System**.  URL: (Foamtec) [www.foamtecintlwcc.com/products/cleanroom-mops/flat-mop-systems/pharmamop/](https://www.foamtecintlwcc.com/products/cleanroom-mops/flat-mop-systems/pharmamop/) – Description: The Foamtec PharmaMOP® is an ultra-lightweight, 360°-rotating cleanroom mop system (handle, wringer-less bucket, interchangeable heads) designed for GMP/ISO applications. Features include foam-core mop heads with welded fiber edges, drip-resistant design, gamma-sterilized SAL 10⁻⁶ mop heads, and compatibility with all major disinfectants (bleach, PAA, phenolics, quats, IPA). The telescoping handle and wringer-less bucket enhance ergonomics and sterility. – **Confidence:** High. **Score:** 0.93. *Reason:* This is an exact match (full system) explicitly marketed for ISO-class cleanrooms and meets Annex 1 needs. *Concerns:* Vendor is specialized (but established in industry).\n\n**VWR (Texwipe®)** – *Product:* **ClipperMop™ Cleanroom Mop System**.  URL: (VWR US) [b2b-us.vwr.com/store/product/16730359/clippermoptm-cleanroom-mops](https://b2b-us.vwr.com/store/product/16730359/clippermoptm-cleanroom-mops) – Description: Texwipe’s ClipperMop™ is a patent-pending cleanroom mop head/frame system that clips disposable wipes (wet/dry/sterile) onto a thermoplastic mop head. Designed for ISO 3–8/Grade A–D areas, it is lightweight, easy to handle, and can be sterilized by Gammex, VHP or ETO. Compatible with standard disinfectants, it allows fast wiper changes without fiber shedding. Widely used in pharma/biotech for high-sensitivity areas. – **Confidence:** High. **Score:** 0.92. *Reason:* Direct product page from a leading lab supplier; system is explicitly for cleanrooms. *Concerns:* Sold via distributor site; ensure pricing/lead-time availability.\n\n**Vileda Professional** – *Product:* **CleanTech™ Duo Microfiber Mop (Cleanroom Duo Mop)**.  URL: (Vileda CE US) [ce.vileda-professional.com/vp_us/CE-Duo-System/CleanTech™-Duo-Microfiber-Mop/p/CleanTech_Duo_Microfibre_Laminated_Mop](https://ce.vileda-professional.com/vp_us/CE-Duo-System/CleanTech™-Duo-Microfiber-Mop/p/CleanTech_Duo_Microfibre_Laminated_Mop) – Description: Part of Vileda’s CE Swep Duo system, the CleanTech™ Duo Mop is a double-sided, microfiber/foam laminated mop head certified for ISO 5/GMP A/B use. It offers high absorbency, low particle shedding (adhesive-free lamination), and meets disinfectant contact times. Sterile, USA-made mop heads (gamma-irradiated SAL10⁻⁶) come double-bagged. It’s used with Vileda’s CleanTech™ hardware (ergonomic handles, buckets) for cleanroom floors, walls, and ceilings. – **Confidence:** High. **Score:** 0.91. *Reason:* Exact cleanroom mop system from global brand; detailed product spec available. *Concerns:* Must source Vileda CE components (handles/buckets) separately, but core mop product matches spec.\n\n**Hydroflex** – *Product:* **PurMop® Z40 Reusable Cleanroom Mop**.  URL: (Hydroflex Group) [www.hydroflex-group.com/en/product/purmop-z40/](https://www.hydroflex-group.com/en/product/purmop-z40/) – Description: The PurMop Z40 is a heavy-duty reusable polyester/microfiber cleanroom mop head for ISO 3–8/GMP areas. Its short-loop polyester-knit fabric delivers even fluid distribution with low particle release. Designed for floors, walls and ceilings in critical environments (pharma, medtech), Z40 maxes out cleaning performance while being machine-washable and autoclavable. Comes in packs of 10 (50 per carton) and is compatible with Hydroflex mop frames/handles or universal systems. – **Confidence:** Medium-high. **Score:** 0.85. *Reason:* Official product spec from manufacturer; meets cleanroom criteria. *Concerns:* This is mop head only (no bucket included); needs compatible autoclavable handle/wringer. Availability may be more limited than global brands, but fits exact ISO/GMP requirements."
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Contec (Fisher Scientific)",
+          "product_name": "Contec™ QuickTask™ Flat Mops (cleanroom flat mop system)",
+          "product_url": "https://www.fishersci.com/shop/products/contec-quicktask-mopping-systems-mop-covers-6/19168800",
+          "product_description": "Complete cleanroom mop system with interchangeable flat mop heads and fully autoclavable frames/handles, designed for ISO 5–8/GMP A–D areas.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "recommendation_reason": "Proven system from a tier-1 supplier, available in sterilized and non-sterile formats, ISO/GMP compliant.",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:27:40",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "mop_head_material",
+              "autoclavable",
+              "ergonomic_features",
+              "disinfectant_compatibility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "cleanroom_class_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "Sign in to check your price (not publicly shown)",
+              "original_label": "Sign In or Register to check your price.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "Not found on this page",
+              "original_label": "",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "19‑168‑800",
+              "original_label": "Catalog No.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Contec™ (brand / manufacturer)",
+              "original_label": "Supplier: Contec™ TASK0400",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "mop_head_material": {
+              "value": "Microfiber Polyester",
+              "original_label": "Material",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "autoclavable": {
+              "value": "Yes – hardware is fully autoclavable",
+              "original_label": "Autoclavable",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "ergonomic_features": {
+              "value": "Lightweight folding frames; quick installation; improved ease of use",
+              "original_label": "Description (notes on hardware design and ease of use)",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            },
+            "disinfectant_compatibility": {
+              "value": "Compatible with a wide range of chemicals and disinfectants including quats and hypochlorite solutions",
+              "original_label": "Each mop head is compatible with a wide range of chemicals and disinfectants including quats and hypochlorite solutions",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:40",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Japan (Contec Co., Ltd. headquartered in Osaka, Japan), though Contec Americas Inc. is based in the USA."
+        },
+        {
+          "id": 2,
+          "vendor_name": "Foamtec International",
+          "product_name": "PharmaMOP® Cleanroom Mop System",
+          "product_url": "https://www.foamtecintlwcc.com/products/cleanroom-mops/flat-mop-systems/pharmamop/",
+          "product_description": "Ultra-lightweight, 360°-rotating cleanroom mop system designed for GMP/ISO applications with foam-core mop heads and drip-resistant design.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.93,
+          "recommendation_reason": "Exact match for ISO-class cleanrooms and meets Annex 1 needs.",
+          "discovery_concerns": "Vendor is specialized (but established in industry).",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:27:51",
+            "available": [
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "mop_head_material",
+              "autoclavable",
+              "cleanroom_class_compatibility",
+              "ergonomic_features",
+              "disinfectant_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "lead_time"
+            ]
+          },
+          "specs": {
+            "certifications": {
+              "value": "ISO 9001, ISO 13485, FDA licensed ISO class 8 clean room, Sterility Assurance Level 10⁻⁶",
+              "original_label": "certified in a ISO 9001:2000 & 13485:2003 certified facility; FDA licensed ISO class 8 clean room; Sterility Assurance Level (SAL) 10‑6",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "varies by item, e.g., “1/Bag ⋅ 10 bgs/Pk ⋅ 10 PK/Case” for FS853 flat mop head",
+              "original_label": "Packs/Case: 1/Bag ⋅ 10bgs/Pk ⋅ 10PK/Case",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "FT416D, FT416C, FT420, FT423, FT414D, FS853, FS853EN, FS856, FS856EN, FS858EN, FS859, etc.",
+              "original_label": "Product codes listed in catalog like FT416D, FS853, etc.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Foamtec International (Wilshire Contamination Control Division)",
+              "original_label": "Foamtec International Contamination Control Division of Foamtec International",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "mop_head_material": {
+              "value": "foam core sandwiched between cleanroom fabric (polyester/microfiber hybrid); polyester over foam; microfiber over foam; Sahara™ foam core with microfiber lamination",
+              "original_label": "constructed with a foam core sandwiched between two layers of cleanroom fabric; polyester over foam construction; clean‑room microfiber fabric over foam; Sahara™ foam core with Microfiber lamination",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "autoclavable": {
+              "value": "Compatible with steam sterilization",
+              "original_label": "compatible with steam sterilization",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "cleanroom_class_compatibility": {
+              "value": "ISO Class 1–7 (including ISO Class 5 sterile suites)",
+              "original_label": "ISO Class 1‑7 cleanrooms; compatible with sterile suites; produced in ISO class 8 clean room",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "ergonomic_features": {
+              "value": "ultra-lightweight telescoping handle; 360° swivel; wringerless bucket system; drip‑resistant mop heads; no wringer required",
+              "original_label": "ultra-lightweight; 360 degree rotating and locking mop head; wringerless bucket system; drip resistant mop heads; no wringer required",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            },
+            "disinfectant_compatibility": {
+              "value": "Compatible with bleach, peracetic acid, phenolics, quats, IPA based disinfectants and sanitizers",
+              "original_label": "compatible with bleach, peracitic acid, phenolics, Quat and IPA based disinfectants and sanitizers",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:27:51",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "United States"
+        },
+        {
+          "id": 3,
+          "vendor_name": "VWR (Texwipe®)",
+          "product_name": "ClipperMop™ Cleanroom Mop System",
+          "product_url": "https://b2b-us.vwr.com/store/product/16730359/clippermoptm-cleanroom-mops",
+          "product_description": "Patent-pending cleanroom mop head/frame system that clips disposable wipes onto a thermoplastic mop head, designed for ISO 3–8/Grade A–D areas.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.92,
+          "recommendation_reason": "Direct product page from a leading lab supplier; system is explicitly for cleanrooms.",
+          "discovery_concerns": "Sold via distributor site; ensure pricing/lead-time availability.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:28:01",
+            "available": [
+              "price",
+              "catalog_number",
+              "manufacturer",
+              "mop_head_material",
+              "autoclavable",
+              "cleanroom_class_compatibility",
+              "ergonomic_features",
+              "disinfectant_compatibility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "pack_size",
+              "lead_time"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "320.26 USD per each (EA)",
+              "original_label": "TWTX7102EA 320.26 USD",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "TWTX7102",
+              "original_label": "TWTX7102",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Texwipe",
+              "original_label": "Supplier: Texwipe",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "mop_head_material": {
+              "value": "Celcon® thermoplastic mop head with clips; flexible polyester pad",
+              "original_label": "includes the Celcon® thermoplastic mop head with clips, a flexible polyester pad",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "autoclavable": {
+              "value": "Sterilization available via gamma irradiation, chemicals, VHP, EO; autoclave not specified",
+              "original_label": "may be sterilized by gamma irradiation, chemicals, vaporized hydrogen peroxide (VHP) or ethylene oxide",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "cleanroom_class_compatibility": {
+              "value": "ISO Class 3 to 8 cleanrooms, sterile and aseptic areas",
+              "original_label": "compatible with protocols for ISO Class 3 to 8 cleanrooms, sterile and aseptic areas",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "ergonomic_features": {
+              "value": "Lightweight, easy to handle; quick and easy wiper change",
+              "original_label": "Quick and easy wiper change; Lightweight, easy to handle",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            },
+            "disinfectant_compatibility": {
+              "value": "Compatible with chemical disinfectants and VHP, EO sterilization methods",
+              "original_label": "compatible with sterilization by gamma irradiation, chemicals, VHP or ethylene oxide",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:28:01",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 4,
+          "vendor_name": "Vileda Professional",
+          "product_name": "CleanTech™ Duo Microfiber Mop (Cleanroom Duo Mop)",
+          "product_url": "https://ce.vileda-professional.com/vp_us/CE-Duo-System/CleanTech™-Duo-Microfiber-Mop/p/CleanTech_Duo_Microfibre_Laminated_Mop",
+          "product_description": "Double-sided, microfiber/foam laminated mop head certified for ISO 5/GMP A/B use, offering high absorbency and low particle shedding.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.91,
+          "recommendation_reason": "Exact cleanroom mop system from global brand; detailed product spec available.",
+          "discovery_concerns": "Must source Vileda CE components (handles/buckets) separately.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:28:09",
+            "available": [
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "mop_head_material",
+              "cleanroom_class_compatibility",
+              "disinfectant_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "lead_time",
+              "autoclavable",
+              "ergonomic_features"
+            ]
+          },
+          "specs": {
+            "certifications": {
+              "value": "Validated to 10⁻⁶ SAL per ISO 11137; sterile; Certificate of Sterility available upon request",
+              "original_label": "Validated to 10⁻⁶ SAL per ISO 11137; sterile; Certificate of Sterility available upon request",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "Packs/case: 50; Pieces/pack: 1",
+              "original_label": "Packs/case | Pieces/pack",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "141886 (case); 141888 (pack)",
+              "original_label": "Art.no Case | Art.no. Pack",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Vileda Professional (part of Freudenberg Group)",
+              "original_label": "Manufactured and sterilized in the USA",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "mop_head_material": {
+              "value": "Microfiber laminated cleanroom foam",
+              "original_label": "Microfiber laminated cleanroom foam",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "cleanroom_class_compatibility": {
+              "value": "Cleanrooms up to ISO 5 / GMP A & B / FED209D Class 100",
+              "original_label": "Designed for use in cleanrooms up to class ISO 5/GMP A & B/FED209D Class 100",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            },
+            "disinfectant_compatibility": {
+              "value": "Allows achievement of contact time requirements for common disinfectants",
+              "original_label": "Allows you to achieve your contact time requirements for common disinfectants",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:28:09",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Germany"
+        },
+        {
+          "id": 5,
+          "vendor_name": "Hydroflex",
+          "product_name": "PurMop® Z40 Reusable Cleanroom Mop",
+          "product_url": "https://www.hydroflex-group.com/en/product/purmop-z40/",
+          "product_description": "Heavy-duty reusable polyester/microfiber cleanroom mop head for ISO 3–8/GMP areas, designed for critical environments.",
+          "discovery_confidence": "medium-high",
+          "recommendation_score": 0.85,
+          "recommendation_reason": "Official product spec from manufacturer; meets cleanroom criteria.",
+          "discovery_concerns": "This is mop head only (no bucket included); needs compatible autoclavable handle/wringer.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:28:18",
+            "available": [
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "mop_head_material",
+              "autoclavable",
+              "cleanroom_class_compatibility",
+              "ergonomic_features"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "disinfectant_compatibility"
+            ]
+          },
+          "specs": {
+            "pack_size": {
+              "value": "10 mops per pack, 5 packs per carton (total 50 mops)",
+              "original_label": "Packing: 10 mops / pack, 5 packs / carton [50 mops]",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "SKU 2111006",
+              "original_label": "SKU",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Hydroflex Group",
+              "original_label": "Hydroflex Group / PurMop® brand",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "mop_head_material": {
+              "value": "Front material: 100 % polyester‑microfiber knit loops (short); Backing material: 100 % polyester knit fabric",
+              "original_label": "Front material / Backing material",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "autoclavable": {
+              "value": "Not found (no autoclave info for mop)",
+              "original_label": "Not provided for this product",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "cleanroom_class_compatibility": {
+              "value": "ISO classes 3–8; GMP classes A/B, C, D",
+              "original_label": "ISO / GMP chart",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            },
+            "ergonomic_features": {
+              "value": "Good gliding properties and easy handling",
+              "original_label": "Good gliding properties and easy handling",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:28:18",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Germany"
+        }
+      ],
+      "last_updated": "2026-01-05 13:27:29",
+      "pipeline_stats": {
+        "total_time_seconds": 189.63,
+        "total_tokens": {
+          "input": 155279,
+          "output": 12710,
+          "total": 167989
+        }
+      }
+    },
+    "bucket less moping head": {
+      "query_id": "bucket-less-moping-head",
+      "query_text": "Bucket less moping head",
+      "enriched_query": "We are seeking detailed vendor information on bucketless mop heads intended for use in biopharmaceutical cleanrooms and production environments, where strict hygiene and contamination control are essential. The mop head should be compatible with handle systems that dispense cleaning solution internally (bucket-free mopping), suitable for controlled and sterile areas. Please provide options designed for pharmaceutical or biotech applications, specifying all relevant compliance and quality certifications, material composition, and performance in ISO-classified cleanrooms. Include details on pricing, pack sizes, chemical compatibility, reusability, and cleaning efficacy, as well as shelf life, storage, and shipping timelines. Highlight whether the product is single-use or reusable and list available sizes and formats.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price for the mop head, with currency and quantity details.",
+          "look_for": [
+            "price",
+            "list price",
+            "unit price",
+            "cost",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Conditions",
+          "description": "Temperature and environmental requirements for storage of the mop heads.",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Recommended period of stability and usability for the mop heads.",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications",
+          "description": "Regulatory and quality certifications relevant to biopharmaceutical use.",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Number of mop heads included per package.",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "set of",
+            "per kit"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Reference or SKU number for the mop head product.",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Company manufacturing or supplying the mop head.",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Expected delivery timeline and product availability.",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "material_composition",
+          "display_name": "Material Composition",
+          "description": "Materials used in the mop head (e.g., microfiber, polyester, nonwoven), relevant for chemical compatibility and cleanliness.",
+          "look_for": [
+            "material",
+            "composition",
+            "made of",
+            "fiber",
+            "microfiber",
+            "polyester",
+            "nonwoven",
+            "blend"
+          ]
+        },
+        {
+          "key": "reusability",
+          "display_name": "Reusability",
+          "description": "Whether the mop head is designed for single-use or multiple uses (reusable/sterilizable).",
+          "look_for": [
+            "single-use",
+            "disposable",
+            "reusable",
+            "autoclavable",
+            "washable",
+            "sterilizable"
+          ]
+        },
+        {
+          "key": "cleanroom_compatibility",
+          "display_name": "Cleanroom Compatibility",
+          "description": "The cleanroom classification the mop head is suitable for (ISO class, GMP grade).",
+          "look_for": [
+            "cleanroom",
+            "ISO class",
+            "GMP grade",
+            "controlled environment",
+            "sterile area",
+            "ISO 5",
+            "ISO 7"
+          ]
+        },
+        {
+          "key": "mop_head_size_format",
+          "display_name": "Mop Head Size and Format",
+          "description": "Dimensions and design (flat, string, shape) of the mop head, and compatibility with specific dispensing handles.",
+          "look_for": [
+            "size",
+            "dimensions",
+            "length",
+            "width",
+            "flat",
+            "string",
+            "fit",
+            "format",
+            "handle compatibility"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2026-01-05 13:28:40",
+        "time_taken_seconds": 181.6,
+        "tokens_used": {
+          "input": 53920,
+          "output": 9344,
+          "total": 63264
+        },
+        "raw_response": "1. **Cole-Parmer (Contec brand)** – *Contec EasySat™ Bucketless Floor Mop Head (Smooth); 32/Pk* – [Product page](https://www.coleparmer.com/i/contec-easysat-mop-head-for-bucketless-floor-mop-smooth-32-pk/0941131) – This is the Contec EasySat™ mop head (smooth, angled) designed for use with the Contec bucketless mop system. It is made of ultraclean polyester/ester foam (VertiKlean) and is autoclavable. It attaches via hook-and-loop to the EasySat handle and eliminates the need for a mop bucket. Comes non-sterile, pack of 32. **Confidence:** High. **Rec. Score:** 0.95 – Exact Contec product, from a reputable distributor. **Reason:** Exact match to bucketless pharmaceutical mop head; user-oriented vendor site. **Concerns:** Sold in UK currency; verify shipping to India; Non-sterile (sterile gamma-irradiated version available separately).\n\n2. **Foamtec (PharmaMOP)** – *Foamtec PharmaMOP™ Cleanroom Mop Heads, Sterile* – [Product page](https://www.fishersci.com/shop/products/pharmamop-cleanroom-mop-heads-sterile/19304821) – This sterile mop head is part of Foamtec’s PharmaMOP system (high-capacity, drip-resistant design). It features a 0.125″ foam core with ultrapure polyester cover (gamma-irradiated, SAL 10⁻⁶) for heavy-duty disinfectant cleaning. Suitable for ISO 5-7 cleanrooms, compatible with bleach, IPA, etc. (Other styles include non-sterile and textured versions under same catalog). **Confidence:** Medium-High. **Rec. Score:** 0.80 – Good match in concept (drip-resistant, ergonomic handle system) and manufacturer. **Reason:** PharmaMOP is designed for aseptic processing areas and meets cleanroom standards; sold through Fisher Sci. **Concerns:** Not explicitly “bucketless” handle (requires manipulating scrubber), but described as “drip-resistant, no wringer”. Ensure it fits the internal-dispense handle system. Pricing and availability need checking.\n\n3. **SterileMate** – *EasyFlo™ Bucketless Mop System* – [Product page](https://sterilemate.com/product/easyflo-bucketless-mop-system/) – SterileMate’s EasyFlo is a bucketless floor mop system with a built-in reservoir (28 oz.) and palm-trigger dispensing. The site lists a starter kit (handle, tank, 18″ frame, 2 flat microfiber pads) and replacement handles. The mop covers up to ~3000 ft², with a lightweight aluminum frame. Kits include 18″ flat wet mop pads (sold separately). **Confidence:** Medium. **Rec. Score:** 0.65 – Close match, intended for clean/sterile areas. **Reason:** Explicitly bucketless design, marketed for sterile environments. **Concerns:** Smaller capacity (28 oz vs 52 oz), not explicitly ISO-certified; primarily shows system overview, less technical detail. Availability and India shipping must be verified.\n\n4. **Hillyard/Boardwalk** – *Boardwalk Bucketless Microfiber Mop System, 18″ W, Blue* – [Product page](https://www.hillyard.com/Wet-Mops/Boardwalk-Bucketless-Microfiber-Mop-System-18-W-Blue/p/BWKBWMS16MFM) – A general-purpose bucketless mop kit with a 865 mL internal tank and 18″ wide microfiber pad. The design dispenses solution directly to the mop head’s high-weight microfiber pad. Marketed for efficiency (saves water/chemicals, reduces contamination). **Confidence:** Low-Medium. **Rec. Score:** 0.50 – Fair match (true bucketless concept) but not specifically “pharmaceutical grade”. **Reason:** Well-known janitorial brand (Boardwalk) selling a bucketless system, so conceptually fits. **Concerns:** No claims of cleanroom/GMP compliance or certification; not gamma-sterilizable; likely not validated for particle/contamination control in pharma settings.\n\n5. **Biomed Pharmacare (India)** – *Bucketless Mopping System for Pharma Use* – [Product page](https://www.indiamart.com/proddetail/bucketless-mopping-system-for-pharma-use-20635866191.html) – An Indian-made mop system described as “bucketless” for pharmaceutical use. Features a plastic handle and looped-end microfiber mop head (red) with no separate bucket. **Confidence:** Low. **Rec. Score:** 0.35 – Loose match. **Reason:** Claims to be bucketless and intended for pharma, and is an India-based manufacturer (potential for local procurement). **Concerns:** Product details are minimal (IndiaMART listing only). “Dry mop” suggests it may not involve dispensing liquids. No information on cleanroom certification or compliance; quality and applicability are unclear. Highest caution on fit for critical environments."
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Cole-Parmer (Contec brand)",
+          "product_name": "Contec EasySat™ Bucketless Floor Mop Head (Smooth); 32/Pk",
+          "product_url": "https://www.coleparmer.com/i/contec-easysat-mop-head-for-bucketless-floor-mop-smooth-32-pk/0941131",
+          "product_description": "Contec EasySat™ mop head (smooth, angled) designed for use with the Contec bucketless mop system, made of ultraclean polyester/ester foam.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "recommendation_reason": "Exact match to bucketless pharmaceutical mop head; user-oriented vendor site.",
+          "discovery_concerns": "Sold in UK currency; verify shipping to India; Non-sterile (sterile gamma-irradiated version available separately).",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:29:12",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "material_composition",
+              "reusability",
+              "mop_head_size_format"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "cleanroom_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "£399.32 GBP per Pkg of 32",
+              "original_label": "£399.32GBP / Pkg of 32",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "32 per package",
+              "original_label": "32/Pk",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "0941131",
+              "original_label": "Item: 0941131",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Contec",
+              "original_label": "Contec | Mfr: BLVKMOP",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Same Day Shipping for US orders placed by 1:30 PM CT (if in stock)",
+              "original_label": "Same Day Shipping for US orders that contain all \"In Stock\" items placed by 1:30 PM CT.",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "material_composition": {
+              "value": "Ultraclean polyester/ester foam blend (VertiKlean material)",
+              "original_label": "MaterialUltraclean polyester/ester foam blend",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "reusability": {
+              "value": "Not specified (likely single-use/disposable; no reuse stated)",
+              "original_label": "—",
+              "confidence": "low",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            },
+            "mop_head_size_format": {
+              "value": "Angled smooth mop head (design/format); dimensions not specified",
+              "original_label": "Quickly attaches ... Angled mop head",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:12",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Foamtec (PharmaMOP)",
+          "product_name": "Foamtec PharmaMOP™ Cleanroom Mop Heads, Sterile",
+          "product_url": "https://www.fishersci.com/shop/products/pharmamop-cleanroom-mop-heads-sterile/19304821",
+          "product_description": "Sterile mop head part of Foamtec’s PharmaMOP system, featuring a 0.125″ foam core with ultrapure polyester cover for heavy-duty disinfectant cleaning.",
+          "discovery_confidence": "medium-high",
+          "recommendation_score": 0.8,
+          "recommendation_reason": "Good match in concept and manufacturer; designed for aseptic processing areas.",
+          "discovery_concerns": "Not explicitly 'bucketless' handle; ensure it fits the internal-dispense handle system.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:29:20",
+            "available": [
+              "certifications",
+              "catalog_number",
+              "manufacturer",
+              "material_composition",
+              "cleanroom_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "pack_size",
+              "lead_time",
+              "reusability",
+              "mop_head_size_format"
+            ]
+          },
+          "specs": {
+            "certifications": {
+              "value": "ISO 9001:2000",
+              "original_label": "Certifications",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:20",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "19304821 (also referenced as 19‑304‑821)",
+              "original_label": "Catalog No.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:20",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Foamtec International",
+              "original_label": "Supplier: Foamtec",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:20",
+              "model": "gpt-4o"
+            },
+            "material_composition": {
+              "value": "Polyester (foam core 0.125 in)",
+              "original_label": "Material / Description",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:20",
+              "model": "gpt-4o"
+            },
+            "cleanroom_compatibility": {
+              "value": "Suitable for ISO Class 1–7 cleanrooms (via Foamtec data)",
+              "original_label": "For Use With (Application)",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:20",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 3,
+          "vendor_name": "SterileMate",
+          "product_name": "EasyFlo™ Bucketless Mop System",
+          "product_url": "https://sterilemate.com/product/easyflo-bucketless-mop-system/",
+          "product_description": "Bucketless floor mop system with a built-in reservoir and palm-trigger dispensing, designed for clean/sterile areas.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.65,
+          "recommendation_reason": "Explicitly bucketless design, marketed for sterile environments.",
+          "discovery_concerns": "Smaller capacity (28 oz vs 52 oz), not explicitly ISO-certified.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:29:28",
+            "available": [
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "material_composition",
+              "mop_head_size_format"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "reusability",
+              "cleanroom_compatibility"
+            ]
+          },
+          "specs": {
+            "pack_size": {
+              "value": "1 DOZ/CASE (for handle M700090), EACH (for starter kit M730000)",
+              "original_label": "1 DOZ/CASE; EACH",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:28",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "M700090 (handle); M730000 (starter kit)",
+              "original_label": "M700090; M730000",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:28",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Monarch Brands",
+              "original_label": "Product Brand",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:28",
+              "model": "gpt-4o"
+            },
+            "material_composition": {
+              "value": "Aluminum (handle frame); mop pads unspecified",
+              "original_label": "Material",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:28",
+              "model": "gpt-4o"
+            },
+            "mop_head_size_format": {
+              "value": "18\" flat wet mop pads (standard)",
+              "original_label": "18\" flat wet mop pads",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:28",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 4,
+          "vendor_name": "Hillyard/Boardwalk",
+          "product_name": "Boardwalk Bucketless Microfiber Mop System, 18\" W, Blue",
+          "product_url": "https://www.hillyard.com/Wet-Mops/Boardwalk-Bucketless-Microfiber-Mop-System-18-W-Blue/p/BWKBWMS16MFM",
+          "product_description": "General-purpose bucketless mop kit with an internal tank and 18\" wide microfiber pad, marketed for efficiency.",
+          "discovery_confidence": "low-medium",
+          "recommendation_score": 0.5,
+          "recommendation_reason": "Fair match for bucketless concept but not specifically 'pharmaceutical grade'.",
+          "discovery_concerns": "No claims of cleanroom/GMP compliance or certification.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:29:37",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "material_composition",
+              "reusability",
+              "mop_head_size_format"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "cleanroom_compatibility"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$118.99 / each (kit)",
+              "original_label": "product price: $118.99 /ea",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "(1) Bucketless Mopping System; (2) Microfiber Pads",
+              "original_label": "Package Includes",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "BWKBWMS16MFM",
+              "original_label": "ITEM # / MFG Model #",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Boardwalk",
+              "original_label": "Manufacturer Name",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "material_composition": {
+              "value": "Microfiber (mop head); Aluminum and Polypropylene (handle)",
+              "original_label": "Mop Head Material; Handle Material(s)",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "reusability": {
+              "value": "Reusable (machine washable microfiber, withstands repeated use)",
+              "original_label": "machine washable; lasts hundreds of launderings",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            },
+            "mop_head_size_format": {
+              "value": "5 x 18 inches, flat style, hook & loop attachment; fits 59\" handle",
+              "original_label": "Mop Head Size; Mop Style; Flat Mop Attachment Type; Handle Length",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:29:37",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "China"
+        },
+        {
+          "id": 5,
+          "vendor_name": "Biomed Pharmacare (India)",
+          "product_name": "Bucketless Mopping System for Pharma Use",
+          "product_url": "https://www.indiamart.com/proddetail/bucketless-mopping-system-for-pharma-use-20635866191.html",
+          "product_description": "Indian-made mop system described as 'bucketless' for pharmaceutical use, featuring a plastic handle and looped-end microfiber mop head.",
+          "discovery_confidence": "low",
+          "recommendation_score": 0.35,
+          "recommendation_reason": "Claims to be bucketless and intended for pharma, potential for local procurement.",
+          "discovery_concerns": "Product details are minimal; no information on cleanroom certification.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:29:41",
+            "error": "Could not parse JSON from response:\nI’m unable to directly open or access the provided IndiaMART vendor page due to technical limitations.\n\nCould you please copy and paste the relevant parts of the page here—especially where details on price, storage conditions, shelf‑life, certifications, pack size, catalog number, manufacturer, lead time, material composition, reusability, cleanroom compatibility, and mop head size/format are mentioned? \n\nOnce you share that, I can extract and format the requested specifications accurately in th..."
+          },
+          "specs": {}
+        }
+      ],
+      "last_updated": "2026-01-05 13:28:58",
+      "pipeline_stats": {
+        "total_time_seconds": 252.67,
+        "total_tokens": {
+          "input": 147288,
+          "output": 13782,
+          "total": 161070
+        }
+      }
+    },
+    "pyrogent 5000 lysate": {
+      "query_id": "pyrogent-5000-lysate",
+      "query_text": "Pyrogent 5000 Lysate",
+      "enriched_query": "I am seeking comprehensive vendor information and quotes for Pyrogent™ 5000 Lysate, which is a Limulus Amebocyte Lysate (LAL) reagent used for endotoxin detection in pharmaceutical and biotech quality control, sterility, and product release testing. Please provide details including unit price, pack size, manufacturer, storage conditions, shelf life, certifications (such as United States Pharmacopeia [USP], European Pharmacopoeia [EP], Good Manufacturing Practice [GMP], Research Use Only [RUO], or In Vitro Diagnostic [IVD]), catalog number, and lead time or availability. Additionally, include information on sensitivity range, reconstitution requirements, required assay instrumentation or compatibility, and any information related to interference or inhibition controls. The intended use is for the detection and quantification of bacterial endotoxins in pharmaceutical product samples and manufacturing environments. Comparative data on performance features and regulatory compliance is preferred.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price with currency and quantity included",
+          "look_for": [
+            "price",
+            "unit price",
+            "cost",
+            "list price",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Conditions",
+          "description": "Recommended temperature and conditions for storing the lysate",
+          "look_for": [
+            "storage",
+            "storage conditions",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "The period for which the product remains stable and usable",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications & Compliance",
+          "description": "Relevant regulatory and quality certifications, such as USP, EP, GMP, ISO, RUO, or IVD",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Number of test units, vials, or reactions per package",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Product identification number or SKU for ordering",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "The company or brand producing or supplying the lysate reagent",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Time from order to product delivery and current availability status",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "sensitivity_range",
+          "display_name": "Sensitivity Range (Endotoxin Detection Limit)",
+          "description": "Lowest and highest endotoxin concentration (EU/mL) the lysate can detect",
+          "look_for": [
+            "sensitivity",
+            "detection limit",
+            "LOD",
+            "LOQ",
+            "EU/mL",
+            "minimum detection",
+            "maximum detection",
+            "range"
+          ]
+        },
+        {
+          "key": "reconstitution_requirements",
+          "display_name": "Reconstitution Requirements",
+          "description": "Instructions and reagents needed to prepare the lysate for testing",
+          "look_for": [
+            "reconstitution",
+            "how to prepare",
+            "diluent",
+            "buffer",
+            "solvent",
+            "preparation",
+            "ready to use",
+            "lyophilized",
+            "powder"
+          ]
+        },
+        {
+          "key": "instrument_compatibility",
+          "display_name": "Instrument Compatibility",
+          "description": "Required or compatible endotoxin testing platforms, readers, or equipment (e.g., tube test, plate reader, kinetic methodology)",
+          "look_for": [
+            "compatible instruments",
+            "required instrumentation",
+            "plate reader",
+            "tube test",
+            "microplate",
+            "endpoint",
+            "kinetic",
+            "instrumentation"
+          ]
+        },
+        {
+          "key": "inhibition_control_information",
+          "display_name": "Inhibition & Enhancement Control Data",
+          "description": "Information about required or recommended controls for interference, inhibition, or enhancement in sample testing",
+          "look_for": [
+            "inhibition",
+            "enhancement",
+            "interference",
+            "control",
+            "validation",
+            "matrix effects",
+            "inhibition/enhancement control"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2026-01-05 13:33:38",
+        "time_taken_seconds": 559.14,
+        "tokens_used": {
+          "input": 49603,
+          "output": 19179,
+          "total": 68782
+        },
+        "raw_response": "- **Lonza (Manufacturer)** – *PYROGENT-5000 Bulk Kinetic Turbidimetric LAL Assay (Cat. T50-300U)* on Lonza’s own site. This bulk kit (5,000-test, 100 vials of lysate, 50 tests each) has a sensitivity range of 0.01–100 EU/mL but *excludes* reconstitution buffer and endotoxin standard (must be bought separately). *Confidence:* High; *Score:* 0.95. *Reason:* Direct manufacturer listing of the exact product. *Concerns:* Requires additional buffer/endotoxin purchases; no immediate pricing shown.  \n  **URL:** https://bioscience.lonza.com/lonza_bs/CH/en/Endotoxin-Detection/p/000000000000186839/PYROGENT™-5000-Bulk-Kinetic-Turbidimetric-LAL-Assay  \n\n- **Fisher Scientific (Thermo Fisher)** – *Lonza Walkersville PYROGENT-5000 Bulk Kinetic Turbidimetric LAL Assay, 2250 Test Kit* (Catalog No. NC0583862). This distributor’s page confirms the Lonza product: a 2,250-test kit containing 45 vials of lysate (50 tests each), 45 vials of reconstitution buffer, and 10 vials of control endotoxin, with 0.01–100 EU/mL sensitivity. *Confidence:* High; *Score:* 0.90. *Reason:* Exact Lonza product name and contents match official description. *Concerns:* Price requires login/quote, and availability may depend on account.  \n  **URL:** https://www.fishersci.com/shop/products/pyrogent-5000-blk-kit-test-kit/NC0583862  \n\n- **BioNordika (Nordic Biolabs)** – *Pyrogent-5000 Lysate Vial 5.2 ml (Cat. LZ-T50-300)*. Nordic Biolabs lists a single 5.2 mL vial of Lonza’s Pyrogent-5000 lysate (sufficient for 50 tests). The product page shows the exact manufacturer part number (T50-300) and identifies it as Lonza. *Confidence:* High; *Score:* 0.90. *Reason:* Exact product (lysate vial) clearly identified. *Concerns:* Price is “request quote”; reconstitution buffer/endotoxin are sold separately.  \n  **URL:** https://bionordika.se/all-products/bioprocessing/pyrogent-5000-lysate-vial-5-2-ml~lz-t50-300  \n\n- **Szabo-Scandic (Global Distributor)** – *Pyrogent-5000 Bulk Kit 100 Vials/Kit* (SKU LON T50-300U). This European supplier’s listing describes Lonza’s Pyrogent-5000 Bulk Kinetic LAL Assay. It confirms the kit contains 100 vials of lysate (50 tests/vial, 5,000 tests total) and matches Lonza’s assay specifications (0.01–100 EU/mL). *Confidence:* High; *Score:* 0.90. *Reason:* Direct match of Lonza bulk kit product. *Concerns:* Actual price and stock status are not displayed openly (requires login or inquiry).  \n  **URL:** https://www.szabo-scandic.com/en/pyrogent-5000-bulk-kit-of-lysate-100-vials-of-50-tests-vial  \n\n- **Dipalabs** – *PYROGENT-5000 (Turbidimetric kit for endotoxin testing)*. This specialty lab supplier lists “PYROGENT-5000” as a Lonza kinetic turbidimetric LAL kit, highlighting a 96-well assay for high-throughput endotoxin testing (sensitivity 0.01–100 EU/mL). Details are sparse, but the name and description match Lonza’s Pyrogent-5000 product. *Confidence:* Medium; *Score:* 0.70. *Reason:* Product name matches exactly, but page lacks full specs and pricing (requires contact). *Concerns:* Limited public info; must request a quote and verify contents.  \n  **URL:** https://www.dipalabs.com/product/pyrogent-5000/"
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Lonza",
+          "product_name": "PYROGENT-5000 Bulk Kinetic Turbidimetric LAL Assay (Cat. T50-300U)",
+          "product_url": "https://bioscience.lonza.com/lonza_bs/CH/en/Endotoxin-Detection/p/000000000000186839/PYROGENT™-5000-Bulk-Kinetic-Turbidimetric-LAL-Assay",
+          "product_description": "Bulk kit (5,000-test, 100 vials of lysate, 50 tests each) with sensitivity range of 0.01–100 EU/mL.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "recommendation_reason": "Direct manufacturer listing of the exact product.",
+          "discovery_concerns": "Requires additional buffer/endotoxin purchases; no immediate pricing shown.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:34:12",
+            "error": "Could not parse JSON from response:\nHere are the extracted specifications based on the Lonza product page for \"PYROGENT™‑5000 Bulk Kinetic Turbidimetric LAL Assay\" (Catalog #: T50‑300U) ([bioscience.lonza.com](https://bioscience.lonza.com/lonza_bs/CH/en/Endotoxin-Detection/p/000000000000186839/PYROGENT%E2%84%A2-5000-Bulk-Kinetic-Turbidimetric-LAL-Assay)):\n\n```json\n{\n  \"results\": {\n    \"price\": {\n      \"value\": \"Not found\",\n      \"original_label\": \"PRICE## per item when you buy more than ##QTY##\",\n      \"confidence\": \"high\"\n    },\n..."
+          },
+          "specs": {}
+        },
+        {
+          "id": 2,
+          "vendor_name": "Fisher Scientific (Thermo Fisher)",
+          "product_name": "Lonza Walkersville PYROGENT-5000 Bulk Kinetic Turbidimetric LAL Assay, 2250 Test Kit",
+          "product_url": "https://www.fishersci.com/shop/products/pyrogent-5000-blk-kit-test-kit/NC0583862",
+          "product_description": "2,250-test kit containing 45 vials of lysate, 45 vials of reconstitution buffer, and 10 vials of control endotoxin.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Exact Lonza product name and contents match official description.",
+          "discovery_concerns": "Price requires login/quote, and availability may depend on account.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:34:22",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "sensitivity_range",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "reconstitution_requirements",
+              "inhibition_control_information"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$8,850.85 / Each of 1",
+              "original_label": " $8,850.85 / Each of 1",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "45 x 50 tests/vial lysate; 45 vials reconstitution buffer; 10 vials endotoxin (2250 tests total)",
+              "original_label": "Content:45 x 50 tests/vial lysate45 vials reconstitution buffer10 vials endotoxin",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "NC0583862",
+              "original_label": "Catalog No. NC0583862",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Lonza Walkersville",
+              "original_label": "Supplier: Lonza Walkersville N588",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            },
+            "sensitivity_range": {
+              "value": "0.01 to 100 EU/ml",
+              "original_label": "Benefits:Sensitivity range from 0.01 to 100 EU/ml",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Requires incubating absorbance plate reader with WinKQCL Software",
+              "original_label": "placed in the incubating absorbance plate reader (via WinKQCL Software)",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:22",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Switzerland"
+        },
+        {
+          "id": 3,
+          "vendor_name": "BioNordika (Nordic Biolabs)",
+          "product_name": "Pyrogent-5000 Lysate Vial 5.2 ml (Cat. LZ-T50-300)",
+          "product_url": "https://bionordika.se/all-products/bioprocessing/pyrogent-5000-lysate-vial-5-2-ml~lz-t50-300",
+          "product_description": "Single 5.2 mL vial of Lonza’s Pyrogent-5000 lysate, sufficient for 50 tests.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Exact product (lysate vial) clearly identified.",
+          "discovery_concerns": "Price is 'request quote'; reconstitution buffer/endotoxin are sold separately.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:34:32",
+            "available": [
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "sensitivity_range",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "reconstitution_requirements",
+              "inhibition_control_information"
+            ]
+          },
+          "specs": {
+            "pack_size": {
+              "value": "1 vial",
+              "original_label": "Unit Size",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:32",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "LZ‑T50‑300",
+              "original_label": "Number",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:32",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Lonza",
+              "original_label": "Supplier info",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:32",
+              "model": "gpt-4o"
+            },
+            "sensitivity_range": {
+              "value": "0.01 to 100 EU/ml",
+              "original_label": "sensitivity range",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:32",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Kinetic turbidimetric assay compatible with 96‑well plate readers (e.g., incubating absorbance plate reader with WinKQCL software)",
+              "original_label": "compatible instruments / described functionality",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:32",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Switzerland"
+        },
+        {
+          "id": 4,
+          "vendor_name": "Szabo-Scandic",
+          "product_name": "Pyrogent-5000 Bulk Kit 100 Vials/Kit",
+          "product_url": "https://www.szabo-scandic.com/en/pyrogent-5000-bulk-kit-of-lysate-100-vials-of-50-tests-vial",
+          "product_description": "Describes Lonza’s Pyrogent-5000 Bulk Kinetic LAL Assay with 100 vials of lysate.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.9,
+          "recommendation_reason": "Direct match of Lonza bulk kit product.",
+          "discovery_concerns": "Actual price and stock status are not displayed openly (requires login or inquiry).",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:34:41",
+            "available": [
+              "price",
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "sensitivity_range",
+              "reconstitution_requirements",
+              "instrument_compatibility"
+            ],
+            "unavailable": [
+              "inhibition_control_information"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "Price is loading... (needs request via 'Price Request')",
+              "original_label": "Price is loading...",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "2 °C–8 °C (product and endotoxin standard); reconstituted reagent stable up to 8 hours at 2–8 °C; reconstituted endotoxin standard stable 4 weeks at 2–8 °C",
+              "original_label": "保存温度: 2℃–8℃; Reconstituted PYROGENT™‑5000 LAL is stable up to 8 hours at 2–8 °C; reconstituted endotoxin standard … can be stored 4 weeks at 2–8 °C",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "shelf_life": {
+              "value": "Not found (no explicit shelf life or expiration information on page)",
+              "original_label": "Not found",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "Manufactured according to FDA license; uses pharmacopoeial method",
+              "original_label": "PYROGENT‑5000 LAL 按照 FDA 的许可证生产; 药典方法",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 vials × 50 tests per vial (5000 tests total)",
+              "original_label": "Bulk Kit 100 Vials/Kit; described as 100×50 tests/vial",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "LONT50‑300U (vendor SKU) / T50‑300U (manufacturer SKU)",
+              "original_label": "SKU: LONT50‑300U; Manufacturer SKU: T50‑300U",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Lonza",
+              "original_label": "Manufacturer: Lonza",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Made to order; requires lead time – contact local sales representative",
+              "original_label": "made to order and requires a lead time. Please contact your local sales representative",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "sensitivity_range": {
+              "value": "0.01 to 100.0 EU/ml",
+              "original_label": "sensitivity range from 0.01 to 100.0 EU/ml",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "reconstitution_requirements": {
+              "value": "Requires reconstitution buffer and matched control standard endotoxin, packaged separately; endotoxin standard is lyophilized from E. coli O55:B5 and should be reconstituted with endotoxin‑free water with vortexing 15 min",
+              "original_label": "kinetic turbidimetric LAL, reconstitution buffer and matched control standard endotoxin are packaged separately … endotoxin … 冻干品 … E.coli strain 055:B5 … 用无内毒素检测用水复溶，并涡旋震荡15 min",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Requires an incubating absorbance plate reader (96‑well) plus WinKQCL software",
+              "original_label": "placed in the incubating absorbance plate reader … via WinKQCL Software",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:41",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Switzerland"
+        },
+        {
+          "id": 5,
+          "vendor_name": "Dipalabs",
+          "product_name": "PYROGENT-5000 (Turbidimetric kit for endotoxin testing)",
+          "product_url": "https://www.dipalabs.com/product/pyrogent-5000/",
+          "product_description": "Lists 'PYROGENT-5000' as a Lonza kinetic turbidimetric LAL kit for high-throughput endotoxin testing.",
+          "discovery_confidence": "medium",
+          "recommendation_score": 0.7,
+          "recommendation_reason": "Product name matches exactly, but page lacks full specs and pricing.",
+          "discovery_concerns": "Limited public info; must request a quote and verify contents.",
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:34:53",
+            "available": [
+              "price",
+              "storage_condition",
+              "certifications",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "sensitivity_range",
+              "reconstitution_requirements",
+              "instrument_compatibility",
+              "inhibition_control_information"
+            ],
+            "unavailable": [
+              "shelf_life"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "Not found on Dipalabs page (external reference: USD 428.04 for 100‑Test Kit)",
+              "original_label": "Not available",
+              "confidence": "low",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "2‑8 °C (reagent and endotoxin standards stored at 2‑8 °C; reconstituted LAL stable up to 8 hours at 2‑8 °C, standards stable up to 4 weeks at 2‑8 °C)",
+              "original_label": "保存温度 / Reconstituted PYROGENT‑5000 LAL is stable up to … at 2‑8 °C / 保存2‑8 ℃",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "certifications": {
+              "value": "USP‑compliant (follows USP bacterial endotoxin test method)",
+              "original_label": "应遵循USP药典细菌内毒素检测法的规定",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "100 tests per kit (2 x 50 tests/vial lysate, 2 vials reconstitution buffer, 1 vial endotoxin)",
+              "original_label": "Content: 2 x 50 tests/vial lysate, 2 vials reconstitution buffer, 1 vial endotoxin",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "N383",
+              "original_label": "Manufacturer Part Number",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Lonza",
+              "original_label": "Brand / Manufacturer",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Not found on Dipalabs; external reference indicates 'made to order' requiring normal production lead-times",
+              "original_label": "made to order and requires normal production lead‑times",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "sensitivity_range": {
+              "value": "0.01 to 100.0 EU/mL",
+              "original_label": "sensitivity range from 0.01 to 100.0 EU/ml",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "reconstitution_requirements": {
+              "value": "Reconstitute LAL reagent with reconstitution buffer; endotoxin standard with pyrogen‑free water (vortex 15 min)",
+              "original_label": "使用时用无内毒素检测用水稀释…复溶后…涡旋震荡15 min",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "instrument_compatibility": {
+              "value": "Requires incubating absorbance plate reader (e.g., ELx808™) and WinKQCL™ software; performed in 96‑well plate format",
+              "original_label": "placed in incubating absorbance plate reader … via WinKQCL™ software",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            },
+            "inhibition_control_information": {
+              "value": "Kit contains matched control endotoxin standards; no explicit inhibition/enhancement control data provided",
+              "original_label": "contains matched control standard endotoxin",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:34:53",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "Switzerland"
+        }
+      ],
+      "last_updated": "2026-01-05 13:34:01",
+      "pipeline_stats": {
+        "total_time_seconds": 649.27,
+        "total_tokens": {
+          "input": 132911,
+          "output": 24647,
+          "total": 157558
+        }
+      }
+    },
+    "pathhunterbioassaykit#93-0933": {
+      "query_id": "pathhunterbioassaykit93-0933",
+      "query_text": "PathHunterBioassayKit#93-0933",
+      "enriched_query": "We are seeking detailed vendor information on the PathHunter Bioassay Kit, catalog number 93-0933. This is a cell-based bioassay kit, commonly used in drug discovery research for quantifying protein-protein interactions, GPCR or kinase signaling, or cellular pathway activity. Please provide comprehensive data for comparison, including unit price (with indicated quantity and currency), storage requirements (temperature and environmental conditions), shelf life/stability, regulatory and quality certifications, pack size (kit/reaction format and quantity per kit), official catalog or SKU number, manufacturer information, and typical lead time/delivery schedule. Additionally, include detailed descriptions of assay format (e.g., luminescent, colorimetric, cell type), detection method, target pathway or protein (e.g., GPCR target, kinase, specific interaction), sensitivity or performance characteristics, and required instrumentation. Indicate any species reactivity or cell line used, and provide references to published application data if available. This information will be used to compare with alternative bioassay kits for suitability in our drug screening workflows in a regulated research environment.",
+      "comparison_attributes": [
+        {
+          "key": "price",
+          "display_name": "Price",
+          "description": "Unit price of the product, including specified currency and the number of reactions/kits included.",
+          "look_for": [
+            "price",
+            "unit price",
+            "cost",
+            "list price",
+            "USD",
+            "EUR",
+            "GBP",
+            "£"
+          ]
+        },
+        {
+          "key": "storage_condition",
+          "display_name": "Storage Condition",
+          "description": "Temperature and environmental requirements for optimal storage and stability.",
+          "look_for": [
+            "storage",
+            "store at",
+            "temperature",
+            "refrigerate",
+            "freeze",
+            "-20",
+            "-80",
+            "2-8"
+          ]
+        },
+        {
+          "key": "shelf_life",
+          "display_name": "Shelf Life",
+          "description": "Product stability period or time until expiration under proper storage.",
+          "look_for": [
+            "shelf life",
+            "expiry",
+            "expiration",
+            "stability",
+            "valid for",
+            "best before",
+            "months from receipt",
+            "weeks from manufacture"
+          ]
+        },
+        {
+          "key": "certifications",
+          "display_name": "Certifications",
+          "description": "Regulatory compliance and quality certifications relevant to the kit (e.g., GMP, ISO, RUO).",
+          "look_for": [
+            "certification",
+            "compliance",
+            "USP",
+            "EP",
+            "GMP",
+            "ISO",
+            "RUO",
+            "IVD"
+          ]
+        },
+        {
+          "key": "pack_size",
+          "display_name": "Pack Size",
+          "description": "Number of units, reactions, or kits per package.",
+          "look_for": [
+            "pack size",
+            "quantity",
+            "unit size",
+            "contents",
+            "per pack",
+            "per kit",
+            "reactions",
+            "tests"
+          ]
+        },
+        {
+          "key": "catalog_number",
+          "display_name": "Catalog Number",
+          "description": "Manufacturer's catalog number, SKU, or product identifier.",
+          "look_for": [
+            "catalog",
+            "cat #",
+            "cat no",
+            "SKU",
+            "product code",
+            "item number",
+            "part number",
+            "ref"
+          ]
+        },
+        {
+          "key": "manufacturer",
+          "display_name": "Manufacturer",
+          "description": "Official manufacturer, brand, supplier, or distributor of the kit.",
+          "look_for": [
+            "manufacturer",
+            "brand",
+            "made by",
+            "produced by",
+            "supplier",
+            "distributed by",
+            "marketed by"
+          ]
+        },
+        {
+          "key": "lead_time",
+          "display_name": "Lead Time",
+          "description": "Time required for delivery, shipment, or order fulfillment; stock status.",
+          "look_for": [
+            "lead time",
+            "delivery",
+            "ships",
+            "shipping",
+            "in stock",
+            "available",
+            "backordered",
+            "dispatch"
+          ]
+        },
+        {
+          "key": "assay_format",
+          "display_name": "Assay Format",
+          "description": "The detection method and platform type (e.g., luminescence, absorbance, HTRF, FRET; homogeneous vs. cell-based).",
+          "look_for": [
+            "assay format",
+            "detection method",
+            "format",
+            "platform",
+            "luminescent",
+            "colorimetric",
+            "cell-based",
+            "homogeneous"
+          ]
+        },
+        {
+          "key": "target_pathway_or_protein",
+          "display_name": "Target Pathway or Protein",
+          "description": "The specific biological pathway, protein, or interaction measured by the assay.",
+          "look_for": [
+            "target",
+            "target pathway",
+            "protein target",
+            "GPCR target",
+            "kinase",
+            "interaction type",
+            "molecular target"
+          ]
+        },
+        {
+          "key": "sensitivity_or_performance",
+          "display_name": "Sensitivity or Performance Metrics",
+          "description": "Limit of detection, dynamic range, signal-to-noise ratio, or other performance characteristics.",
+          "look_for": [
+            "sensitivity",
+            "limit of detection",
+            "LOD",
+            "dynamic range",
+            "performance",
+            "Z' factor",
+            "signal"
+          ]
+        },
+        {
+          "key": "required_instrumentation",
+          "display_name": "Required Instrumentation",
+          "description": "Readers or detection equipment required for assay readout (e.g., plate reader type, compatible instruments).",
+          "look_for": [
+            "instrument",
+            "equipment",
+            "plate reader",
+            "detection system",
+            "required reader",
+            "compatible with"
+          ]
+        }
+      ],
+      "discovery": {
+        "model": "o4-mini-deep-research",
+        "completed_at": "2026-01-05 13:34:59",
+        "time_taken_seconds": 608.94,
+        "tokens_used": {
+          "input": 69510,
+          "output": 14892,
+          "total": 84402
+        },
+        "raw_response": "- **Thermo Fisher Scientific (Fisher Scientific – US)** – *Eurofins Discoverx PathHunter Bioassay Detection Kit, 75 (1,000 dp, 96-well) (93-0933)* – This Fisher Scientific page (Thermo Fisher) sells the exact PathHunter Bioassay Detection Kit (Cat. 93-0933). It’s the 1,000-dp 96-well set (75 reagent vials), including lysis and EFC substrate. Catalog No. NC1079661. Description notes it contains all reagents for detecting EFC in PathHunter cells (10 plates of 96 wells).  Price shown $5,825.43 (1 kit).  \n  - **Confidence:** High (100%) – exact match on leading global vendor site.  \n  - **Recommendation:** 1.0 – Exact Eurofins DiscoverX product from Thermo Fisher (US) with availability, reliable supplier.  \n  - **Reason:** Official authorized distributor listing, contains the specified kit and components. Highly reputable vendor, in‐stock status likely good.  \n  - **Concerns:** None significant, though requires account to see price; likely heavy import item (long lead time) given specialty.\n\n- **Thermo Fisher Scientific (Fisher Scientific – Europe)** – *Discoverx PathHunter Bioassay Detection Kit (Brand: Discoverx 93-0933E)* – This Fisher UK site lists the PathHunter Bioassay Detection Kit (Cat. 93-0933E), essentially the European version. Product code 16337616. The description simply shows “PathHunter Bioassay Detection Kit” with brand Discoverx 93-0933E. Price ~£1,858.49 (each kit). Same contents (1,000-dp, 96-well kit).  \n  - **Confidence:** High (95%) – exact kit (93-0933E) on Fisher EU, just variant letter.  \n  - **Recommendation:** 0.95 – Exact match variant (93-0933E, EU-import kit) from major supplier (Fisher Europe).  \n  - **Reason:** Only slight difference is “E” suffix (packaging/region), contents identical. Fisher UK/EU is reliable, available in GBP.  \n  - **Concerns:** None significant; ensure “93-0933E” version meets requirements (should, as same kit) and check any regional restrictions or lead times.\n\n- **Shanghai YuBo Biotech (51bioe.com)** – *discoverx代理商之产品 93-0933 PathHunter® Bioassay Detection Kit* – This Chinese distributor (Shanghai Yubo) offers the DiscoverX PathHunter Bioassay Detection Kit (catalog 93-0933), listed under “discoverx代理商之产品”. The page title confirms model 93-0933 and original import. It describes the kit and Yubo’s role as the China agent, noting it contains all reagents (lysis buffer, substrate) for the assay. (No price given, “consult”).  \n  - **Confidence:** Medium (80%) – correct product from an official Chinese agent.  \n  - **Recommendation:** 0.75 – Good match (same catalog no. at an authorized distributor).  \n  - **Reason:** Exact kit name and number match; Yubo is a known bio-reagent importer in China. Likely sources genuine DiscoverX product.  \n  - **Concerns:** Chinese-language site, no visible pricing (likely on request). Availability and delivery to India might be uncertain (import lead time, possible customs). Need to verify that international shipping is feasible.\n\n- **GoMa Biotech (Komabiotech, South Korea)** – *DiscoverX PathHunter Bioassay Detection Kit (Cat No. 93-0933)* – The GoMa (Komabiotech) Korean site lists “PathHunter Bioassay Detection Kit, 93-0933” for Eurofins DiscoverX. Its order table shows Cat.No. 93-0933 and “1 kit” from Eurofins DiscoverX. The product detail (in Korean) confirms it’s a reagent set for use with PathHunter cell lines (lysis buffer + substrate, 96-well format).  \n  - **Confidence:** High (90%) – exact kit, direct authorized distributor listing.  \n  - **Recommendation:** 0.80 – Very good match (same catalog number, reputable Korean life-science supplier).  \n  - **Reason:** Kit is identical (93-0933), vendor lists brand and components clearly. Komabiotech (GoMa) is established in drug discovery supplies.  \n  - **Concerns:** Korean site content, but “견적문의” (price on request). Need sales inquiry; ensure delivery to India support. Check lead time (likely imported from US/Europe).\n\n- **Thermo Fisher Scientific (Fisher Scientific – Europe)** – *Discoverx PathHunter Bioassay Detection Kit (Brand: Discoverx 93-0933E)* – This Fisher Scientific Finland (fishersci.fi) listing shows the PathHunter Bioassay Detection Kit, Brand Discoverx 93-0933E (Product Code 16337616) at €2,233.50 each. Same kit contents (96-well, 1,000-dp).  \n  - **Confidence:** High (95%) – exact kit (93-0933E) on Fisher Europe (Finnish site).  \n  - **Recommendation:** 0.85 – Recommended (same product, available in EUR).  \n  - **Reason:** Original kit from established vendor (Thermo Fisher Europe). Euro price may differ, but serves as alternate regional source.  \n  - **Concerns:** None major except potentially longer shipping to India/EU depending on stock status (but Fisher Europe is global distributor).\n\nEach vendor listed supplies the exact DiscoverX PathHunter Bioassay Detection Kit (93-0933 or 93-0933E) in its catalog. Fisher Scientific (Thermo) has global dispersion (US and Europe) with known pricing; Shanghai Yubo and GoMa Biotech are regional distributors providing the original kit (likely at quotation pricing). These entries give choices on currency, lead time, and local support. All matches are high-confidence for exact kit match. Shipping and availability should be confirmed when ordering (especially for overseas distributors)."
+      },
+      "vendors": [
+        {
+          "id": 1,
+          "vendor_name": "Thermo Fisher Scientific (Fisher Scientific – US)",
+          "product_name": "Eurofins Discoverx PathHunter Bioassay Detection Kit, 75 (1,000 dp, 96-well) (93-0933)",
+          "product_url": "https://www.thermofisher.com/order/catalog/product/93-0933",
+          "product_description": "PathHunter Bioassay Detection Kit (Cat. 93-0933) with all reagents for detecting EFC in PathHunter cells.",
+          "discovery_confidence": "high",
+          "recommendation_score": 1.0,
+          "recommendation_reason": "Exact Eurofins DiscoverX product from Thermo Fisher (US) with availability, reliable supplier.",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:35:25",
+            "available": [
+              "price",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "lead_time",
+              "assay_format",
+              "target_pathway_or_protein"
+            ],
+            "unavailable": [
+              "storage_condition",
+              "shelf_life",
+              "certifications",
+              "sensitivity_or_performance",
+              "required_instrumentation"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$5,825.43 / Each of 1",
+              "original_label": "$5,825.43 / Each of 1",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "Kit contains all components required to assay 10 plates (96‑well)",
+              "original_label": "This kit contains all components required to assay 10 plates (96‑well)",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "NC1079661",
+              "original_label": "Catalog No. NC1079661",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Eurofins DiscoverX",
+              "original_label": "Supplier: Eurofins Discoverx",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "lead_time": {
+              "value": "Sign In or Register to check your price; no shipping or stock status provided",
+              "original_label": "Sign In or Register to check your price",
+              "confidence": "low",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "assay_format": {
+              "value": "Detection kit (includes lysis buffer and EFC substrate for EFC levels detection)",
+              "original_label": "detection kit intended for use with ... PathHunter Bioassay cells",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            },
+            "target_pathway_or_protein": {
+              "value": "EFC levels in PathHunter Bioassay cells",
+              "original_label": "detection ... to allow for detection of EFC levels in the assayed cells",
+              "confidence": "medium",
+              "extracted_at": "2026-01-05 13:35:25",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 2,
+          "vendor_name": "Thermo Fisher Scientific (Fisher Scientific – Europe)",
+          "product_name": "Discoverx PathHunter Bioassay Detection Kit (Brand: Discoverx 93-0933E)",
+          "product_url": "https://www.fishersci.com/shop/products/discoverx-pathhunter-bioassay-detection-kit-93-0933e-1/p-7019705",
+          "product_description": "PathHunter Bioassay Detection Kit (Cat. 93-0933E), European version with identical contents.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.95,
+          "recommendation_reason": "Exact match variant (93-0933E, EU-import kit) from major supplier (Fisher Europe).",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:35:35",
+            "available": [
+              "price",
+              "storage_condition",
+              "pack_size",
+              "catalog_number",
+              "manufacturer",
+              "assay_format",
+              "target_pathway_or_protein",
+              "required_instrumentation"
+            ],
+            "unavailable": [
+              "shelf_life",
+              "certifications",
+              "lead_time",
+              "sensitivity_or_performance"
+            ]
+          },
+          "specs": {
+            "price": {
+              "value": "$1,773.95 / Each of 1 (200 dp, 96‑well)",
+              "original_label": " $1,773.95 / Each of 1",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "storage_condition": {
+              "value": "Store reagents at –20 °C upon arrival (see user manual for details)",
+              "original_label": "Storage Conditions",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "pack_size": {
+              "value": "200 assay deployments (per 96‑well plate), components sufficient for 2 plates",
+              "original_label": "This kit contains all components required to assay 2 plates (96‑well)",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "catalog_number": {
+              "value": "NC1318472",
+              "original_label": "Catalog No.",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "manufacturer": {
+              "value": "Eurofins DiscoverX (brand: PathHunter®)",
+              "original_label": "Supplier / Brand",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "assay_format": {
+              "value": "Cell‑based assay; Detection via chemiluminescence (EFC technology)",
+              "original_label": "Assay Type / Detection Method",
+              "confidence": "high",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "target_pathway_or_protein": {
+              "value": "Not specified on product page; general EFC detection",
+              "original_label": "",
+              "confidence": "low",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            },
+            "required_instrumentation": {
+              "value": "Not specified (presumably a compatible chemiluminescence plate reader)",
+              "original_label": "",
+              "confidence": "low",
+              "extracted_at": "2026-01-05 13:35:35",
+              "model": "gpt-4o"
+            }
+          },
+          "manufacturer_country": "USA"
+        },
+        {
+          "id": 3,
+          "vendor_name": "Thermo Fisher Scientific (Fisher Scientific – Europe)",
+          "product_name": "Discoverx PathHunter Bioassay Detection Kit (Brand: Discoverx 93-0933E)",
+          "product_url": "https://www.fishersci.fi/shop/products/discoverx-pathhunter-bioassay-detection-kit-93-0933e-1/p-7019705",
+          "product_description": "PathHunter Bioassay Detection Kit (Cat. 93-0933E) available in Finland.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.85,
+          "recommendation_reason": "Original kit from established vendor (Thermo Fisher Europe).",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:35:42",
+            "error": "Could not parse JSON from response:\nI attempted to access the specified vendor page directly (fishersci.fi link), but received a “410 Gone” response—it appears the page is no longer available. However, I located equivalent information via Fisher Scientific's US site for the same product (Eurofins Discoverx PathHunter Bioassay Detection Kit, 15 (200 dp, 96‑well), catalog number 93‑0933E) ([fishersci.com](https://www.fishersci.com/shop/products/2-96well-plate-of-bioassay/NC1318472?utm_source=openai)).\n\nUsing that, I've extracted the..."
+          },
+          "specs": {}
+        },
+        {
+          "id": 4,
+          "vendor_name": "GoMa Biotech (Komabiotech, South Korea)",
+          "product_name": "DiscoverX PathHunter Bioassay Detection Kit (Cat No. 93-0933)",
+          "product_url": "https://www.komabiotech.com/product/93-0933",
+          "product_description": "PathHunter Bioassay Detection Kit (Cat No. 93-0933) from Eurofins DiscoverX.",
+          "discovery_confidence": "high",
+          "recommendation_score": 0.8,
+          "recommendation_reason": "Very good match (same catalog number, reputable Korean life-science supplier).",
+          "discovery_concerns": null,
+          "specs_availability": {
+            "checked_at": "2026-01-05 13:35:50",
+            "error": "Could not parse JSON from response:\nI wasn't able to fetch the specified product page (URL https://www.komabiotech.com/product/93-0933) due to access limitations. Despite that, I attempted to locate information via site search, but could not find relevant product details associated with the catalog number 93‑0933.\n\nTherefore, I'm unable to extract any of the requested specifications from that page at this time.\n\nFor your review:\n- price: Not found\n- storage_condition: Not found\n- shelf_life: Not found\n- certifications: Not found\n-..."
+          },
+          "specs": {}
+        }
+      ],
+      "last_updated": "2026-01-05 13:35:16",
+      "pipeline_stats": {
+        "total_time_seconds": 675.39,
+        "total_tokens": {
+          "input": 115041,
+          "output": 17597,
+          "total": 132638
+        }
+      }
     }
   }
 }

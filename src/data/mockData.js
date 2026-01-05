@@ -581,15 +581,27 @@ export const api = {
   },
 
   // Get vendors for a product with filters
-  async getVendors(productQuery, filters = {}) {
+  async getVendors(productQuery, filters = {}, version = null) {
     // First try to fetch from real API for alternate vendors
     try {
-      const response = await fetch(`${API_BASE_URL}/alternate-vendors?q=${encodeURIComponent(productQuery)}`)
+      let url = `${API_BASE_URL}/alternate-vendors?q=${encodeURIComponent(productQuery)}`
+      if (version) {
+        url += `&version=${version}`
+      }
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         if (data.found && data.vendors.length > 0) {
           // Transform API vendors to frontend format
           let vendors = data.vendors.map((v, i) => transformApiVendor(v, i))
+          
+          // Store version info to return
+          const versionInfo = {
+            version: data.version,
+            currentVersion: data.currentVersion,
+            availableVersions: data.availableVersions || [],
+            last_updated: data.last_updated
+          }
           
           // Apply frontend filters
           if (filters.source?.length) {
@@ -620,7 +632,11 @@ export const api = {
           // Sort by suitability score
           vendors.sort((a, b) => b.suitabilityScore - a.suitabilityScore)
           
-          return vendors
+          // Return vendors with version info
+          return {
+            vendors,
+            ...versionInfo
+          }
         }
       }
     } catch (error) {
@@ -660,7 +676,14 @@ export const api = {
     // Sort by suitability score
     vendors.sort((a, b) => b.suitabilityScore - a.suitabilityScore)
     
-    return vendors
+    // Return in same format as API response for consistency
+    return {
+      vendors,
+      version: 1,
+      currentVersion: 1,
+      availableVersions: [{ version: 1, date: '', vendorCount: vendors.length }],
+      last_updated: ''
+    }
   },
 
   // Get AI analysis/recommendation - always uses full unfiltered vendor list for accurate analysis
@@ -739,12 +762,28 @@ export const api = {
           id: sku.id,
           name: sku.name,
           casNumber: '—',
-          category: `${sku.vendorCount} vendor${sku.vendorCount !== 1 ? 's' : ''}`
+          category: `${sku.vendorCount} vendor${sku.vendorCount !== 1 ? 's' : ''}`,
+          versionsCount: sku.versionsCount || 1,
+          currentVersion: sku.currentVersion || 1,
+          lastUpdated: sku.lastUpdated || ''
         }))
       }
     } catch (error) {
       console.log('Backend API not available for all SKUs:', error.message)
     }
     return []
+  },
+
+  // Get versions for a specific SKU
+  async getVersions(queryId) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/versions/${encodeURIComponent(queryId)}`)
+      if (response.ok) {
+        return await response.json()
+      }
+    } catch (error) {
+      console.log('Backend API not available for versions:', error.message)
+    }
+    return { versions: [], found: false }
   }
 }

@@ -55,6 +55,36 @@ openai_api_key = os.getenv('OPENAI_API_KEY')
 if not openai_api_key:
     print("Warning: OPENAI_API_KEY not found in environment variables")
 
+# =============================================================================
+# PRICING - OpenAI Model Costs (per 1M tokens, as of Jan 2025)
+# =============================================================================
+MODEL_PRICING = {
+    # GPT-4.1 series
+    "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00},
+    "gpt-4.1": {"input": 2.00, "output": 8.00},
+    # GPT-4o series
+    "gpt-4o": {"input": 2.50, "output": 10.00},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
+    # Deep research models (estimated based on compute)
+    "o4-mini-deep-research": {"input": 1.10, "output": 4.40},
+    "o3-mini": {"input": 1.10, "output": 4.40},
+    # Fallback
+    "default": {"input": 2.50, "output": 10.00}
+}
+
+def calculate_cost(model: str, input_tokens: int, output_tokens: int) -> float:
+    """Calculate cost in USD for a given model and token counts."""
+    pricing = MODEL_PRICING.get(model, MODEL_PRICING["default"])
+    input_cost = (input_tokens / 1_000_000) * pricing["input"]
+    output_cost = (output_tokens / 1_000_000) * pricing["output"]
+    return round(input_cost + output_cost, 6)
+
+def format_cost(cost: float) -> str:
+    """Format cost as string with appropriate precision."""
+    if cost < 0.01:
+        return f"${cost:.4f}"
+    return f"${cost:.2f}"
+
 
 def get_openai_client():
     """Get OpenAI client with extended timeouts for deep research."""
@@ -113,6 +143,46 @@ def save_vendors_data(data: Dict[str, Any]) -> None:
     with open(VENDORS_JSON_PATH, 'w') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"✓ Data saved to {VENDORS_JSON_PATH}")
+
+
+def get_next_version(query_data: Dict[str, Any]) -> int:
+    """Get the next version number for a query."""
+    versions = query_data.get("versions", [])
+    if not versions:
+        return 1
+    return max(v.get("version", 0) for v in versions) + 1
+
+
+def save_query_with_versioning(query_key: str, query_entry: Dict[str, Any]) -> int:
+    """
+    Save a query entry with versioning support.
+    Returns the version number assigned.
+    """
+    data = load_vendors_data()
+    
+    if query_key not in data["queries"]:
+        # New query - initialize with versions array
+        data["queries"][query_key] = {
+            "query_id": query_entry["query_id"],
+            "query_text": query_entry["query_text"],
+            "versions": [],
+            "current_version": 1
+        }
+    
+    # Get next version number
+    version_num = get_next_version(data["queries"][query_key])
+    
+    # Add version metadata to entry
+    query_entry["version"] = version_num
+    query_entry["version_date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Append to versions array
+    data["queries"][query_key]["versions"].append(query_entry)
+    data["queries"][query_key]["current_version"] = version_num
+    data["queries"][query_key]["last_updated"] = query_entry["version_date"]
+    
+    save_vendors_data(data)
+    return version_num
 
 
 def parse_json_response(response_text: str) -> dict:
@@ -470,7 +540,7 @@ def parse_discovery(raw_discovery: str) -> Dict[str, Any]:
         raw_discovery: Raw text from deep research
         
     Returns:
-        dict with vendors list
+        dict with vendors list and token info
     """
     print("\n🔧 Phase 3: Parsing discovery results...")
     
@@ -489,6 +559,14 @@ def parse_discovery(raw_discovery: str) -> Dict[str, Any]:
     response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
     
     result = parse_json_response(response.choices[0].message.content)
+    
+    # Add token info
+    if hasattr(response, 'usage') and response.usage:
+        result["tokens_used"] = {
+            "input": response.usage.prompt_tokens,
+            "output": response.usage.completion_tokens,
+            "total": response.usage.total_tokens
+        }
     
     print(f"   ✓ Parsed {len(result.get('vendors', []))} vendors")
     
@@ -639,7 +717,14 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
         Complete query entry with all data
     """
     total_start = time.time()
-    total_tokens = {"input": 0, "output": 0, "total": 0}
+    
+    # Track tokens and costs per step
+    step_stats = {
+        "enrichment": {"model": None, "input_tokens": 0, "output_tokens": 0, "cost": 0.0},
+        "discovery": {"model": None, "input_tokens": 0, "output_tokens": 0, "cost": 0.0},
+        "parsing": {"model": None, "input_tokens": 0, "output_tokens": 0, "cost": 0.0},
+        "extraction": {"model": None, "input_tokens": 0, "output_tokens": 0, "cost": 0.0, "vendor_count": 0}
+    }
     
     print(f"\n{'='*60}")
     print(f"🔍 Running full pipeline for: {query}")
@@ -650,21 +735,46 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     enriched_query = enrichment["enriched_query"]
     comparison_attributes = enrichment["comparison_attributes"]
     
+    # Track enrichment tokens
+    step_stats["enrichment"]["model"] = enrichment.get("model", "gpt-4.1-2025-04-14")
     if enrichment.get("tokens_used"):
-        for k in total_tokens:
-            total_tokens[k] += enrichment["tokens_used"].get(k, 0)
+        step_stats["enrichment"]["input_tokens"] = enrichment["tokens_used"].get("input", 0)
+        step_stats["enrichment"]["output_tokens"] = enrichment["tokens_used"].get("output", 0)
+        step_stats["enrichment"]["cost"] = calculate_cost(
+            step_stats["enrichment"]["model"],
+            step_stats["enrichment"]["input_tokens"],
+            step_stats["enrichment"]["output_tokens"]
+        )
     
     print(f"\n--- Enriched Query ---\n{enriched_query[:500]}...")
     
     # Phase 2: Discovery
     discovery = run_discovery(enriched_query, comparison_attributes)
     
+    # Track discovery tokens
+    step_stats["discovery"]["model"] = discovery.get("model", "o4-mini-deep-research")
     if discovery.get("tokens_used"):
-        for k in total_tokens:
-            total_tokens[k] += discovery["tokens_used"].get(k, 0)
+        step_stats["discovery"]["input_tokens"] = discovery["tokens_used"].get("input", 0)
+        step_stats["discovery"]["output_tokens"] = discovery["tokens_used"].get("output", 0)
+        step_stats["discovery"]["cost"] = calculate_cost(
+            step_stats["discovery"]["model"],
+            step_stats["discovery"]["input_tokens"],
+            step_stats["discovery"]["output_tokens"]
+        )
     
     # Phase 3: Parse
     parsed = parse_discovery(discovery["raw_response"])
+    
+    # Track parsing tokens
+    step_stats["parsing"]["model"] = "gpt-4o-mini"
+    if parsed.get("tokens_used"):
+        step_stats["parsing"]["input_tokens"] = parsed["tokens_used"].get("input", 0)
+        step_stats["parsing"]["output_tokens"] = parsed["tokens_used"].get("output", 0)
+        step_stats["parsing"]["cost"] = calculate_cost(
+            step_stats["parsing"]["model"],
+            step_stats["parsing"]["input_tokens"],
+            step_stats["parsing"]["output_tokens"]
+        )
     
     # Build query entry structure
     query_id = slugify(query)
@@ -706,6 +816,7 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     # Phase 4: Extraction (optional)
     if extract_specs_flag and query_entry["vendors"]:
         print("\n📊 Phase 4: Extracting specs from vendor pages...")
+        step_stats["extraction"]["model"] = "gpt-4o"
         
         for vendor in query_entry["vendors"]:
             product_url = vendor.get("product_url")
@@ -719,9 +830,11 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
                 # Extract all comparison attributes
                 extraction = extract_specs(product_url, comparison_attributes)
                 
+                # Track extraction tokens
                 if extraction.get("tokens_used"):
-                    for k in total_tokens:
-                        total_tokens[k] += extraction["tokens_used"].get(k, 0)
+                    step_stats["extraction"]["input_tokens"] += extraction["tokens_used"].get("input", 0)
+                    step_stats["extraction"]["output_tokens"] += extraction["tokens_used"].get("output", 0)
+                    step_stats["extraction"]["vendor_count"] += 1
                 
                 # Store results
                 results = extraction.get("results", {})
@@ -764,12 +877,56 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
                     "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     "error": str(e)
                 }
+        
+        # Calculate extraction cost
+        step_stats["extraction"]["cost"] = calculate_cost(
+            step_stats["extraction"]["model"],
+            step_stats["extraction"]["input_tokens"],
+            step_stats["extraction"]["output_tokens"]
+        )
     
-    # Final stats
+    # Calculate totals
+    total_input_tokens = sum(s["input_tokens"] for s in step_stats.values())
+    total_output_tokens = sum(s["output_tokens"] for s in step_stats.values())
+    total_cost = sum(s["cost"] for s in step_stats.values())
     total_time = round(time.time() - total_start, 2)
+    
+    # Build comprehensive pipeline stats
     query_entry["pipeline_stats"] = {
         "total_time_seconds": total_time,
-        "total_tokens": total_tokens
+        "total_tokens": {
+            "input": total_input_tokens,
+            "output": total_output_tokens,
+            "total": total_input_tokens + total_output_tokens
+        },
+        "total_cost_usd": total_cost,
+        "steps": {
+            "enrichment": {
+                "model": step_stats["enrichment"]["model"],
+                "input_tokens": step_stats["enrichment"]["input_tokens"],
+                "output_tokens": step_stats["enrichment"]["output_tokens"],
+                "cost_usd": step_stats["enrichment"]["cost"]
+            },
+            "discovery": {
+                "model": step_stats["discovery"]["model"],
+                "input_tokens": step_stats["discovery"]["input_tokens"],
+                "output_tokens": step_stats["discovery"]["output_tokens"],
+                "cost_usd": step_stats["discovery"]["cost"]
+            },
+            "parsing": {
+                "model": step_stats["parsing"]["model"],
+                "input_tokens": step_stats["parsing"]["input_tokens"],
+                "output_tokens": step_stats["parsing"]["output_tokens"],
+                "cost_usd": step_stats["parsing"]["cost"]
+            },
+            "extraction": {
+                "model": step_stats["extraction"]["model"],
+                "input_tokens": step_stats["extraction"]["input_tokens"],
+                "output_tokens": step_stats["extraction"]["output_tokens"],
+                "cost_usd": step_stats["extraction"]["cost"],
+                "vendors_processed": step_stats["extraction"]["vendor_count"]
+            }
+        }
     }
     
     return query_entry
@@ -791,31 +948,53 @@ def cmd_research(args):
     try:
         query_entry = run_full_pipeline(query, extract_specs_flag=True)
         
-        # Load existing data and add new query
-        data = load_vendors_data()
+        # Save with versioning (don't overwrite existing versions)
         query_key = query.lower().strip()
-        data["queries"][query_key] = query_entry
-        
-        save_vendors_data(data)
+        version_num = save_query_with_versioning(query_key, query_entry)
         
         # Print summary
         print(f"\n{'='*60}")
         print("📊 Research Results Summary")
         print(f"{'='*60}")
         print(f"Query ID: {query_entry['query_id']}")
+        print(f"Version: {version_num}")
         print(f"Vendors found: {len(query_entry['vendors'])}")
         
         stats = query_entry.get('pipeline_stats', {})
-        print(f"\n⏱️  Total time: {stats.get('total_time_seconds', 0)}s")
-        tokens = stats.get('total_tokens', {})
-        print(f"🪙 Total tokens: {tokens.get('total', 'N/A')}")
         
-        print("\nVendors:")
+        # Print detailed token and cost breakdown
+        print(f"\n{'='*60}")
+        print("💰 Token Usage & Cost Breakdown")
+        print(f"{'='*60}")
+        
+        steps = stats.get('steps', {})
+        for step_name, step_data in steps.items():
+            if step_data.get("input_tokens", 0) > 0 or step_data.get("output_tokens", 0) > 0:
+                print(f"\n  📍 {step_name.upper()}")
+                print(f"     Model: {step_data.get('model', 'N/A')}")
+                print(f"     Input tokens:  {step_data.get('input_tokens', 0):,}")
+                print(f"     Output tokens: {step_data.get('output_tokens', 0):,}")
+                print(f"     Cost: {format_cost(step_data.get('cost_usd', 0))}")
+                if step_name == 'extraction' and step_data.get('vendors_processed'):
+                    print(f"     Vendors processed: {step_data['vendors_processed']}")
+        
+        total_tokens = stats.get('total_tokens', {})
+        print(f"\n  {'─'*40}")
+        print(f"  📊 TOTALS")
+        print(f"     Total input tokens:  {total_tokens.get('input', 0):,}")
+        print(f"     Total output tokens: {total_tokens.get('output', 0):,}")
+        print(f"     Total tokens:        {total_tokens.get('total', 0):,}")
+        print(f"     Total cost:          {format_cost(stats.get('total_cost_usd', 0))}")
+        print(f"     Total time:          {stats.get('total_time_seconds', 0)}s")
+        
+        print(f"\n{'='*60}")
+        print("Vendors:")
         for v in query_entry["vendors"]:
             specs_count = len(v.get("specs", {}))
             print(f"  [{v['id']}] {v['vendor_name']} ({specs_count} specs extracted)")
         
         print(f"\n💡 View details: python pipeline.py show \"{query_entry['query_id']}\"")
+        print(f"💡 List versions: python pipeline.py versions \"{query_entry['query_id']}\"")
         
     except Exception as e:
         print(f"\n❌ Error during research: {e}")
@@ -831,16 +1010,15 @@ def cmd_discover(args):
     try:
         query_entry = run_discovery_only(query)
         
-        data = load_vendors_data()
+        # Save with versioning
         query_key = query.lower().strip()
-        data["queries"][query_key] = query_entry
-        
-        save_vendors_data(data)
+        version_num = save_query_with_versioning(query_key, query_entry)
         
         print(f"\n{'='*60}")
         print("📊 Discovery Results Summary")
         print(f"{'='*60}")
         print(f"Query ID: {query_entry['query_id']}")
+        print(f"Version: {version_num}")
         print(f"Vendors found: {len(query_entry['vendors'])}")
         
         print("\nVendors:")
@@ -856,6 +1034,49 @@ def cmd_discover(args):
         import traceback
         traceback.print_exc()
         sys.exit(1)
+
+
+def cmd_versions(args):
+    """Handle the 'versions' command - list all versions of a query."""
+    query_id = args.query_id
+    
+    data = load_vendors_data()
+    
+    # Find the query
+    query_data = None
+    for key, entry in data["queries"].items():
+        if entry.get("query_id") == query_id or query_id.lower() in key:
+            query_data = entry
+            break
+    
+    if not query_data:
+        print(f"❌ Query not found: {query_id}")
+        sys.exit(1)
+    
+    versions = query_data.get("versions", [])
+    if not versions:
+        print(f"❌ No versions found for: {query_id}")
+        sys.exit(1)
+    
+    print(f"\n{'='*60}")
+    print(f"📋 Versions for: {query_data.get('query_text', query_id)}")
+    print(f"{'='*60}\n")
+    
+    print(f"Current version: {query_data.get('current_version', 'N/A')}")
+    print(f"Total versions: {len(versions)}\n")
+    
+    for v in versions:
+        is_current = v.get("version") == query_data.get("current_version")
+        marker = " ← current" if is_current else ""
+        
+        print(f"  Version {v.get('version', '?')}{marker}")
+        print(f"    Date: {v.get('version_date', 'N/A')}")
+        print(f"    Vendors: {len(v.get('vendors', []))}")
+        
+        stats = v.get('pipeline_stats', {})
+        if stats.get('total_cost_usd'):
+            print(f"    Cost: {format_cost(stats['total_cost_usd'])}")
+        print()
 
 
 def cmd_extract(args):
@@ -1035,24 +1256,43 @@ def cmd_list(args):
 def cmd_show(args):
     """Handle the 'show' command."""
     query_id = args.query_id
+    version_num = getattr(args, 'version', None)
     
     data = load_vendors_data()
     
-    query_entry = None
+    query_data = None
     for key, entry in data["queries"].items():
-        if entry["query_id"] == query_id or query_id.lower() in key:
-            query_entry = entry
+        if entry.get("query_id") == query_id or query_id.lower() in key:
+            query_data = entry
             break
     
-    if not query_entry:
+    if not query_data:
         print(f"❌ Query not found: {query_id}")
         sys.exit(1)
     
+    # Get the specific version or current version
+    versions = query_data.get("versions", [])
+    if versions:
+        if version_num:
+            query_entry = next((v for v in versions if v.get("version") == version_num), None)
+            if not query_entry:
+                print(f"❌ Version {version_num} not found")
+                sys.exit(1)
+        else:
+            # Get current version
+            current_ver = query_data.get("current_version", 1)
+            query_entry = next((v for v in versions if v.get("version") == current_ver), versions[-1])
+    else:
+        # Old format - no versions
+        query_entry = query_data
+    
     print(f"\n{'='*60}")
-    print(f"📄 Query Details: {query_entry['query_id']}")
+    print(f"📄 Query Details: {query_entry.get('query_id', query_data.get('query_id'))}")
+    if query_entry.get("version"):
+        print(f"   Version: {query_entry['version']} ({query_entry.get('version_date', 'N/A')})")
     print(f"{'='*60}\n")
     
-    print(f"Original Query: {query_entry['query_text']}")
+    print(f"Original Query: {query_entry.get('query_text', query_data.get('query_text'))}")
     print(f"Last Updated: {query_entry.get('last_updated', 'N/A')}")
     
     # Discovery info
@@ -1062,8 +1302,17 @@ def cmd_show(args):
         print(f"  Model: {discovery.get('model', 'N/A')}")
         print(f"  Time: {discovery.get('time_taken_seconds', 'N/A')}s")
         tokens = discovery.get("tokens_used", {})
-    if tokens:
+        if tokens:
             print(f"  Tokens: {tokens.get('total', 'N/A')} total")
+    
+    # Pipeline stats
+    stats = query_entry.get("pipeline_stats", {})
+    if stats.get("total_cost_usd"):
+        print(f"\nPipeline Stats:")
+        print(f"  Total Time: {stats.get('total_time_seconds', 'N/A')}s")
+        print(f"  Total Cost: {format_cost(stats['total_cost_usd'])}")
+        total_tokens = stats.get('total_tokens', {})
+        print(f"  Total Tokens: {total_tokens.get('total', 'N/A'):,}")
     
     # Comparison attributes
     attrs = query_entry.get("comparison_attributes", [])
@@ -1202,7 +1451,13 @@ Examples:
     # Show command
     show_parser = subparsers.add_parser("show", help="Show details for a query")
     show_parser.add_argument("query_id", help="The query ID to show")
+    show_parser.add_argument("--version", type=int, help="Specific version number (default: current)")
     show_parser.set_defaults(func=cmd_show)
+    
+    # Versions command
+    versions_parser = subparsers.add_parser("versions", help="List all versions of a query")
+    versions_parser.add_argument("query_id", help="The query ID to list versions for")
+    versions_parser.set_defaults(func=cmd_versions)
     
     # Export command
     export_parser = subparsers.add_parser("export", help="Export query data to JSON")
@@ -1226,3 +1481,4 @@ Examples:
 
 if __name__ == "__main__":
     main()
+

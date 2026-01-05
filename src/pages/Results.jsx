@@ -16,6 +16,11 @@ function Results() {
   const [aiAnalysis, setAiAnalysis] = useState(null)
   const [sortBy, setSortBy] = useState('suitability')
   
+  // Version state
+  const [selectedVersion, setSelectedVersion] = useState(null)
+  const [availableVersions, setAvailableVersions] = useState([])
+  const [versionDate, setVersionDate] = useState('')
+  
   // Filter states
   const [filters, setFilters] = useState({
     currentPartnerOnly: false,
@@ -25,16 +30,22 @@ function Results() {
     minSuitability: 0
   })
 
-  // Fetch vendors when query or filters change
+  // Fetch vendors when query, filters, or version change
   useEffect(() => {
     if (query) {
       setLoading(true)
-      api.getVendors(query, filters).then(data => {
-        setVendors(data)
+      api.getVendors(query, filters, selectedVersion).then(data => {
+        setVendors(data.vendors || data)
+        // Update version info if available
+        if (data.availableVersions) {
+          setAvailableVersions(data.availableVersions)
+          setSelectedVersion(prev => prev || data.version || data.currentVersion)
+          setVersionDate(data.last_updated || '')
+        }
         setLoading(false)
       })
     }
-  }, [query, filters])
+  }, [query, filters, selectedVersion])
 
   // Fetch AI analysis separately - always uses unfiltered data for accurate recommendations
   useEffect(() => {
@@ -315,14 +326,36 @@ function Results() {
             <div className="results-title-section">
               <h1>({vendors.length}) Results for: {query}</h1>
               <p className="results-subtitle">Top recommendations based on price, suitability, and delivery speed.</p>
+              {versionDate && (
+                <p className="version-info">
+                  Data version: v{selectedVersion} • Updated: {new Date(versionDate).toLocaleDateString()}
+                </p>
+              )}
             </div>
-            <div className="sort-dropdown">
-              <label>Sort by:</label>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                <option value="suitability">Suitability Score</option>
-                <option value="price">Price (Low to High)</option>
-                <option value="leadTime">Lead Time</option>
-              </select>
+            <div className="results-controls">
+              {availableVersions.length > 1 && (
+                <div className="version-dropdown">
+                  <label>Version:</label>
+                  <select 
+                    value={selectedVersion || ''} 
+                    onChange={(e) => setSelectedVersion(Number(e.target.value))}
+                  >
+                    {availableVersions.map(v => (
+                      <option key={v.version} value={v.version}>
+                        v{v.version} ({v.vendorCount} vendors) - {v.date ? new Date(v.date).toLocaleDateString() : 'N/A'}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              <div className="sort-dropdown">
+                <label>Sort by:</label>
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                  <option value="suitability">Suitability Score</option>
+                  <option value="price">Price (Low to High)</option>
+                  <option value="leadTime">Lead Time</option>
+                </select>
+              </div>
             </div>
           </div>
 
