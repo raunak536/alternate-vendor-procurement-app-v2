@@ -492,7 +492,6 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
             <h3 className="vendor-name">{vendor.name}</h3>
             <div className="vendor-badges">
               <span className={`source-badge ${vendor.source.toLowerCase()}`}>{vendor.source}</span>
-              {vendor.isPreferred && <span className="tag-badge preferred">Preferred</span>}
               {vendor.isBestValue && <span className="tag-badge best-value">Best Value</span>}
               {vendor.isFastest && <span className="tag-badge fastest">Fastest</span>}
               {vendor.isManufacturerDirect !== undefined && (

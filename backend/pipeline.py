@@ -66,7 +66,7 @@ MODEL_PRICING = {
     "gpt-4o": {"input": 2.50, "output": 10.00},
     "gpt-4o-mini": {"input": 0.15, "output": 0.60},
     # Deep research models (estimated based on compute)
-    "o4-mini-deep-research": {"input": 1.10, "output": 4.40},
+    "o4-mini-deep-research": {"input": 2.00, "output": 8.00},
     "o3-mini": {"input": 1.10, "output": 4.40},
     # Fallback
     "default": {"input": 2.50, "output": 10.00}
@@ -168,6 +168,21 @@ def save_query_with_versioning(query_key: str, query_entry: Dict[str, Any]) -> i
             "versions": [],
             "current_version": 1
         }
+    elif "versions" not in data["queries"][query_key]:
+        # Migrate old format to new versioned format
+        old_data = data["queries"][query_key].copy()
+        data["queries"][query_key] = {
+            "query_id": old_data.get("query_id", query_entry["query_id"]),
+            "query_text": old_data.get("query_text", query_entry["query_text"]),
+            "versions": [],
+            "current_version": 0
+        }
+        # If old data had vendors/results, save it as version 1
+        if "vendors" in old_data or "enriched_query" in old_data:
+            old_data["version"] = 1
+            old_data["version_date"] = old_data.get("last_updated", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            data["queries"][query_key]["versions"].append(old_data)
+            data["queries"][query_key]["current_version"] = 1
     
     # Get next version number
     version_num = get_next_version(data["queries"][query_key])
@@ -255,10 +270,11 @@ INSTRUCTIONS:
 The base attributes are critical for all biopharma procurement comparisons. Add product-specific attributes on top of them."""
 
 
-DISCOVERY_PROMPT = """You are a domain expert in biopharma procurement researching alternate vendors.
+DISCOVERY_PROMPT = """You are a domain expert in biopharma procurement researching alternate MANUFACTURERS (not just vendors/resellers).
 
 CONTEXT:
-We are procuring for a large Indian biopharma company. We need to find alternate vendors for the product below.
+We are procuring for a large Indian biopharma company. We need to find alternate MANUFACTURERS for the product below.
+These are critical, high-value SKUs worth millions of dollars - quality and reliability are paramount.
 
 PRODUCT QUERY:
 {enriched_query}
@@ -267,52 +283,88 @@ ATTRIBUTES THAT WILL BE EXTRACTED LATER:
 {attributes_list}
 
 YOUR TASK:
-Find at least 5 alternate vendors that supply this EXACT product or very close equivalents.
+Find at least 5 alternate MANUFACTURERS that produce this EXACT product or very close equivalents.
 
-CRITICAL: Finding an exact product match is essential. Do not include vendors that only have vaguely similar products. The product name, specifications, and intended use must closely match the query.
+CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
+- You MAY search vendor/reseller websites (VWR, Fisher Scientific, etc.) to discover products - that's fine
+- BUT each MANUFACTURER must appear only ONCE in your results
+- If you find Corning products on VWR's website, report it as Corning (the manufacturer) - do NOT also report Corning from Fisher Scientific's website
+- Example of WRONG result: Reporting Corning flask found on VWR, then same Corning flask found on Fisher Scientific - this is duplicate manufacturer
+- Example of CORRECT result: Reporting Corning, Thermo Fisher, Greiner Bio-One, Eppendorf, Sarstedt - 5 DIFFERENT manufacturers (even if you found some via reseller websites)
 
-SEARCH STRATEGY:
-1. Search well-established GLOBAL vendors first:
-   - Thermo Fisher Scientific / Fisher Scientific
-   - MilliporeSigma (Merck/Sigma-Aldrich)
-   - VWR/Avantor
+MANUFACTURER REQUIREMENTS:
+Only include ESTABLISHED, REPUTABLE manufacturers:
+- Must be well-known, tier-1 or tier-2 global biopharma suppliers
+- Must have proven track record in biopharma/life sciences industry
+- Must have proper quality certifications (ISO, FDA registered, etc.)
+- NO small unknown players, regional-only suppliers, or unverified manufacturers
+- NO random suppliers from obscure marketplaces or trading platforms
+
+APPROVED MANUFACTURER CATEGORIES (prioritize these):
+1. Global tier-1 manufacturers:
+   - Thermo Fisher Scientific (manufacturer, not just Fisher Scientific reseller)
+   - MilliporeSigma / Merck / Sigma-Aldrich (as manufacturer)
    - BD (Becton Dickinson)
    - Sartorius
-   - Corning
-   - Bio-Techne (R&D Systems, Novus)
-2. Also search for specialized manufacturers if relevant
-3. Verify each product actually exists and appears available for purchase
+   - Corning Life Sciences
+   - Eppendorf
+   - Bio-Rad
+   - Agilent
+   - Cytiva (formerly GE Healthcare Life Sciences)
+   - Greiner Bio-One
+   - NEST Biotechnology
+   - Sarstedt
+   - Biologix
+2. Specialized established manufacturers in relevant product categories
+3. Regional manufacturers ONLY if they are well-established with global presence
 
-URL REGION PREFERENCE:
+URL VERIFICATION - ABSOLUTELY CRITICAL:
+- ONLY include products where you have VERIFIED the URL loads a valid product page
+- Do NOT include URLs that might be outdated, broken, or lead to 404 errors
+- Do NOT guess or construct URLs - only use URLs you have actually verified exist
+- If you cannot verify a URL works and shows the actual product, DO NOT include that result
+- Prefer manufacturer's direct website over third-party reseller pages
+- If a manufacturer's website is difficult to navigate or doesn't have direct product links, it's better to skip than provide a broken link
+
+NEVER USE PLACEHOLDER OR EXAMPLE URLs - THIS IS A SERIOUS ERROR:
+- NEVER output placeholder URLs like "https://exact-product-page-url" or "https://example.com/product"
+- NEVER output template URLs like "https://vendor.com/product-page" or "[URL]" or "URL_HERE"
+- NEVER make up fake URLs that look real but don't exist
+- If you cannot find a real, working URL for a product, DO NOT include that manufacturer in results
+- Every URL must be a REAL URL you actually found during your research
+- It is better to return 2-3 manufacturers with real URLs than 5 manufacturers with fake/placeholder URLs
+
+URL REGION PREFERENCE (only after verification):
 When the same product exists on multiple regional sites, prefer in this order:
 1. Global sites (.com without regional path)
 2. US sites (/US/en, /us/en, .com/us)
-3. India sites (/IN/en, /in/en, sigmaaldrich.com/IN)
+3. India sites (/IN/en, /in/en)
 4. Other regional sites only if the above are unavailable
-Example: Prefer sigmaaldrich.com/US/en over sigmaaldrich.com/DE/de for the same product.
 
-FOR EACH VENDOR, REPORT:
+FOR EACH MANUFACTURER, REPORT:
 - Vendor name
-- Product name (exact name as shown on vendor's site)
-- Direct product page URL (the specific product page, NOT the homepage or search results)
+- Product name (exact name as shown on manufacturer's site)
+- Direct product page URL (MUST be verified working - the specific product page, NOT homepage or search results)
 - Brief product description
 - Confidence level (high/medium/low) that this is an EXACT match
-- Recommendation score (0.0 to 1.0) - how strongly you recommend this vendor for this product
-  - 0.9-1.0: Excellent match, highly recommended (exact product, reputable vendor, good availability)
-  - 0.7-0.8: Good match, recommended (close match or minor concerns)
+- URL verification status: Confirm you have verified this URL loads the product page
+- Recommendation score (0.0 to 1.0) - how strongly you recommend this manufacturer
+  - 0.9-1.0: Excellent match from tier-1 manufacturer with verified working URL
+  - 0.7-0.8: Good match from established manufacturer with verified URL
   - 0.5-0.6: Acceptable match, consider as alternative
   - Below 0.5: Weak match, only if no better options
-- Recommendation reason (1-2 sentences explaining why you gave this score - e.g., "Exact product match from tier-1 vendor with confirmed availability" or "Close equivalent but different pack size")
+- Recommendation reason (1-2 sentences explaining why - include manufacturer reputation)
 - Any concerns (out of stock, discontinued, regional restrictions, etc.)
 
 IMPORTANT:
-- Find at least 5 vendors. More is better if quality exact matches exist.
-- EXACT MATCH is critical - do not pad results with loosely related products.
-- Take your time to research thoroughly. Quality matters more than speed.
-- Write naturally as a research report - do NOT use rigid JSON format.
-- Do NOT extract detailed specs - just find vendors and their product URLs.
-- Do NOT include inline citations with brackets - just list URLs clearly.
-- Only include vendors where you found actual product pages with the exact product."""
+- Find at least 5 DIFFERENT MANUFACTURERS (not 5 vendors selling same manufacturer's product)
+- EXACT MATCH is critical - do not pad results with loosely related products
+- ONLY established, reputable manufacturers - no unknown or small players
+- URL MUST WORK - if you cannot verify the link, do not include the result
+- Quality over quantity - 3 verified results from reputable manufacturers is better than 5 unverified results
+- Write naturally as a research report - do NOT use rigid JSON format
+- Do NOT extract detailed specs - just find manufacturers and their verified product URLs
+- Do NOT include inline citations with brackets - just list URLs clearly"""
 
 
 PARSE_DISCOVERY_PROMPT = """Convert this vendor research report into structured JSON.
@@ -326,7 +378,7 @@ OUTPUT FORMAT (valid JSON only):
         {{
             "vendor_name": "Full vendor name",
             "product_name": "Exact product name as shown on vendor site",
-            "product_url": "https://exact-product-page-url",
+            "product_url": "THE ACTUAL URL FROM THE REPORT - must be a real URL like https://www.thermofisher.com/order/catalog/product/12345",
             "product_description": "Brief description of the product",
             "confidence": "high/medium/low",
             "recommendation_score": 0.85,
@@ -336,16 +388,24 @@ OUTPUT FORMAT (valid JSON only):
     ]
 }}
 
+CRITICAL URL RULES - READ CAREFULLY:
+- product_url MUST be the ACTUAL URL from the research report, NOT a placeholder
+- NEVER output placeholder URLs like "https://exact-product-page-url" or "https://example.com"
+- NEVER output template text like "THE ACTUAL URL FROM THE REPORT" - use the real URL
+- If a vendor in the report does not have a real, specific URL, SKIP that vendor entirely
+- Every URL must start with https:// and be a complete, real product page URL
+
 INSTRUCTIONS:
 1. Extract ALL vendors mentioned that have valid product URLs (direct product pages, not homepages or search results)
 2. Include the exact product_name as mentioned in the report for each vendor
 3. Exclude any vendors marked as unavailable, discontinued, or unreliable
-4. Normalize vendor names consistently (e.g., "Sigma-Aldrich" and "MilliporeSigma" should both be "MilliporeSigma (Sigma-Aldrich)")
-5. Keep descriptions concise but informative
-6. Preserve the confidence level and any concerns mentioned
-7. Extract recommendation_score as a decimal between 0.0 and 1.0 (if not explicitly mentioned, infer from confidence: high=0.85, medium=0.65, low=0.45)
-8. Extract recommendation_reason - the explanation for why this score was given. If not explicitly stated, generate a brief reason based on confidence level and any noted strengths/concerns
-9. Set concerns to null if no issues were noted"""
+4. SKIP any vendor that does not have a real, complete URL - do not use placeholders
+5. Normalize vendor names consistently (e.g., "Sigma-Aldrich" and "MilliporeSigma" should both be "MilliporeSigma (Sigma-Aldrich)")
+6. Keep descriptions concise but informative
+7. Preserve the confidence level and any concerns mentioned
+8. Extract recommendation_score as a decimal between 0.0 and 1.0 (if not explicitly mentioned, infer from confidence: high=0.85, medium=0.65, low=0.45)
+9. Extract recommendation_reason - the explanation for why this score was given. If not explicitly stated, generate a brief reason based on confidence level and any noted strengths/concerns
+10. Set concerns to null if no issues were noted"""
 
 
 SPEC_AVAILABILITY_PROMPT = """Check which product specs are available on this page.
