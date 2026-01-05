@@ -28,7 +28,8 @@ function Compare() {
     if (productName) {
       setLoading(true)
       api.getVendors(productName, {}).then(data => {
-        setAllVendors(data)
+        // Handle both object response (with vendors array) and direct array
+        setAllVendors(data.vendors || data)
         setLoading(false)
       })
     }
