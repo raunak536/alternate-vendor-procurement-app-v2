@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import { api } from '../data/mockData'
@@ -13,6 +13,8 @@ function Compare() {
   const [searchQuery, setSearchQuery] = useState(productName)
   const [allVendors, setAllVendors] = useState([])
   const [loading, setLoading] = useState(true)
+  const [exporting, setExporting] = useState(false)
+  const comparisonRef = useRef(null)
   
   // Filter states (same as Results page for consistency)
   const [filters, setFilters] = useState({
@@ -45,7 +47,7 @@ function Compare() {
     'suitabilityScore', 'certifications', 'internalHistory', 'riskAssessment', 'website',
     'lat', 'lng', '_apiData', 'vendor_name', 'product_url', 'availability_status', 'price',
     'product_description', 'crawled_data', 'crawled_at', 'extracted_info', 'source_urls',
-    'shelfLife', 'packaging', 'storage', 'locking'
+    'shelfLife', 'packaging', 'storage', 'locking', 'isManufacturerDirect', 'url'
   ]
   
   // Collect all unique dynamic attribute keys from all selected vendors
@@ -89,14 +91,43 @@ function Compare() {
     navigate(-1)
   }
 
-  const handleExport = () => {
-    // Placeholder for export functionality
-    alert('Export comparison functionality would be implemented here')
-  }
-
-  const handleSelectVendor = (vendorId) => {
-    // Placeholder for vendor selection
-    alert(`Vendor ${vendorId} selected for procurement`)
+  const handleExport = async () => {
+    if (!comparisonRef.current) return
+    
+    setExporting(true)
+    
+    try {
+      // Dynamically import html2pdf
+      const html2pdf = (await import('html2pdf.js')).default
+      
+      const element = comparisonRef.current
+      const vendorNames = selectedVendors.map(v => v.name).join(' vs ')
+      
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `${productName}_Vendor_Comparison_${new Date().toISOString().split('T')[0]}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          letterRendering: true
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a3', 
+          orientation: 'landscape' 
+        },
+        pagebreak: { mode: 'avoid-all' }
+      }
+      
+      await html2pdf().set(opt).from(element).save()
+    } catch (error) {
+      console.error('Error exporting PDF:', error)
+      alert('Error exporting PDF. Please try again.')
+    } finally {
+      setExporting(false)
+    }
   }
 
   if (loading) {
@@ -308,13 +339,24 @@ function Compare() {
               ← Back to Results
             </button>
             <div className="compare-actions">
-              <button className="export-btn" onClick={handleExport}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Export Comparison
+              <button className="export-btn" onClick={handleExport} disabled={exporting}>
+                {exporting ? (
+                  <>
+                    <svg className="spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" strokeDasharray="32" strokeDashoffset="12" />
+                    </svg>
+                    Exporting...
+                  </>
+                ) : (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Export Comparison
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -323,7 +365,7 @@ function Compare() {
             <h1>{productName} / Vendor Comparison</h1>
           </div>
 
-          <div className="comparison-table">
+          <div className="comparison-table" ref={comparisonRef}>
             {/* Header Row */}
             <div className="table-row header-row">
               <div className="attribute-column">
@@ -343,12 +385,6 @@ function Compare() {
                       {vendor.isPreferred && <span className="preferred-badge">Preferred</span>}
                     </div>
                     <h3 className="vendor-name">{vendor.name}</h3>
-                    <button 
-                      className="select-vendor-btn"
-                      onClick={() => handleSelectVendor(vendor.id)}
-                    >
-                      SELECT VENDOR
-                    </button>
                   </div>
                 </div>
               ))}
@@ -368,20 +404,24 @@ function Compare() {
               ))}
             </div>
 
-            {/* Internal History Row */}
+            {/* URL Row */}
             <div className="table-row">
               <div className="attribute-column">
-                <span className="attribute-name">Internal History</span>
+                <span className="attribute-name">Product URL</span>
               </div>
               {selectedVendors.map(vendor => (
                 <div key={vendor.id} className="vendor-column">
-                  {vendor.internalHistory ? (
-                    <div className="history-data">
-                      <span>Spend: <strong>{formatCurrency(vendor.internalHistory.lifetimeSpend)}</strong></span>
-                      <span>Partner: <strong>{vendor.internalHistory.partnerSince}</strong></span>
-                    </div>
+                  {(vendor.url || vendor.website || vendor.product_url) ? (
+                    <a 
+                      href={vendor.url || vendor.website || vendor.product_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="website-link"
+                    >
+                      {vendor.url || vendor.website || vendor.product_url}
+                    </a>
                   ) : (
-                    <span className="no-data">No internal history</span>
+                    <span className="no-data">NA</span>
                   )}
                 </div>
               ))}
@@ -497,31 +537,6 @@ function Compare() {
                 </div>
               </>
             )}
-
-            {/* AI Risk Assessment Row */}
-            <div className="table-row">
-              <div className="attribute-column">
-                <div className="attribute-content">
-                  <span className="attribute-name">AI Risk Assessment</span>
-                  <svg className="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v-4M12 8h.01" />
-                  </svg>
-                </div>
-              </div>
-              {selectedVendors.map(vendor => (
-                <div key={vendor.id} className="vendor-column">
-                  {vendor.riskAssessment ? (
-                    <div className={`risk-badge ${vendor.riskAssessment.level.toLowerCase().replace(' ', '-')}`}>
-                      <span className="risk-icon">✓</span>
-                      <span className="risk-text">{vendor.riskAssessment.level}: {vendor.riskAssessment.description}</span>
-                    </div>
-                  ) : (
-                    <span className="no-data">—</span>
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
         </main>
       </div>
