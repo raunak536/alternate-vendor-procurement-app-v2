@@ -547,8 +547,25 @@ function transformApiVendor(vendor, index) {
 
 // Mock API service to simulate backend calls
 export const api = {
-  // Search for products/SKUs
+  // Search for products/SKUs from backend
   async searchProducts(query) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/skus?q=${encodeURIComponent(query)}`)
+      if (response.ok) {
+        const data = await response.json()
+        // Transform backend SKU format to match expected format
+        return data.skus.map(sku => ({
+          id: sku.id,
+          name: sku.name,
+          casNumber: '—',
+          category: `${sku.vendorCount} vendor${sku.vendorCount !== 1 ? 's' : ''}`
+        }))
+      }
+    } catch (error) {
+      console.log('Backend API not available for SKU search:', error.message)
+    }
+    
+    // Fallback to mock data if backend unavailable
     await new Promise(r => setTimeout(r, 300))
     const products = [
       { id: 1, name: 'TSA Plates', casNumber: '—', category: 'Lab Consumables' },
@@ -695,9 +712,39 @@ export const api = {
     }
   },
 
-  // Get dashboard data
+  // Get dashboard data from backend
   async getDashboard() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/dashboard-stats`)
+      if (response.ok) {
+        const data = await response.json()
+        return data
+      }
+    } catch (error) {
+      console.log('Backend API not available for dashboard stats:', error.message)
+    }
+    
+    // Fallback to mock data if backend unavailable
     await new Promise(r => setTimeout(r, 200))
     return dashboardStats
+  },
+
+  // Get all SKUs for dropdown (no filter)
+  async getAllSkus() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/skus`)
+      if (response.ok) {
+        const data = await response.json()
+        return data.skus.map(sku => ({
+          id: sku.id,
+          name: sku.name,
+          casNumber: '—',
+          category: `${sku.vendorCount} vendor${sku.vendorCount !== 1 ? 's' : ''}`
+        }))
+      }
+    } catch (error) {
+      console.log('Backend API not available for all SKUs:', error.message)
+    }
+    return []
   }
 }

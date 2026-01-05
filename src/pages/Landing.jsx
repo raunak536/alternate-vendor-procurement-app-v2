@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import { api } from '../data/mockData'
@@ -7,20 +7,42 @@ import './Landing.css'
 function Landing() {
   const [query, setQuery] = useState('')
   const [suggestions, setSuggestions] = useState([])
+  const [allSkus, setAllSkus] = useState([])
+  const [showDropdown, setShowDropdown] = useState(false)
   const [dashboard, setDashboard] = useState(null)
+  const searchRef = useRef(null)
   const navigate = useNavigate()
 
+  // Load dashboard stats and all SKUs on mount
   useEffect(() => {
-    api.getDashboard().then(setDashboard)
+    api.getDashboard().then(setDashboard).catch(err => console.error('Dashboard error:', err))
+    api.getAllSkus().then(setAllSkus).catch(err => console.error('SKUs error:', err))
   }, [])
 
+  // Filter suggestions as user types
   useEffect(() => {
-    if (query.length > 1) {
-      api.searchProducts(query).then(setSuggestions)
+    if (query.length > 0) {
+      // Filter all SKUs based on query
+      const filtered = allSkus.filter(sku => 
+        sku.name.toLowerCase().includes(query.toLowerCase())
+      )
+      setSuggestions(filtered)
     } else {
-      setSuggestions([])
+      // Show all SKUs when no query
+      setSuggestions(allSkus)
     }
-  }, [query])
+  }, [query, allSkus])
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -31,8 +53,12 @@ function Landing() {
 
   const selectSuggestion = (item) => {
     setQuery(item.name)
-    setSuggestions([])
+    setShowDropdown(false)
     navigate(`/results?q=${encodeURIComponent(item.name)}`)
+  }
+
+  const handleInputFocus = () => {
+    setShowDropdown(true)
   }
 
   return (
@@ -44,7 +70,7 @@ function Landing() {
           <h1 className="hero-title">INTELLIGENT PROCUREMENT</h1>
           <p className="hero-subtitle">AI-Powered Vendor Discovery & Risk Analysis</p>
           
-          <form onSubmit={handleSearch} className="search-form">
+          <form onSubmit={handleSearch} className="search-form" ref={searchRef}>
             <div className="search-container">
               <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
@@ -54,9 +80,9 @@ function Landing() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search chemical, material, SKU, or CAS number..."
+                onFocus={handleInputFocus}
+                placeholder="Search SKU from database..."
                 className="search-input"
-                autoFocus
               />
               <button type="submit" className="search-button">
                 SEARCH
@@ -66,13 +92,12 @@ function Landing() {
               </button>
             </div>
             
-            {suggestions.length > 0 && (
+            {showDropdown && suggestions.length > 0 && (
               <div className="suggestions-dropdown">
                 {suggestions.map((item) => (
                   <div key={item.id} className="suggestion-item" onClick={() => selectSuggestion(item)}>
                     <div className="suggestion-name">{item.name}</div>
                     <div className="suggestion-meta">
-                      <span className="suggestion-cas">{item.casNumber}</span>
                       <span className="suggestion-category">{item.category}</span>
                     </div>
                   </div>
@@ -116,7 +141,7 @@ function Landing() {
                   </div>
                   <div className="country-breakdown">
                     <div className="breakdown-header">
-                      <span>Country</span>
+                      <span>Manufacturer Country</span>
                       <span>Vendors</span>
                     </div>
                     {dashboard.networkStatus.topCountries.map((country, idx) => (

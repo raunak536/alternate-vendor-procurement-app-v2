@@ -38,7 +38,7 @@ lerna-debug.log*
 *.sw?
 cursor.md
 CODEBASE_DOCUMENTATION.md
-
+20251216_Consumables_SKUs_Categorization.xlsx
 # Jupyter notebooks (development only)
 jupyter_notebooks/
 *.ipynb
