@@ -57,7 +57,7 @@ def get_sku_category(sku_name):
 def load_vendor_data():
     """Load vendor data from JSON file."""
     if VENDOR_DATA_PATH.exists():
-        with open(VENDOR_DATA_PATH, 'r') as f:
+        with open(VENDOR_DATA_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
     return {"queries": {}}
 
