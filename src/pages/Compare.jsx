@@ -382,7 +382,6 @@ function Compare() {
                     )}
                     <div className="vendor-badges">
                       <span className={`source-badge ${vendor.source.toLowerCase()}`}>{vendor.source}</span>
-                      {vendor.isPreferred && <span className="preferred-badge">Preferred</span>}
                     </div>
                     <h3 className="vendor-name">{vendor.name}</h3>
                   </div>
