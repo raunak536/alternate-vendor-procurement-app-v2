@@ -11586,6 +11586,1346 @@
       ],
       "current_version": 2,
       "last_updated": "2026-01-05 19:50:39"
+    },
+    "ambr250 bioreactors, #001-5g25": {
+      "query_id": "ambr250-bioreactors-001-5g25",
+      "query_text": "ambr250 bioreactors, #001-5G25",
+      "versions": [
+        {
+          "query_id": "ambr250-bioreactors-001-5g25",
+          "query_text": "ambr250 bioreactors, #001-5G25",
+          "enriched_query": "Requesting detailed vendor information and technical specifications for ambr 250 Modular Bioreactor Systems, specifically for catalog number #001-5G25. This is for bioprocess development and process optimization in a laboratory or pilot-scale biopharmaceutical setting. Please include pricing, delivery timelines, pack sizes, certifications, shelf life, and storage conditions. Additionally, provide detailed technical specifications such as working volume range, vessel material, agitation/impeller type, compatibility with automation, and control system features. Compare products based on these attributes to assess suitability for scalable upstream bioprocess applications.",
+          "comparison_attributes": [
+            {
+              "key": "price",
+              "display_name": "Price",
+              "description": "Unit price in specified currency and the quantity included in the price.",
+              "look_for": [
+                "price",
+                "list price",
+                "unit price",
+                "cost",
+                "USD",
+                "EUR",
+                "GBP",
+                "£"
+              ]
+            },
+            {
+              "key": "storage_condition",
+              "display_name": "Storage Conditions",
+              "description": "Temperature and environmental requirements for storage to ensure product stability.",
+              "look_for": [
+                "storage",
+                "store at",
+                "temperature",
+                "refrigerate",
+                "freeze",
+                "-20",
+                "-80",
+                "2-8"
+              ]
+            },
+            {
+              "key": "shelf_life",
+              "display_name": "Shelf Life",
+              "description": "Time period during which the product remains stable and usable.",
+              "look_for": [
+                "shelf life",
+                "expiry",
+                "expiration",
+                "stability",
+                "valid for",
+                "best before",
+                "months from receipt",
+                "weeks from manufacture"
+              ]
+            },
+            {
+              "key": "certifications",
+              "display_name": "Certifications",
+              "description": "Regulatory and quality certifications relevant to bioprocessing equipment.",
+              "look_for": [
+                "certification",
+                "compliance",
+                "USP",
+                "EP",
+                "GMP",
+                "ISO",
+                "RUO",
+                "IVD"
+              ]
+            },
+            {
+              "key": "pack_size",
+              "display_name": "Pack Size",
+              "description": "Number of bioreactor vessels or systems per package.",
+              "look_for": [
+                "pack size",
+                "quantity",
+                "unit size",
+                "contents",
+                "per pack",
+                "per kit"
+              ]
+            },
+            {
+              "key": "catalog_number",
+              "display_name": "Catalog Number",
+              "description": "Product catalog, SKU, or reference number identifying the bioreactor model.",
+              "look_for": [
+                "catalog",
+                "cat #",
+                "cat no",
+                "SKU",
+                "product code",
+                "item number",
+                "part number",
+                "ref"
+              ]
+            },
+            {
+              "key": "manufacturer",
+              "display_name": "Manufacturer",
+              "description": "Brand or company that manufactures, supplies, or distributes the bioreactor system.",
+              "look_for": [
+                "manufacturer",
+                "brand",
+                "made by",
+                "produced by",
+                "supplier",
+                "distributed by",
+                "marketed by"
+              ]
+            },
+            {
+              "key": "lead_time",
+              "display_name": "Lead Time",
+              "description": "Delivery timelines, availability status, and typical shipping schedules.",
+              "look_for": [
+                "lead time",
+                "delivery",
+                "ships",
+                "shipping",
+                "in stock",
+                "available",
+                "backordered",
+                "dispatch"
+              ]
+            },
+            {
+              "key": "working_volume_range",
+              "display_name": "Working Volume Range",
+              "description": "Minimum and maximum culture working volume supported per vessel.",
+              "look_for": [
+                "working volume",
+                "culture volume",
+                "min volume",
+                "max volume",
+                "capacity"
+              ]
+            },
+            {
+              "key": "vessel_material",
+              "display_name": "Vessel Material",
+              "description": "Material composition of the vessel (e.g., single-use plastic, glass, stainless steel).",
+              "look_for": [
+                "vessel material",
+                "chamber material",
+                "single-use",
+                "disposable",
+                "glass",
+                "stainless"
+              ]
+            },
+            {
+              "key": "agitation_impeller_type",
+              "display_name": "Agitation/Impeller Type",
+              "description": "Type and configuration of mixing mechanism, including impeller design.",
+              "look_for": [
+                "impeller",
+                "agitation",
+                "stirrer",
+                "mixing",
+                "blade",
+                "orbital",
+                "magnetic"
+              ]
+            },
+            {
+              "key": "automation_compatibility",
+              "display_name": "Automation Compatibility",
+              "description": "Compatibility with automated sampling, control systems, or robotic integration.",
+              "look_for": [
+                "automation",
+                "robotic",
+                "integration",
+                "control system",
+                "automated sampling",
+                "SCADA",
+                "data logging"
+              ]
+            }
+          ],
+          "discovery": {
+            "model": "o4-mini-deep-research",
+            "completed_at": "2026-01-06 16:30:10",
+            "time_taken_seconds": 195.47,
+            "tokens_used": {
+              "input": 41428,
+              "output": 16972,
+              "total": 58400
+            },
+            "raw_response": "- **Manufacturer:** Sartorius – *Ambr 250 Modular System (6-Vessel)* – [Product Page](https://shop.sartorius.com/ww/p/ambr-250-modular-system--6-vessel/001-8A66-P)  \n  **Description:** Original high-throughput benchtop bioreactor system with 2, 4, 6, or 8 single-use 100–250 mL vessels. Modular design (up to four modules of 2 vessels each) allows control of up to 8 reactors with integrated pH/DO sensors, pumps, and optional off-gas analyzer ([shop.sartorius.com](https://shop.sartorius.com/ww/p/ambr-250-modular-system--6-vessel/001-8A66-P#:~:text=The%20Ambr,process%20development%2C%20and%20process%20optimization)) ([shop.sartorius.com](https://shop.sartorius.com/ww/p/ambr-250-modular-system--6-vessel/001-8A66-P#:~:text=The%20system%20features%20single,by%20a%20single%20control%20module)). This system is widely used for parallel cell culture/fermentation in bioprocess development.  \n  **URL Verified:** Yes (loads valid product page).  \n  **Confidence:** High – Exact match (original manufacturer) with verified URL.  \n  **Recommendation:** 0.9 – Tier-1 supplier with proven product. Well-established in bioprocess development.  \n  **Reasons:** Sartorius is a leading biopharma equipment company; the Ambr 250 is the specified system. The product page confirms features (100–250 mL, single-use vessels, integrated control) that match requirements.  \n  **Concerns:** None specific (product is sold and supported globally). If any, slightly higher price or lead time due to popularity, but no stock issues noted.\n\n- **Manufacturer:** Eppendorf – *DASbox® Mini Bioreactor System* – [Product Page](https://www.eppendorf.com/th-en/Products/Bioprocess/Bioprocess-Controllers/DASbox-Mini-Bioreactor-System-p-PF-133566)  \n  **Description:** Parallel bench-top bioreactor platform supporting up to 24 glass or single-use vessels (BioBLU®) in parallel. Designed for microbial and mammalian cell cultures, it covers small working volumes of ~60–250 mL per vessel ([www.eppendorf.com](https://www.eppendorf.com/th-en/Products/Bioprocess/Bioprocess-Controllers/DASbox-Mini-Bioreactor-System-p-PF-133566#:~:text=The%20DASbox%20Mini%20Bioreactor%20System,down%20applications)) ([www.eppendorf.com](https://www.eppendorf.com/th-en/Products/Bioprocess/Bioprocess-Controllers/DASbox-Mini-Bioreactor-System-p-PF-133566#:~:text=and%20process%20development%20in%20small,optimal%20tool%20for%20efficient%20process)). Includes integrated control of pH, temperature, DO, pumps and mass flow controllers. Suitable for high-throughput process development and scale-down experiments.  \n  **URL Verified:** Yes (loads product page with specs).  \n  **Confidence:** High – Eppendorf is a top-tier life-science equipment supplier, and the DASbox system is an established multi-parallel bioreactor.  \n  **Recommendation:** 0.9 – Excellent match. Eppendorf is well-known and that model meets the volume/parallel requirements.  \n  **Reasons:** Tier-1 manufacturer; the DASbox Mini specifically lists 60–250 mL and up to 24 vessels. It offers modular expansion and automation compatibility, making it highly suitable for scalable upstream development.  \n  **Concerns:** None critical. (Eppendorf products are globally supported, though the Thai/English site was used – a US/EN URL could be substituted if needed; offering multiple language indicates wide availability.)\n\n- **Manufacturer:** INFORS HT (Merck Millipore) – *Multifors® 2 Bench-Top Parallel Bioreactor System* – [Product Page](https://infors-ht.com/en/products/bioreactors/bench-top-bioreactors/multifors-2)  \n  **Description:** A configurable parallel benchtop reactor system. One control unit can run up to 6 vessels (glass), with vessel options including 400 mL (115–250 mL working volume) ([infors-ht.com](https://infors-ht.com/en/products/bioreactors/bench-top-bioreactors/multifors-2#:~:text=Product%20specifications)), 750 mL (180–500 mL working), or 1400 mL (320–1000 mL). Magnetic drives and integrated pumps/MFCs minimize footprint. Designed for microbial/fermentation use, it allows similar sensors and scales as production systems.  \n  **URL Verified:** Yes (loads product info and specs).  \n  **Confidence:** High – INFORS HT (now part of Merck Life Science) is a recognized biotech equipment manufacturer.  \n  **Recommendation:** 0.8 – Strong alternative. Known parallel system with matching scale (115–250 mL).  \n  **Reasons:** INFORS is an established bioreactor supplier (infors-ht.com). The Multifors 2 explicitly supports 115–250 mL working volumes per vessel, matching ambr’s range. Its parallel design (up to 6-fold) and industrial-grade sensors suit scalable applications.  \n  **Concerns:** The website shows glass vessels (not single-use). If single-use or disposable elements are needed, additional components or adaptation might be required. However, INFORS does offer single-use options on request.\n\n- **Manufacturer:** PBS Biotech – *PBS-0.1 Mini Vertical-Wheel Bioreactor* – [Product Page](https://www.pbsbiotech.com/pbs-01-mini-bioreactors)  \n  **Description:** A specialized single-use bioreactor for cell culture (stem cells, immunotherapies). Uses a patented vertical-wheel mixing system. Supports working volumes of ~60–100 mL ([www.pbsbiotech.com](https://www.pbsbiotech.com/pbs-01-mini-bioreactors#:~:text=The%20PBS,scale%20production)) (bench-scale). It is a benchtop system (PBS-Mini base unit) with enclosed single-use vessels; simple aseptic handling and regulatory-compliant materials (ideal for cell therapy development).  \n  **URL Verified:** Yes (official product page).  \n  **Confidence:** Medium – PBS Biotech is an emerging but reputable company in advanced bioreactors.  \n  **Recommendation:** 0.7 – Good specialty alternative, but note volume range slightly smaller.   \n  **Reasons:** PBS is known for cutting-edge single-use vessel technology. The PBS-0.1 Mini matches small-volume range (60–100 mL) and is built for high cell viability. It may serve similar experiments, especially where gentle mixing (vertical impeller) is desired.  \n  **Concerns:** Working volume max (100 mL) is below 250 mL, so users needing higher volume would have to use fewer vessels or scale up to PBS-0.5 model. It’s designed for cell therapy processes, so microbial fermentations might not be its focus. Ensure compatibility with process needs.\n\n- **Manufacturer:** H.E.L Group – *BioXplorer® 100 (Parallel 8 Bioreactor Platform)* – [Product Page](https://helgroup.com/products/bioreactors/bioxplorer-100/)  \n  **Description:** A multi-parallel stirred-tank system for aerobic cultures, with 8 configurable bioreactor vessels. Working volume range is ~50–150 mL per vessel ([helgroup.com](https://helgroup.com/products/bioreactors/bioxplorer-100/#:~:text=The%20BioXplorer%20100%20is%20a,as%2050%20ml%2C%C2%A0%20the%20BioXplorer)). Each reactor has a glass body and stainless lid; sensors can be independently configured. Controlled by H.E.L’s WinISO system. Emphasizes automated liquid/addition control and high-throughput data.  \n  **URL Verified:** Yes (working product page with specs).  \n  **Confidence:** Medium – H.E.L Group is a smaller specialized manufacturer, mainly known in fermentation R&D.  \n  **Recommendation:** 0.6 – Acceptable as an alternative.  \n  **Reasons:** The BioXplorer 100 meets the concept (parallel bioreactors, ~50–150 mL) closely. H.E.L is ISO-certified and serves pharma/biotech labs. This platform is used for fermentation screening and process development.  \n  **Concerns:** Less well-known than Tier-1 brands. Maximum volume (150 mL) is below 250 mL, so uses slightly smaller vessels; however, multiple runs can compensate. Regional availability may vary; confirm local support or lead times."
+          },
+          "vendors": [
+            {
+              "id": 1,
+              "vendor_name": "Sartorius",
+              "product_name": "Ambr 250 Modular System (6-Vessel)",
+              "product_url": "https://shop.sartorius.com/ww/p/ambr-250-modular-system--6-vessel/001-8A66-P",
+              "product_description": "High-throughput benchtop bioreactor system with modular design for up to 8 single-use vessels, integrated sensors, and pumps.",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Tier-1 supplier with proven product, widely used in bioprocess development.",
+              "discovery_concerns": null,
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:30:40",
+                "available": [
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "lead_time",
+                  "working_volume_range",
+                  "vessel_material",
+                  "agitation_impeller_type",
+                  "automation_compatibility"
+                ],
+                "unavailable": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "certifications"
+                ]
+              },
+              "specs": {
+                "pack_size": {
+                  "value": "1",
+                  "original_label": "Pack Size",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "001-8A66-P",
+                  "original_label": "Item No.",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Sartorius AG (Brand: Ambr® 250 Modular)",
+                  "original_label": "Brand",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "lead_time": {
+                  "value": "Quote provided within 72 hours upon request",
+                  "original_label": "Request a Quote note",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "working_volume_range": {
+                  "value": "100–250 mL per vessel",
+                  "original_label": "working volume",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "vessel_material": {
+                  "value": "Single-use plastic (Polycarbonate, Polypropylene, Polyethylene for vessels)",
+                  "original_label": "single-use; Materials of Construction (from related vessel page)",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "agitation_impeller_type": {
+                  "value": "Dual pitch blade or Rushton impellers; unbaffled option with elephant-ear impeller",
+                  "original_label": "impeller options",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                },
+                "automation_compatibility": {
+                  "value": "Integrated sensors and control via touchscreen; optional off-gas analyzer; compatible with add-on modules for up to 8 vessels",
+                  "original_label": "controller manages pH, temperature, DO; optional off-gas analyzer; expandable system",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:40",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "Germany"
+            },
+            {
+              "id": 2,
+              "vendor_name": "Eppendorf",
+              "product_name": "DASbox® Mini Bioreactor System",
+              "product_url": "https://www.eppendorf.com/th-en/Products/Bioprocess/Bioprocess-Controllers/DASbox-Mini-Bioreactor-System-p-PF-133566",
+              "product_description": "Parallel bench-top bioreactor platform supporting up to 24 vessels, designed for microbial and mammalian cell cultures.",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Excellent match with established multi-parallel bioreactor capabilities.",
+              "discovery_concerns": null,
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:30:51",
+                "available": [
+                  "certifications",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "working_volume_range",
+                  "vessel_material",
+                  "agitation_impeller_type",
+                  "automation_compatibility"
+                ],
+                "unavailable": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "lead_time"
+                ]
+              },
+              "specs": {
+                "certifications": {
+                  "value": "Certificates available (unspecified)",
+                  "original_label": "Certificates",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "4‑fold system (expandable up to 24 parallel bioreactors)",
+                  "original_label": "4‑fold system / up to 24 bioreactors",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "Various, e.g., 76DX04CC, 76DX04CCSU, 76DX04MB, 76DX04MBSU, 76DX08CC, etc.",
+                  "original_label": "Catalog no.",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Eppendorf SE",
+                  "original_label": "Product brand",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "working_volume_range": {
+                  "value": "60 mL – 250 mL",
+                  "original_label": "working volumes from …",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "vessel_material": {
+                  "value": "Glass or BioBLU® single‑use (plastic)",
+                  "original_label": "glass or BioBLU Single‑Use Bioreactors",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "agitation_impeller_type": {
+                  "value": "Not specified",
+                  "original_label": "agitation / impeller type",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                },
+                "automation_compatibility": {
+                  "value": "Seamless integration with Bioprocess Autosampler for automated 24/7 sampling; control via DASware® software suite",
+                  "original_label": "integration with Bioprocess Autosampler / DASware software",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:51",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "Germany"
+            },
+            {
+              "id": 3,
+              "vendor_name": "INFORS HT (Merck Millipore)",
+              "product_name": "Multifors® 2 Bench-Top Parallel Bioreactor System",
+              "product_url": "https://infors-ht.com/en/products/bioreactors/bench-top-bioreactors/multifors-2",
+              "product_description": "Configurable parallel benchtop reactor system supporting up to 6 vessels with various volume options.",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.8,
+              "recommendation_reason": "Strong alternative with matching scale and established supplier.",
+              "discovery_concerns": "Glass vessels may not meet single-use requirements.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:30:59",
+                "available": [
+                  "pack_size",
+                  "manufacturer",
+                  "working_volume_range",
+                  "vessel_material",
+                  "agitation_impeller_type",
+                  "automation_compatibility"
+                ],
+                "unavailable": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "certifications",
+                  "catalog_number",
+                  "lead_time"
+                ]
+              },
+              "specs": {
+                "pack_size": {
+                  "value": "Up to 6 vessels per system (controlled via one touchscreen unit)",
+                  "original_label": "operating up to 6 Multifors® bioreactor vessels from one touchscreen control",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "INFORS HT",
+                  "original_label": "Vendor / page branding",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                },
+                "working_volume_range": {
+                  "value": "115–250 mL (400 mL vessel), 180–500 mL (750 mL vessel), 320–1000 mL (1400 mL vessel)",
+                  "original_label": "Vessel sizes (and working volumes)",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                },
+                "vessel_material": {
+                  "value": "Glass vessels available (total volume 0.4 L to 1 L)",
+                  "original_label": "Glass vessels available in total volume range from 0.4 L to 1 L",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                },
+                "agitation_impeller_type": {
+                  "value": "Magnetic drive system allowing up to 1600 RPM",
+                  "original_label": "magnetic drive system capable of 1600 RPM",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                },
+                "automation_compatibility": {
+                  "value": "Compatible with eve® web‑based bioprocess software for integration regardless of manufacturer",
+                  "original_label": "eve® integrates with your bioreactors, regardless of the manufacturer",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:59",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "Switzerland"
+            },
+            {
+              "id": 4,
+              "vendor_name": "PBS Biotech",
+              "product_name": "PBS-0.1 Mini Vertical-Wheel Bioreactor",
+              "product_url": "https://www.pbsbiotech.com/pbs-01-mini-bioreactors",
+              "product_description": "Specialized single-use bioreactor for cell culture with a vertical-wheel mixing system, supporting small working volumes.",
+              "discovery_confidence": "medium",
+              "recommendation_score": 0.7,
+              "recommendation_reason": "Good specialty alternative for small-volume applications.",
+              "discovery_concerns": "Max working volume is below 250 mL, may not suit all applications.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:08",
+                "available": [
+                  "certifications",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "lead_time",
+                  "working_volume_range",
+                  "vessel_material",
+                  "agitation_impeller_type"
+                ],
+                "unavailable": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "automation_compatibility"
+                ]
+              },
+              "specs": {
+                "certifications": {
+                  "value": "USP Class VI (Plastics) and ISO 10993 compliance",
+                  "original_label": "Product contact materials meet requirements for USP Class VI Testing for Plastics and/or ISO 10993",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "pack of 1 or pack of 4 vessels",
+                  "original_label": "pack of 1 / pack of 4",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "FA-0.1-D-101 (pack of 1), FA-0.1-D-001 (pack of 4)",
+                  "original_label": "Product Number",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "PBS Biotech",
+                  "original_label": "—",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "lead_time": {
+                  "value": "Request a quote – implies custom lead time",
+                  "original_label": "Request a quote",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "working_volume_range": {
+                  "value": "20–100 mL (liquid mixing), 60–100 mL (cell culture)",
+                  "original_label": "Working volume range:",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "vessel_material": {
+                  "value": "Single-use injection-molded plastics (USP Class VI / ISO 10993 compliant)",
+                  "original_label": "Product contact materials meet requirements for USP Class VI Testing for Plastics and/or ISO 10993",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "agitation_impeller_type": {
+                  "value": "Vertical impeller (Vertical-Wheel mixing)",
+                  "original_label": "Vertical impeller",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "USA"
+            },
+            {
+              "id": 5,
+              "vendor_name": "H.E.L Group",
+              "product_name": "BioXplorer® 100 (Parallel 8 Bioreactor Platform)",
+              "product_url": "https://helgroup.com/products/bioreactors/bioxplorer-100/",
+              "product_description": "Multi-parallel stirred-tank system for aerobic cultures with 8 configurable vessels and automated control.",
+              "discovery_confidence": "medium",
+              "recommendation_score": 0.6,
+              "recommendation_reason": "Acceptable alternative for fermentation screening and process development.",
+              "discovery_concerns": "Maximum volume is below 250 mL; regional availability may vary.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:14",
+                "available": [
+                  "pack_size",
+                  "manufacturer",
+                  "working_volume_range",
+                  "vessel_material",
+                  "agitation_impeller_type",
+                  "automation_compatibility"
+                ],
+                "unavailable": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "certifications",
+                  "catalog_number",
+                  "lead_time"
+                ]
+              },
+              "specs": {
+                "pack_size": {
+                  "value": "8 bioreactors per system",
+                  "original_label": "Number of independent parallel bioreactors",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "H.E.L Group",
+                  "original_label": "—",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                },
+                "working_volume_range": {
+                  "value": "50–150 ml",
+                  "original_label": "Total volume / working volumes",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                },
+                "vessel_material": {
+                  "value": "Glass body, stainless steel lid",
+                  "original_label": "Bioreactor material",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                },
+                "agitation_impeller_type": {
+                  "value": "Magnetically driven captive impeller",
+                  "original_label": "Stirrer drive",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                },
+                "automation_compatibility": {
+                  "value": "Fully automated; controlled by Windows PC with WinISO control software",
+                  "original_label": "Control PC and software",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:14",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "United Kingdom"
+            }
+          ],
+          "last_updated": "2026-01-06 16:30:29",
+          "pipeline_stats": {
+            "total_time_seconds": 294.06,
+            "total_tokens": {
+              "input": 148561,
+              "output": 23316,
+              "total": 171877
+            },
+            "total_cost_usd": 0.53498,
+            "steps": {
+              "enrichment": {
+                "model": "gpt-4.1-2025-04-14",
+                "input_tokens": 615,
+                "output_tokens": 993,
+                "cost_usd": 0.009174
+              },
+              "discovery": {
+                "model": "o4-mini-deep-research",
+                "input_tokens": 41428,
+                "output_tokens": 16972,
+                "cost_usd": 0.218632
+              },
+              "parsing": {
+                "model": "gpt-4o-mini",
+                "input_tokens": 2451,
+                "output_tokens": 731,
+                "cost_usd": 0.000806
+              },
+              "extraction": {
+                "model": "gpt-4o",
+                "input_tokens": 104067,
+                "output_tokens": 4620,
+                "cost_usd": 0.306368,
+                "vendors_processed": 5
+              }
+            }
+          },
+          "version": 1,
+          "version_date": "2026-01-06 16:31:14"
+        }
+      ],
+      "current_version": 1,
+      "last_updated": "2026-01-06 16:31:14"
+    },
+    "sds-mwanalysiskit#pn390953": {
+      "query_id": "sds-mwanalysiskitpn390953",
+      "query_text": "SDS-MWAnalysisKit#PN390953",
+      "versions": [
+        {
+          "query_id": "sds-mwanalysiskitpn390953",
+          "query_text": "SDS-MWAnalysisKit#PN390953",
+          "enriched_query": "Request for detailed vendor information and comparison for a Sodium Dodecyl Sulfate - Molecular Weight Analysis Kit, product code PN390953. This kit is intended for protein molecular weight analysis by SDS polyacrylamide gel electrophoresis (SDS-PAGE) and related methods in biopharmaceutical research and quality control. Please provide information on pricing, storage specifications, shelf life, regulatory certifications, package size, exact catalog or part number, manufacturer or supplier name, and typical delivery timelines. Additionally, include data on molecular weight range, detection sensitivity, compatible detection systems or instruments, and included reagents or components. Product must be suitable for laboratory use and compatible with standard protein electrophoresis workflows. Information on lot consistency and validation data is also highly valued for scientific and QC applications.",
+          "comparison_attributes": [
+            {
+              "key": "price",
+              "display_name": "Unit Price",
+              "description": "Cost of the kit per unit, including currency and quantity breakdown.",
+              "look_for": [
+                "price",
+                "list price",
+                "unit price",
+                "cost",
+                "USD",
+                "EUR",
+                "GBP",
+                "£"
+              ]
+            },
+            {
+              "key": "storage_condition",
+              "display_name": "Storage Conditions",
+              "description": "Recommended temperature and storage requirements for product stability.",
+              "look_for": [
+                "storage",
+                "store at",
+                "temperature",
+                "refrigerate",
+                "freeze",
+                "-20",
+                "-80",
+                "2-8"
+              ]
+            },
+            {
+              "key": "shelf_life",
+              "display_name": "Shelf Life",
+              "description": "Period during which the product remains stable and usable if properly stored.",
+              "look_for": [
+                "shelf life",
+                "expiry",
+                "expiration",
+                "stability",
+                "valid for",
+                "best before",
+                "months from receipt",
+                "weeks from manufacture"
+              ]
+            },
+            {
+              "key": "certifications",
+              "display_name": "Certifications",
+              "description": "Regulatory and quality certifications for the product.",
+              "look_for": [
+                "certification",
+                "compliance",
+                "USP",
+                "EP",
+                "GMP",
+                "ISO",
+                "RUO",
+                "IVD"
+              ]
+            },
+            {
+              "key": "pack_size",
+              "display_name": "Pack Size",
+              "description": "Number of units, reactions, or tests per package/kit.",
+              "look_for": [
+                "pack size",
+                "quantity",
+                "unit size",
+                "contents",
+                "per pack",
+                "per kit",
+                "reactions",
+                "tests"
+              ]
+            },
+            {
+              "key": "catalog_number",
+              "display_name": "Catalog Number",
+              "description": "Manufacturer-provided SKU, catalog, or reference number.",
+              "look_for": [
+                "catalog",
+                "cat #",
+                "cat no",
+                "SKU",
+                "product code",
+                "item number",
+                "part number",
+                "ref"
+              ]
+            },
+            {
+              "key": "manufacturer",
+              "display_name": "Manufacturer",
+              "description": "Company or brand that manufactures or supplies the product.",
+              "look_for": [
+                "manufacturer",
+                "brand",
+                "made by",
+                "produced by",
+                "supplier",
+                "distributed by",
+                "marketed by"
+              ]
+            },
+            {
+              "key": "lead_time",
+              "display_name": "Lead Time",
+              "description": "Expected delivery timeframe and current stock or backorder status.",
+              "look_for": [
+                "lead time",
+                "delivery",
+                "ships",
+                "shipping",
+                "in stock",
+                "available",
+                "backordered",
+                "dispatch"
+              ]
+            },
+            {
+              "key": "molecular_weight_range",
+              "display_name": "Molecular Weight Range",
+              "description": "Range of molecular weights the kit can accurately analyze or resolve.",
+              "look_for": [
+                "molecular weight range",
+                "MW range",
+                "analyte size",
+                "size range",
+                "kDa range"
+              ]
+            },
+            {
+              "key": "detection_sensitivity",
+              "display_name": "Detection Sensitivity",
+              "description": "Minimum detectable quantity or limit of detection for protein bands.",
+              "look_for": [
+                "detection sensitivity",
+                "minimum detectable",
+                "LOD",
+                "limit of detection",
+                "sensitivity"
+              ]
+            },
+            {
+              "key": "included_reagents",
+              "display_name": "Included Reagents",
+              "description": "Detailed list or types of reagents or standards included in the kit.",
+              "look_for": [
+                "included reagents",
+                "kit contents",
+                "what's included",
+                "components",
+                "reagents provided"
+              ]
+            },
+            {
+              "key": "instrument_compatibility",
+              "display_name": "Instrument Compatibility",
+              "description": "Compatible electrophoresis and detection platforms (e.g., gel systems, readers).",
+              "look_for": [
+                "instrument compatibility",
+                "compatible systems",
+                "compatible devices",
+                "gel type",
+                "platform"
+              ]
+            }
+          ],
+          "discovery": {
+            "model": "o4-mini-deep-research",
+            "completed_at": "2026-01-06 16:30:18",
+            "time_taken_seconds": 204.4,
+            "tokens_used": {
+              "input": 49391,
+              "output": 12132,
+              "total": 61523
+            },
+            "raw_response": "- **SciEX (AB Sciex)** – **Product:** SDS-MW Analysis Kit (for PA 800 Plus) – **URL:** [SDS-MW Analysis Kit](https://us-store.sciex.com/USD/capillary-electrophoresis/chemistries-and-kits/kits/SDS-MW-Analysis-Kit-zid390953) (verified working) – **Description:** A complete kit for protein size determination by SDS-PAGE capillary electrophoresis, including separation capillaries, SDS separation buffer, SDS sample buffer, molecular weight standards (10–225 kDa), internal 10 kDa standard, and wash solutions. (Part #390953; 100-sample kit.) – **Confidence:** High (exact product/part number match) – **Verified:** Yes (sciex.com loads product page) – **Recommendation Score:** 0.9 – **Reason:** Broadly trusted Danaher/SCIEX instrument supplier; exact kit for SDS molecular-weight analysis. – **Concerns:** Specific to Beckman PA 800 Plus system; may not be needed for standard slab gels; price level ($1,525 US list) is high.  \n\n- **Thermo Fisher Scientific (Invitrogen)** – **Product:** PageRuler™ Prestained Protein Ladder, 10–180 kDa – **URL:** [PageRuler Prestained Protein Ladder](https://www.thermofisher.com/order/catalog/product/hk/en/26616) – **Description:** A premixed, prestained protein ladder of ten colored bands (10–180 kDa) in loading buffer, optimized for SDS-PAGE; supplied as 2 × 250 µL (50 tests per vial). (Recommended for all standard SDS-PAGE gels.) – **Confidence:** High – **Verified:** Yes (thermofisher.com loads product page) – **Recommendation Score:** 0.9 – **Reason:** Tier-1 global reagent supplier; well-established, high-quality SDS-PAGE ladder with lot consistency; Thermo’s ladders are widely used. – **Concerns:** Fixed size range (10–180 kDa), may not cover >180 kDa; requires purchase of loading dye (already in buffer) and Coomassie stain separately.  \n\n- **MilliporeSigma (Merck)** – **Product:** Perfect Protein™ Markers, 10–225 kDa – **URL:** [Perfect Protein Markers, 10–225 kDa](https://www.merckmillipore.com/IL/en/product/mm/69079) – **Description:** A liquid protein ladder mix of 11 recombinant proteins (10–225 kDa) for SDS-PAGE molecular-weight calibration. Supplied 500 µL (sufficient for ~100 lanes), optimized for Coomassie staining; includes SDS sample buffer for denaturation (Cat. no. 70607). – **Confidence:** High – **Verified:** Yes – **Recommendation Score:** 0.9 – **Reason:** Established life-sciences reagents division of Merck; “Perfect Protein” markers are FDA-registered/ISO-compliant; lot-to-lot optimized for linear migration; broad range. – **Concerns:** Product is a marker-only kit (no gel), intended for Coomassie detection, additional reagents (running buffer, stain) needed; price may vary by distributor.  \n\n- **Bio-Rad Laboratories** – **Product:** Precision Plus Protein™ All Blue Prestained Standards – **URL:** [Precision Plus All Blue Prestained Standards, #1610393](https://www.bio-rad.com/en-se/sku/1610393-precision-plus-protein-all-blue-prestained-protein-standards-value-pack?ID=1610393) – **Description:** A value-pack kit of five vials (5 × 500 µL) containing a mixture of ten highly purified prestained proteins (10–250 kDa, blue-blast stained) with three internal reference bands (25, 50, 75 kDa); pre-diluted and ready to load, ~250 uses. – **Confidence:** High – **Verified:** Yes – **Recommendation Score:** 0.9 – **Reason:** Bio-Rad is a top-tier electrophoresis reagent manufacturer; Precision Plus ladders are industry-standard for SDS-PAGE and reliable for QC; comes with documentation. – **Concerns:** Prestained only (less sensitive than unstained); may require fluorescence or visible scanner; kit does not include buffers or gel matrix.  \n\n- **Cytiva (GE Healthcare Life Sciences)** – **Product:** Protein and Peptide Molecular Weight Markers – **URL:** [HMW-SDS Marker Kit: Gel (Cytiva Brand)](https://www.fishersci.ie/shop/products/ge-healthcare-protein-peptide-molecular-weight-markers-1/10136284) – **Description:** High-MW SDS-PAGE protein marker kit (e.g. 10–225+ kDa range) branded “Cytiva Life Sciences”; provides sharp Coomassie/silver-stainable bands for precise molecular weight estimation in standard SDS-PAGE. – **Confidence:** Medium (product info from Fisher, not direct site) – **Verified:** Yes (Fisher-scientific Ireland site shows kit) – **Recommendation Score:** 0.7 – **Reason:** Cytiva (formerly GE) is an established global biopharma supplier with ISO/FDA-regulated products; these markers are formulated for high accuracy. – **Concerns:** The specific “17-0615-01” HMW-SDS kit appears discontinued/out of stock (Fisher sci). Alternative Cytiva markers may need to be sourced; may require buffer/stain purchase separately."
+          },
+          "vendors": [
+            {
+              "id": 1,
+              "vendor_name": "SciEX (AB Sciex)",
+              "product_name": "SDS-MW Analysis Kit (for PA 800 Plus)",
+              "product_url": "https://us-store.sciex.com/USD/capillary-electrophoresis/chemistries-and-kits/kits/SDS-MW-Analysis-Kit-zid390953",
+              "product_description": "A complete kit for protein size determination by SDS-PAGE capillary electrophoresis, including separation capillaries, SDS separation buffer, SDS sample buffer, molecular weight standards (10–225 kDa), internal 10 kDa standard, and wash solutions.",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Broadly trusted Danaher/SCIEX instrument supplier; exact kit for SDS molecular-weight analysis.",
+              "discovery_concerns": "Specific to Beckman PA 800 Plus system; may not be needed for standard slab gels; price level ($1,525 US list) is high.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:30:49",
+                "available": [
+                  "price",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "molecular_weight_range",
+                  "included_reagents",
+                  "instrument_compatibility"
+                ],
+                "unavailable": [
+                  "storage_condition",
+                  "shelf_life",
+                  "certifications",
+                  "lead_time",
+                  "detection_sensitivity"
+                ]
+              },
+              "specs": {
+                "price": {
+                  "value": "$1,510.50 per kit",
+                  "original_label": "SDS-MW Analysis Kit – list on US store page (category listing)",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "Reagent volumes for analysis of 100 samples",
+                  "original_label": "provides reagent volumes for analysis of 100 samples",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "390953",
+                  "original_label": "Part Number / Artikelnummer / Part Number / Part Number (UK site)",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "SCIEX (AB Sciex LLC)",
+                  "original_label": "Vendor brand / product provider",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "molecular_weight_range": {
+                  "value": "approximately 10 to 225 kDa",
+                  "original_label": "effective protein sieving range of approximately 10 to 225 kDa",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "included_reagents": {
+                  "value": "Separation capillary (2 × 67 cm × 50 µm ID), SDS Gel Separation Buffer 140 mL, SDS Sample Buffer 50 mL, MW Sizing Standard (10 to 225 kDa) 100 µL, Internal Standard 10 kDa protein 0.4 mL, Acidic Wash Solution 100 mL, Basic Wash Solution 100 mL",
+                  "original_label": "includes:",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                },
+                "instrument_compatibility": {
+                  "value": "Designed for use on PA 800 Plus system",
+                  "original_label": "designed for use on the PA 800 Plus",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:30:49",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "USA"
+            },
+            {
+              "id": 2,
+              "vendor_name": "Thermo Fisher Scientific (Invitrogen)",
+              "product_name": "PageRuler™ Prestained Protein Ladder, 10–180 kDa",
+              "product_url": "https://www.thermofisher.com/order/catalog/product/hk/en/26616",
+              "product_description": "A premixed, prestained protein ladder of ten colored bands (10–180 kDa) in loading buffer, optimized for SDS-PAGE; supplied as 2 × 250 µL (50 tests per vial).",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Tier-1 global reagent supplier; well-established, high-quality SDS-PAGE ladder with lot consistency.",
+              "discovery_concerns": "Fixed size range (10–180 kDa), may not cover >180 kDa; requires purchase of loading dye and Coomassie stain separately.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:00",
+                "available": [
+                  "price",
+                  "storage_condition",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "molecular_weight_range",
+                  "included_reagents",
+                  "instrument_compatibility"
+                ],
+                "unavailable": [
+                  "shelf_life",
+                  "certifications",
+                  "lead_time",
+                  "detection_sensitivity"
+                ]
+              },
+              "specs": {
+                "price": {
+                  "value": "23,800 JPY Each (UNIT PRICE for 2 × 250 μL)",
+                  "original_label": "価格（JPY） 23,800 Each",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "storage_condition": {
+                  "value": "Store at –20 °C upon receipt",
+                  "original_label": "保管: 受け取り後、‑20 °Cで保存",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "2 × 250 µL (two vials of 250 µL each)",
+                  "original_label": "数量 2x250 μL / 内容: 250 μLのバイアル2本",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "26616",
+                  "original_label": "製品番号（カタログ番号） 26616",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Thermo Scientific (Thermo Fisher Scientific)",
+                  "original_label": "Thermo Scientific™",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "molecular_weight_range": {
+                  "value": "10–180 kDa (size range)",
+                  "original_label": "分子量 180, 130, …, 10 kDa; サイズ範囲 10～180 kDa",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "included_reagents": {
+                  "value": "Contents: two vials of 250 µL each; storage buffer components: 62.5 mM Tris‑H₃PO₄ (pH 7.5 at 25 °C), 1 mM EDTA, 2% SDS, 10 mM DTT, 1 mM NaN₃, 33% glycerol",
+                  "original_label": "組成および保存条件 / Contents: …; ストレージバッファー: …",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                },
+                "instrument_compatibility": {
+                  "value": "Compatible with SDS‑PAGE and Western blotting systems (Bolt™ Bis‑Tris Plus, Novex™ Tricine, Novex™ Tris‑Glycine, NuPAGE™ Bis‑Tris, NuPAGE™ Tris‑Acetate gels)",
+                  "original_label": "ゲル適合性; システムタイプ Western Blotting, SDS‑PAGE",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:00",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "USA"
+            },
+            {
+              "id": 3,
+              "vendor_name": "MilliporeSigma (Merck)",
+              "product_name": "Perfect Protein™ Markers, 10–225 kDa",
+              "product_url": "https://www.merckmillipore.com/IL/en/product/mm/69079",
+              "product_description": "A liquid protein ladder mix of 11 recombinant proteins (10–225 kDa) for SDS-PAGE molecular-weight calibration.",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Established life-sciences reagents division of Merck; 'Perfect Protein' markers are FDA-registered/ISO-compliant.",
+              "discovery_concerns": "Product is a marker-only kit (no gel), intended for Coomassie detection, additional reagents needed.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:08",
+                "available": [
+                  "price",
+                  "storage_condition",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "lead_time",
+                  "molecular_weight_range",
+                  "included_reagents",
+                  "instrument_compatibility"
+                ],
+                "unavailable": [
+                  "shelf_life",
+                  "certifications",
+                  "detection_sensitivity"
+                ]
+              },
+              "specs": {
+                "price": {
+                  "value": "Not found (pricing not displayed without login)",
+                  "original_label": "Price (login required)",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "storage_condition": {
+                  "value": "OK to freeze; avoid repeated freeze/thaw cycles; store at −20 °C",
+                  "original_label": "storage condition / storage temp.",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "One vial per kit (Glass bottle, sufficient for 100 lane; contains 500 µg total protein)",
+                  "original_label": "Qty/Pack and description",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "69079",
+                  "original_label": "Catalogue Number",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Novagen® (brand family of Merck KGaA)",
+                  "original_label": "manufacturer/tradename",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "lead_time": {
+                  "value": "Not found (availability limited; pricing/inventory require login)",
+                  "original_label": "Availability / Login to See Inventory",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "molecular_weight_range": {
+                  "value": "10–225 kDa",
+                  "original_label": "Title / Description",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "included_reagents": {
+                  "value": "Recombinant protein markers supplied in gel loading buffer; two size ranges included (10, 15, 25, 35, 50, 75, 100, 150, 225 kDa)",
+                  "original_label": "Description / Features and Benefits",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                },
+                "instrument_compatibility": {
+                  "value": "Compatible with SDS‑polyacrylamide gel electrophoresis; optimized for Coomassie blue staining (also usable with silver or fluorescent dyes)",
+                  "original_label": "Description",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:08",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "Germany"
+            },
+            {
+              "id": 4,
+              "vendor_name": "Bio-Rad Laboratories",
+              "product_name": "Precision Plus Protein™ All Blue Prestained Standards",
+              "product_url": "https://www.bio-rad.com/en-se/sku/1610393-precision-plus-protein-all-blue-prestained-protein-standards-value-pack?ID=1610393",
+              "product_description": "A value-pack kit of five vials (5 × 500 µL) containing a mixture of ten highly purified prestained proteins (10–250 kDa, blue-blast stained).",
+              "discovery_confidence": "high",
+              "recommendation_score": 0.9,
+              "recommendation_reason": "Bio-Rad is a top-tier electrophoresis reagent manufacturer; Precision Plus ladders are industry-standard for SDS-PAGE.",
+              "discovery_concerns": "Prestained only (less sensitive than unstained); may require fluorescence or visible scanner.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:18",
+                "available": [
+                  "price",
+                  "storage_condition",
+                  "shelf_life",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "molecular_weight_range",
+                  "included_reagents",
+                  "instrument_compatibility"
+                ],
+                "unavailable": [
+                  "certifications",
+                  "lead_time",
+                  "detection_sensitivity"
+                ]
+              },
+              "specs": {
+                "price": {
+                  "value": "Not found (login required to see your price); list price not displayed",
+                  "original_label": "List Price",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "storage_condition": {
+                  "value": "Store for 6 months at 4 °C or 12 months at –20 °C",
+                  "original_label": "Shelf life",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "shelf_life": {
+                  "value": "6 months at 4 °C; 12 months at –20 °C",
+                  "original_label": "Shelf life",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "2.5 ml (5 x 500 µl), 250 applications",
+                  "original_label": "Packaging Options / Number of Applications / Total Volume",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "1610393",
+                  "original_label": "Catalog Number",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Bio‑Rad Laboratories, Inc.",
+                  "original_label": "Company / Bio‑Rad Laboratories, Inc.",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "molecular_weight_range": {
+                  "value": "10–250 kD",
+                  "original_label": "MW size range, kD",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "included_reagents": {
+                  "value": "Mixture of ten blue‑stained recombinant proteins (10–250 kD), including three reference bands (25, 50, and 75 kD)",
+                  "original_label": "Overview / Packaging Options",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                },
+                "instrument_compatibility": {
+                  "value": "Compatible with fluorescent blot detection at red wavelengths (635 nm laser or red LED), and with SDS‑PAGE / Western blotting",
+                  "original_label": "Overview",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:31:18",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "United States"
+            },
+            {
+              "id": 5,
+              "vendor_name": "Cytiva (GE Healthcare Life Sciences)",
+              "product_name": "Protein and Peptide Molecular Weight Markers",
+              "product_url": "https://www.fishersci.ie/shop/products/ge-healthcare-protein-peptide-molecular-weight-markers-1/10136284",
+              "product_description": "High-MW SDS-PAGE protein marker kit (e.g. 10–225+ kDa range) branded 'Cytiva Life Sciences'; provides sharp Coomassie/silver-stainable bands.",
+              "discovery_confidence": "medium",
+              "recommendation_score": 0.7,
+              "recommendation_reason": "Cytiva is an established global biopharma supplier with ISO/FDA-regulated products.",
+              "discovery_concerns": "The specific '17-0615-01' HMW-SDS kit appears discontinued/out of stock; may require buffer/stain purchase separately.",
+              "specs_availability": {
+                "checked_at": "2026-01-06 16:31:32",
+                "available": [
+                  "storage_condition",
+                  "pack_size",
+                  "catalog_number",
+                  "manufacturer",
+                  "lead_time",
+                  "molecular_weight_range",
+                  "included_reagents",
+                  "instrument_compatibility"
+                ],
+                "unavailable": [
+                  "price",
+                  "shelf_life",
+                  "certifications",
+                  "detection_sensitivity"
+                ]
+              },
+              "specs": {
+                "storage_condition": {
+                  "value": "Unopened vials should be stored at 4°C",
+                  "original_label": "Storage Requirements",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "pack_size": {
+                  "value": "10 Vials",
+                  "original_label": "Quantity",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "catalog_number": {
+                  "value": "10136284",
+                  "original_label": "Product Code",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "manufacturer": {
+                  "value": "Cytiva",
+                  "original_label": "Brand",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "lead_time": {
+                  "value": "Currently unavailable or discontinued",
+                  "original_label": "Availability notice",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "molecular_weight_range": {
+                  "value": "Up to approximately 220,000 Mr (myosin 220 kDa)",
+                  "original_label": "Molecular Weight (g/mol)",
+                  "confidence": "medium",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "included_reagents": {
+                  "value": "Myosin (25 µg, 220 000 Mr, rabbit muscle), α‑2‑Macroglobulin (100 µg, 170 000 Mr, bovine plasma), β‑Galactosidase (16 µg, 116 000 Mr, E. coli), Transferrin",
+                  "original_label": "Kit Contents",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                },
+                "instrument_compatibility": {
+                  "value": "Designed for use with SDS electrophoresis",
+                  "original_label": "For Use With (Application)",
+                  "confidence": "high",
+                  "extracted_at": "2026-01-06 16:31:32",
+                  "model": "gpt-4o"
+                }
+              },
+              "manufacturer_country": "Sweden"
+            }
+          ],
+          "last_updated": "2026-01-06 16:30:40",
+          "pipeline_stats": {
+            "total_time_seconds": 325.89,
+            "total_tokens": {
+              "input": 139782,
+              "output": 18766,
+              "total": 158548
+            },
+            "total_cost_usd": 0.472522,
+            "steps": {
+              "enrichment": {
+                "model": "gpt-4.1-2025-04-14",
+                "input_tokens": 611,
+                "output_tokens": 1019,
+                "cost_usd": 0.009374
+              },
+              "discovery": {
+                "model": "o4-mini-deep-research",
+                "input_tokens": 49391,
+                "output_tokens": 12132,
+                "cost_usd": 0.195838
+              },
+              "parsing": {
+                "model": "gpt-4o-mini",
+                "input_tokens": 1683,
+                "output_tokens": 993,
+                "cost_usd": 0.000848
+              },
+              "extraction": {
+                "model": "gpt-4o",
+                "input_tokens": 88097,
+                "output_tokens": 4622,
+                "cost_usd": 0.266462,
+                "vendors_processed": 5
+              }
+            }
+          },
+          "version": 1,
+          "version_date": "2026-01-06 16:31:32"
+        }
+      ],
+      "current_version": 1,
+      "last_updated": "2026-01-06 16:31:32"
     }
   }
 }
