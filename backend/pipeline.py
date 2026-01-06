@@ -283,14 +283,14 @@ ATTRIBUTES THAT WILL BE EXTRACTED LATER:
 {attributes_list}
 
 YOUR TASK:
-Find at least 5 alternate MANUFACTURERS that produce this EXACT product or very close equivalents.
+Find at least 10 alternate MANUFACTURERS that produce this EXACT product or very close equivalents.
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
 - You MAY search vendor/reseller websites (VWR, Fisher Scientific, etc.) to discover products - that's fine
 - BUT each MANUFACTURER must appear only ONCE in your results
 - If you find Corning products on VWR's website, report it as Corning (the manufacturer) - do NOT also report Corning from Fisher Scientific's website
 - Example of WRONG result: Reporting Corning flask found on VWR, then same Corning flask found on Fisher Scientific - this is duplicate manufacturer
-- Example of CORRECT result: Reporting Corning, Thermo Fisher, Greiner Bio-One, Eppendorf, Sarstedt - 5 DIFFERENT manufacturers (even if you found some via reseller websites)
+- Example of CORRECT result: Reporting Corning, Thermo Fisher, Greiner Bio-One, Eppendorf, Sarstedt - DIFFERENT manufacturers (even if you found some via reseller websites)
 
 MANUFACTURER REQUIREMENTS:
 Only include ESTABLISHED, REPUTABLE manufacturers:
@@ -300,23 +300,6 @@ Only include ESTABLISHED, REPUTABLE manufacturers:
 - NO small unknown players, regional-only suppliers, or unverified manufacturers
 - NO random suppliers from obscure marketplaces or trading platforms
 
-APPROVED MANUFACTURER CATEGORIES (prioritize these):
-1. Global tier-1 manufacturers:
-   - Thermo Fisher Scientific (manufacturer, not just Fisher Scientific reseller)
-   - MilliporeSigma / Merck / Sigma-Aldrich (as manufacturer)
-   - BD (Becton Dickinson)
-   - Sartorius
-   - Corning Life Sciences
-   - Eppendorf
-   - Bio-Rad
-   - Agilent
-   - Cytiva (formerly GE Healthcare Life Sciences)
-   - Greiner Bio-One
-   - NEST Biotechnology
-   - Sarstedt
-   - Biologix
-2. Specialized established manufacturers in relevant product categories
-3. Regional manufacturers ONLY if they are well-established with global presence
 
 URL VERIFICATION - ABSOLUTELY CRITICAL:
 - ONLY include products where you have VERIFIED the URL loads a valid product page
@@ -332,7 +315,7 @@ NEVER USE PLACEHOLDER OR EXAMPLE URLs - THIS IS A SERIOUS ERROR:
 - NEVER make up fake URLs that look real but don't exist
 - If you cannot find a real, working URL for a product, DO NOT include that manufacturer in results
 - Every URL must be a REAL URL you actually found during your research
-- It is better to return 2-3 manufacturers with real URLs than 5 manufacturers with fake/placeholder URLs
+- It is better to return 10 manufacturers with real URLs than 20 manufacturers with fake/placeholder URLs
 
 URL REGION PREFERENCE (only after verification):
 When the same product exists on multiple regional sites, prefer in this order:
@@ -357,11 +340,11 @@ FOR EACH MANUFACTURER, REPORT:
 - Any concerns (out of stock, discontinued, regional restrictions, etc.)
 
 IMPORTANT:
-- Find at least 5 DIFFERENT MANUFACTURERS (not 5 vendors selling same manufacturer's product)
+- Find at least 10 DIFFERENT MANUFACTURERS (not 10 vendors selling same manufacturer's product)
 - EXACT MATCH is critical - do not pad results with loosely related products
 - ONLY established, reputable manufacturers - no unknown or small players
 - URL MUST WORK - if you cannot verify the link, do not include the result
-- Quality over quantity - 3 verified results from reputable manufacturers is better than 5 unverified results
+- Quality over quantity - 10 verified results from reputable manufacturers is better than 20 unverified results
 - Write naturally as a research report - do NOT use rigid JSON format
 - Do NOT extract detailed specs - just find manufacturers and their verified product URLs
 - Do NOT include inline citations with brackets - just list URLs clearly"""
