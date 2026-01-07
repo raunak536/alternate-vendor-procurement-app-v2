@@ -282,6 +282,7 @@ PRODUCT QUERY:
 
 YOUR TASK:
 Find 7 different MANUFACTURERS that produce this EXACT product or very close equivalents.
+{exclusion_instructions}
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
 - You may search manufacturer's websites and product pages to discover products - that's fine
@@ -456,32 +457,36 @@ def run_enrichment(query: str) -> Dict[str, Any]:
 # PHASE 2: DISCOVERY
 # =============================================================================
 
-def run_discovery(enriched_query: str, comparison_attributes: List[Dict]) -> Dict[str, Any]:
+def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None) -> Dict[str, Any]:
     """
     Phase 2: Run deep research to discover vendors.
     
     Args:
         enriched_query: The enriched query from Phase 1
-        comparison_attributes: List of attributes to consider
+        exclude_manufacturers: Optional list of manufacturer names to exclude from results
         
     Returns:
         dict with raw_response, market_summary, time_taken, tokens
     """
-    print("\n🌐 Phase 2: Running deep research...")
+    run_label = "Phase 2" if not exclude_manufacturers else "Phase 2b"
+    print(f"\n🌐 {run_label}: Running deep research...")
     print("   This may take 3-10 minutes. Will auto-retry on connection errors...")
     
     client = get_openai_client()
     start_time = time.time()
     
-    # Format attributes for the prompt
-    attrs_list = "\n".join([
-        f"- {attr['display_name']}: {attr['description']}"
-        for attr in comparison_attributes
-    ])
+    # Build exclusion instructions if manufacturers to exclude are provided
+    exclusion_instructions = ""
+    if exclude_manufacturers:
+        excluded_list = ", ".join(exclude_manufacturers)
+        exclusion_instructions = f"""
+IMPORTANT - EXCLUDE THESE MANUFACTURERS (already found in previous search):
+Do NOT include any of these manufacturers in your results: {excluded_list}
+Find 7 DIFFERENT manufacturers that are NOT in the above list."""
     
     prompt = DISCOVERY_PROMPT.format(
         enriched_query=enriched_query,
-        attributes_list=attrs_list
+        exclusion_instructions=exclusion_instructions
     )
     
     def make_call():
@@ -701,33 +706,69 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     
     print(f"\n--- Enriched Query ---\n{enriched_query[:500]}...")
     
-    # Phase 2: Discovery
-    discovery = run_discovery(enriched_query, comparison_attributes)
+    # Phase 2a: First Discovery Run
+    discovery1 = run_discovery(enriched_query)
     
-    # Track discovery tokens
-    step_stats["discovery"]["model"] = discovery.get("model", "o4-mini-deep-research")
-    if discovery.get("tokens_used"):
-        step_stats["discovery"]["input_tokens"] = discovery["tokens_used"].get("input", 0)
-        step_stats["discovery"]["output_tokens"] = discovery["tokens_used"].get("output", 0)
-        step_stats["discovery"]["cost"] = calculate_cost(
-            step_stats["discovery"]["model"],
-            step_stats["discovery"]["input_tokens"],
-            step_stats["discovery"]["output_tokens"]
-        )
+    # Track discovery tokens for first run
+    step_stats["discovery"]["model"] = discovery1.get("model", "o4-mini-deep-research")
+    if discovery1.get("tokens_used"):
+        step_stats["discovery"]["input_tokens"] = discovery1["tokens_used"].get("input", 0)
+        step_stats["discovery"]["output_tokens"] = discovery1["tokens_used"].get("output", 0)
     
-    # Phase 3: Parse
-    parsed = parse_discovery(discovery["raw_response"])
+    # Phase 3a: Parse first discovery to get manufacturer names
+    parsed1 = parse_discovery(discovery1["raw_response"])
+    first_run_manufacturers = [v.get("vendor_name", "") for v in parsed1.get("vendors", [])]
+    print(f"\n   ✓ First run found {len(first_run_manufacturers)} manufacturers: {', '.join(first_run_manufacturers)}")
     
-    # Track parsing tokens
+    # Phase 2b: Second Discovery Run (excluding first run manufacturers)
+    discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers)
+    
+    # Track discovery tokens for second run (add to totals)
+    if discovery2.get("tokens_used"):
+        step_stats["discovery"]["input_tokens"] += discovery2["tokens_used"].get("input", 0)
+        step_stats["discovery"]["output_tokens"] += discovery2["tokens_used"].get("output", 0)
+    
+    step_stats["discovery"]["cost"] = calculate_cost(
+        step_stats["discovery"]["model"],
+        step_stats["discovery"]["input_tokens"],
+        step_stats["discovery"]["output_tokens"]
+    )
+    
+    # Phase 3b: Parse second discovery
+    parsed2 = parse_discovery(discovery2["raw_response"])
+    second_run_manufacturers = [v.get("vendor_name", "") for v in parsed2.get("vendors", [])]
+    print(f"\n   ✓ Second run found {len(second_run_manufacturers)} manufacturers: {', '.join(second_run_manufacturers)}")
+    
+    # Combine discovery results
+    combined_raw_response = f"=== DISCOVERY RUN 1 ===\n{discovery1['raw_response']}\n\n=== DISCOVERY RUN 2 ===\n{discovery2['raw_response']}"
+    discovery = {
+        "model": discovery1["model"],
+        "completed_at": discovery2["completed_at"],
+        "time_taken_seconds": discovery1["time_taken_seconds"] + discovery2["time_taken_seconds"],
+        "tokens_used": {
+            "input": step_stats["discovery"]["input_tokens"],
+            "output": step_stats["discovery"]["output_tokens"],
+            "total": step_stats["discovery"]["input_tokens"] + step_stats["discovery"]["output_tokens"]
+        },
+        "raw_response": combined_raw_response
+    }
+    
+    # Combine parsed vendors
+    parsed = {"vendors": parsed1.get("vendors", []) + parsed2.get("vendors", [])}
+    
+    # Track parsing tokens (combine from both parsing calls)
     step_stats["parsing"]["model"] = "gpt-4o-mini"
-    if parsed.get("tokens_used"):
-        step_stats["parsing"]["input_tokens"] = parsed["tokens_used"].get("input", 0)
-        step_stats["parsing"]["output_tokens"] = parsed["tokens_used"].get("output", 0)
-        step_stats["parsing"]["cost"] = calculate_cost(
-            step_stats["parsing"]["model"],
-            step_stats["parsing"]["input_tokens"],
-            step_stats["parsing"]["output_tokens"]
-        )
+    if parsed1.get("tokens_used"):
+        step_stats["parsing"]["input_tokens"] += parsed1["tokens_used"].get("input", 0)
+        step_stats["parsing"]["output_tokens"] += parsed1["tokens_used"].get("output", 0)
+    if parsed2.get("tokens_used"):
+        step_stats["parsing"]["input_tokens"] += parsed2["tokens_used"].get("input", 0)
+        step_stats["parsing"]["output_tokens"] += parsed2["tokens_used"].get("output", 0)
+    step_stats["parsing"]["cost"] = calculate_cost(
+        step_stats["parsing"]["model"],
+        step_stats["parsing"]["input_tokens"],
+        step_stats["parsing"]["output_tokens"]
+    )
     
     # Build query entry structure
     query_id = slugify(query)
