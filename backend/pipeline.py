@@ -134,7 +134,7 @@ def slugify(text: str) -> str:
 def load_vendors_data() -> Dict[str, Any]:
     """Load existing vendors data from JSON file."""
     if VENDORS_JSON_PATH.exists():
-        with open(VENDORS_JSON_PATH, 'r') as f:
+        with open(VENDORS_JSON_PATH, 'r',encoding='utf-8') as f:
             return json.load(f)
     return {"queries": {}}
 
