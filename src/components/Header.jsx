@@ -42,6 +42,15 @@ function Header({ showSearch = false, searchQuery = '', onSearchChange, onSearch
     return `${date.toLocaleDateString('en-US', { weekday: 'long', month: 'long' })} ${day}${suffix}, ${date.getFullYear()}`
   }
 
+  // Navigation highlighting logic:
+  // - Home is active on landing (/), results (/results), and vendor detail (/vendor)
+  // - SKU Coverage is a separate feature (not currently used)
+  // - Evaluation Tracker is active on compare page
+  const isHomeActive = () => {
+    return location.pathname === '/' || 
+           location.pathname.startsWith('/results') || 
+           location.pathname.startsWith('/vendor')
+  }
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/')
 
   // Default recent searches for demo
@@ -77,7 +86,7 @@ function Header({ showSearch = false, searchQuery = '', onSearchChange, onSearch
         
         <nav className="sidebar-nav">
           <button 
-            className={`sidebar-nav-btn ${isActive('/') && location.pathname === '/' ? 'active' : ''}`}
+            className={`sidebar-nav-btn ${isHomeActive() ? 'active' : ''}`}
             onClick={() => navigate('/')}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -88,7 +97,7 @@ function Header({ showSearch = false, searchQuery = '', onSearchChange, onSearch
           </button>
           
           <button 
-            className={`sidebar-nav-btn ${isActive('/results') || isActive('/vendor') ? 'active' : ''}`}
+            className="sidebar-nav-btn"
             onClick={() => navigate('/results')}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

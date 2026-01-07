@@ -427,6 +427,40 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
     return suffix ? `${value} ${suffix}` : value
   }
 
+  // Map region/country to appropriate flag emoji
+  const getCountryFlag = (region) => {
+    if (!region) return '🌍'
+    const regionLower = region.toLowerCase()
+    
+    // Direct country matches
+    if (regionLower.includes('india')) return '🇮🇳'
+    if (regionLower.includes('usa') || regionLower.includes('united states') || regionLower.includes('us')) return '🇺🇸'
+    if (regionLower.includes('china')) return '🇨🇳'
+    if (regionLower.includes('germany')) return '🇩🇪'
+    if (regionLower.includes('uk') || regionLower.includes('united kingdom') || regionLower.includes('britain')) return '🇬🇧'
+    if (regionLower.includes('japan')) return '🇯🇵'
+    if (regionLower.includes('switzerland')) return '🇨🇭'
+    if (regionLower.includes('france')) return '🇫🇷'
+    if (regionLower.includes('canada')) return '🇨🇦'
+    if (regionLower.includes('australia')) return '🇦🇺'
+    if (regionLower.includes('korea')) return '🇰🇷'
+    if (regionLower.includes('singapore')) return '🇸🇬'
+    if (regionLower.includes('ireland')) return '🇮🇪'
+    if (regionLower.includes('netherlands')) return '🇳🇱'
+    if (regionLower.includes('belgium')) return '🇧🇪'
+    if (regionLower.includes('italy')) return '🇮🇹'
+    if (regionLower.includes('spain')) return '🇪🇸'
+    if (regionLower.includes('brazil')) return '🇧🇷'
+    if (regionLower.includes('mexico')) return '🇲🇽'
+    
+    // Regional matches
+    if (regionLower.includes('europe')) return '🇪🇺'
+    if (regionLower.includes('asia')) return '🌏'
+    if (regionLower.includes('america')) return '🌎'
+    
+    return '🌍' // Default globe
+  }
+
   // Navigate to vendor detail page
   const handleViewDetails = () => {
     navigate(`/vendor/${vendor.id}?q=${encodeURIComponent(searchQuery || '')}`)
@@ -464,15 +498,25 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
 
       {/* Card Content */}
       <div className="card-content">
-        {/* Left: Price & Image Placeholder */}
+        {/* Left: Price & Packaging */}
         <div className="card-left">
           {vendor.unitPrice ? (
             <div className="price-block">
               <span className="price-value">${vendor.unitPrice.toFixed(2)}</span>
-              <span className="price-unit">/ {vendor.packaging || '20 pack'}</span>
+              <span className="price-unit">/ {vendor.unitPriceDisplay || vendor.packaging || 'unit'}</span>
+            </div>
+          ) : vendor.unitPriceDisplay ? (
+            <div className="price-block">
+              <span className="price-value">{vendor.unitPriceDisplay}</span>
+            </div>
+          ) : vendor.price ? (
+            <div className="price-block">
+              <span className="price-value">{vendor.price}</span>
             </div>
           ) : (
-            <div className="no-image">N/a</div>
+            <div className="price-block no-price">
+              <span className="price-value">Price on Request</span>
+            </div>
           )}
         </div>
 
@@ -482,27 +526,24 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
             <div className="detail-item">
               <span className="detail-label">Region & Origin</span>
               <span className="detail-value">
-                <span className="flag-icon">🇮🇳</span> {displayValue(vendor.region)}
+                <span className="flag-icon">{getCountryFlag(vendor.region)}</span> {displayValue(vendor.region)}
               </span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Shelf Life</span>
-              <span className="detail-value">{displayValue(vendor.shelfLife) || '24 Months'}</span>
+              <span className="detail-value">{displayValue(vendor.shelfLife)}</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Storage</span>
-              <span className="detail-value">{displayValue(vendor.storage) || 'RT (2-25 deg C)'}</span>
+              <span className="detail-value">{displayValue(vendor.storage)}</span>
             </div>
+            {/* Always show Manufacturer - use vendor name if direct, manufacturerName if distributor */}
             <div className="detail-item">
-              <span className="detail-label">Delivery</span>
+              <span className="detail-label">Manufacturer</span>
               <span className="detail-value">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="1" y="3" width="15" height="13" />
-                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-                  <circle cx="5.5" cy="18.5" r="2.5" />
-                  <circle cx="18.5" cy="18.5" r="2.5" />
-                </svg>
-                {displayValue(vendor.leadTime)}
+                {vendor.isManufacturerDirect === true 
+                  ? vendor.name 
+                  : displayValue(vendor.manufacturerName) || vendor.name}
               </span>
             </div>
             <div className="detail-item">
@@ -511,7 +552,7 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
             </div>
             <div className="detail-item">
               <span className="detail-label">Packaging</span>
-              <span className="detail-value">{displayValue(vendor.packaging) || 'Tripled wrapped (two plastic sleeve + one foil)'}</span>
+              <span className="detail-value">{displayValue(vendor.packaging)}</span>
             </div>
           </div>
         </div>
