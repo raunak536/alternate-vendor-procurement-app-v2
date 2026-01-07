@@ -62,6 +62,7 @@ MODEL_PRICING = {
     # GPT-4.1 series
     "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00},
     "gpt-4.1": {"input": 2.00, "output": 8.00},
+    "gpt-5.1": {"input": 1.25, "output": 10.00},
     # GPT-4o series
     "gpt-4o": {"input": 2.50, "output": 10.00},
     "gpt-4o-mini": {"input": 0.15, "output": 0.60},
@@ -237,7 +238,8 @@ def parse_json_response(response_text: str) -> dict:
 
 ENRICHMENT_PROMPT = """You are an expert in biopharma procurement.
 
-Rewrite the user query to be clear and detailed for vendor research. Also identify the key specs that matter for comparing this specific product type.
+Rewrite the user query to be clear and detailed for vendor research. 
+Also identify the key specs that matter for comparing this specific product type.
 
 USER QUERY: {query}
 
@@ -270,27 +272,25 @@ INSTRUCTIONS:
 The base attributes are critical for all biopharma procurement comparisons. Add product-specific attributes on top of them."""
 
 
-DISCOVERY_PROMPT = """You are a domain expert in biopharma procurement researching alternate MANUFACTURERS (not just vendors/resellers).
-
-CONTEXT:
-We are procuring for a large Indian biopharma company. We need to find alternate MANUFACTURERS for the product below.
-These are critical, high-value SKUs worth millions of dollars - quality and reliability are paramount.
+DISCOVERY_PROMPT = """
+CONTEXT: You are a domain expert in biopharma procurement. 
+I need your help to find leads for procuring a product for a large Indian biopharma company.
+You need to help me find different MANUFACTURERS for a product so that I can compare product fit, specs, price and quality.
 
 PRODUCT QUERY:
 {enriched_query}
 
-ATTRIBUTES THAT WILL BE EXTRACTED LATER:
-{attributes_list}
-
 YOUR TASK:
-Find at least 5 alternate MANUFACTURERS that produce this EXACT product or very close equivalents.
+Find 7 different MANUFACTURERS that produce this EXACT product or very close equivalents.
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
-- You MAY search vendor/reseller websites (VWR, Fisher Scientific, etc.) to discover products - that's fine
+- You may search manufacturer's websites and product pages to discover products - that's fine
+- You MAY search vendor/reseller websites (VWR, Avantor, Fisher Scientific, etc.) to discover products - that's fine
 - BUT each MANUFACTURER must appear only ONCE in your results
-- If you find Corning products on VWR's website, report it as Corning (the manufacturer) - do NOT also report Corning from Fisher Scientific's website
+- If you find Corning products on VWR's website, report it as Corning (the manufacturer) - DO NOT also report Corning from Fisher Scientific's website
 - Example of WRONG result: Reporting Corning flask found on VWR, then same Corning flask found on Fisher Scientific - this is duplicate manufacturer
-- Example of CORRECT result: Reporting Corning, Thermo Fisher, Greiner Bio-One, Eppendorf, Sarstedt - 5 DIFFERENT manufacturers (even if you found some via reseller websites)
+- Example of CORRECT result: Reporting Corning flask found on VWR, Reporting Merck flask on Fisher Scientific, Reporting Thermo Fisher flask on Thermo Fisher - DIFFERENT manufacturers
+
 
 MANUFACTURER REQUIREMENTS:
 Only include ESTABLISHED, REPUTABLE manufacturers:
@@ -300,31 +300,12 @@ Only include ESTABLISHED, REPUTABLE manufacturers:
 - NO small unknown players, regional-only suppliers, or unverified manufacturers
 - NO random suppliers from obscure marketplaces or trading platforms
 
-APPROVED MANUFACTURER CATEGORIES (prioritize these):
-1. Global tier-1 manufacturers:
-   - Thermo Fisher Scientific (manufacturer, not just Fisher Scientific reseller)
-   - MilliporeSigma / Merck / Sigma-Aldrich (as manufacturer)
-   - BD (Becton Dickinson)
-   - Sartorius
-   - Corning Life Sciences
-   - Eppendorf
-   - Bio-Rad
-   - Agilent
-   - Cytiva (formerly GE Healthcare Life Sciences)
-   - Greiner Bio-One
-   - NEST Biotechnology
-   - Sarstedt
-   - Biologix
-2. Specialized established manufacturers in relevant product categories
-3. Regional manufacturers ONLY if they are well-established with global presence
 
 URL VERIFICATION - ABSOLUTELY CRITICAL:
 - ONLY include products where you have VERIFIED the URL loads a valid product page
 - Do NOT include URLs that might be outdated, broken, or lead to 404 errors
 - Do NOT guess or construct URLs - only use URLs you have actually verified exist
 - If you cannot verify a URL works and shows the actual product, DO NOT include that result
-- Prefer manufacturer's direct website over third-party reseller pages
-- If a manufacturer's website is difficult to navigate or doesn't have direct product links, it's better to skip than provide a broken link
 
 NEVER USE PLACEHOLDER OR EXAMPLE URLs - THIS IS A SERIOUS ERROR:
 - NEVER output placeholder URLs like "https://exact-product-page-url" or "https://example.com/product"
@@ -332,38 +313,19 @@ NEVER USE PLACEHOLDER OR EXAMPLE URLs - THIS IS A SERIOUS ERROR:
 - NEVER make up fake URLs that look real but don't exist
 - If you cannot find a real, working URL for a product, DO NOT include that manufacturer in results
 - Every URL must be a REAL URL you actually found during your research
-- It is better to return 2-3 manufacturers with real URLs than 5 manufacturers with fake/placeholder URLs
-
-URL REGION PREFERENCE (only after verification):
-When the same product exists on multiple regional sites, prefer in this order:
-1. Global sites (.com without regional path)
-2. US sites (/US/en, /us/en, .com/us)
-3. India sites (/IN/en, /in/en)
-4. Other regional sites only if the above are unavailable
 
 FOR EACH MANUFACTURER, REPORT:
 - Vendor name
 - Product name (exact name as shown on manufacturer's site)
-- Direct product page URL (MUST be verified working - the specific product page, NOT homepage or search results)
-- Brief product description
-- Confidence level (high/medium/low) that this is an EXACT match
-- URL verification status: Confirm you have verified this URL loads the product page
-- Recommendation score (0.0 to 1.0) - how strongly you recommend this manufacturer
-  - 0.9-1.0: Excellent match from tier-1 manufacturer with verified working URL
-  - 0.7-0.8: Good match from established manufacturer with verified URL
-  - 0.5-0.6: Acceptable match, consider as alternative
-  - Below 0.5: Weak match, only if no better options
-- Recommendation reason (1-2 sentences explaining why - include manufacturer reputation)
-- Any concerns (out of stock, discontinued, regional restrictions, etc.)
+- Direct product page URL (MUST be verified working - the specific product page, NOT homepage or search results) (Can be of the Manufacturer's website or a vendor's website depending on what you referenced)
+
 
 IMPORTANT:
-- Find at least 5 DIFFERENT MANUFACTURERS (not 5 vendors selling same manufacturer's product)
-- EXACT MATCH is critical - do not pad results with loosely related products
+- Find 7 DIFFERENT MANUFACTURERS
+- EXACT PRODUCT MATCH is critical - do not pad results with loosely related products
 - ONLY established, reputable manufacturers - no unknown or small players
 - URL MUST WORK - if you cannot verify the link, do not include the result
-- Quality over quantity - 3 verified results from reputable manufacturers is better than 5 unverified results
 - Write naturally as a research report - do NOT use rigid JSON format
-- Do NOT extract detailed specs - just find manufacturers and their verified product URLs
 - Do NOT include inline citations with brackets - just list URLs clearly"""
 
 
@@ -379,11 +341,6 @@ OUTPUT FORMAT (valid JSON only):
             "vendor_name": "Full vendor name",
             "product_name": "Exact product name as shown on vendor site",
             "product_url": "THE ACTUAL URL FROM THE REPORT - must be a real URL like https://www.thermofisher.com/order/catalog/product/12345",
-            "product_description": "Brief description of the product",
-            "confidence": "high/medium/low",
-            "recommendation_score": 0.85,
-            "recommendation_reason": "Brief explanation for the score",
-            "concerns": "Any noted issues, or null if none"
         }}
     ]
 }}
@@ -401,35 +358,7 @@ INSTRUCTIONS:
 3. Exclude any vendors marked as unavailable, discontinued, or unreliable
 4. SKIP any vendor that does not have a real, complete URL - do not use placeholders
 5. Normalize vendor names consistently (e.g., "Sigma-Aldrich" and "MilliporeSigma" should both be "MilliporeSigma (Sigma-Aldrich)")
-6. Keep descriptions concise but informative
-7. Preserve the confidence level and any concerns mentioned
-8. Extract recommendation_score as a decimal between 0.0 and 1.0 (if not explicitly mentioned, infer from confidence: high=0.85, medium=0.65, low=0.45)
-9. Extract recommendation_reason - the explanation for why this score was given. If not explicitly stated, generate a brief reason based on confidence level and any noted strengths/concerns
-10. Set concerns to null if no issues were noted"""
-
-
-SPEC_AVAILABILITY_PROMPT = """Check which product specs are available on this page.
-
-PRODUCT URL: {product_url}
-
-SPECS TO CHECK:
-{specs_list}
-
-Visit the product page and identify which specs have actual values displayed.
-
-OUTPUT FORMAT (valid JSON only):
-{{
-    "available_specs": ["<spec_keys_that_are_visible>"],
-    "unavailable_specs": ["<spec_keys_not_found>"],
-    "page_title": "Product page title if found",
-    "notes": "Any relevant observations about the page"
-}}
-
-INSTRUCTIONS:
-1. Use web search to access the product page
-2. For each spec, check if the information is actually visible on the page
-3. Be conservative - only mark as "available" if you can clearly see the data
-4. Note if the page requires login, shows "request quote", or has regional restrictions"""
+6. Keep descriptions concise but informative"""
 
 
 EXTRACTION_PROMPT = """Extract product specs from this vendor page.
@@ -496,8 +425,9 @@ def run_enrichment(query: str) -> Dict[str, Any]:
     
     def make_call():
         return client.responses.create(
-            model="gpt-4.1-2025-04-14",
-            input=prompt
+            model="gpt-5.1",
+            input=prompt,
+            tools=[{"type": "web_search"}]
         )
     
     response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
@@ -514,7 +444,7 @@ def run_enrichment(query: str) -> Dict[str, Any]:
         }
     
     result["tokens_used"] = tokens
-    result["model"] = "gpt-4.1-2025-04-14"
+    result["model"] = "gpt-5.1"
     
     print(f"   ✓ Enriched query generated")
     print(f"   ✓ {len(result.get('comparison_attributes', []))} comparison attributes identified")
@@ -612,8 +542,6 @@ def parse_discovery(raw_discovery: str) -> Dict[str, Any]:
         return client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.1,
-            max_tokens=2000
         )
     
     response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
@@ -636,41 +564,6 @@ def parse_discovery(raw_discovery: str) -> Dict[str, Any]:
 # =============================================================================
 # PHASE 4: SPEC EXTRACTION
 # =============================================================================
-
-def discover_available_specs(product_url: str, comparison_attributes: List[Dict]) -> Dict[str, Any]:
-    """
-    Check which specs are available on a product page.
-    
-    Args:
-        product_url: URL of the product page
-        comparison_attributes: List of specs to check
-        
-    Returns:
-        dict with available_specs and unavailable_specs lists
-    """
-    client = get_openai_client()
-    
-    specs_list = "\n".join([
-        f"- {attr['key']} ({attr['display_name']}): {attr['description']}"
-        for attr in comparison_attributes
-    ])
-    
-    prompt = SPEC_AVAILABILITY_PROMPT.format(
-        product_url=product_url,
-        specs_list=specs_list
-    )
-    
-    def make_call():
-        return client.responses.create(
-            model="gpt-4o",
-            input=prompt,
-            tools=[{"type": "web_search"}]
-        )
-    
-    response = retry_with_backoff(make_call, max_retries=2, initial_delay=5)
-    
-    return parse_json_response(response.output_text)
-
 
 def extract_specs(product_url: str, specs_to_extract: List[Dict], model: str = "gpt-4o") -> Dict[str, Any]:
     """
@@ -861,11 +754,6 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
             "vendor_name": vendor.get("vendor_name", "Unknown"),
             "product_name": vendor.get("product_name"),
             "product_url": vendor.get("product_url"),
-            "product_description": vendor.get("product_description"),
-            "discovery_confidence": vendor.get("confidence", "medium"),
-            "recommendation_score": vendor.get("recommendation_score", 0.5),
-            "recommendation_reason": vendor.get("recommendation_reason"),
-            "discovery_concerns": vendor.get("concerns"),
             "specs_availability": None,
             "specs": {}
         }

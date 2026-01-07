@@ -21,8 +21,10 @@ function VendorDetail() {
       try {
         // First try to get from API with the search query
         if (query) {
-          const vendors = await api.getVendors(query, {})
-          const found = vendors.find(v => String(v.id) === String(id))
+          const result = await api.getVendors(query, {})
+          // api.getVendors returns { vendors: [...], version, ... }
+          const vendorsList = result.vendors || result
+          const found = vendorsList.find(v => String(v.id) === String(id))
           if (found) {
             setVendor(found)
             setLoading(false)
