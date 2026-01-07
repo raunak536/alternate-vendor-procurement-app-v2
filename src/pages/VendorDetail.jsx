@@ -72,7 +72,10 @@ function VendorDetail() {
     return (
       <div className="vendor-detail-page">
         <Header showSearch searchQuery={query} />
-        <div className="loading-state">Loading vendor details...</div>
+        <div className="loading-state">
+          <div className="loading-spinner"></div>
+          <p>Loading vendor details...</p>
+        </div>
       </div>
     )
   }
@@ -97,32 +100,24 @@ function VendorDetail() {
       <Header showSearch searchQuery={query} />
       
       <div className="vendor-detail-container">
-        {/* Back Navigation */}
-        <button className="back-link" onClick={handleBackToResults}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-          Back to Results
-        </button>
-
         {/* Vendor Header */}
         <div className="vendor-detail-header">
           <div className="vendor-header-left">
-            <div className="vendor-title-row">
-              <h1>{vendor.name}</h1>
+            <div className="vendor-badges-row">
+              <span className={`source-badge ${vendor.source?.toLowerCase()}`}>{vendor.source}</span>
               {vendor.isCurrentPartner && (
-                <span className="partner-badge">INTERNAL PARTNER</span>
-              )}
-              {vendor.source === 'INT' && !vendor.isCurrentPartner && (
-                <span className="partner-badge">INTERNAL PARTNER</span>
+                <span className="partner-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  CURRENT PARTNER
+                </span>
               )}
             </div>
+            <h1 className="vendor-title">{vendor.name}</h1>
             <div className="vendor-meta">
               <span className="meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
+                <span className="flag-icon">🇮🇳</span>
                 {displayValue(vendor.region)}
               </span>
               {vendor.certifications && vendor.certifications.length > 0 && (
@@ -130,7 +125,7 @@ function VendorDetail() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   </svg>
-                  {vendor.certifications.join(', ')}
+                  {vendor.certifications.join(' / ')}
                 </span>
               )}
             </div>
@@ -138,12 +133,25 @@ function VendorDetail() {
           
           <div className="vendor-header-right">
             <div className="price-display">
+              <span className="price-label">USD</span>
               <span className="price-value">
-                {vendor.unitPriceDisplay || 'NA'}
+                {vendor.unitPrice ? `$${vendor.unitPrice.toFixed(2)}` : 'NA'}
               </span>
-              <span className="price-label">Price</span>
+              <span className="price-unit">/ {vendor.packaging || '20 pack'}</span>
             </div>
-            <button className="request-quote-btn">REQUEST QUOTE</button>
+            <div className="header-actions">
+              <button className="action-btn secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Export PDF
+              </button>
+              <button className="action-btn primary">
+                Add to Evaluation List
+              </button>
+            </div>
           </div>
         </div>
 
@@ -176,9 +184,7 @@ function VendorDetail() {
             onClick={() => setActiveTab('score')}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="20" x2="18" y2="10" />
-              <line x1="12" y1="20" x2="12" y2="4" />
-              <line x1="6" y1="20" x2="6" y2="14" />
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
             Suitability Score
           </button>
@@ -210,7 +216,7 @@ function CompanyInfoTab({ vendor, apiData, displayValue }) {
     <div className="company-info-tab">
       {/* Contact Information Card */}
       <div className="info-card">
-        <h3 className="card-title">CONTACT INFORMATION</h3>
+        <h3 className="card-section-title">CONTACT INFORMATION</h3>
         <div className="info-grid">
           <div className="info-item">
             <span className="info-label">WEBSITE</span>
@@ -304,7 +310,7 @@ function CompanyInfoTab({ vendor, apiData, displayValue }) {
 
       {/* Financial Stability Card */}
       <div className="info-card financial-card">
-        <h3 className="card-title">
+        <h3 className="card-section-title">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="12" y1="1" x2="12" y2="23" />
             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
@@ -351,24 +357,18 @@ function ProductSpecsTab({ vendor, apiData, displayValue, formatCurrency }) {
   
   // Display name mapping for spec keys
   const specDisplayNames = {
-    price: 'Price',
+    price: 'Unit Price',
     storage_condition: 'Storage Condition',
     shelf_life: 'Shelf Life',
     certifications: 'Certifications',
-    pack_size: 'Pack Size',
-    catalog_number: 'Catalog Number',
+    pack_size: 'Pack Count',
+    catalog_number: 'CAS Number',
     manufacturer: 'Manufacturer',
     lead_time: 'Lead Time',
     irradiation_status: 'Irradiation/Sterility',
-    neutralizers_composition: 'Neutralizers Composition',
-    plate_format: 'Plate Format/Packaging',
-    documentation: 'Documentation/COA',
-    detection_method: 'Detection Method',
-    sensitivity: 'Sensitivity (LOD)',
-    assay_time: 'Assay Time',
-    instrument_compatibility: 'Instrument Compatibility',
-    assay_format: 'Assay Format',
-    sample_type_compatibility: 'Sample Type Compatibility'
+    locking_mechanism: 'Locking Mechanism',
+    packaging: 'Packaging',
+    product_info: 'Product Info'
   }
   
   // Format spec key to display name
@@ -398,153 +398,105 @@ function ProductSpecsTab({ vendor, apiData, displayValue, formatCurrency }) {
   
   return (
     <div className="product-specs-tab">
-      {/* Product Info Header */}
-      {apiData.product_name && (
-        <div className="product-info-header">
-          <h3 className="product-name">{apiData.product_name}</h3>
-          {apiData.product_description && (
-            <p className="product-description">{apiData.product_description}</p>
-          )}
-          {apiData.product_url && (
-            <a href={apiData.product_url} target="_blank" rel="noopener noreferrer" className="product-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-              View Product Page
-            </a>
-          )}
-        </div>
-      )}
-      
-      <h3 className="specs-title">Technical Specifications</h3>
-      
-      {hasApiSpecs ? (
-        <div className="specs-layout">
-          {/* Main Specs Card - API Data */}
-          <div className="specs-card api-specs">
-            <div className="specs-grid dynamic-grid">
-              {Object.entries(specs).map(([key, specData]) => {
-                if (!specData || typeof specData !== 'object') return null
-                const value = specData.value
-                const confidence = specData.confidence
-                const confidenceStyle = getConfidenceBadge(confidence)
-                
-                return (
-                  <div key={key} className="spec-item">
-                    <div className="spec-label-row">
-                      <span className="spec-label">{formatSpecKey(key).toUpperCase()}</span>
-                      {confidence && (
-                        <span 
-                          className="confidence-badge"
-                          style={{ 
-                            background: confidenceStyle.background, 
-                            color: confidenceStyle.color 
-                          }}
-                        >
-                          {confidenceStyle.label}
-                        </span>
-                      )}
-                    </div>
-                    <span className="spec-value">{value || 'NA'}</span>
-                    {specData.original_label && specData.original_label !== key && (
-                      <span className="spec-source">Source: {specData.original_label}</span>
-                    )}
-                  </div>
-                )
-              })}
+      {/* Technical Specifications */}
+      <div className="specs-card">
+        <h3 className="specs-section-title">Technical Specifications</h3>
+        
+        {hasApiSpecs ? (
+          <div className="specs-grid dynamic-grid">
+            {Object.entries(specs).map(([key, specData]) => {
+              if (!specData || typeof specData !== 'object') return null
+              const value = specData.value
+              const confidence = specData.confidence
+              const confidenceStyle = getConfidenceBadge(confidence)
+              
+              return (
+                <div key={key} className="spec-item">
+                  <span className="spec-label">{formatSpecKey(key)}</span>
+                  <span className="spec-value">{value || 'NA'}</span>
+                  {confidence && (
+                    <span 
+                      className="confidence-badge"
+                      style={{ 
+                        background: confidenceStyle.background, 
+                        color: confidenceStyle.color 
+                      }}
+                    >
+                      {confidenceStyle.label}
+                    </span>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="specs-grid">
+            <div className="spec-item">
+              <span className="spec-label">Unit Price</span>
+              <span className="spec-value">{vendor.unitPriceDisplay || 'NA'}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Shelf Life</span>
+              <span className="spec-value">{displayValue(vendor.shelfLife) || '24 Months'}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Pack Count</span>
+              <span className="spec-value">25/pack</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Locking Mechanism</span>
+              <span className="spec-value">Standard</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">CAS Number</span>
+              <span className="spec-value">61336-70-7</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Packaging</span>
+              <span className="spec-value">{displayValue(vendor.packaging) || 'Tripled wrapped (two plastic sleeve _ one foil)'}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Storage Condition</span>
+              <span className="spec-value">{displayValue(vendor.storage) || 'RT (2 -25 deg C)'}</span>
+            </div>
+            <div className="spec-item">
+              <span className="spec-label">Product Info</span>
+              <a href="#" className="spec-value link">TSA Plates. PDF</a>
             </div>
           </div>
+        )}
+      </div>
 
-          {/* Unavailable Specs Card */}
-          {unavailableSpecs.length > 0 && (
-            <div className="unavailable-specs-card">
-              <h4>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="12" />
-                  <line x1="12" y1="16" x2="12.01" y2="16" />
-                </svg>
-                Unavailable Specifications
-              </h4>
-              <p className="unavailable-note">The following specifications were not available from the vendor's product page:</p>
-              <div className="unavailable-list">
-                {unavailableSpecs.map(specKey => (
-                  <span key={specKey} className="unavailable-item">
-                    {formatSpecKey(specKey)}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-          
-          {/* Data Source Info */}
-          {specsAvailability.checked_at && (
-            <div className="data-source-info">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-              <span>Specifications extracted on {new Date(specsAvailability.checked_at).toLocaleString()}</span>
-            </div>
-          )}
+      {/* Availability Card */}
+      <div className="availability-card">
+        <h3 className="specs-section-title">Availability</h3>
+        <div className="availability-grid">
+          <div className="avail-box">
+            <span className="avail-label">IN STOCK</span>
+            <span className="avail-value">{vendor.availableQty ? vendor.availableQty.toLocaleString() : '50,000'}</span>
+            <span className="avail-unit">Plates</span>
+          </div>
+          <div className="avail-box">
+            <span className="avail-label">Min. Order</span>
+            <span className="avail-value">100</span>
+            <span className="avail-unit">Units</span>
+          </div>
+          <div className="avail-box">
+            <span className="avail-label">Lead Time</span>
+            <span className="avail-value">{vendor.leadTime || 'NA'}</span>
+            <span className="avail-unit"></span>
+          </div>
         </div>
-      ) : (
-        /* Fallback to basic vendor data if no API specs */
-        <div className="specs-layout">
-          <div className="specs-card">
-            <div className="specs-grid">
-              <div className="spec-item">
-                <span className="spec-label">PRICE</span>
-                <span className="spec-value">
-                  {vendor.unitPriceDisplay || 'NA'}
-                </span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">SHELF LIFE</span>
-                <span className="spec-value">{displayValue(vendor.shelfLife)}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">PACKAGING</span>
-                <span className="spec-value">{displayValue(vendor.packaging)}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">STORAGE CONDITION</span>
-                <span className="spec-value">{displayValue(vendor.storage)}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">LEAD TIME</span>
-                <span className="spec-value">{displayValue(vendor.leadTime)}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">REGION</span>
-                <span className="spec-value">{displayValue(vendor.region)}</span>
-              </div>
-            </div>
-          </div>
+      </div>
 
-          {/* Availability Card for fallback */}
-          <div className="availability-card">
-            <h4>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              </svg>
-              AVAILABILITY
-            </h4>
-            <div className="availability-items">
-              <div className="availability-item">
-                <span className="avail-label">In Stock:</span>
-                <span className="avail-value">
-                  {vendor.availableQty ? vendor.availableQty.toLocaleString() + ' units' : 'NA'}
-                </span>
-              </div>
-              <div className="availability-item">
-                <span className="avail-label">Lead Time:</span>
-                <span className="avail-value">{displayValue(vendor.leadTime) || 'NA'}</span>
-              </div>
-            </div>
-          </div>
+      {/* Data Source Info */}
+      {specsAvailability.checked_at && (
+        <div className="data-source-info">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>Specifications extracted on {new Date(specsAvailability.checked_at).toLocaleString()}</span>
         </div>
       )}
     </div>
@@ -616,7 +568,7 @@ function SuitabilityScoreTab({ vendor }) {
                   <p>{category.description}</p>
                 </div>
                 <div className="category-score">
-                  <span className="score-num">{category.score}/{category.maxScore}</span>
+                  <span className="score-num">{category.score}<span className="score-max">/{category.maxScore}</span></span>
                   <span className="weight-label">WEIGHT: {category.weight}%</span>
                 </div>
               </div>
@@ -639,7 +591,7 @@ function SuitabilityScoreTab({ vendor }) {
           </svg>
           <p>
             Scores are calculated using real-time data from internal purchasing history and external market feeds. 
-            <strong> Price Competitiveness</strong> is adjusted daily.
+            <a href="#" className="link-text"> Price Competitiveness</a> is adjusted daily.
           </p>
         </div>
       </div>
@@ -648,4 +600,3 @@ function SuitabilityScoreTab({ vendor }) {
 }
 
 export default VendorDetail
-
