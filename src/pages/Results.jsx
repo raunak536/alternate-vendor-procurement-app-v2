@@ -308,6 +308,31 @@ function Results() {
               <p className="results-subtitle">Top recommendations based on price, suitability, and delivery speed.</p>
             </div>
             <div className="results-controls">
+              {/* Version Toggle */}
+              {availableVersions.length > 0 && (
+                <div className="version-dropdown">
+                  <label>Version:</label>
+                  <select 
+                    value={selectedVersion || ''} 
+                    onChange={(e) => setSelectedVersion(e.target.value)}
+                  >
+                    {availableVersions.map((versionObj) => {
+                      // Handle both object format {version, date, vendorCount} and simple version number
+                      const versionNum = typeof versionObj === 'object' ? versionObj.version : versionObj
+                      return (
+                        <option key={versionNum} value={versionNum}>
+                          v{versionNum}
+                        </option>
+                      )
+                    })}
+                  </select>
+                  {versionDate && (
+                    <span className="version-date">
+                      Last updated: {new Date(versionDate).toLocaleDateString()}
+                    </span>
+                  )}
+                </div>
+              )}
               <div className="sort-dropdown">
                 <label>Sort by:</label>
                 <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>

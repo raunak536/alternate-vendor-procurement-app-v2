@@ -166,6 +166,46 @@
   gap: 16px;
 }
 
+/* Version Dropdown */
+.version-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 16px;
+  border-right: 1px solid var(--gray-200);
+  margin-right: 8px;
+}
+
+.version-dropdown label {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.version-dropdown select {
+  padding: 8px 32px 8px 12px;
+  border: 1px solid var(--primary-300);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  background: var(--primary-50);
+  color: var(--primary-800);
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%230B4F6C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.version-dropdown select:hover {
+  border-color: var(--primary-500);
+}
+
+.version-date {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+
 .sort-dropdown {
   display: flex;
   align-items: center;
