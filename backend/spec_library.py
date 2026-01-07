@@ -129,7 +129,7 @@ def get_default_specs() -> list:
     """
     default_keys = [
         "price", "storage_condition", "shelf_life", "certifications",
-        "pack_size", "catalog_number", "manufacturer", "lead_time"
+        "pack_size", "catalog_number", "manufacturer"
     ]
     return get_specs_for_keys(default_keys)
 

@@ -112,8 +112,9 @@ function Results() {
   })
 
   // Split vendors into top recommendations and others
-  const topVendors = sortedVendors.slice(0, 4)
-  const otherVendors = sortedVendors.slice(4)
+  // Top recommendations: suitability >= 50, Other recommendations: suitability < 50
+  const topVendors = sortedVendors.filter(v => v.suitabilityScore >= 50)
+  const otherVendors = sortedVendors.filter(v => v.suitabilityScore < 50)
 
   // Compute consistent comparison attributes from ALL vendors dynamically
   // This ensures all tiles show the same attributes regardless of which SKU is searched
@@ -446,10 +447,19 @@ function Results() {
 function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, searchQuery, comparisonAttributes = [] }) {
   const navigate = useNavigate()
   
-  // Helper to display value or NA
+  // Helper to display value or NA - handles objects, arrays, and primitives
   const displayValue = (value, suffix = '') => {
     if (value === null || value === undefined || value === 'NA' || value === '') {
       return 'NA'
+    }
+    // Handle object values by joining their values
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      const stringified = Object.values(value).join('; ')
+      return suffix ? `${stringified} ${suffix}` : stringified
+    }
+    // Handle arrays
+    if (Array.isArray(value)) {
+      return value.join(', ')
     }
     return suffix ? `${value} ${suffix}` : value
   }
@@ -575,9 +585,7 @@ function VendorCard({ vendor, isSelected, onToggleSelect, formatCurrency, search
             {dynamicAttributes.map(([key, value]) => (
               <div className="detail-item" key={key}>
                 <span className="detail-label">{formatLabel(key)}</span>
-                <span className="detail-value">
-                  {Array.isArray(value) ? value.join(', ') : displayValue(value)}
-                </span>
+                <span className="detail-value">{displayValue(value)}</span>
               </div>
             ))}
           </div>
