@@ -281,7 +281,7 @@ PRODUCT QUERY:
 {enriched_query}
 
 YOUR TASK:
-Find 7 different MANUFACTURERS that produce this EXACT product or very close equivalents.
+Find 5 different MANUFACTURERS that produce this EXACT product or very close equivalents.
 {exclusion_instructions}
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
@@ -322,7 +322,7 @@ FOR EACH MANUFACTURER, REPORT:
 
 
 IMPORTANT:
-- Find 7 DIFFERENT MANUFACTURERS
+- Find 5 DIFFERENT MANUFACTURERS
 - EXACT PRODUCT MATCH is critical - do not pad results with loosely related products
 - ONLY established, reputable manufacturers - no unknown or small players
 - URL MUST WORK - if you cannot verify the link, do not include the result
@@ -482,7 +482,7 @@ def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None) 
         exclusion_instructions = f"""
 IMPORTANT - EXCLUDE THESE MANUFACTURERS (already found in previous search):
 Do NOT include any of these manufacturers in your results: {excluded_list}
-Find 7 DIFFERENT manufacturers that are NOT in the above list."""
+Find 5 DIFFERENT manufacturers that are NOT in the above list."""
     
     prompt = DISCOVERY_PROMPT.format(
         enriched_query=enriched_query,
@@ -721,12 +721,25 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     print(f"\n   ✓ First run found {len(first_run_manufacturers)} manufacturers: {', '.join(first_run_manufacturers)}")
     
     # Phase 2b: Second Discovery Run (excluding first run manufacturers)
-    discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers)
+    discovery2 = None
+    parsed2 = {"vendors": []}
+    second_run_manufacturers = []
     
-    # Track discovery tokens for second run (add to totals)
-    if discovery2.get("tokens_used"):
-        step_stats["discovery"]["input_tokens"] += discovery2["tokens_used"].get("input", 0)
-        step_stats["discovery"]["output_tokens"] += discovery2["tokens_used"].get("output", 0)
+    try:
+        discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers)
+        
+        # Track discovery tokens for second run (add to totals)
+        if discovery2.get("tokens_used"):
+            step_stats["discovery"]["input_tokens"] += discovery2["tokens_used"].get("input", 0)
+            step_stats["discovery"]["output_tokens"] += discovery2["tokens_used"].get("output", 0)
+        
+        # Phase 3b: Parse second discovery
+        parsed2 = parse_discovery(discovery2["raw_response"])
+        second_run_manufacturers = [v.get("vendor_name", "") for v in parsed2.get("vendors", [])]
+        print(f"\n   ✓ Second run found {len(second_run_manufacturers)} manufacturers: {', '.join(second_run_manufacturers)}")
+    except Exception as e:
+        print(f"\n   ⚠️ Second discovery run failed: {e}")
+        print(f"   ℹ️ Continuing with {len(first_run_manufacturers)} manufacturers from first run")
     
     step_stats["discovery"]["cost"] = calculate_cost(
         step_stats["discovery"]["model"],
@@ -734,17 +747,20 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
         step_stats["discovery"]["output_tokens"]
     )
     
-    # Phase 3b: Parse second discovery
-    parsed2 = parse_discovery(discovery2["raw_response"])
-    second_run_manufacturers = [v.get("vendor_name", "") for v in parsed2.get("vendors", [])]
-    print(f"\n   ✓ Second run found {len(second_run_manufacturers)} manufacturers: {', '.join(second_run_manufacturers)}")
-    
     # Combine discovery results
-    combined_raw_response = f"=== DISCOVERY RUN 1 ===\n{discovery1['raw_response']}\n\n=== DISCOVERY RUN 2 ===\n{discovery2['raw_response']}"
+    if discovery2:
+        combined_raw_response = f"=== DISCOVERY RUN 1 ===\n{discovery1['raw_response']}\n\n=== DISCOVERY RUN 2 ===\n{discovery2['raw_response']}"
+        total_time = discovery1["time_taken_seconds"] + discovery2["time_taken_seconds"]
+        completed_at = discovery2["completed_at"]
+    else:
+        combined_raw_response = f"=== DISCOVERY RUN 1 ===\n{discovery1['raw_response']}"
+        total_time = discovery1["time_taken_seconds"]
+        completed_at = discovery1["completed_at"]
+    
     discovery = {
         "model": discovery1["model"],
-        "completed_at": discovery2["completed_at"],
-        "time_taken_seconds": discovery1["time_taken_seconds"] + discovery2["time_taken_seconds"],
+        "completed_at": completed_at,
+        "time_taken_seconds": total_time,
         "tokens_used": {
             "input": step_stats["discovery"]["input_tokens"],
             "output": step_stats["discovery"]["output_tokens"],
