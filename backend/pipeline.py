@@ -63,6 +63,7 @@ MODEL_PRICING = {
     "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00},
     "gpt-4.1": {"input": 2.00, "output": 8.00},
     "gpt-5.1": {"input": 1.25, "output": 10.00},
+    "gpt-5.2": {"input": 1.75, "output": 14.00},
     # GPT-4o series
     "gpt-4o": {"input": 2.50, "output": 10.00},
     "gpt-4o-mini": {"input": 0.15, "output": 0.60},
@@ -93,7 +94,7 @@ def get_openai_client():
         api_key=openai_api_key,
         timeout=httpx.Timeout(
             connect=120.0,
-            read=7200.0,    # 2 hours for deep research
+            read=60*15,    # 2 hours for deep research
             write=120.0,
             pool=120.0
         ),
@@ -281,7 +282,7 @@ PRODUCT QUERY:
 {enriched_query}
 
 YOUR TASK:
-Find 5 different MANUFACTURERS that produce this EXACT product or very close equivalents.
+Find {num_vendors} different MANUFACTURERS that produce this EXACT product or very close equivalents.
 {exclusion_instructions}
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
@@ -457,19 +458,21 @@ def run_enrichment(query: str) -> Dict[str, Any]:
 # PHASE 2: DISCOVERY
 # =============================================================================
 
-def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None) -> Dict[str, Any]:
+def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None, model: str = "o4-mini-deep-research", num_vendors: int = 5) -> Dict[str, Any]:
     """
     Phase 2: Run deep research to discover vendors.
     
     Args:
         enriched_query: The enriched query from Phase 1
         exclude_manufacturers: Optional list of manufacturer names to exclude from results
+        model: Model to use for discovery (default: o4-mini-deep-research)
+        num_vendors: Number of vendors to find (default: 5)
         
     Returns:
         dict with raw_response, market_summary, time_taken, tokens
     """
     run_label = "Phase 2" if not exclude_manufacturers else "Phase 2b"
-    print(f"\n🌐 {run_label}: Running deep research...")
+    print(f"\n🌐 {run_label}: Running discovery with {model}...")
     print("   This may take 3-10 minutes. Will auto-retry on connection errors...")
     
     client = get_openai_client()
@@ -482,22 +485,34 @@ def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None) 
         exclusion_instructions = f"""
 IMPORTANT - EXCLUDE THESE MANUFACTURERS (already found in previous search):
 Do NOT include any of these manufacturers in your results: {excluded_list}
-Find 5 DIFFERENT manufacturers that are NOT in the above list."""
+Find {num_vendors} DIFFERENT manufacturers that are NOT in the above list."""
     
     prompt = DISCOVERY_PROMPT.format(
         enriched_query=enriched_query,
-        exclusion_instructions=exclusion_instructions
+        exclusion_instructions=exclusion_instructions,
+        num_vendors=num_vendors
     )
     
     def make_call():
-        return client.responses.create(
-            model="o4-mini-deep-research",
+        if model == 'o4-mini-deep-research':
+            return client.responses.create(
+                model=model,
+                input=prompt,
+                tools=[{"type": "web_search"}],
+                reasoning={"summary": "auto"},
+                background=False,
+                timeout=60*15
+            )
+        elif model == 'gpt-5.2':
+            return client.responses.create(
+            model=model,
             input=prompt,
             tools=[{"type": "web_search"}],
-            reasoning={"summary": "auto"},
-            background=False,
-            timeout=7200
+            timeout=60*15,
+            reasoning={"effort": "high", "summary": "auto"}
         )
+        else:
+            raise ValueError(f"Invalid model: {model}")
     
     response = retry_with_backoff(make_call, max_retries=3, initial_delay=10)
     
@@ -516,7 +531,7 @@ Find 5 DIFFERENT manufacturers that are NOT in the above list."""
     
     return {
         "raw_response": response.output_text,
-        "model": "o4-mini-deep-research",
+        "model": model,
         "time_taken_seconds": time_taken,
         "tokens_used": tokens,
         "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -707,13 +722,15 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     print(f"\n--- Enriched Query ---\n{enriched_query[:500]}...")
     
     # Phase 2a: First Discovery Run
-    discovery1 = run_discovery(enriched_query)
+    discovery1 = run_discovery(enriched_query, model="o4-mini-deep-research", num_vendors=5)
     
-    # Track discovery tokens for first run
-    step_stats["discovery"]["model"] = discovery1.get("model", "o4-mini-deep-research")
-    if discovery1.get("tokens_used"):
-        step_stats["discovery"]["input_tokens"] = discovery1["tokens_used"].get("input", 0)
-        step_stats["discovery"]["output_tokens"] = discovery1["tokens_used"].get("output", 0)
+    # Track discovery tokens and cost for first run
+    step_stats["discovery"]["model"] = "mixed (o4-mini-deep-research + gpt-5.2)"
+    d1_input = discovery1["tokens_used"].get("input", 0) if discovery1.get("tokens_used") else 0
+    d1_output = discovery1["tokens_used"].get("output", 0) if discovery1.get("tokens_used") else 0
+    step_stats["discovery"]["input_tokens"] = d1_input
+    step_stats["discovery"]["output_tokens"] = d1_output
+    step_stats["discovery"]["cost"] = calculate_cost(discovery1.get("model", "o4-mini-deep-research"), d1_input, d1_output)
     
     # Phase 3a: Parse first discovery to get manufacturer names
     parsed1 = parse_discovery(discovery1["raw_response"])
@@ -726,12 +743,15 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     second_run_manufacturers = []
     
     try:
-        discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers)
+        discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers, model="gpt-5.2", num_vendors=5)
         
-        # Track discovery tokens for second run (add to totals)
+        # Track discovery tokens and cost for second run (add to totals)
         if discovery2.get("tokens_used"):
-            step_stats["discovery"]["input_tokens"] += discovery2["tokens_used"].get("input", 0)
-            step_stats["discovery"]["output_tokens"] += discovery2["tokens_used"].get("output", 0)
+            d2_input = discovery2["tokens_used"].get("input", 0)
+            d2_output = discovery2["tokens_used"].get("output", 0)
+            step_stats["discovery"]["input_tokens"] += d2_input
+            step_stats["discovery"]["output_tokens"] += d2_output
+            step_stats["discovery"]["cost"] += calculate_cost(discovery2.get("model", "gpt-5.2"), d2_input, d2_output)
         
         # Phase 3b: Parse second discovery
         parsed2 = parse_discovery(discovery2["raw_response"])
@@ -740,12 +760,6 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     except Exception as e:
         print(f"\n   ⚠️ Second discovery run failed: {e}")
         print(f"   ℹ️ Continuing with {len(first_run_manufacturers)} manufacturers from first run")
-    
-    step_stats["discovery"]["cost"] = calculate_cost(
-        step_stats["discovery"]["model"],
-        step_stats["discovery"]["input_tokens"],
-        step_stats["discovery"]["output_tokens"]
-    )
     
     # Combine discovery results
     if discovery2:
