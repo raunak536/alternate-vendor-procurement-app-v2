@@ -282,7 +282,7 @@ PRODUCT QUERY:
 {enriched_query}
 
 YOUR TASK:
-Find {num_vendors} different MANUFACTURERS that produce this EXACT product or very close equivalents.
+Find {vendor_range} different MANUFACTURERS that produce this EXACT product or very close equivalents.
 {exclusion_instructions}
 
 CRITICAL RULE - UNIQUE MANUFACTURERS ONLY:
@@ -323,7 +323,7 @@ FOR EACH MANUFACTURER, REPORT:
 
 
 IMPORTANT:
-- Find 5 DIFFERENT MANUFACTURERS
+- Find {vendor_range} DIFFERENT MANUFACTURERS
 - EXACT PRODUCT MATCH is critical - do not pad results with loosely related products
 - ONLY established, reputable manufacturers - no unknown or small players
 - URL MUST WORK - if you cannot verify the link, do not include the result
@@ -485,12 +485,12 @@ def run_discovery(enriched_query: str, exclude_manufacturers: List[str] = None, 
         exclusion_instructions = f"""
 IMPORTANT - EXCLUDE THESE MANUFACTURERS (already found in previous search):
 Do NOT include any of these manufacturers in your results: {excluded_list}
-Find {num_vendors} DIFFERENT manufacturers that are NOT in the above list."""
+Find {num_vendors}-{num_vendors+2} DIFFERENT manufacturers that are NOT in the above list."""
     
     prompt = DISCOVERY_PROMPT.format(
         enriched_query=enriched_query,
         exclusion_instructions=exclusion_instructions,
-        num_vendors=num_vendors
+        vendor_range=f"{num_vendors}-{num_vendors+2}"
     )
     
     def make_call():
@@ -501,20 +501,20 @@ Find {num_vendors} DIFFERENT manufacturers that are NOT in the above list."""
                 tools=[{"type": "web_search"}],
                 reasoning={"summary": "auto"},
                 background=False,
-                timeout=60*15
+                timeout=60*10
             )
         elif model == 'gpt-5.2':
             return client.responses.create(
             model=model,
             input=prompt,
             tools=[{"type": "web_search"}],
-            timeout=60*15,
-            reasoning={"effort": "high", "summary": "auto"}
+            timeout=60*10,
+            reasoning={"effort": "medium", "summary": "auto"}
         )
         else:
             raise ValueError(f"Invalid model: {model}")
     
-    response = retry_with_backoff(make_call, max_retries=3, initial_delay=10)
+    response = retry_with_backoff(make_call, max_retries=2, initial_delay=10)
     
     end_time = time.time()
     time_taken = round(end_time - start_time, 2)
@@ -743,7 +743,7 @@ def run_full_pipeline(query: str, extract_specs_flag: bool = True) -> Dict[str, 
     second_run_manufacturers = []
     
     try:
-        discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers, model="gpt-5.2", num_vendors=5)
+        discovery2 = run_discovery(enriched_query, exclude_manufacturers=first_run_manufacturers, model="gpt-5.2", num_vendors=3)
         
         # Track discovery tokens and cost for second run (add to totals)
         if discovery2.get("tokens_used"):
